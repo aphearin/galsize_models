@@ -1,9 +1,10 @@
 """
 """
-from halotools.mock_observables import return_xyz_formatted_array
+import numpy as np
+from halotools.mock_observables import return_xyz_formatted_array, wp, tpcf
 
 
-__all__ = ('clustering_sample_iterator', )
+__all__ = ('clustering_sample_iterator', 'wp_measurement_iterator')
 
 
 def clustering_sample_iterator(table, *masks, **kwargs):
@@ -44,3 +45,27 @@ def clustering_sample_iterator(table, *masks, **kwargs):
             assert set(('halo_x', 'halo_y', 'halo_z')) <= set(list(table.keys())), msg
 
         yield sample_pos
+
+
+def wp_measurement_iterator(table, *masks, **kwargs):
+    """
+    """
+    pi_max = kwargs.get('pi_max', 20)
+    rp_bins = kwargs.get('rp_bins', np.logspace(-1, 1.5, 25))
+    period = kwargs.get('period', np.inf)
+    for sample1 in clustering_sample_iterator(table, *masks, **kwargs):
+        yield rp_bins, wp(sample1, rp_bins, pi_max, period=period)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
