@@ -1,10 +1,10 @@
 """
 """
 import numpy as np
-from halotools.mock_observables import return_xyz_formatted_array, wp, tpcf
+from halotools.mock_observables import return_xyz_formatted_array, wp
 
 
-__all__ = ('clustering_sample_iterator', 'wp_measurement_iterator')
+__all__ = ('clustering_sample_iterator', 'wp_measurement_iterator', 'mstar_size_masks')
 
 
 def clustering_sample_iterator(table, *masks, **kwargs):
@@ -56,6 +56,12 @@ def wp_measurement_iterator(table, *masks, **kwargs):
     for sample1 in clustering_sample_iterator(table, *masks, **kwargs):
         yield rp_bins, wp(sample1, rp_bins, pi_max, period=period)
 
+
+def mstar_size_masks(mstar, size, logsm_low, logsm_high):
+    mask1_all = (mstar >= 10**logsm_low) & (mstar < 10**logsm_high)
+    mask1_low_size = mask1_all & (size <= np.median(size[mask1_all]))
+    mask1_high_size = mask1_all & (size > np.median(size[mask1_all]))
+    return mask1_all, mask1_low_size, mask1_high_size
 
 
 
