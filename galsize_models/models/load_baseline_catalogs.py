@@ -5,6 +5,9 @@ from halotools.empirical_models import Moster13SmHm
 from halotools.sim_manager import CachedHaloCatalog
 
 
+__all__ = ('load_moster13_mock', )
+
+
 def load_moster13_mock(logmstar_cut=9.75, simname='bolplanck', redshift=0.):
     """
     Examples
