@@ -1,9 +1,11 @@
 """
 """
 import numpy as np
+from halotools.empirical_models import halo_mass_to_halo_radius
+from astropy.cosmology import Planck15
 
 
-__all__ = ('galsize_vs_rvir', )
+__all__ = ('galsize_vs_rvir', 'kravtsov13')
 
 
 def galsize_vs_rvir(r200c, normalization=0.015, scatter_in_dex=0.2):
@@ -36,3 +38,19 @@ def galsize_vs_rvir(r200c, normalization=0.015, scatter_in_dex=0.2):
     >>> galsize = galsize_vs_rvir(r200c)
     """
     return 10**np.random.normal(loc=np.log10(normalization*r200c), scale=scatter_in_dex)
+
+
+def kravtsov13(halo_mass_in_Msun, cosmology=Planck15, redshift=0, **kwargs):
+    """
+    Examples
+    --------
+    >>> halo_mass_in_Msun = 10**np.random.uniform(11, 15, 100)
+    >>> rhalf = kravtsov13(halo_mass_in_Msun)
+    """
+    halo_mass_in_Msun_by_h = halo_mass_in_Msun*cosmology.h
+    mdef = '200c'
+    r200c_in_Mpc_by_h = halo_mass_to_halo_radius(halo_mass_in_Msun_by_h, cosmology, redshift, mdef)
+    r200c_in_kpc = 1000.*r200c_in_Mpc_by_h/cosmology.h
+
+    rhalf_mstar = galsize_vs_rvir(r200c_in_kpc, **kwargs)
+    return rhalf_mstar
