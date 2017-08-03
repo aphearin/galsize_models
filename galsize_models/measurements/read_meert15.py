@@ -58,7 +58,7 @@ def kravtsov_read_meert_catalog(datadir=default_datadir, phot_type=4):
 
     # eliminate galaxies with bad photometry
     fflag = mdata['finalflag']
-    print("# galaxies in initial Meert et al. sample = {0}".format(np.size(fflag)))
+    # print("# galaxies in initial Meert et al. sample = {0}".format(np.size(fflag)))
 
     def isset(flag, bit):
         """Return True if the specified bit is set in the given bit mask"""
