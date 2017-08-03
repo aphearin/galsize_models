@@ -57,3 +57,26 @@ def cross_match_umachine_sdss_meert15_with_meert15(mpc_match_dist_cut=1.7,
 
     return umachine_sdss
 
+
+def store_cross_matched_catalog_to_disk(commit_hash, output_fname, overwrite=False, **kwargs):
+    """
+    """
+    new_catalog = cross_match_umachine_sdss_meert15_with_meert15(**kwargs)
+    new_catalog.write(output_fname, path='data', overwrite=overwrite)
+
+    import h5py
+    f = h5py.File(output_fname)
+
+    key = "comments"
+    msg = ("This catalog was created by create_value_added_dr10_catalog.ipynb in "
+          "bt_models/master, commit {0}. "
+           "The repo is stored on GitHub at "
+           "https://github.com/aphearin/galsize_models. Briefly, the umachine DR10 sample "
+          "has been cross-matched against my own query to DR7 to get DR7-objIDs; "
+          "these objIDs have been cross-matched against those in Mendel+13. "
+          "Cross-matching has also bee done against the Meert+15 morphology catalogs "
+          "using the cross_match_umachine_sdss_meert15_with_meert15 function.".format(commit_hash))
+
+    f.attrs.create(key, msg)
+    f.close()
+
