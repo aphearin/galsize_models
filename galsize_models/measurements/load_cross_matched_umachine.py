@@ -25,4 +25,5 @@ def load_umachine_sdss_with_meert15(datadir=default_datadir,
     completeness_limit = np.interp(full_sdss['sm'], completeness_table[:, 0], completeness_table[:, 1])
     is_complete = full_sdss['z'] < completeness_limit
 
+    full_sdss['ssfr'] = np.log10(full_sdss['sfr']/10**full_sdss['sm'])
     return full_sdss, is_complete
