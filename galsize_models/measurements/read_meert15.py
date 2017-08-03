@@ -10,6 +10,8 @@ from colossus.cosmology import cosmology
 cosmo = cosmology.setCosmology('planck15')
 default_datadir = r'/Users/aphearin/work/sdss/meert15'
 
+__all__ = ('load_meert15', )
+
 
 def kravtsov_read_meert_catalog(datadir=default_datadir, phot_type=4):
     """ Load the Meert et al. 2015 catalog from the collection of .fits files on disk
@@ -92,6 +94,9 @@ def load_meert15(datadir=default_datadir, phot_type=4):
         integer corresponding to the photometry model fit type from the catalog:
         1=best fit, 2=deVaucouleurs, 3=Sersic, 4=DeVExp, 5=SerExp. Default is 4.
     """
+    if datadir is None:
+        datadir = default_datadir
+
     result = kravtsov_read_meert_catalog(datadir=datadir, phot_type=phot_type)
     sdata, mdata, mnpdata, phot_r, mdatag, mnpdatag, morph = result
 
