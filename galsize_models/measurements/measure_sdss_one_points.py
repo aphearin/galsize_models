@@ -67,33 +67,33 @@ def tabulate_sdss_size_vs_stellar_mass(output_dirname=os.path.abspath('.')):
     """
     """
     logsm_min, logsm_max = 9.75, 11.25
-    full_sdss, __ = load_umachine_sdss_with_meert15(sm_limit=logsm_min)
-
+    full_sdss, __ = load_umachine_sdss_with_meert15()
+    meert15_measurement_mask = ~np.isnan(full_sdss['r50_magr_kpc_meert15'])
     dlogsm = 0.15
     logsm_bins = np.arange(logsm_min, logsm_max+dlogsm, dlogsm)
 
-    mask_all = np.ones(len(full_sdss), dtype=bool)
+    mask_all = np.ones(len(full_sdss), dtype=bool) & meert15_measurement_mask
     sm = full_sdss['sm'][mask_all]
     size = full_sdss['r50_magr_kpc_meert15'][mask_all]
     redshift = full_sdss['z'][mask_all]
     mean_size_all, scatter_size_all, logsm_mids = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins)
     median_size_all, __x, __y = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins, statistic='median')
 
-    mask_q = full_sdss['ssfr'] < -11.25
+    mask_q = (full_sdss['ssfr'] < -11.25) & meert15_measurement_mask
     sm = full_sdss['sm'][mask_q]
     size = full_sdss['r50_magr_kpc_meert15'][mask_q]
     redshift = full_sdss['z'][mask_q]
     mean_size_q, scatter_size_q, logsm_mids = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins)
     median_size_q, __x, __y = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins, statistic='median')
 
-    mask_sf = full_sdss['ssfr'] >= -10.75
+    mask_sf = (full_sdss['ssfr'] >= -10.75) & meert15_measurement_mask
     sm = full_sdss['sm'][mask_sf]
     size = full_sdss['r50_magr_kpc_meert15'][mask_sf]
     redshift = full_sdss['z'][mask_sf]
     mean_size_sf, scatter_size_sf, logsm_mids = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins)
     median_size_sf, __x, __y = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins, statistic='median')
 
-    mask_gv = (full_sdss['ssfr'] <= -10.75) & (full_sdss['ssfr'] > -11.25)
+    mask_gv = (full_sdss['ssfr'] <= -10.75) & (full_sdss['ssfr'] > -11.25) & meert15_measurement_mask
     sm = full_sdss['sm'][mask_gv]
     size = full_sdss['r50_magr_kpc_meert15'][mask_gv]
     redshift = full_sdss['z'][mask_gv]
