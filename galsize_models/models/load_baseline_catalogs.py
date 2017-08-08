@@ -1,8 +1,8 @@
 """
 """
-import numpy as np
 from halotools.empirical_models import Moster13SmHm
 from halotools.sim_manager import CachedHaloCatalog
+from .new_haloprops import halo_radius_at_mpeak
 
 
 __all__ = ('load_moster13_mock', )
@@ -24,4 +24,8 @@ def load_moster13_mock(logmstar_cut=9.75, simname='bolplanck', redshift=0.):
             prim_haloprop=mpeak, redshift=redshift)
 
     mstar_mask = halocat.halo_table['mstar'] > 10**logmstar_cut
-    return halocat.halo_table[mstar_mask]
+    mock = halocat.halo_table[mstar_mask]
+    mock['comoving_radius_at_mpeak'] = halo_radius_at_mpeak(
+            mock['halo_mpeak'], mock['halo_scale_factor_mpeak'])
+    return mock
+
