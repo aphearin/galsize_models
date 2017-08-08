@@ -14,7 +14,7 @@ def load_umachine_sdss_with_meert15(datadir=default_datadir, zmin=0.02, sm_limit
     """
     Examples
     --------
-    >>> full_sdss, is_complete = load_umachine_sdss_with_meert15()
+    >>> full_sdss, is_complete = load_umachine_sdss_with_meert15(sm_limit=9.75)
     """
     basename = "umachine_sdss_dr10_meert15.hdf5"
     fname = os.path.join(datadir, basename)
