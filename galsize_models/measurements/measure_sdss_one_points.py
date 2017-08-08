@@ -1,12 +1,17 @@
 """
 """
-from scipy.stats import binned_statistic
+import os
+import numpy as np
 
 
-__all__ = ('size_vs_stellar_mass', )
+__all__ = ('sdss_size_vs_stellar_mass', )
 
 
-def size_vs_stellar_mass(logsm, size, logsm_bins, statistic='mean'):
+default_datadir = "/Users/aphearin/work/sdss/cross_matched_catalogs/meert15"
+
+
+def sdss_size_vs_stellar_mass(logsm, size, redshift, logsm_bins, statistic='mean',
+        datadir=default_datadir, zmin=0.02):
     """
     Parameters
     ----------
@@ -30,7 +35,30 @@ def size_vs_stellar_mass(logsm, size, logsm_bins, statistic='mean'):
     logsm_mids : ndarray
         Numpy array of shape (nbins, ) storing the bin midpoints
     """
-    result, bin_edges, binnumber = binned_statistic(logsm, size, bins=logsm_bins,
-            statistic=statistic)
+    completeness_table = np.loadtxt(os.path.join(datadir, 'completeness.dat'))
     logsm_mids = 0.5*(logsm_bins[:-1] + logsm_bins[1:])
+    assert np.all(logsm_bins >= 9.5), "SDSS volume is too small for logsm bins < 9.5"
+    if statistic == 'mean':
+        f = np.mean
+    elif statistic == 'median':
+        f = np.median
+    else:
+        raise ValueError("Choose ``mean`` or ``median`` for ``statistic``")
+
+    nbins = len(logsm_mids)
+    result = np.zeros(nbins)
+
+    for i, logsm_low, logsm_high in zip(range(nbins), logsm_bins[:-1], logsm_bins[1:]):
+        zcut = np.interp(logsm_low, completeness_table[:, 0], completeness_table[:, 1])
+        mask = (redshift < zcut) & (redshift >= zmin)
+        mask *= (logsm >= logsm_low) & (logsm < logsm_high)
+        mask *= ~np.isnan(size)
+        result[i] = f(size[mask])
+
     return result, logsm_mids
+
+
+def tabulate_sdss_size_vs_stellar_mass():
+    """
+    """
+    pass
