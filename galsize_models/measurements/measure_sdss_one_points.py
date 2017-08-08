@@ -77,24 +77,28 @@ def tabulate_sdss_size_vs_stellar_mass(output_dirname=os.path.abspath('.')):
     size = full_sdss['r50_magr_kpc_meert15'][mask_all]
     redshift = full_sdss['z'][mask_all]
     mean_size_all, scatter_size_all, logsm_mids = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins)
+    median_size_all, __x, __y = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins, statistic='median')
 
     mask_q = full_sdss['ssfr'] < -11.25
     sm = full_sdss['sm'][mask_q]
     size = full_sdss['r50_magr_kpc_meert15'][mask_q]
     redshift = full_sdss['z'][mask_q]
     mean_size_q, scatter_size_q, logsm_mids = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins)
+    median_size_q, __x, __y = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins, statistic='median')
 
     mask_sf = full_sdss['ssfr'] >= -10.75
     sm = full_sdss['sm'][mask_sf]
     size = full_sdss['r50_magr_kpc_meert15'][mask_sf]
     redshift = full_sdss['z'][mask_sf]
     mean_size_sf, scatter_size_sf, logsm_mids = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins)
+    median_size_sf, __x, __y = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins, statistic='median')
 
     mask_gv = (full_sdss['ssfr'] <= -10.75) & (full_sdss['ssfr'] > -11.25)
     sm = full_sdss['sm'][mask_gv]
     size = full_sdss['r50_magr_kpc_meert15'][mask_gv]
     redshift = full_sdss['z'][mask_gv]
     mean_size_gv, scatter_size_gv, logsm_mids = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins)
+    median_size_gv, __x, __y = sdss_size_vs_stellar_mass(sm, size, redshift, logsm_bins, statistic='median')
 
     np.save(os.path.join(output_dirname, 'logsm_bins'), logsm_bins)
 
@@ -108,20 +112,33 @@ def tabulate_sdss_size_vs_stellar_mass(output_dirname=os.path.abspath('.')):
     np.save(os.path.join(output_dirname, 'scatter_size_sf'), scatter_size_sf)
     np.save(os.path.join(output_dirname, 'scatter_size_gv'), scatter_size_gv)
 
+    np.save(os.path.join(output_dirname, 'median_size_all'), median_size_all)
+    np.save(os.path.join(output_dirname, 'median_size_q'), median_size_q)
+    np.save(os.path.join(output_dirname, 'median_size_sf'), median_size_sf)
+    np.save(os.path.join(output_dirname, 'median_size_gv'), median_size_gv)
 
-def load_sdss_size_vs_stellar_mass(output_dirname):
+
+def load_sdss_size_vs_stellar_mass(output_dirname, statistic='mean'):
     output_dirname = os.path.abspath(output_dirname)
     logsm_bins = np.load(os.path.join(output_dirname, 'logsm_bins.npy'))
 
-    mean_size_all = np.load(os.path.join(output_dirname, 'mean_size_all.npy'))
-    mean_size_q = np.load(os.path.join(output_dirname, 'mean_size_q.npy'))
-    mean_size_sf = np.load(os.path.join(output_dirname, 'mean_size_sf.npy'))
-    mean_size_gv = np.load(os.path.join(output_dirname, 'mean_size_gv.npy'))
+    if statistic == 'mean':
+        size_all = np.load(os.path.join(output_dirname, 'mean_size_all.npy'))
+        size_q = np.load(os.path.join(output_dirname, 'mean_size_q.npy'))
+        size_sf = np.load(os.path.join(output_dirname, 'mean_size_sf.npy'))
+        size_gv = np.load(os.path.join(output_dirname, 'mean_size_gv.npy'))
+    elif statistic == 'median':
+        size_all = np.load(os.path.join(output_dirname, 'median_size_all.npy'))
+        size_q = np.load(os.path.join(output_dirname, 'median_size_q.npy'))
+        size_sf = np.load(os.path.join(output_dirname, 'median_size_sf.npy'))
+        size_gv = np.load(os.path.join(output_dirname, 'median_size_gv.npy'))
+    else:
+        raise ValueError("Input ``statistic`` must be either ``mean`` or ``median``")
 
     scatter_size_all = np.load(os.path.join(output_dirname, 'scatter_size_all.npy'))
     scatter_size_q = np.load(os.path.join(output_dirname, 'scatter_size_q.npy'))
     scatter_size_sf = np.load(os.path.join(output_dirname, 'scatter_size_sf.npy'))
     scatter_size_gv = np.load(os.path.join(output_dirname, 'scatter_size_gv.npy'))
 
-    return list((logsm_bins, mean_size_all, mean_size_q, mean_size_sf, mean_size_gv,
+    return list((logsm_bins, size_all, size_q, size_sf, size_gv,
             scatter_size_all, scatter_size_q, scatter_size_sf, scatter_size_gv))
