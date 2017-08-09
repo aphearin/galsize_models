@@ -38,7 +38,8 @@ def sdss_size_vs_stellar_mass(logsm, size, redshift, logsm_bins, statistic='mean
     logsm_mids : ndarray
         Numpy array of shape (nbins, ) storing the bin midpoints
     """
-    completeness_table = np.loadtxt(os.path.join(datadir, 'completeness.dat'))
+    completeness_table_dirname = "/Users/aphearin/Dropbox/UniverseMachine/data/sdss"
+    completeness_table = np.loadtxt(os.path.join(completeness_table_dirname, 'completeness.dat'))
     logsm_mids = 0.5*(logsm_bins[:-1] + logsm_bins[1:])
     assert np.all(logsm_bins >= 9.5), "SDSS volume is too small for logsm bins < 9.5"
     if statistic == 'mean':
