@@ -20,7 +20,8 @@ def load_umachine_sdss_with_meert15(datadir=default_datadir):
     fname = os.path.join(datadir, basename)
     full_sdss = Table.read(fname, path='data')
 
-    completeness_table = np.loadtxt(os.path.join(datadir, 'completeness.dat'))
+    completeness_table_dirname = "/Users/aphearin/Dropbox/UniverseMachine/data/sdss"
+    completeness_table = np.loadtxt(os.path.join(completeness_table_dirname, 'completeness.dat'))
 
     z_limit = np.interp(np.log10(full_sdss['sm']),
             completeness_table[:, 0], completeness_table[:, 1])
