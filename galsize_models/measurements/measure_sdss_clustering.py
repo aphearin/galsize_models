@@ -3,6 +3,7 @@
 import os
 import subprocess
 import numpy as np
+from scipy.stats import binned_statistic
 from astropy.table import Table
 
 
@@ -10,7 +11,7 @@ umachine_sdss_fname = "/Users/aphearin/Dropbox/UniverseMachine/data/sdss/dr10_sm
 _orig_umachine_sdss = Table.read(umachine_sdss_fname, format='ascii.commented_header')
 
 
-__all__ = ('write_umachine_ascii', 'measure_wp')
+__all__ = ('write_umachine_ascii', 'measure_wp', 'below_median_size_mask')
 
 
 def write_umachine_ascii(gals, fname, orig_keys=list(_orig_umachine_sdss.keys()), overwrite=False):
@@ -20,12 +21,13 @@ def write_umachine_ascii(gals, fname, orig_keys=list(_orig_umachine_sdss.keys())
     output_table.write(fname, format='ascii.commented_header', overwrite=overwrite)
 
 
-def get_wp_measurements(wp_sample_fname, sm_low, sm_high, pi_max):
+def get_wp_measurements(wp_sample_fname, sm_low, sm_high, pi_max, num_randoms=int(2e5)):
+    num_randoms_string = str(int(num_randoms))
 
     code_basename = "/Users/aphearin/work/UniverseMachine/code/UniverseMachine/correl/correl"
 
     command_prefix = code_basename + " " + wp_sample_fname + " "
-    command_suffix = str(sm_low) + " " + str(sm_high) + " " + str(pi_max) + " 20 0.02 0.1 500000"
+    command_suffix = str(sm_low) + " " + str(sm_high) + " " + str(pi_max) + " 25 0.02 0.1 " + num_randoms_string
     command = command_prefix + command_suffix
 
     raw_result = subprocess.check_output(command, shell=True)
@@ -45,9 +47,8 @@ def get_wp_measurements(wp_sample_fname, sm_low, sm_high, pi_max):
     return result
 
 
-def measure_wp(gals, mask, sm_low, sm_high, dirname, rp_bins=np.logspace(-1, 1.25, 25), pi_max=20,
+def measure_wp(sample, sm_low, sm_high, dirname, rp_bins=np.logspace(-1, 1.25, 25), pi_max=20,
             auto_regions_dirname="/Users/aphearin/Dropbox/UniverseMachine/data/sdss"):
-    sample = gals[mask]
     temp_fname = os.path.join(dirname, 'temp.dat')
 
     auto_regions_basename = 'auto_regions.txt'
@@ -71,3 +72,9 @@ def measure_wp(gals, mask, sm_low, sm_high, dirname, rp_bins=np.logspace(-1, 1.2
     one_plus_wp_interp = np.exp(np.interp(np.log(rp_bins), np.log(rp), np.log(1. + wp)))
     wperr_interp = np.exp(np.interp(np.log(rp_bins), np.log(rp), np.log(wperr)))
     return rp_bins, one_plus_wp_interp - 1., wperr_interp
+
+
+def below_median_size_mask(log10sm, rhalf):
+    median_log10_size, log10sm_bins, __ = binned_statistic(log10sm, np.log10(rhalf), statistic='median')
+    logsm_mids = 0.5*(log10sm_bins[:-1] + log10sm_bins[1:])
+    return rhalf < 10**np.interp(log10sm, logsm_mids, median_log10_size)
