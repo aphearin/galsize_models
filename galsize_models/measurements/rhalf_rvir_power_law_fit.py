@@ -34,7 +34,22 @@ def _completeness_redshift_vs_rhalo(rhalo_planck15_kpc,
 
 def rvir_rhalf_power_law_index_and_normalization(rhalf_planck15_kpc, rhalo_planck15_kpc,
             log10_rhalo_min=np.log10(100.), log10_rhalo_max=np.log10(1500.), num_bins=20):
-    """
+    """ Fit for the normalization and power law index of the relation
+    Rhalf = A*Rvir**alpha.
+
+    Parameters
+    ----------
+    rhalf_planck15_kpc : ndarray
+
+    rhalo_planck15_kpc : ndarray
+
+    Returns
+    -------
+    alpha : float
+        power law index
+
+    normalization : float
+        Constant factor ``A`` in the scaling relation
     """
     rhalo_bins = np.logspace(log10_rhalo_min, log10_rhalo_max, num_bins)
     median_rhalf, bin_edges, __ = binned_statistic(
