@@ -45,7 +45,7 @@ def halo_radius_at_mpeak(mpeak, scale_factor_mpeak, cosmology=Planck15):
     >>> num_halos = 100
     >>> mpeak = np.logspace(10, 15, num_halos)
     >>> scale_factor_mpeak = 1.0
-    >>> radius = halo_radius_mpeak(mpeak, scale_factor_mpeak)
+    >>> radius = halo_radius_at_mpeak(mpeak, scale_factor_mpeak)
     """
 
     total_mass_unity_h = mpeak*cosmology.h
