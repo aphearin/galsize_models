@@ -32,24 +32,8 @@ def _completeness_redshift_vs_rhalo(rhalo_planck15_kpc,
     return completeness_redshift
 
 
-def median_rhalf_vs_rhalo(redshift, stellar_mass, rhalf, rhalo, rhalo_bins):
-    bin_mids = 10**(0.5*(np.log10(rhalo_bins[:-1]) + np.log10(rhalo_bins[1:])))
-
-    nbins = len(bin_mids)
-    result = np.zeros(nbins)
-
-    raise NotImplementedError
-
-    # for i, rhalo_low, rhalo_high in zip(range(nbins), rhalo_bins[:-1], rhalo_bins[1:]):
-    #     zcut = np.interp(logsm_low, completeness_table[:, 0], completeness_table[:, 1])
-    #     mask = (redshift < zcut) & (redshift >= zmin)
-    #     mask *= (logsm >= logsm_low) & (logsm < logsm_high)
-    #     mask *= ~np.isnan(size)
-    #     result[i] = np.median(size[mask])
-
-
 def rvir_rhalf_power_law_index_and_normalization(rhalf_planck15_kpc, rhalo_planck15_kpc,
-            log10_rhalo_min=np.log10(50.), log10_rhalo_max=np.log10(1500.), num_bins=20):
+            log10_rhalo_min=np.log10(100.), log10_rhalo_max=np.log10(1500.), num_bins=20):
     """
     """
     rhalo_bins = np.logspace(log10_rhalo_min, log10_rhalo_max, num_bins)
