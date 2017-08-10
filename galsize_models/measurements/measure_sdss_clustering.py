@@ -1,5 +1,6 @@
 """
 """
+import os
 import subprocess
 import numpy as np
 from astropy.table import Table
@@ -9,7 +10,7 @@ umachine_sdss_fname = "/Users/aphearin/Dropbox/UniverseMachine/data/sdss/dr10_sm
 _orig_umachine_sdss = Table.read(umachine_sdss_fname, format='ascii.commented_header')
 
 
-__all__ = ('write_umachine_ascii', )
+__all__ = ('write_umachine_ascii', 'measure_wp')
 
 
 def write_umachine_ascii(gals, fname, orig_keys=list(_orig_umachine_sdss.keys()), overwrite=False):
@@ -42,3 +43,31 @@ def get_wp_measurements(wp_sample_fname, sm_low, sm_high, pi_max):
     result = np.array(data_strings, dtype='f4')
     # rp, wp, wperr = result[:, 0], result[:, 1], result[:, 2]
     return result
+
+
+def measure_wp(gals, mask, sm_low, sm_high, dirname, rp_bins=np.logspace(-1, 1.25, 25), pi_max=20,
+            auto_regions_dirname="/Users/aphearin/Dropbox/UniverseMachine/data/sdss"):
+    sample = gals[mask]
+    temp_fname = os.path.join(dirname, 'temp.dat')
+
+    auto_regions_basename = 'auto_regions.txt'
+
+    auto_regions_fname1 = os.path.join(dirname, auto_regions_basename)
+    auto_regions_fname2 = os.path.join(auto_regions_dirname, auto_regions_basename)
+
+    if os.path.isfile(auto_regions_fname1):
+        pass
+    else:
+        if os.path.isfile(auto_regions_fname2):
+            command = "cp {0} {1}"
+            os.system(command.format(auto_regions_fname2, auto_regions_fname1))
+        else:
+            raise IOError("The ``auto_regions.txt`` file could not be found in your current directory,\n"
+                "nor in the Dropbox location {1}".format(auto_regions_fname2))
+
+    __ = write_umachine_ascii(sample, temp_fname, overwrite=True)
+    result = get_wp_measurements(temp_fname, sm_low, sm_high, pi_max)
+    rp, wp, wperr = result[:, 0], result[:, 1], result[:, 2]
+    one_plus_wp_interp = np.exp(np.interp(np.log(rp_bins), np.log(rp), np.log(1. + wp)))
+    wperr_interp = np.exp(np.interp(np.log(rp_bins), np.log(rp), np.log(wperr)))
+    return rp_bins, one_plus_wp_interp - 1., wperr_interp
