@@ -4,7 +4,13 @@ import numpy as np
 from halotools.empirical_models import Moster13SmHm
 from halotools.sim_manager import CachedHaloCatalog
 from umachine_pyio.load_mock import load_mock_from_binaries, value_added_mock
+from halotools.empirical_models import halo_mass_to_halo_radius
+from astropy.cosmology import Planck15
+
 from .new_haloprops import halo_radius_at_mpeak
+from .random_bt_assignment import value_add_random_bt
+
+from ..measurements import load_umachine_sdss_with_meert15
 
 
 __all__ = ('load_moster13_mock', 'load_umachine_mock')
@@ -41,4 +47,17 @@ def load_umachine_mock(galprops=default_umachine_galprops, Lbox=250):
     """
     """
     subvolumes = np.arange(144)
-    return value_added_mock(load_mock_from_binaries(subvolumes, galprops=galprops), Lbox=Lbox)
+    mock = value_added_mock(load_mock_from_binaries(subvolumes, galprops=galprops), Lbox=Lbox)
+
+    mock['ssfr'] = np.log10(mock['sfr']/mock['sm'])
+    redshift = 1./mock['a_first_infall'] - 1.
+    mock['rvir_halo_kpc'] = halo_mass_to_halo_radius(mock['mpeak']*Planck15.h,
+            Planck15, redshift, 'vir')*1000./Planck15.h
+
+    full_sdss, behroozi_complete = load_umachine_sdss_with_meert15()
+    no_data_mask = np.isnan(full_sdss['Magr_tot_meert15'])
+
+    mask = ~no_data_mask & behroozi_complete
+    sdss = full_sdss[mask]
+
+    return value_add_random_bt(mock, sdss)

@@ -6,6 +6,16 @@ from halotools.utils import monte_carlo_from_cdf_lookup, build_cdf_lookup
 from ..measurements.ellipse_selection_functions import ellipse_selector
 
 
+def value_add_random_bt(mock, sdss):
+    """
+    """
+    logsm_mock, ssfr_mock = np.log10(mock['obs_sm']), mock['ssfr']
+    logsm_data, ssfr_data, bt_data = sdss['sm'], sdss['ssfr'], sdss['bulge_to_total_rband_meert15']
+    mock['bt_meert15_random'] = assign_random_bt(logsm_mock, ssfr_mock,
+                logsm_data, ssfr_data, bt_data)
+    return mock
+
+
 def get_percentile_based_bins(arr, nbins, lowp=0.025, highp=0.975):
     """ Calculate a binning scheme for ``arr`` based on its rank-order percentiles.
 
