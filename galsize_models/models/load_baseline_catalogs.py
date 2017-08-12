@@ -9,6 +9,11 @@ from .new_haloprops import halo_radius_at_mpeak
 
 __all__ = ('load_moster13_mock', 'load_umachine_mock')
 
+default_umachine_galprops = list((
+    'sm', 'sfr', 'obs_sm', 'obs_sfr', 'icl', 'halo_id', 'upid',
+    'x', 'y', 'z', 'vx', 'vy', 'vz', 'rvir', 'mvir', 'mpeak',
+    'a_first_infall', 'dvmax_zscore', 'vmax_at_mpeak'))
+
 
 def load_moster13_mock(logmstar_cut=9.75, simname='bolplanck', redshift=0.):
     """
@@ -32,12 +37,8 @@ def load_moster13_mock(logmstar_cut=9.75, simname='bolplanck', redshift=0.):
     return mock
 
 
-def load_umachine_mock():
+def load_umachine_mock(galprops=default_umachine_galprops, Lbox=250):
     """
     """
     subvolumes = np.arange(144)
-    galprops = list((
-        'sm', 'sfr', 'obs_sm', 'obs_sfr', 'icl', 'halo_id', 'upid',
-        'x', 'y', 'z', 'vx', 'vy', 'vz', 'rvir', 'mvir', 'mpeak',
-        'a_first_infall', 'dvmax_zscore', 'vmax_at_mpeak'))
-    return value_added_mock(load_mock_from_binaries(subvolumes, galprops=galprops), 250.)
+    return value_added_mock(load_mock_from_binaries(subvolumes, galprops=galprops), Lbox=Lbox)
