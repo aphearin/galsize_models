@@ -7,7 +7,7 @@ from halotools.mock_observables import return_xyz_formatted_array, wp
 __all__ = ('wp_ssfr_sequence_mock', )
 
 
-def wp_ssfr_sequence_mock(mock, logsm_min, ssfr_sample,
+def wp_ssfr_sequence_mock(mock, logsm_min, ssfr_sample, size_key='r50_magr_kpc_meert15',
         rp_bins=np.logspace(-1, 1.25, 25), pi_max=20., period=250.):
     """
     """
@@ -22,9 +22,9 @@ def wp_ssfr_sequence_mock(mock, logsm_min, ssfr_sample,
     else:
         raise ValueError("ssfr_sample = {0} not recognized")
 
-    size_cut = np.median(mock['r50_magr_kpc_meert15'][mask_sm_ssfr])
-    mask_sm_ssfr_small = mask_sm_ssfr & (mock['r50_magr_kpc_meert15'] < size_cut)
-    mask_sm_ssfr_large = mask_sm_ssfr & (mock['r50_magr_kpc_meert15'] >= size_cut)
+    size_cut = np.median(mock[size_key][mask_sm_ssfr])
+    mask_sm_ssfr_small = mask_sm_ssfr & (mock[size_key] < size_cut)
+    mask_sm_ssfr_large = mask_sm_ssfr & (mock[size_key] >= size_cut)
 
     pos_sm_sf = return_xyz_formatted_array(
             mock['x'], mock['y'], mock['z'], velocity=mock['vz'],
