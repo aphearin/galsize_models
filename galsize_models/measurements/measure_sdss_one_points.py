@@ -67,7 +67,7 @@ def sdss_size_vs_stellar_mass(logsm, size, redshift, logsm_bins, statistic='mean
 def tabulate_sdss_size_vs_stellar_mass(output_dirname=os.path.abspath('.')):
     """
     """
-    logsm_min, logsm_max = 9.75, 11.25
+    logsm_min, logsm_max = 9.75, 11.5
     full_sdss, __ = load_umachine_sdss_with_meert15()
     meert15_measurement_mask = ~np.isnan(full_sdss['r50_magr_kpc_meert15'])
     dlogsm = 0.15
