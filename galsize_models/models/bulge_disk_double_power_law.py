@@ -6,7 +6,7 @@ from ..measurements.measure_one_points import mock_ssfr_sequence_one_points
 from ..measurements.sdss_covariance import assemble_data_vector
 
 
-__all__ = ('component_size_vs_rhalo', 'galaxy_size_vs_rhalo', 'data_vector_prediction')
+__all__ = ('component_size_vs_rhalo', 'galaxy_size_vs_rhalo')
 
 
 def component_size_vs_rhalo(rvir_halo_kpc, normalization, alpha, R0=1., scatter=0.):
