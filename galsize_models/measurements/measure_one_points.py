@@ -14,8 +14,7 @@ __all__ = ('sdss_size_vs_stellar_mass', 'tabulate_sdss_size_vs_stellar_mass',
 default_datadir = "/Users/aphearin/work/sdss/cross_matched_catalogs/meert15"
 
 
-def sdss_size_vs_stellar_mass(logsm, size, redshift, logsm_bins, statistic='mean',
-        datadir=default_datadir, zmin=0.02):
+def sdss_size_vs_stellar_mass(logsm, size, redshift, logsm_bins, statistic='mean', zmin=0.02):
     """
     Parameters
     ----------
@@ -90,7 +89,7 @@ def tabulate_sdss_size_vs_stellar_mass(output_dirname=os.path.abspath('.')):
     logsm_min, logsm_max = 9.75, 11.5
     full_sdss, __ = load_umachine_sdss_with_meert15()
     meert15_measurement_mask = ~np.isnan(full_sdss['r50_magr_kpc_meert15'])
-    dlogsm = 0.15
+    dlogsm = 0.2
     logsm_bins = np.arange(logsm_min, logsm_max+dlogsm, dlogsm)
 
     mask_all = np.ones(len(full_sdss), dtype=bool) & meert15_measurement_mask
