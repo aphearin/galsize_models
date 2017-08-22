@@ -76,11 +76,11 @@ def mock_size_vs_stellar_mass(logsm_bins, logsm, r50_kpc, statistic='mean'):
 def mock_ssfr_sequence_one_points(logsm_bins, logsm, r50_kpc,
             mask_sf, mask_gv, mask_q, statistic='mean'):
     size_sf, scatter_sf = mock_size_vs_stellar_mass(
-                logsm_bins[mask_sf], logsm[mask_sf], r50_kpc[mask_sf], statistic=statistic)
+                logsm_bins, logsm[mask_sf], r50_kpc[mask_sf], statistic=statistic)
     size_gv, scatter_gv = mock_size_vs_stellar_mass(
-                logsm_bins[mask_gv], logsm[mask_gv], r50_kpc[mask_gv], statistic=statistic)
+                logsm_bins, logsm[mask_gv], r50_kpc[mask_gv], statistic=statistic)
     size_q, scatter_q = mock_size_vs_stellar_mass(
-                logsm_bins[mask_q], logsm[mask_q], r50_kpc[mask_q], statistic=statistic)
+                logsm_bins, logsm[mask_q], r50_kpc[mask_q], statistic=statistic)
     return size_sf, size_gv, size_q, scatter_sf, scatter_gv, scatter_q
 
 
