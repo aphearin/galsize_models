@@ -16,13 +16,13 @@ sf_num_skip = 4
 def _get_ifirst_ilast_indices(i=None):
     npts = len(logsm_mids)
     npts_sf = npts - sf_num_skip
-    npts_arr = (npts_sf, npts, npts, npts_sf, npts, npts)
+    npts_arr = (npts_sf, npts, npts, 1, 1, 1)
     ifirst = 0
     collector = []
     for n in npts_arr:
         ilast = ifirst+n
         collector.append((ifirst, ilast))
-        ifirst=ilast
+        ifirst = ilast
 
     if i is None:
         return collector
@@ -61,14 +61,17 @@ def sdss_ssfr_sequence_scatter_errors():
 
 def assemble_data_vector(mean_size_sf, mean_size_gv, mean_size_q,
             scatter_size_sf, scatter_size_gv, scatter_size_q):
-    return np.concatenate((mean_size_sf[:-sf_num_skip], mean_size_gv, mean_size_q,
-                scatter_size_sf[:-sf_num_skip], scatter_size_gv, scatter_size_q))
+    scatter_array = np.array((np.median(scatter_size_sf[:-sf_num_skip]),
+                np.median(scatter_size_gv), np.median(scatter_size_q)))
+    return np.concatenate((mean_size_sf[:-sf_num_skip], mean_size_gv, mean_size_q, scatter_array))
 
 
 def assemble_cov(size_sf_err, size_gv_err, size_q_err,
             scatter_sf_err, scatter_gv_err, scatter_q_err):
+    scatter_errors = np.array((np.median(scatter_sf_err[:-sf_num_skip]),
+                np.median(scatter_gv_err), np.median(scatter_q_err)))
     error_vector = np.concatenate((size_sf_err[:-sf_num_skip], size_gv_err, size_q_err,
-            scatter_sf_err[:-sf_num_skip], scatter_gv_err, scatter_q_err))
+            scatter_errors))
     return np.diag(error_vector*error_vector)
 
 
@@ -83,4 +86,3 @@ def sdss_measurements_and_cov():
     sdss_cov = assemble_cov(size_sf_err, size_gv_err, size_q_err,
                 scatter_sf_err, scatter_gv_err, scatter_q_err)
     return sdss_data_vector, sdss_cov
-
