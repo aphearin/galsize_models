@@ -50,6 +50,11 @@ def load_umachine_mock(galprops=default_umachine_galprops, Lbox=250):
     mock = value_added_mock(load_mock_from_binaries(subvolumes, galprops=galprops), Lbox=Lbox)
 
     mock['ssfr'] = np.log10(mock['sfr']/mock['sm'])
+    mock['is_main_sequence'] = mock['ssfr'] >= -10.75
+    mock['is_green_valley'] = (mock['ssfr'] < -10.75) & (mock['ssfr'] >= -11.25)
+    mock['is_quenched'] = (mock['ssfr'] < -11.25)
+    mock['logsm'] = np.log10(mock['obs_sm'])
+
     redshift = 1./mock['a_first_infall'] - 1.
     mock['rvir_halo_kpc'] = halo_mass_to_halo_radius(mock['mpeak']*Planck15.h,
             Planck15, redshift, 'vir')*1000./Planck15.h
