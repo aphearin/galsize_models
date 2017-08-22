@@ -8,6 +8,7 @@ data_subdirname = "galsize_models/measurements/data/one_point_functions"
 data_dirname = os.path.join(repo_dirname, data_subdirname)
 
 logsm_bins = np.load(os.path.join(data_dirname, 'logsm_bins.npy'))
+logsm_mids = 0.5*(logsm_bins[:-1] + logsm_bins[1:])
 
 
 def sdss_ssfr_sequence_means():
