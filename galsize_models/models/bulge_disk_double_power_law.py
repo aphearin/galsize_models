@@ -37,3 +37,24 @@ def data_vector_prediction(params, mock, logsm_bins):
     mask_q = mock['is_quenched']
     _x = mock_ssfr_sequence_one_points(logsm_bins, logsm, r50_kpc, mask_sf, mask_gv, mask_q)
     return assemble_data_vector(*_x)
+
+
+def lnprior(params):
+    """
+    """
+    norm1, norm2, alpha1, alpha2, scatter = params
+
+    forbidden = norm1 < 0
+    forbidden *= norm1 > 1
+    forbidden *= norm2 < 0
+    forbidden *= norm2 > 1
+    forbidden *= alpha1 < 0
+    forbidden *= alpha1 > 2
+    forbidden *= alpha2 < 0
+    forbidden *= alpha2 > 2
+    forbidden *= scatter < 0
+    forbidden *= scatter > 1
+    if forbidden:
+        return -np.inf
+    else:
+        return 0.0
