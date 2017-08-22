@@ -2,6 +2,7 @@
 """
 import os
 import numpy as np
+from scipy.stats import binned_statistic
 
 from .load_cross_matched_umachine import load_umachine_sdss_with_meert15
 
@@ -62,6 +63,14 @@ def sdss_size_vs_stellar_mass(logsm, size, redshift, logsm_bins, statistic='mean
         sdss_scatter[i] = np.std(np.log10(size[mask]))
 
     return sdss_mean, sdss_scatter, logsm_mids
+
+
+def mock_size_vs_stellar_mass(logsm_bins, logsm, r50_kpc, statistic='mean'):
+    one_point, __, __ = binned_statistic(
+                logsm, r50_kpc, bins=logsm_bins, statistic=statistic)
+    scatter_in_dex, __, __ = binned_statistic(
+                logsm, np.log10(r50_kpc), bins=logsm_bins, statistic=np.std)
+    return one_point, scatter_in_dex
 
 
 def tabulate_sdss_size_vs_stellar_mass(output_dirname=os.path.abspath('.')):
