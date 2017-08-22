@@ -45,14 +45,14 @@ def assemble_data_vector(mean_size_sf, mean_size_gv, mean_size_q,
                 scatter_size_sf, scatter_size_gv, scatter_size_q))
 
 
-def assemble_icov(size_sf_err, size_gv_err, size_q_err,
+def assemble_cov(size_sf_err, size_gv_err, size_q_err,
             scatter_sf_err, scatter_gv_err, scatter_q_err):
     error_vector = np.concatenate((size_sf_err, size_gv_err, size_q_err,
             scatter_sf_err, scatter_gv_err, scatter_q_err))
     return np.diag(error_vector*error_vector)
 
 
-def sdss_measurements_and_errors():
+def sdss_measurements_and_cov():
     mean_size_sf, mean_size_gv, mean_size_q = sdss_ssfr_sequence_means()
     scatter_size_sf, scatter_size_gv, scatter_size_q = sdss_ssfr_sequence_scatter_in_dex()
     sdss_data_vector = assemble_data_vector(mean_size_sf, mean_size_gv, mean_size_q,
@@ -60,7 +60,7 @@ def sdss_measurements_and_errors():
 
     size_sf_err, size_gv_err, size_q_err = sdss_ssfr_sequence_means_errors()
     scatter_sf_err, scatter_gv_err, scatter_q_err = sdss_ssfr_sequence_scatter_errors()
-    sdss_icov = assemble_icov(size_sf_err, size_gv_err, size_q_err,
+    sdss_cov = assemble_cov(size_sf_err, size_gv_err, size_q_err,
                 scatter_sf_err, scatter_gv_err, scatter_q_err)
-    return sdss_data_vector, sdss_icov
+    return sdss_data_vector, sdss_cov
 
