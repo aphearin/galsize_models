@@ -22,7 +22,7 @@ def galaxy_size_vs_rhalo(rvir_halo_kpc, bt, norm1, norm2, alpha1, alpha2, R0=1.,
     return bt*size1 + (1-bt)*size2
 
 
-def data_vector_prediction(params, mock, logsm_bins):
+def data_vector_prediction(params, mock, logsm_bins, statistic='mean'):
     """
     """
     norm1, norm2, alpha1, alpha2, scatter = params
@@ -35,7 +35,8 @@ def data_vector_prediction(params, mock, logsm_bins):
     mask_sf = mock['is_main_sequence']
     mask_gv = mock['is_green_valley']
     mask_q = mock['is_quenched']
-    _x = mock_ssfr_sequence_one_points(logsm_bins, logsm, r50_kpc, mask_sf, mask_gv, mask_q)
+    _x = mock_ssfr_sequence_one_points(logsm_bins, logsm, r50_kpc,
+                mask_sf, mask_gv, mask_q, statistic=statistic)
     return assemble_data_vector(*_x)
 
 
