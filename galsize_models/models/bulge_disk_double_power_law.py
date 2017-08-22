@@ -45,17 +45,22 @@ def lnprior(params):
     """
     norm1, norm2, alpha1, alpha2, scatter = params
 
-    forbidden = norm1 < 0
-    forbidden *= norm1 > 1
-    forbidden *= norm2 < 0
-    forbidden *= norm2 > 1
-    forbidden *= alpha1 < 0
-    forbidden *= alpha1 > 2
-    forbidden *= alpha2 < 0
-    forbidden *= alpha2 > 2
-    forbidden *= scatter < 0
-    forbidden *= scatter > 1
-    if forbidden:
-        return -np.inf
-    else:
+    acceptable = norm1 > 0
+    acceptable *= norm1 < 1
+
+    acceptable *= norm2 > 0
+    acceptable *= norm2 < 1
+
+    acceptable *= alpha1 > 0
+    acceptable *= alpha1 < 2
+
+    acceptable *= alpha2 > 0
+    acceptable *= alpha2 < 2
+
+    acceptable *= scatter > 0
+    acceptable *= scatter < 1
+
+    if bool(acceptable) is True:
         return 0.0
+    else:
+        return -np.inf
