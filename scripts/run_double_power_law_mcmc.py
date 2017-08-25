@@ -36,7 +36,7 @@ outname = "bulge_disk_power_law_chain.dat"
 
 sep = "  "
 formatter = sep.join("{"+str(i)+":.4f}" for i in range(pos0.shape[-1])) + "  " + "{"+str(pos0.shape[-1])+":.4f}\n"
-header = "norm1, norm2, alpha1, alpha2, scatter, lnprob\n"
+header = "norm_bulge,norm_disk,alpha_bulge,alpha_disk,scatter,lnprob\n"
 
 start = time()
 
