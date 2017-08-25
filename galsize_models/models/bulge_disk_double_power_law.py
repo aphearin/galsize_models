@@ -5,6 +5,12 @@ import numpy as np
 from ..measurements.measure_one_points import mock_ssfr_sequence_one_points
 from ..measurements.sdss_covariance import assemble_data_vector
 
+norm_bulge_priors = (0, 0.1)
+bulge_to_disk_size_ratio_priors = (0.1, 0.5)
+alpha_bulge_priors = (0.5, 1.5)
+alpha_disk_priors = (0.5, 1.5)
+scatter_priors = (0.1, 0.4)
+
 
 __all__ = ('component_size_vs_rhalo', 'galaxy_size_vs_rhalo')
 
@@ -44,23 +50,45 @@ def data_vector_prediction(params, mock, logsm_bins, statistic='mean'):
 
 def lnprior(params):
     """
+    Examples
+    --------
+    >>> norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter = 0.05, 0.2, 0.7, 0.7, 0.25
+    >>> params = (norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter)
+    >>> prior = lnprior(params)
+    >>> assert ~np.isinf(prior)
+
+    >>> norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter = -0.05, 0.2, 0.7, 0.7, 0.25
+    >>> params = (norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter)
+    >>> prior = lnprior(params)
+    >>> assert np.isinf(prior)
+
+    >>> norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter = 0.05, 2, 0.7, 0.7, 0.25
+    >>> params = (norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter)
+    >>> prior = lnprior(params)
+    >>> assert np.isinf(prior)
+
+    >>> norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter = 0.05, 2, 0.1, 0.7, 0.25
+    >>> params = (norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter)
+    >>> prior = lnprior(params)
+    >>> assert np.isinf(prior)
+
+    >>> norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter = 0.05, 2, 0.1, 0.7, 0.25
+    >>> params = (norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter)
+    >>> prior = lnprior(params)
+    >>> assert np.isinf(prior)
+
+    >>> norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter = 0.05, 2, 0.1, 0.7, 0.5
+    >>> params = (norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter)
+    >>> prior = lnprior(params)
+    >>> assert np.isinf(prior)
     """
     norm_bulge, bulge_to_disk_size_ratio, alpha_bulge, alpha_disk, scatter = params
 
-    acceptable = norm_bulge > 0
-    acceptable *= norm_bulge < 0.1
-
-    acceptable *= bulge_to_disk_size_ratio >= 0.1
-    acceptable *= bulge_to_disk_size_ratio <= 1
-
-    acceptable *= alpha_bulge > 0.5
-    acceptable *= alpha_bulge < 1.5
-
-    acceptable *= alpha_disk > 0.5
-    acceptable *= alpha_disk < 1.5
-
-    acceptable *= scatter > 0.1
-    acceptable *= scatter < 0.4
+    acceptable = norm_bulge_priors[0] < norm_bulge < norm_bulge_priors[1]
+    acceptable *= bulge_to_disk_size_ratio_priors[0] < bulge_to_disk_size_ratio < bulge_to_disk_size_ratio_priors[1]
+    acceptable *= alpha_bulge_priors[0] < alpha_bulge < alpha_bulge_priors[1]
+    acceptable *= alpha_disk_priors[0] < alpha_disk < alpha_disk_priors[1]
+    acceptable *= scatter_priors[0] < scatter < scatter_priors[1]
 
     if bool(acceptable) is True:
         return 0.0
