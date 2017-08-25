@@ -39,7 +39,7 @@ outname = "bulge_disk_power_law_chain_aggressive_priors.dat"
 
 sep = "  "
 formatter = sep.join("{"+str(i)+":.4f}" for i in range(pos0.shape[-1])) + "  " + "{"+str(pos0.shape[-1])+":.4f}\n"
-header = "norm_bulge  disk_to_bulge_ratio  alpha_bulge  alpha_disk  scatter  lnprob\n"
+header = "norm_bulge  bulge_to_disk_size_ratio  alpha_bulge  alpha_disk  scatter  lnprob\n"
 
 start = time()
 
@@ -57,3 +57,6 @@ print("\a\a\a")
 
 chain = Table.read(outname, format='ascii')
 print("Successfully loaded chain with {0} elements from disk after completion of MCMC".format(len(chain)))
+chain.sort('lnprob')
+print("Best fitting model:\n")
+print(chain[-1])
