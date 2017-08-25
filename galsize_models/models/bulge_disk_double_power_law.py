@@ -16,19 +16,20 @@ def component_size_vs_rhalo(rvir_halo_kpc, normalization, alpha, R0=1., scatter=
     return 10**np.random.normal(loc=np.log10(mean_size), scale=scatter)
 
 
-def galaxy_size_vs_rhalo(rvir_halo_kpc, bt, norm1, norm2, alpha1, alpha2, R0=1., scatter=0.):
-    size1 = component_size_vs_rhalo(rvir_halo_kpc, norm1, alpha1, R0, scatter)
-    size2 = component_size_vs_rhalo(rvir_halo_kpc, norm2, alpha2, R0, scatter)
+def galaxy_size_vs_rhalo(rvir_halo_kpc, bt, norm_bulge, norm_disk, alpha_bulge, alpha_disk,
+            R0=1., scatter=0.):
+    size1 = component_size_vs_rhalo(rvir_halo_kpc, norm_bulge, alpha_bulge, R0, scatter)
+    size2 = component_size_vs_rhalo(rvir_halo_kpc, norm_disk, alpha_disk, R0, scatter)
     return bt*size1 + (1-bt)*size2
 
 
 def data_vector_prediction(params, mock, logsm_bins, statistic='mean'):
     """
     """
-    norm1, norm2, alpha1, alpha2, scatter = params
+    norm_bulge, norm_disk, alpha_bulge, alpha_disk, scatter = params
     rvir_halo_kpc = mock['rvir_halo_kpc']
     bt = mock['bt_meert15_random']
-    r50_kpc = galaxy_size_vs_rhalo(rvir_halo_kpc, bt, norm1, norm2, alpha1, alpha2,
+    r50_kpc = galaxy_size_vs_rhalo(rvir_halo_kpc, bt, norm_bulge, norm_disk, alpha_bulge, alpha_disk,
                 R0=1., scatter=scatter)
 
     logsm = mock['logsm']
@@ -43,19 +44,19 @@ def data_vector_prediction(params, mock, logsm_bins, statistic='mean'):
 def lnprior(params):
     """
     """
-    norm1, norm2, alpha1, alpha2, scatter = params
+    norm_bulge, norm_disk, alpha_bulge, alpha_disk, scatter = params
 
-    acceptable = norm1 > 0
-    acceptable *= norm1 < 1
+    acceptable = norm_bulge > 0
+    acceptable *= norm_bulge < 1
 
-    acceptable *= norm2 > 0
-    acceptable *= norm2 < 1
+    acceptable *= norm_disk > 0
+    acceptable *= norm_disk < 1
 
-    acceptable *= alpha1 > 0
-    acceptable *= alpha1 < 2
+    acceptable *= alpha_bulge > 0
+    acceptable *= alpha_bulge < 2
 
-    acceptable *= alpha2 > 0
-    acceptable *= alpha2 < 2
+    acceptable *= alpha_disk > 0
+    acceptable *= alpha_disk < 2
 
     acceptable *= scatter > 0
     acceptable *= scatter < 1
