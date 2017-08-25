@@ -15,6 +15,7 @@ parser.add_argument("-num_burnin", type=int, default=3,
 args = parser.parse_args()
 
 from galsize_models.models import mcmc_bulge_disk_double_power_law as mcmc
+from galsize_models.models.bulge_disk_double_power_law import set_mcmc_p0
 
 
 ndim = 5
@@ -23,7 +24,8 @@ nwalkers = 2*ndim
 mcmc_num_iteration = int(round(args.num_iteration/float(nwalkers)))
 burnin_num_iteration = int(round(args.num_burnin/float(nwalkers)))
 
-p0 = np.random.rand(ndim * nwalkers).reshape((nwalkers, ndim))
+p0 = set_mcmc_p0(nwalkers)
+
 sampler = EnsembleSampler(nwalkers, ndim, mcmc.lnprob, args=mcmc.lnprob_args)
 
 print("...Running burn-in phase of {0} total likelihood evaluations ".format(
