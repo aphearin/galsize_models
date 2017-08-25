@@ -40,7 +40,7 @@ outname = "bulge_disk_power_law_chain_aggressive_priors.dat"
 
 
 sep = "  "
-formatter = sep.join("{"+str(i)+":.4f}" for i in range(pos0.shape[-1])) + "  " + "{"+str(pos0.shape[-1])+":.4f}\n"
+formatter = sep.join("{"+str(i)+":.6f}" for i in range(pos0.shape[-1])) + "  " + "{"+str(pos0.shape[-1])+":.6f}\n"
 header = "norm_bulge  bulge_to_disk_size_ratio  alpha_bulge  alpha_disk  scatter  lnprob\n"
 
 start = time()
