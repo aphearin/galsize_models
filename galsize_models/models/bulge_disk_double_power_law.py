@@ -94,3 +94,25 @@ def lnprior(params):
         return 0.0
     else:
         return -np.inf
+
+
+def set_mcmc_p0(nwalkers):
+    """
+    Examples
+    --------
+    >>> nwalkers = 10
+    >>> p0 = set_mcmc_p0(nwalkers)
+    >>> assert np.shape(p0) == (nwalkers, 5)
+    >>> priors_init = [lnprior(params) for params in p0]
+    >>> assert ~np.any(np.isinf(priors_init))
+    """
+    norm_bulge_init = np.random.uniform(norm_bulge_priors[0], norm_bulge_priors[1], nwalkers)
+    bulge_to_disk_size_ratio_init = np.random.uniform(bulge_to_disk_size_ratio_priors[0], bulge_to_disk_size_ratio_priors[1], nwalkers)
+    alpha_bulge_init = np.random.uniform(alpha_bulge_priors[0], alpha_bulge_priors[1], nwalkers)
+    alpha_disk_init = np.random.uniform(alpha_disk_priors[0], alpha_disk_priors[1], nwalkers)
+    scatter_init = np.random.uniform(scatter_priors[0], scatter_priors[1], nwalkers)
+
+    return np.vstack((norm_bulge_init, bulge_to_disk_size_ratio_init, alpha_bulge_init,
+                alpha_disk_init, scatter_init)).T
+
+
