@@ -50,10 +50,8 @@ def get_percentile_based_bins(arr, nbins, lowp=0.025, highp=0.975):
 
 
 def assign_random_bt(logsm_mock, ssfr_mock, logsm_data, ssfr_data, bt_data,
-        logsm_bins=np.linspace(9.8, 11.75, 15)):
+        logsm_bins=np.linspace(9.8, 11.75, 15), num_ssfr_bins=15):
 
-    sm_bins = 10**logsm_bins
-    sm_bins = np.insert(np.append(sm_bins, np.inf), 0, -np.inf)
     logsm_bins = np.insert(np.append(logsm_bins, np.inf), 0, -np.inf)
 
     nkeep = 2500
@@ -62,13 +60,14 @@ def assign_random_bt(logsm_mock, ssfr_mock, logsm_data, ssfr_data, bt_data,
 
     msg = "Working on logsm_mock = {0:.1f}, ssfr = {1:.1f}\nSDSS <sm> = {2:.1f} SDSS <ssfr> = {3:.1f}"
 
-    for sm_low, sm_high in zip(sm_bins[:-1], sm_bins[1:]):
-        ism_mask = (logsm_mock >= sm_low) & (logsm_mock < sm_high)
+    for logsm_low, logsm_high in zip(logsm_bins[:-1], logsm_bins[1:]):
+        ism_mask = (logsm_mock >= logsm_low) & (logsm_mock < logsm_high)
 
         if np.count_nonzero(ism_mask) > 0:
-            logsm_mid = np.log10(np.median(logsm_mock[ism_mask]))
+            logsm_mid = np.median(logsm_mock[ism_mask])
+            # print("{0} mock galaxies in logM* = {1:.2f} bin".format(np.count_nonzero(ism_mask), logsm_mid))
 
-            ssfr_bins = get_percentile_based_bins(ssfr_mock[ism_mask], 15)[0]
+            ssfr_bins = get_percentile_based_bins(ssfr_mock[ism_mask], num_ssfr_bins)[0]
             for jssfr, ssfr_low, ssfr_high in zip(range(len(ssfr_bins)), ssfr_bins[:-1], ssfr_bins[1:]):
                 ssfr_mid = 0.5*(ssfr_low + ssfr_high)
 
