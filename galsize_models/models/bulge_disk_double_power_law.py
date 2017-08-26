@@ -6,10 +6,10 @@ from ..measurements.measure_one_points import mock_ssfr_sequence_one_points
 from ..measurements.sdss_covariance import assemble_data_vector
 
 norm_bulge_priors = (0, 0.1)
-bulge_to_disk_size_ratio_priors = (0.1, 0.5)
-alpha_bulge_priors = (0.5, 1.5)
-alpha_disk_priors = (0.5, 1.5)
-scatter_priors = (0.1, 0.4)
+bulge_to_disk_size_ratio_priors = (1/5., 1/2.)
+alpha_bulge_priors = (0.75, 1.1)
+alpha_disk_priors = (0.75, 1.1)
+scatter_priors = (0.15, 0.2)
 
 
 __all__ = ('component_size_vs_rhalo', 'galaxy_size_vs_rhalo')
