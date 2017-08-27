@@ -5,7 +5,7 @@ import numpy as np
 from astropy.table import Table
 
 
-__all__ = ('load_umachine_sdss_with_meert15', )
+__all__ = ('load_umachine_sdss_with_meert15', 'mendel13_bulge_to_total')
 
 default_datadir = "/Users/aphearin/work/sdss/cross_matched_catalogs/meert15"
 
@@ -29,3 +29,15 @@ def load_umachine_sdss_with_meert15(datadir=default_datadir):
 
     full_sdss['ssfr'] = np.log10(full_sdss['sfr']/10**full_sdss['sm'])
     return full_sdss, is_complete
+
+
+def mendel13_bulge_to_total(sample):
+    msg = "Must first make a cut on having a good Mendel+13 B/D decomposition"
+    assert ~np.any(np.isnan(sample['logMB_mendel13'])), msg
+    assert ~np.any(np.isnan(sample['logMD_mendel13'])), msg
+    assert np.all(sample['logMB_mendel13'] > 0), msg
+    assert np.all(sample['logMD_mendel13'] > 0), msg
+
+    bulge_mass = 10**sample['logMB_mendel13']
+    disk_mass = 10**sample['logMD_mendel13']
+    return bulge_mass/(bulge_mass + disk_mass)
