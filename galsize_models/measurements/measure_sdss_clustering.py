@@ -96,11 +96,14 @@ def save_wp_measurement(sample, output_dirname, output_basename, sm_low, sm_high
     msg = "Measuring wp for {0} sample of {1} galaxies"
     print(msg.format(output_basename, len(sample)))
 
-    temp_ascii_fname = os.path.join(output_dirname, 'tmp.dat')
-    write_umachine_ascii(sample, temp_ascii_fname, overwrite=True)
+    rp, wp, _wperr = measure_wp(sample, sm_low, sm_high, output_dirname)
 
-    _results = get_wp_measurements(temp_ascii_fname, sm_low, sm_high, pi_max)
-    rp, wp, _wperr = _results[:, 0], _results[:, 1], _results[:, 2]
+    # temp_ascii_fname = os.path.join(output_dirname, 'tmp.dat')
+    # write_umachine_ascii(sample, temp_ascii_fname, overwrite=True)
+
+    # _results = get_wp_measurements(temp_ascii_fname, sm_low, sm_high, pi_max)
+    # rp, wp, _wperr = _results[:, 0], _results[:, 1], _results[:, 2]
+
     rp_fname = os.path.join(output_dirname, output_basename+'_rp')
     wp_fname = os.path.join(output_dirname, output_basename+'_wp')
     np.save(wp_fname, wp)

@@ -51,3 +51,5 @@ distribute-*.tar.gz
 
 # Mac OSX
 .DS_Store
+
+galsize_models/measurements/data/two_point_functions/*.dat
