@@ -66,10 +66,9 @@ def load_umachine_mock(galprops=default_umachine_galprops, Lbox=250):
     mock['spin_at_infall'][~nonzero_spin_mask] = np.random.choice(
                 np.copy(mock['spin_at_infall'][nonzero_spin_mask].data), num_impute, replace=True)
 
-    full_sdss, behroozi_complete = load_umachine_sdss_with_meert15()
-    no_data_mask = np.isnan(full_sdss['Magr_tot_meert15'])
+    full_sdss, behroozi_complete, good_profile_mask = load_umachine_sdss_with_meert15()
 
-    mask = ~no_data_mask & behroozi_complete
+    mask = good_profile_mask & behroozi_complete
     sdss = full_sdss[mask]
 
     return value_add_random_bt(mock, sdss)
