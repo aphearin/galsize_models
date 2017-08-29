@@ -1,6 +1,7 @@
 """
 """
 import numpy as np
+from astropy.utils.misc import NumpyRNGContext
 
 from ..measurements.measure_one_points import mock_ssfr_sequence_one_points
 from ..measurements.sdss_covariance import assemble_data_vector
@@ -22,17 +23,19 @@ fiducial_norm_disk = fiducial_norm_bulge/fiducial_bulge_to_disk_size_ratio
 __all__ = ('component_size_vs_rhalo', 'galaxy_size_vs_rhalo')
 
 
-def component_size_vs_rhalo(rvir_halo_kpc, normalization, alpha, R0=1., scatter=0.):
+def component_size_vs_rhalo(rvir_halo_kpc, normalization, alpha, R0=1., scatter=0., seed=None):
     """
     """
     mean_size = normalization*(rvir_halo_kpc/R0)**alpha
-    return 10**np.random.normal(loc=np.log10(mean_size), scale=scatter)
+    with NumpyRNGContext(seed):
+        result = 10**np.random.normal(loc=np.log10(mean_size), scale=scatter)
+    return result
 
 
 def galaxy_size_vs_rhalo(rvir_halo_kpc, bt, norm_bulge, norm_disk, alpha_bulge, alpha_disk,
-            R0=1., scatter=0.):
-    size1 = component_size_vs_rhalo(rvir_halo_kpc, norm_bulge, alpha_bulge, R0, scatter)
-    size2 = component_size_vs_rhalo(rvir_halo_kpc, norm_disk, alpha_disk, R0, scatter)
+            R0=1., scatter=0., seed=None):
+    size1 = component_size_vs_rhalo(rvir_halo_kpc, norm_bulge, alpha_bulge, R0, scatter, seed=seed)
+    size2 = component_size_vs_rhalo(rvir_halo_kpc, norm_disk, alpha_disk, R0, scatter, seed=seed)
     return bt*size1 + (1-bt)*size2
 
 
