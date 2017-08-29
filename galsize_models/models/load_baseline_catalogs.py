@@ -59,6 +59,9 @@ def load_umachine_mock(galprops=default_umachine_galprops, Lbox=250):
     mock['rvir_halo_kpc'] = halo_mass_to_halo_radius(mock['mpeak']*Planck15.h,
             Planck15, redshift, 'vir')*1000./Planck15.h
 
+    mock['rvir_halo_kpc_present_day'] = halo_mass_to_halo_radius(mock['mvir']*Planck15.h,
+            Planck15, 0., 'vir')*1000./Planck15.h
+
     spin_at_infall_fname = '/Users/aphearin/work/UniverseMachine/temp_galsize_models/spin_at_infall_umachine.npy'
     mock['spin_at_infall'] = np.load(spin_at_infall_fname)
     nonzero_spin_mask = mock['spin_at_infall'] != 0
