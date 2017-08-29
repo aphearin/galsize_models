@@ -11,6 +11,13 @@ alpha_bulge_priors = (0.75, 1.1)
 alpha_disk_priors = (0.75, 1.1)
 scatter_priors = (0.15, 0.2)
 
+fiducial_norm_bulge = 0.002
+fiducial_bulge_to_disk_size_ratio = 1/7.
+fiducial_alpha_bulge = 1.25
+fiducial_alpha_disk = 1
+fiducial_scatter = 0.2
+fiducial_norm_disk = fiducial_norm_bulge/fiducial_bulge_to_disk_size_ratio
+
 
 __all__ = ('component_size_vs_rhalo', 'galaxy_size_vs_rhalo')
 
