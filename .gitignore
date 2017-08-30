@@ -57,5 +57,6 @@ galsize_models/measurements/data/two_point_functions/*.dat
 paper/*.aux
 paper/*.log
 paper/*.bbl
+paper/*.blg
 paper/*synctex.gz
 
