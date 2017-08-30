@@ -30,6 +30,33 @@
 \newcommand{\bit}{\begin{itemize}}
 \newcommand{\eit}{\end{itemize}}
 
+%%%%%%%%  galaxy properties  %%%%%%%%
+\newcommand{\rhalf}{R_{1/2}}
+\newcommand{\rhalfdisk}{R_{1/2}^{\rm disk}}
+\newcommand{\rhalfbulge}{R_{1/2}^{\rm bulge}}
+\newcommand{\adisk}{A_{\rm disk}}
+\newcommand{\abulge}{A_{\rm bulge}}
+\newcommand{\alphadisk}{\alpha_{\rm disk}}
+\newcommand{\alphabulge}{\alpha_{\rm bulge}}
+\newcommand{\rvir}{R_{\rm vir}}
+\newcommand{\bt}{{\rm B/T}}
+\newcommand{\mstar}{M_{\ast}}
+
+%%%%%%%%  halo properties  %%%%%%%%
+\newcommand{\halospin}{\lambda_{\rm halo}}
+\newcommand{\mvir}{M_{\rm vir}}
+\newcommand{\macc}{M_{\rm acc}}
+
+
+%%%%%%%%  observations  %%%%%%%%
+\newcommand{\rproj}{r_{\rm p}}
+\newcommand{\wproj}{w_{\rm p}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \usepackage{epsfig}  \usepackage{graphicx}   \usepackage{rotating}
 
 \begin{document}
@@ -38,12 +65,18 @@
 {On the Galaxy Size--Halo Connection}
 
 
-\author[Homeboy et al.]{Homeboy}
+\author[Hearin, Behroozi, Kravtsov \& Moster]{
+Andrew Hearin$^{1}$, Peter Behroozi$^{2}$, Andrey Kravtsov$^{3}$, Benjamin Moster$^{4}$\\
+$^{1}$Argonne National Laboratory, Argonne, IL, USA 60439, USA\\
+$^{2}$Department of Physics, University of Arizona, 1118 E 4th St, Tucson, AZ 85721 USA\\
+$^{3}$Department of Astronomy \& Astrophysics, The University of Chicago, Chicago, IL 60637 USA\\
+$^{4}$Universit{\"a}ts-Sternwarte, Ludwig-Maximilians-Universit{\"a}t M{\"u}nchen, Scheinerstr. 1, 81679 M{\"u}nchen, Germany
+}
 
 \maketitle
 
 \begin{abstract}
-Some abstract 
+We derive empirical modeling constraints on the connection between dark matter halos and the half-mass radius $\rhalf$ of galaxy bulges and disks. We show that both $\rhalfdisk$ and $\rhalfbulge$ are well-described by power law scaling relations with halo virial radius, $\rhalf=A\rvir^{\alpha}.$ Novel to this work, we use new SDSS measurements of the $\rhalf-$dependence of galaxy clustering to constrain the model parameters, $A_{\rm bulge}, A_{\rm disk}, \alpha_{\rm bulge},\alpha_{\rm disk},$ and log-normal scatter $\sigma_{R_{1/2}}.$ Even when only coarsely tuning these parameters to the observed one-point functions $\langle\rhalfdisk|\mstar^{\rm disk}\rangle$ and $\langle\rhalfbulge|\mstar^{\rm bulge}\rangle,$ our model accurately predicts the observed two-point clustering on small- and large-scales. This success non-trivial, as we show that galaxy clustering is highly sensitive to the physics that shapes satellite galaxy profiles. We find no evidence for the commonly assumed relation between halo spin $\halospin$ and $\rhalfdisk,$ and show that this assumption cannot be meaningfully constrained with either the clustering or lensing of  $L_{\ast}$ galaxies. Our results provide simple boundary conditions for more complex and fine-grained models of galaxy size. We make our python code publicly available to support cosmological surveys that require realistic synthetic galaxy populations.
 \end{abstract}
 
 \section{Introduction}
@@ -53,3 +86,10 @@ Some introduction goes here.
 \section*{Acknowledgments}
 
 \end{document}
+
+
+
+
+
+
+
