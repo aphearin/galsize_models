@@ -97,7 +97,9 @@ Some introduction goes here.
 \label{subsec:galaxydata}
 
 
-Our galaxy sample comes from Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS][]{ahn_etal14}. We study the same $\mstar-$complete galaxy sample used in \citet{behroozi_etal15}, to which we refer the reader for details. Values for $\mstar$ and $\sfr$ are taken from the MPA-JHU value-added catalog \citep{kauffmann_etal03,brinchmann_etal04}. We cross-match this galaxy sample against the catalog of two-component profile decompositions provided by \citet{meert_etal15}. 
+Our galaxy sample comes from Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS][]{ahn_etal14}. We study the same $\mstar-$complete galaxy sample used in \citet{behroozi_etal15}, to which we refer the reader for details. Values for $\mstar$ and $\sfr$ are taken from the MPA-JHU value-added catalog \citep{kauffmann_etal03,brinchmann_etal04}. 
+
+We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile for the bulge and disk, respectively. We cross-match our DR10 sample against the \citet{meert_etal15} scale radii and flux ratios of the two components, giving us a volume-limited galaxy sample with values of $\mstar,\ssfr,\rhalfbulge,\rhalfdisk,$ and $\bt.$ Together with the present work, we make publicly available this cross-matched catalog, as well as code to generate the catalog from the original data files and load it into a python interpreter. 
 
 \subsection{Clustering Measurements}
 \label{subsec:clusteringmeasurements}
