@@ -56,6 +56,9 @@
 \newcommand{\rproj}{r_{\rm p}}
 \newcommand{\wproj}{w_{\rm p}}
 
+%%%%%%%%  units  %%%%%%%%
+\newcommand{\kpc}{{\rm kpc}}
+\newcommand{\mpc}{{\rm Mpc}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,11 +97,12 @@ Some introduction goes here.
 \label{subsec:galaxydata}
 
 
-Our galaxy sample comes from Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS][]{ahn_etal14}. We study the same $\mstar-$complete galaxy sample used in \citet{behroozi_etal15}, to which we refer the reader for details. Values for $\mstar$ and $\sfr$ are taken from the MPA-JHU value-added catalog \citep{kauffmann_etal03,brinchmann_etal04}. 
-
+Our galaxy sample comes from Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS][]{ahn_etal14}. We study the same $\mstar-$complete galaxy sample used in \citet{behroozi_etal15}, to which we refer the reader for details. Values for $\mstar$ and $\sfr$ are taken from the MPA-JHU value-added catalog \citep{kauffmann_etal03,brinchmann_etal04}. We cross-match this galaxy sample against the catalog of two-component profile decompositions provided by \citet{meert_etal15}. 
 
 \subsection{Clustering Measurements}
 \label{subsec:clusteringmeasurements}
+
+We calculate two-point clustering $\wproj$ with line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. 
 
 \subsection{Baseline Mock Catalog}
 \label{subsec:baselinemock}
