@@ -38,6 +38,7 @@
 \newcommand{\abulge}{A_{\rm bulge}}
 \newcommand{\alphadisk}{\alpha_{\rm disk}}
 \newcommand{\alphabulge}{\alpha_{\rm bulge}}
+\newcommand{\sigmarhalf}{\sigma_{\rm R_{1/2}}}
 \newcommand{\rvir}{R_{\rm vir}}
 \newcommand{\bt}{{\rm B/T}}
 \newcommand{\mstar}{M_{\ast}}
@@ -83,7 +84,7 @@ $^{4}$Universit{\"a}ts-Sternwarte, Ludwig-Maximilians-Universit{\"a}t M{\"u}nche
 \maketitle
 
 \begin{abstract}
-We derive empirical modeling constraints on the connection between dark matter halos and the half-mass radius $\rhalf$ of galaxy bulges and disks. We show that both $\rhalfdisk$ and $\rhalfbulge$ are well-described by power law scaling relations with halo virial radius, $\rhalf=A\rvir^{\alpha}.$ Novel to this work, we use new SDSS measurements of the $\rhalf-$dependence of galaxy clustering to constrain the model parameters, $A_{\rm bulge}, A_{\rm disk}, \alpha_{\rm bulge},\alpha_{\rm disk},$ and log-normal scatter $\sigma_{R_{1/2}}.$ Even when only coarsely tuning these parameters to the observed one-point functions $\langle\rhalfdisk|\mstar^{\rm disk}\rangle$ and $\langle\rhalfbulge|\mstar^{\rm bulge}\rangle,$ our model accurately predicts the observed two-point clustering on small- and large-scales. This success non-trivial, as we show that galaxy clustering is highly sensitive to the physics that shapes satellite galaxy profiles. We find no evidence for the commonly assumed relation between halo spin $\halospin$ and $\rhalfdisk,$ and show that this assumption cannot be meaningfully constrained with either the clustering or lensing of  $L_{\ast}$ galaxies. Our results provide simple boundary conditions for more complex and fine-grained models of galaxy size. We make our python code publicly available to support cosmological surveys that require realistic synthetic galaxy populations.
+We derive empirical modeling constraints on the connection between dark matter halos and the half-mass radius $\rhalf$ of galaxy bulges and disks. We show that both $\rhalfdisk$ and $\rhalfbulge$ are well-described by power law scaling relations with halo virial radius, $\rhalf=A\rvir^{\alpha}.$ Novel to this work, we use new SDSS measurements of the $\rhalf-$dependence of galaxy clustering to constrain the model parameters, $A_{\rm bulge}, A_{\rm disk}, \alpha_{\rm bulge},\alpha_{\rm disk},$ and log-normal scatter $\sigmarhalf.$ Even when only coarsely tuning these parameters to the observed one-point functions $\langle\rhalfdisk|\mstar^{\rm disk}\rangle$ and $\langle\rhalfbulge|\mstar^{\rm bulge}\rangle,$ our model accurately predicts the observed two-point clustering on small- and large-scales. This success non-trivial, as we show that galaxy clustering is highly sensitive to the physics that shapes satellite galaxy profiles. We find no evidence for the commonly assumed relation between halo spin $\halospin$ and $\rhalfdisk,$ and show that this assumption cannot be meaningfully constrained with either the clustering or lensing of  $L_{\ast}$ galaxies. Our results provide simple boundary conditions for more complex and fine-grained models of galaxy size. We make our python code publicly available to support cosmological surveys that require realistic synthetic galaxy populations.
 \end{abstract}
 
 \section{Introduction}
@@ -99,13 +100,11 @@ Some introduction goes here.
 
 Our galaxy sample comes from Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS][]{ahn_etal14}. We study the same $\mstar-$complete galaxy sample used in \citet{behroozi_etal15}, to which we refer the reader for details. Values for $\mstar$ and $\sfr$ are taken from the MPA-JHU value-added catalog \citep{kauffmann_etal03,brinchmann_etal04}. 
 
-We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile for the bulge and disk, respectively. We cross-match our DR10 sample against the \citet{meert_etal15} scale radii and flux ratios of the two components, giving us a volume-limited galaxy sample with values of $\mstar,\ssfr,\rhalfbulge,\rhalfdisk,$ and $\bt.$ 
+We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile for the bulge and disk, respectively. We cross-match our DR10 sample against the \citet{meert_etal15} scale radius of the composite profile and flux ratios of the two components, giving us a volume-limited galaxy sample with values of $\mstar,\ssfr,\rhalf,$ and $\bt.$ 
 
 We calculate two-point clustering $\wproj$ with line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. 
 
 Together with the present work, we make publicly available this cross-matched catalog, as well as code to generate the catalog from the original data files and load it into a python interpreter. 
-
-
 
 \subsection{Simulation and Halos}
 \label{subsec:sim}
@@ -127,6 +126,20 @@ Our model for galaxy size is further predicated upon the mapping between dark ma
 
 \section{Galaxy Profile Model}
 \label{sec:model}
+
+Motivated by the \citet{kravtsov13} results, we model the half-mass radii of galaxies as separate power law functions of halo virial radius:
+
+\begin{eqnarray}
+\rhalfbulge &=& \abulge\rvir^{\alphabulge} \\
+\rhalfdisk &=& \adisk\rvir^{\alphadisk} 
+\end{eqnarray}
+
+For central galaxies residing in host halos, we use the present-day virial radius; for satellite galaxies we use the virial radius at the time of accretion, using physical units of $\kpc.$ We model the composite size of model galaxies as 
+\beq
+\rhalf = (\bt)\rhalfbulge + (1-\bt)\rhalfdisk.
+\eeq
+
+When generating Monte Carlo realizations of our model galaxy population, we add log-normal scatter $\sigmarhalf$ separately to each component. Our model for sizes thus has five free parameters: $\abulge, \adisk, \alphabulge, \alphadisk,$ and $\sigmarhalf.$
 
 \section{Results}
 \label{sec:results}
