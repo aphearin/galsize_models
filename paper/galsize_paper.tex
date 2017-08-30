@@ -42,6 +42,7 @@
 \newcommand{\bt}{{\rm B/T}}
 \newcommand{\mstar}{M_{\ast}}
 \newcommand{\ssfr}{{\rm sSFR}}
+\newcommand{\sfr}{{\rm SFR}}
 
 %%%%%%%%  halo properties  %%%%%%%%
 \newcommand{\halospin}{\lambda_{\rm halo}}
@@ -97,6 +98,15 @@ Some introduction goes here.
 
 \subsection{Baseline Mock Catalog}
 \label{subsec:baselinemock}
+
+\subsubsection{Mapping $\mstar$ and $\sfr$ to halos}
+\label{subsubsec:umachine}
+The starting point of our model is the best-fit {\tt UniverseMachine} model \citep[][in prep]{behroozi_etal17}. This model maps stellar mass and star-formation rate to every halo and subhalo at each snapshot in the Bolshoi-Planck simulation. The stellar mass function, quenched fraction, SFR density, and SFR-dependent clustering are all accurately captured by this model from $z=0-10.$ The model we have developed in the present work does not depend in an essential way upon the {\tt UniverseMachine} model in particular, we only require some reasonably accurate starting point for the $\mstar$ and $\ssfr$ values mapped to simulated halos. 
+
+\subsubsection{Mapping $\bt$ decomposition to halos}
+\label{subsubsec:random_bt_model}
+
+Our model for galaxy size is further predicated upon the mapping between dark matter halos and $\bt,$ the fraction of stellar mass in the bulge. In a companion paper to this work, we will present a separate empirical model for the $\bt-$halo connection. For our present purposes, we instead rely upon the simplest possible assumption for this connection that recovers the observed distribution $P(\bt\vert\mstar,\ssfr):$ we suppose that galaxy $\bt$ has no dependence whatsoever upon halo environment or assembly, beyond what is inherited by the mutual correlation between $\mstar, \ssfr$ and the cosmic web. That is, we map $\bt$ to dark matter halos by using the $\mstar$ and $\ssfr$ values from {\tt UniverseMachine} to randomly select the $\bt$ of a galaxy from our SDSS sample with a similar $\mstar$ and $\ssfr.$ The intuitive interpretation of this modeling choice is that we assume the morphology-density relation is entirely determined by the color-density relation. 
 
 \section{Galaxy Profile Model}
 \label{sec:model}
