@@ -93,28 +93,34 @@ Some introduction goes here.
 \section{Data and Simulations}
 \label{sec:data}
 
-\subsection{Galaxy Sample}
+\subsection{Galaxy Sample and Measurements}
 \label{subsec:galaxydata}
 
 
 Our galaxy sample comes from Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS][]{ahn_etal14}. We study the same $\mstar-$complete galaxy sample used in \citet{behroozi_etal15}, to which we refer the reader for details. Values for $\mstar$ and $\sfr$ are taken from the MPA-JHU value-added catalog \citep{kauffmann_etal03,brinchmann_etal04}. 
 
-We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile for the bulge and disk, respectively. We cross-match our DR10 sample against the \citet{meert_etal15} scale radii and flux ratios of the two components, giving us a volume-limited galaxy sample with values of $\mstar,\ssfr,\rhalfbulge,\rhalfdisk,$ and $\bt.$ Together with the present work, we make publicly available this cross-matched catalog, as well as code to generate the catalog from the original data files and load it into a python interpreter. 
-
-\subsection{Clustering Measurements}
-\label{subsec:clusteringmeasurements}
+We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile for the bulge and disk, respectively. We cross-match our DR10 sample against the \citet{meert_etal15} scale radii and flux ratios of the two components, giving us a volume-limited galaxy sample with values of $\mstar,\ssfr,\rhalfbulge,\rhalfdisk,$ and $\bt.$ 
 
 We calculate two-point clustering $\wproj$ with line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. 
+
+Together with the present work, we make publicly available this cross-matched catalog, as well as code to generate the catalog from the original data files and load it into a python interpreter. 
+
+
+
+\subsection{Simulation and Halos}
+\label{subsec:sim}
+
+{\tt Rockstar} subhalos identified at $z=0$ in the Bolshoi-Planck simulation are the basis of all our modeling. 
 
 \subsection{Baseline Mock Catalog}
 \label{subsec:baselinemock}
 
-\subsubsection{Mapping $\mstar$ and $\sfr$ to halos}
+\subsubsection{Mapping $\mstar$ \& $\sfr$ to halos}
 \label{subsubsec:umachine}
 
 The starting point of our model is the best-fit {\tt UniverseMachine} model \citep[][in prep]{behroozi_etal17}. This model maps stellar mass and star-formation rate to every halo and subhalo at each snapshot in the Bolshoi-Planck simulation. The stellar mass function, quenched fraction, SFR density, and SFR-dependent clustering are all accurately captured by this model from $z=0-10.$ The model we have developed in the present work does not depend in an essential way upon the {\tt UniverseMachine} model in particular, we only require some reasonably accurate starting point for the $\mstar$ and $\ssfr$ values mapped to simulated halos. 
 
-\subsubsection{Mapping $\bt$ decomposition to halos}
+\subsubsection{Mapping $\bt$ to halos}
 \label{subsubsec:random_bt_model}
 
 Our model for galaxy size is further predicated upon the mapping between dark matter halos and $\bt,$ the fraction of stellar mass in the bulge. In a companion paper to this work, we will present a separate empirical model for the $\bt-$halo connection. For our present purposes, we instead rely upon the simplest possible assumption for this connection that recovers the observed distribution $P(\bt\vert\mstar,\ssfr):$ we suppose that galaxy $\bt$ has no dependence whatsoever upon halo environment or assembly, beyond what is inherited by the mutual correlation between $\mstar, \ssfr$ and the cosmic web. That is, we map $\bt$ to dark matter halos by using the $\mstar$ and $\ssfr$ values from {\tt UniverseMachine} to randomly select the $\bt$ of a galaxy from our SDSS sample with a similar $\mstar$ and $\ssfr.$ The intuitive interpretation of this modeling choice is that we assume the morphology-density relation is entirely determined by the color-density relation. 
