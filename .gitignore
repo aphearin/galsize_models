@@ -53,3 +53,9 @@ distribute-*.tar.gz
 .DS_Store
 
 galsize_models/measurements/data/two_point_functions/*.dat
+
+paper/*.aux
+paper/*.log
+paper/*.bbl
+paper/*synctex.gz
+
