@@ -18,6 +18,7 @@
 \newcommand{\nat}{Nature~}
 \newcommand{\physrep}{Phys. Rep.~}
 \newcommand{\aj}{AJ~}
+\newcommand{\pasp}{ASP~}
 
 %%%% Misc %%%
 \newcommand{\beq}{\begin{equation}}
@@ -152,9 +153,21 @@ In \S~\ref{subsec:tests1} we show comparisons between the fiducial galaxy profil
 \subsection{Tests of the Fiducial Power Law Model}
 \label{subsec:tests1}
 
-The results shown in \citet{kravtsov13} simplify our task of parameter space exploration: the assumption that composite galaxy size $\rhalf$ scales in linear proportion to halo radius $\rvir$ gives a qualitatively good description of SDSS data over many orders of magnitude in galaxy mass. In Figure \ref{fig:scatter_plot} we show the scaling of composite galaxy size $\rhalf$ with $\mstar,$ with separate panels dedicated to subsamples of galaxies divided according to value of $\bt.$ We refer to galaxies with $\bt<0.25$ as ``disk-dominated", $\bt>=0.75$ as ``bulge-dominated", and $0.25<=\bt<0.75$ as ``mixed morphology". 
+\subsubsection{Scaling of $\rhalf$ with $\mstar$}
+\label{subsubsec:scaling_relation}
 
+In Figure \ref{fig:scatter_plot} we show the scaling of composite galaxy size $\rhalf$ with $\mstar,$ with separate panels dedicated to subsamples of galaxies divided according to value of $\bt.$ We refer to galaxies with $\bt<0.25$ as ``disk-dominated", $\bt>=0.75$ as ``bulge-dominated", and $0.25<=\bt<0.75$ as ``mixed morphology". 
 
+The results shown in \citet{kravtsov13} simplify our task of parameter space exploration: the assumption that composite galaxy size $\rhalf$ scales in linear proportion to halo radius $\rvir$ gives a qualitatively good description of SDSS data over many orders of magnitude in galaxy mass. As first pointed out in \citet{kravtsov13}, this linearization is non-trivial because of the well-known curvature in the scaling relation of $\langle\rhalf\vert\mstar\rangle,$ which is visually apparent in all panels of Fig.~\ref{fig:scatter_plot}. 
+
+Comparison of the top panels of Fig.~\ref{fig:scatter_plot} show that this linearization is only approximate; evidently, the composite size $\rhalf$ of bulge-dominated galaxies has a steeper scaling relation with $\mstar$ relative to disk-dominated galaxies. This difference motivates our simple extension of the \citet{kravtsov13} model, in which composite size $\rhalf$ of disk- and bulge-dominated galaxies scale according to separate power laws. 
+
+Through MCMC parameter space exploration aided by {\tt emcee} \citep{emcee_hammer}, we find a good description of the observed one-point scaling relations is given by model galaxies with the parameters $\adisk=0.014=7\abulge, \alphadisk=1, \alphabulge=5/4,$ with log-normal scatter of $0.2$ dex motivated by \citet{somerville_etal17}. The black curves in Fig.~\ref{fig:scatter_plot} illustrate the median $\langle\rhalf\vert\mstar\rangle.$ 
+
+We confirm the visual impression of comparing the top panels of Fig.~\ref{fig:scatter_plot}: we are unable to find a parameter combination in which the composite size of both bulge- and disk-dominated galaxies have linear ($\alpha=1$) scaling with $\rvir.$ We do not quantitatively rule out such a scaling relation, as this would require careful investigation of the systematic error budget of galaxy profile modeling that we consider beyond the scope, though well-motivated, by the present work. 
+ 
+\subsubsection{Dependence of clustering on $\rhalf$}
+\label{subsubsec:clustering_tests}
 
 \subsection{Sensitivity of Clustering to Satellite Profile Evolution}
 \label{subsec:tests2}
@@ -169,7 +182,7 @@ The results shown in \citet{kravtsov13} simplify our task of parameter space exp
 \includegraphics[width=12cm]{FIGS/size_vs_stellar_mass_multipanel_bt_decomposition.pdf}
 \caption{
 {\bf One-point data used to fit the fiducial model.}
-Scattered points show the $\rhalf-\mstar$ relation for SDSS galaxies as measured in \citet{meert_etal15}. Bulge-dominated galaxies are defined in terms of the bulge-to-total stellar mass ratio $\bt>=0.75,$ disk-dominated galaxies $\bt<0.25,$ mixed morphology as $0.25 < \bt < 0.75.$ The black curve in each panel shows the $\rhalf-\mstar$ relation implied by our fiducial model, in which $\rhalf=A\rvir^\alpha,$ with $\adisk=0.14=7\abulge, \alphadisk=1, \alphabulge=5/4,$ and uncorrelated log-normal scatter of $0.2$ dex about these relations. 
+Scattered points show the $\rhalf-\mstar$ relation for SDSS galaxies as measured in \citet{meert_etal15}. Bulge-dominated galaxies are defined in terms of the bulge-to-total stellar mass ratio $\bt>=0.75,$ disk-dominated galaxies $\bt<0.25,$ mixed morphology as $0.25 < \bt < 0.75.$ The black curve in each panel shows the $\rhalf-\mstar$ relation implied by our fiducial model, in which $\rhalf=A\rvir^\alpha,$ with $\adisk=0.014=7\abulge, \alphadisk=1, \alphabulge=5/4,$ and uncorrelated log-normal scatter of $0.2$ dex about these relations. 
 }
 \label{fig:scatter_plot}
 \end{figure*}
