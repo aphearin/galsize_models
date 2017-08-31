@@ -101,11 +101,9 @@ Some introduction goes here.
 
 Our galaxy sample comes from Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS][]{ahn_etal14}. We study the same $\mstar-$complete galaxy sample used in \citet{behroozi_etal15}, to which we refer the reader for details. Values for $\mstar$ and $\sfr$ are taken from the MPA-JHU value-added catalog \citep{kauffmann_etal03,brinchmann_etal04}. 
 
-We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile for the bulge and disk, respectively. We cross-match our DR10 sample against the \citet{meert_etal15} scale radius of the composite profile, $\rhalf,$ and the $r-$band flux ratio of the two components, $\bt,$ giving us a volume-limited galaxy sample with values of $\mstar,\ssfr,\rhalf,$ and $\bt.$ 
+We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile. We cross-match our DR10 sample against the \citet{meert_etal15} catalog values of $\rhalf,$ the half-light radius of the full profile, and $\bt,$ the $r-$band flux ratio of the de Vaucouleurs component to the total $r-$band flux. This cross-matching gives us a volume-limited galaxy sample with values of $\mstar,$ $\ssfr,$ $\rhalf,$ and $\bt.$ Together with the present work, we make publicly available this cross-matched catalog, as well as code to generate the catalog from the original data files and load it into a python interpreter. 
 
 We calculate two-point clustering $\wproj$ with line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. Our results in \S~\ref{sec:results} will give special focus on the dependence of $\wproj$ upon composite galaxy size $\rhalf.$ We will quantify this dependence in terms of {\em clustering ratios} of ``large" vs. ``small" galaxies, defined according to whether composite galaxy size is above or below $\langle\rhalf\vert\mstar\rangle,$ computed as the median of a sliding stellar mass window with a width of $N_{\rm gal}=1000.$ 
-
-Together with the present work, we make publicly available this cross-matched catalog, as well as code to generate the catalog from the original data files and load it into a python interpreter. 
 
 \subsection{Simulation and Halos}
 \label{subsec:sim}
