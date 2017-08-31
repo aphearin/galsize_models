@@ -5,7 +5,6 @@
 \usepackage{epsfig}
 \usepackage{amsmath}
 \usepackage{color}
-%\usepackage{hyperref}
 
 \bibliographystyle{mn2e} 
 
@@ -103,14 +102,14 @@ Our galaxy sample comes from Data Release 10 of the Sloan Digital Sky Survey \ci
 
 We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile. We cross-match our DR10 sample against the \citet{meert_etal15} catalog values of $\rhalf,$ the half-light radius of the full profile, and $\bt,$ the $r-$band flux ratio of the de Vaucouleurs component to the total $r-$band flux. This cross-matching gives us a volume-limited galaxy sample with values of $\mstar,$ $\ssfr,$ $\rhalf,$ and $\bt.$ Together with the present work, we make publicly available this cross-matched catalog, as well as code to generate the catalog from the original data files and load it into a python interpreter. 
 
-We calculate two-point clustering $\wproj$ with line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. Our results in \S~\ref{sec:results} will give special focus on the dependence of $\wproj$ upon composite galaxy size $\rhalf.$ We will quantify this dependence in terms of {\em clustering ratios} of ``large" vs. ``small" galaxies, defined according to whether composite galaxy size is above or below $\langle\rhalf\vert\mstar\rangle,$ computed as the median of a sliding stellar mass window with a width of $N_{\rm gal}=1000.$ 
+We calculate two-point clustering $\wproj$ of our SDSS galaxy sample using line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. Our results in \S~\ref{sec:results} will give special focus on the dependence of $\wproj$ upon composite galaxy size $\rhalf.$ We will quantify this dependence in terms of {\em clustering ratios} of ``large" vs. ``small" galaxies, defined according to whether composite galaxy size is above or below $\langle\rhalf\vert\mstar\rangle,$ computed as the median of a sliding stellar mass window with a width of $N_{\rm gal}=1000.$ 
 
 \subsection{Simulation and Halos}
 \label{subsec:sim}
 
 {\tt Rockstar} subhalos identified at $z=0$ in the Bolshoi-Planck simulation are the basis of all our modeling. 
 
-\subsection{Baseline Mock Catalog}
+\subsection{Baseline Model and Mock Measurements}
 \label{subsec:baselinemock}
 
 \subsubsection{Mapping $\mstar$ \& $\sfr$ to halos}
@@ -122,6 +121,12 @@ The starting point of our model is the best-fit {\tt UniverseMachine} model \cit
 \label{subsubsec:random_bt_model}
 
 Our model for galaxy size is further predicated upon the mapping between dark matter halos and $\bt,$ the fraction of stellar mass in the bulge. In a companion paper to this work, we will present a separate empirical model for the $\bt-$halo connection. For our present purposes, we instead rely upon the simplest possible assumption for this connection that recovers the observed distribution $P(\bt\vert\mstar,\ssfr):$ we suppose that galaxy $\bt$ has no dependence whatsoever upon halo environment or assembly, beyond what is inherited by the mutual correlation between $\mstar, \ssfr$ and the cosmic web. That is, we map $\bt$ to dark matter halos by using the $\mstar$ and $\ssfr$ values from {\tt UniverseMachine} to randomly select the $\bt$ of a galaxy from our SDSS sample with a similar $\mstar$ and $\ssfr.$ The intuitive interpretation of this modeling choice is that we assume the morphology-density relation is entirely determined by the color-density relation. 
+
+\subsection{Mock Measurements of Clustering and Lensing}
+\label{subsec:mock_measurements}
+
+For mock galaxies, to compute galaxy clustering we employ the distant observer approximation by treating the simulation $z-$axis as the line-of-sight. We compute $\wproj$ using the {\tt mock\_observables.wp} function in {\tt Halotools}, which is a python implementation of the algorithm in the {\tt Corrfunc} C library \citep{sinha_etal17}. 
+
 
 \section{Galaxy Profile Model}
 \label{sec:model}
@@ -166,6 +171,12 @@ We confirm the visual impression of comparing the top panels of Fig.~\ref{fig:sc
  
 \subsubsection{Dependence of clustering on $\rhalf$}
 \label{subsubsec:clustering_tests}
+
+In this section we present new measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj.$ Galaxy clustering has complex, simultaneous dependence upon $\mstar,$ $\ssfr,$ $\rhalf,$ and $\bt.$ Since the purpose of this work is to test models of composite galaxy size $\rhalf,$ we design a measurement that is specifically tailored to isolate the influence of $\rhalf$ on the two-point function, while minimizing the dependence upon the other correlated variables. 
+
+To achieve this, we compute projected clustering separately for $\mstar-$complete samples of galaxies defined by simultaneous cuts on $\bt$ and $\rhalf,$ described as follows. First, we construct subsamples of disk-dominated and bulge-dominated galaxies using cuts of $\bt<0.25$ and $\bt>0.75,$ respectively, as in \S~\ref{subsubsec:scaling_relation} above. Separately for each $\bt-$selected subsample, we calculate $\rangle\rhalf\vert\mstar\rangle,$ the median composite size of the sample as a function of total galaxy stellar mass. We split each $\bt-$selected sample in half according to whether the galaxy has a composite size $\rhalf$ that is above or below this median value. For any $\mstar-$complete threshold, this gives four subsamples of large and small, disk- and bulge-dominated galaxies. For each $\bt-$selected sample, we calculate the difference $\wproj^{\rm large}-\wproj^{\rm small},$ scaled by $\wproj^{\rm all},$ the clustering of the $\bt-$selected sample prior to splitting on $\rhalf,$ and refer to this quantity as {\em the $\rhalf$ clustering ratio}.  
+
+The y-axis of each panel in Figure \ref{fig:clustering_ratio_upshot} shows these $\rhalf$ clustering ratios, with left and right panels showing measurements for $\mstar>10^{10}M_{\odot}$ and $\mstar>10^{10.5}M_{\odot}$ thresholds in total stellar mass, and top and bottom panels showing results for disk- and bulge-dominated samples, respectively. 
 
 \subsection{Sensitivity of Clustering to Satellite Profile Evolution}
 \label{subsec:tests2}
