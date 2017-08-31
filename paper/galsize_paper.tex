@@ -100,9 +100,9 @@ Some introduction goes here.
 
 Our galaxy sample comes from Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS][]{ahn_etal14}. We study the same $\mstar-$complete galaxy sample used in \citet{behroozi_etal15}, to which we refer the reader for details. Values for $\mstar$ and $\sfr$ are taken from the MPA-JHU value-added catalog \citep{kauffmann_etal03,brinchmann_etal04}. 
 
-We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile for the bulge and disk, respectively. We cross-match our DR10 sample against the \citet{meert_etal15} scale radius of the composite profile and flux ratios of the two components, giving us a volume-limited galaxy sample with values of $\mstar,\ssfr,\rhalf,$ and $\bt.$ 
+We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile for the bulge and disk, respectively. We cross-match our DR10 sample against the \citet{meert_etal15} scale radius of the composite profile, $\rhalf,$ and the $r-$band flux ratio of the two components, $\bt,$ giving us a volume-limited galaxy sample with values of $\mstar,\ssfr,\rhalf,$ and $\bt.$ 
 
-We calculate two-point clustering $\wproj$ with line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. 
+We calculate two-point clustering $\wproj$ with line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. Our results in \S~\ref{sec:results} will give special focus on the dependence of $\wproj$ upon composite galaxy size $\rhalf.$ We will quantify this dependence in terms of {\em clustering ratios} of ``large" vs. ``small" galaxies, defined according to whether composite galaxy size is above or below $\langle\rhalf\vert\mstar\rangle,$ computed as the median of a sliding stellar mass window with a width of $N_{\rm gal}=1000.$ 
 
 Together with the present work, we make publicly available this cross-matched catalog, as well as code to generate the catalog from the original data files and load it into a python interpreter. 
 
@@ -140,7 +140,9 @@ For central galaxies residing in host halos, we use the present-day virial radiu
 \rhalf = (\bt)\rhalfbulge + (1-\bt)\rhalfdisk.
 \eeq
 
-When generating Monte Carlo realizations of our model galaxy population, we add log-normal scatter $\sigmarhalf$ separately to each component. Our model for sizes thus has five free parameters: $\abulge, \adisk, \alphabulge, \alphadisk,$ and $\sigmarhalf.$
+When generating Monte Carlo realizations of our model galaxy population, we add log-normal scatter $\sigmarhalf$ separately to each component. Our model for sizes thus has five free parameters: $\abulge, \adisk, \alphabulge, \alphadisk,$ and $\sigmarhalf.$ 
+
+We reiterate an important distinction drawn in the formulation of our forward modeling approach. In the model described above, $\rhalfbulge$ and $\rhalfdisk$ are forward modeling quantities that we aim to constrain through SDSS observations of {\em composite} galaxy size $\rhalf.$ In particular, both model and real galaxies will be categorized as ``small" or ``large`` according to whether $\rhalf$ is above or below the median size for a galaxy with total stellar mass $\mstar.$
 
 \section{Results}
 \label{sec:results}
@@ -149,6 +151,9 @@ In \S~\ref{subsec:tests1} we show comparisons between the fiducial galaxy profil
 
 \subsection{Tests of the Fiducial Power Law Model}
 \label{subsec:tests1}
+
+The results shown in \citet{kravtsov13} simplify our task of parameter space exploration: the assumption that composite galaxy size $\rhalf$ scales in linear proportion to halo radius $\rvir$ gives a qualitatively good description of SDSS data over many orders of magnitude in galaxy mass. In Figure \ref{fig:scatter_plot} we show the scaling of composite galaxy size $\rhalf$ with $\mstar,$ with separate panels dedicated to subsamples of galaxies divided according to value of $\bt.$ We refer to galaxies with $\bt<0.25$ as ``disk-dominated", $\bt>=0.75$ as ``bulge-dominated", and $0.25<=\bt<0.75$ as ``mixed morphology". 
+
 
 
 \subsection{Sensitivity of Clustering to Satellite Profile Evolution}
@@ -223,6 +228,10 @@ We compare the predictions between our fiducial model in which sizes are purely 
 
 \section{Discussion}
 \label{sec:discussion}
+
+
+\subsection{Progression from Backwards to Forwards Modeling}
+\label{subsec:forwardsmodeling}
 
 \subsection{Relation to Previous Work}
 \label{subsec:previouswork}
