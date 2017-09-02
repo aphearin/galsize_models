@@ -248,11 +248,14 @@ Figure~\ref{fig:satellites} compares the clustering ratios of our fiducial model
 
 The large differences between the solid and dashed curves in Fig.~\ref{fig:satellites} establishes that the largely successful prediction for the clustering ratios fiducial model is a non-trivial: $\wproj(\rproj)$ is indeed providing good constraining power on the  assumptions underlying our profile modeling and not simply our morphology modeling, c.f., \S\ref{subsubsec:random_bt_model} and \S\ref{sec:model}. We refer the reader to \S\ref{subsec:satellite_discussion} for further discussion of the physical implications of this result. 
 
-
-
 \subsection{Insensitivity of Clustering and Lensing to Halo Spin Correlations}
 \label{subsec:tests3}
 
+The results of the previous section \S\ref{subsec:tests2} illustrate the sensitive constraints that galaxy clustering measurements provide on modeling assumptions about satellite $\rhalf.$ In this section we explore the potential constraining power of clustering on models for the size of disks of central galaxies. In particular, we seek to assess whether clustering measurements can constrain the long-standing assumption that disk size scales in proportion to the spin of the parent halo, $\rhalfdisk\propto\halospin,$ \citep[e.g.,][]{mo_mao_white98}. 
+
+We wish to build an alternative empirical model that inherits the quantitative success of our fiducial model, and further makes the extreme assumption that central galaxy $\rhalfdisk$ is maximally correlated with $\halospin$ at fixed $\mstar.$ Conditional Abundance Matching \citep[hereafter, CAM,][]{hearin_etal13b} is the natural framework to use to build such a model. 
+
+Disk size in our fiducial model has log-normal scatter $\sigmarhalf=0.2$ dex about the mean value $\adisk\rvir^{\alphadisk}.$  We use the CAM implementation in {\tt Halotools}\footnote{See {\tt halotools.empirical\_models.conditional\_abunmatch} documentation for details.} to extend our fiducial model so that the scatter in central galaxy $\rhalfdisk$ is not stochastic, but is in stead in one-to-one correspondence with $\halospin$ at fixed total stellar mass $\mstar.$ This alternative model thus has exactly the same one-point functions as the fiducial model (i.e., the solid curves in Fig.~\ref{fig:scatter_plot} are formally preserved by construction). However, $\halospin$ exhibits a highly non-trivial connection to the cosmic density field, including $\mvir-$dependent correlations with large-scale density and topology, and so it is natural to ask how these correlations manifest in our $\rhalf$ clustering ratios. 
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
@@ -267,18 +270,31 @@ We compare the predictions between our fiducial model in which sizes are purely 
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
+The top panel of Figure \ref{fig:halospin_lensing} shows a comparison of the $\rhalf$ clustering ratios of our fiducial model to the alternative CAM model in which $\rhalfdisk\propto\halospin.$ Evidently, for galaxies in this stellar mass range, the strength of $\halospin$ correlations with the cosmic web are sufficiently weak as to produce almost no measurable impact on the $\rhalf-$dependence of the clustering of disk-dominated systems. 
+
+Of course it is possible that galaxy clustering is poorly suited to detect $\rhalfdisk-\halospin$ correlations, which instead manifest in some alternative measurement of large-scale structure. For example, numerous studies of the $\halospin-$dependence of halo assembly bias have shown that low-spin halos are preferentially found in environments of below-average dark matter density relative to high-spin halos of comparable mass \citep[see, for example,][]{lee_etal17}. 
+
+Motivated by these results, we show in the bottom panel of Fig.~\ref{fig:halospin_lensing} an idealized mock measurement of the lensing of central galaxies identified with perfect fidelity. Solid curves show $\Delta\Sigma$ signal of our fiducial model centrals, dashed curves the alternative CAM model. Again we see that $\rhalfdisk-\halospin$ correlations are simply not strong enough in $L_\ast$ galaxies to produce a compelling signal. These results imply that it will be extremely challenging to either confirm or refute the $\rhalfdisk\propto\halospin$ hypothesis using large-scale structure measurements. We discuss this further in \S\ref{subsec:mo_status}.
+
+
 \section{Discussion}
 \label{sec:discussion}
 
 
-\subsection{Physical Interpretation for Satellites}
+\subsection{Implications for Satellites}
 \label{subsec:satellite_discussion}
+
+\subsection{State of the $\rhalfdisk\propto\halospin$ Hypothesis}
+\label{subsec:mo_status}
 
 \subsection{Progression from Backwards to Forwards Modeling}
 \label{subsec:forwardsmodeling}
 
 \subsection{Relation to Previous Work}
 \label{subsec:previouswork}
+
+\subsection{Future Directions for Empirical Modeling of Morphology}
+\label{subsec:future}
 
 
 \section{Conclusion}
