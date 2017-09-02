@@ -60,6 +60,7 @@
 %%%%%%%%  units  %%%%%%%%
 \newcommand{\kpc}{{\rm kpc}}
 \newcommand{\mpc}{{\rm Mpc}}
+\newcommand{\msun}{M_\odot}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -161,6 +162,18 @@ In \S~\ref{subsec:tests1} we show comparisons between the fiducial galaxy profil
 
 In Figure \ref{fig:scatter_plot} we show the scaling of composite galaxy size $\rhalf$ with $\mstar,$ with separate panels dedicated to subsamples of galaxies divided according to value of $\bt.$ We refer to galaxies with $\bt<0.25$ as ``disk-dominated", $\bt>=0.75$ as ``bulge-dominated", and $0.25<=\bt<0.75$ as ``mixed morphology". 
 
+%---------------------------------------------------------------------------------------------------
+\begin{figure}
+\centering
+\includegraphics[width=8cm]{FIGS/size_vs_stellar_mass_multipanel_bt_decomposition.pdf}
+\caption{
+{\bf One-point data used to fit the fiducial model.}
+Scattered points show the $\rhalf-\mstar$ relation for SDSS galaxies as measured in \citet{meert_etal15}. Bulge-dominated galaxies are defined in terms of the bulge-to-total stellar mass ratio $\bt>=0.75,$ disk-dominated galaxies $\bt<0.25,$ mixed morphology as $0.25 < \bt < 0.75.$ The black curve in each panel shows the $\rhalf-\mstar$ relation implied by our fiducial model, in which $\rhalf=A\rvir^\alpha,$ with $\adisk=0.014=7\abulge, \alphadisk=1, \alphabulge=5/4,$ and uncorrelated log-normal scatter of $0.2$ dex about these relations. 
+}
+\label{fig:scatter_plot}
+\end{figure}
+%-----------------------------------------------------------------------------------------------------
+
 The results shown in \citet{kravtsov13} simplify our task of parameter space exploration: the assumption that composite galaxy size $\rhalf$ scales in linear proportion to halo radius $\rvir$ gives a qualitatively good description of SDSS data over many orders of magnitude in galaxy mass. As first pointed out in \citet{kravtsov13}, this linearization is non-trivial because of the well-known curvature in the scaling relation of $\langle\rhalf\vert\mstar\rangle,$ which is visually apparent in all panels of Fig.~\ref{fig:scatter_plot}. 
 
 Comparison of the top panels of Fig.~\ref{fig:scatter_plot} show that this linearization is only approximate; evidently, the composite size $\rhalf$ of bulge-dominated galaxies has a steeper scaling relation with $\mstar$ relative to disk-dominated galaxies. This difference motivates our simple extension of the \citet{kravtsov13} model, in which composite size $\rhalf$ of disk- and bulge-dominated galaxies scale according to separate power laws. 
@@ -176,46 +189,24 @@ In this section we present new measurements of the $\rhalf-$dependence of projec
 
 To achieve this, we compute projected clustering separately for $\mstar-$complete samples of galaxies defined by simultaneous cuts on $\bt$ and $\rhalf,$ described as follows. First, we construct subsamples of disk-dominated and bulge-dominated galaxies using cuts of $\bt<0.25$ and $\bt>0.75,$ respectively, as in \S~\ref{subsubsec:scaling_relation} above. Separately for each $\bt-$selected subsample, we calculate $\langle\rhalf\vert\mstar;\bt\rangle,$ the median composite size of the sample as a function of total galaxy stellar mass. We split each $\bt-$selected sample in half according to whether the galaxy has a composite size $\rhalf$ that is above or below this median value. For any $\mstar-$complete threshold, this gives four subsamples of large and small, disk- and bulge-dominated galaxies. For each $\bt-$selected sample, we calculate the difference $\wproj^{\rm large}-\wproj^{\rm small},$ scaled by $\wproj^{\rm all},$ the clustering of the $\bt-$selected sample prior to splitting on $\rhalf,$ and refer to this quantity as {\em the $\rhalf$ clustering ratio}.  
 
-The y-axis of each panel in Figure \ref{fig:clustering_ratio_upshot} shows these $\rhalf$ clustering ratios, with left and right panels showing measurements for $\mstar>10^{10}M_{\odot}$ and $\mstar>10^{10.5}M_{\odot}$ thresholds in total stellar mass, and top and bottom panels showing results for disk- and bulge-dominated samples, respectively. Points with error bars show SDSS measurements, solid curves show the clustering ratios of model galaxies. Before unpacking the information contained in these clustering measurements, we stress that the good agreement shown between model and data in Figure~\ref{fig:clustering_ratio_upshot} is a genuine model prediction, since we only tuned parameters to fit the one-point measurements in Fig.~\ref{fig:scatter_plot}. 
-
-The salient feature of the clustering ratio measurements is that they are negative: for either disk- or bulge-dominated samples, small galaxies cluster more strongly than large galaxies of the same stellar mass threshold, a new result. This feature also holds true for model galaxies, for which both $\rhalfbulge$ and $\rhalfdisk$ scale in power law proportion to $\rvir.$ Since halo mass $\mvir\propto\rvir^{3},$ and clustering is a strong function of $\mvir,$ the result may seem surprising. 
-
-The resolution to this puzzle is illustrated in Figure~\ref{fig:bt_censat}, which shows the PDF of $\bt$ for halos of the same mass $\mhalo,$ defined as $\mpeak,$ the peak mass ever attained through the history of the (sub)halo, so that host halos and subhalos can be treated on equal footing. In the model, central galaxies are diskier than satellites, a feature that is inherited from the method we use to map $\bt$ to model galaxies. 
-
-In the {\tt UniverseMachine}, and in any quantitatively successful cosmological model of galaxy formation, central galaxies are preferentially more star-forming relative to satellites of comparable stellar or halo mass. Since bluer galaxies are diskier than redder galaxies, our model centrals will be diskier than satellites. Our galaxy profile model has $\adisk=7\abulge,$ and so satellite galaxies will be smaller than centrals due to the $\bt-\ssfr$ correlation. These simultaneous features alone will naturally result in the negative sign of the clustering ratios seen in Figure~\ref{fig:clustering_ratio_upshot}. 
-
-In light of this explanation, it is natural to ask whether this simple feature {\em alone} is all that is needed for any model of $\rhalf$ to achieve this level of success at predicting galaxy clustering on small and large scales. We address this question in \S~\ref{subsec:tests2} below, finding that the answer is no: the reasonably correct magnitude and scale-dependence of the clustering ratios predicted by our model is a highly non-trivial result that places tight constraints on the post-infall physics of satellite galaxies. 
-
-\subsection{Sensitivity of Clustering to Satellite Profile Evolution}
-\label{subsec:tests2}
-
-
-\subsection{Insensitivity of Clustering and Lensing to Halo Spin Correlations}
-\label{subsec:tests3}
-
-%---------------------------------------------------------------------------------------------------
-\begin{figure}
-\centering
-\includegraphics[width=8cm]{FIGS/size_vs_stellar_mass_multipanel_bt_decomposition.pdf}
-\caption{
-{\bf One-point data used to fit the fiducial model.}
-Scattered points show the $\rhalf-\mstar$ relation for SDSS galaxies as measured in \citet{meert_etal15}. Bulge-dominated galaxies are defined in terms of the bulge-to-total stellar mass ratio $\bt>=0.75,$ disk-dominated galaxies $\bt<0.25,$ mixed morphology as $0.25 < \bt < 0.75.$ The black curve in each panel shows the $\rhalf-\mstar$ relation implied by our fiducial model, in which $\rhalf=A\rvir^\alpha,$ with $\adisk=0.014=7\abulge, \alphadisk=1, \alphabulge=5/4,$ and uncorrelated log-normal scatter of $0.2$ dex about these relations. 
-}
-\label{fig:scatter_plot}
-\end{figure}
-%-----------------------------------------------------------------------------------------------------
-
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
 \includegraphics[width=8cm]{FIGS/size_clustering_ratios_bt_decomposition_model_vs_sdss.pdf}
 \caption{
-{\bf Two-point clustering data used to validate the fiducial model.}
+{\bf Two-point clustering predictions of the fiducial model.}
 Points with error bars show new SDSS measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj,$ compared to predictions by the model tuned to the measurements shown in Fig.~\ref{fig:scatter_plot}. We define a disk or bulge as ``large" or ``small" according to whether it is above or below the median size for its stellar mass. The y-axis shows clustering strength ratios, so that, for example, a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of comparable stellar mass. We show results separately for disk-dominated galaxies ({\em top} panels) and bulge-dominated galaxies ({\em bottom }panels), and different thresholds in total stellar mass in the {\em left} and {\em right} panels. The successful prediction shown here is remarkable because the model was not fit to these data, and because two-point clustering is highly sensitive to the physics that shapes satellite galaxy profiles (see Fig.~\ref{fig:satellites}). 
 }
 \label{fig:clustering_ratio_upshot}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
+
+
+The y-axis of each panel in Figure \ref{fig:clustering_ratio_upshot} shows these $\rhalf$ clustering ratios, with left and right panels showing measurements for $\mstar>10^{10}M_{\odot}$ and $\mstar>10^{10.5}M_{\odot}$ thresholds in total stellar mass, and top and bottom panels showing results for disk- and bulge-dominated samples, respectively. Points with error bars show SDSS measurements, solid curves show the clustering ratios of model galaxies. Before unpacking the information contained in these clustering measurements, we stress that the good agreement shown between model and data in Figure~\ref{fig:clustering_ratio_upshot} is a genuine model prediction, since we only tuned parameters to fit the one-point measurements in Fig.~\ref{fig:scatter_plot}. 
+
+The salient feature of the clustering ratio measurements is that they are negative: for either disk- or bulge-dominated samples, small galaxies cluster more strongly than large galaxies of the same stellar mass threshold, a new result. This feature also holds true for model galaxies, for which both $\rhalfbulge$ and $\rhalfdisk$ scale in power law proportion to $\rvir.$ Since halo mass $\mvir\propto\rvir^{3},$ and clustering is a strong function of $\mvir,$ the result may seem surprising. 
+
+The resolution to this puzzle is illustrated in Figure~\ref{fig:bt_censat}, which shows the PDF of $\bt$ for halos of the same mass $\mhalo,$ defined as $\mpeak,$ the peak mass ever attained through the history of the (sub)halo, so that host halos and subhalos can be treated on equal footing. In the model, central galaxies are diskier than satellites, a feature that is inherited from the method we use to map $\bt$ to model galaxies. 
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
@@ -228,19 +219,39 @@ Points with error bars show new SDSS measurements of the $\rhalf-$dependence of 
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
+In the {\tt UniverseMachine}, and in any quantitatively successful cosmological model of galaxy formation, central galaxies are preferentially more star-forming relative to satellites of comparable stellar or halo mass. Since bluer galaxies are diskier than redder galaxies, our model centrals will be diskier than satellites. Our galaxy profile model has $\adisk=7\abulge,$ and so satellite galaxies will be smaller than centrals due to the $\bt-\ssfr$ correlation. These simultaneous features alone will naturally result in the negative sign of the clustering ratios seen in Figure~\ref{fig:clustering_ratio_upshot}. 
 
+In light of this explanation, it is natural to ask whether this simple feature {\em alone} is all that is needed for any model of $\rhalf$ to achieve this level of success at predicting galaxy clustering on small and large scales. We address this question in \S~\ref{subsec:tests2} below, finding that the answer is no: the reasonably correct magnitude and scale-dependence of the clustering ratios predicted by our model is a non-trivial result that places tight constraints on the post-infall physics of satellite galaxies. 
+
+\subsection{Sensitivity of Clustering to Satellite Profile Evolution}
+\label{subsec:tests2}
+
+In this section we explore how post-infall changes in satellite $\rhalf$ manifest in $\wproj(\rproj).$ To do so, we construct an extension our fiducial model with a simple additional ingredient for post-infall size evolution of satellites.   
+
+In the fiducial model described in \S~\ref{sec:model}, recall that in the power law a scaling relations (Eq.~\ref{eq:fiducial_model}) the halo radius $\rvir$ used for satellite galaxies is taken to be the value at the time of infall. The simple interpretation of this assumption is that, in a statistical sense, the size of satellite galaxies is determined by its history as a central galaxy, and that post-infall physics leaves no distinct imprint on satellite $\rhalf.$ 
+
+Here we suppose that this assumption is violated, and that $\rhalf$ decreases after infall according to $(\mvir/\macc)^{1/3}.$ That is, in this alternative formulation, rather than using $\rvir$ at the time of infall for satellites in the power law scaling relations, we instead use $\rvir(\mvir/\macc)^{1/3}.$ This simple toy model attempts supposes that the same physical processes leading to halo mass loss are also responsible for a post-infall decrease in satellite size. 
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
 \includegraphics[width=8cm]{FIGS/alternate_satellite_models_size_clustering_ratios.pdf}
 \caption{
-{\bf Clustering provides tight constraints on the relative sizes of centrals and satellites.} 
+{\bf Clustering tightly constrains satellite-specific size evolution.} 
 Here we compare our fiducial model, in which satellite galaxy size is set by $\rvir$ at the time of infall, to an alternative model analogous to \citet{watson_etal12} in which satellite sizes contract in proportion to $(\mvir/\macc)^{1/3}.$ The large differences between solid and dashed curves in the top panels show that the $\rhalf-$dependence of galaxy clustering ratios is highly sensitive to the post-infall evolution of satellite galaxy profiles. The successful prediction of our fiducial model, in which satellite galaxies neither contract nor puff up after infall, places tight constraints on satellite-specific physical processes, which must be either negligible or conspiratorially produce little-to-no size change after accretion. 
 }
 \label{fig:satellites}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
+
+Figure~\ref{fig:satellites} compares the clustering ratios of our fiducial model (solid curves) to the clustering ratios of this alternative model (dashed curves). The difference between the small-scale clustering of the two models is stark: the assumption that $\rhalf$ decreases after infall leaves a strong imprint on the $\rhalf-$dependence of $\wproj(\rproj),$ such that small galaxies cluster {\em much} more strongly relative to large galaxies, particularly for disk-dominated systems with $\mstar\approx10^{10}\msun.$ 
+
+The large differences between the solid and dashed curves in Fig.~\ref{fig:satellites} establishes that the largely successful prediction for the clustering ratios fiducial model is a non-trivial: $\wproj(\rproj)$ is indeed providing good constraining power on the  assumptions underlying our profile modeling and not simply our morphology modeling, c.f., \S\ref{subsubsec:random_bt_model} and \S\ref{sec:model}. We refer the reader to \S\ref{subsec:satellite_discussion} for further discussion of the physical implications of this result. 
+
+
+
+\subsection{Insensitivity of Clustering and Lensing to Halo Spin Correlations}
+\label{subsec:tests3}
 
 
 %---------------------------------------------------------------------------------------------------
@@ -259,6 +270,9 @@ We compare the predictions between our fiducial model in which sizes are purely 
 \section{Discussion}
 \label{sec:discussion}
 
+
+\subsection{Physical Interpretation for Satellites}
+\label{subsec:satellite_discussion}
 
 \subsection{Progression from Backwards to Forwards Modeling}
 \label{subsec:forwardsmodeling}
