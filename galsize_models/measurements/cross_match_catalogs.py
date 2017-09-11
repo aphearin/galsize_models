@@ -49,7 +49,8 @@ def cross_match_umachine_sdss_meert15_with_meert15(mpc_match_dist_cut=1.7,
     umachine_sdss['has_meert15_match'][good_match_mask] = 1
 
     keys_to_inherit = ('r50_magr_kpc', 'Magr_tot', 'Magr_bulge', 'Magr_disk',
-                      'gr_bulge', 'gr_disk', 'morph_type_T', 'gr_kcorr', 'bulge_to_total_rband')
+            'gr_bulge', 'gr_disk', 'morph_type_T', 'gr_kcorr',
+            'bulge_to_total_rband', 'logsm_bell03')
 
     for key in keys_to_inherit:
         umachine_sdss[key+'_meert15'] = np.nan
