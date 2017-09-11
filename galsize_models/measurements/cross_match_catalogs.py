@@ -69,14 +69,15 @@ def store_cross_matched_catalog_to_disk(commit_hash, output_fname, overwrite=Fal
     f = h5py.File(output_fname)
 
     key = "comments"
-    msg = ("This catalog was created by create_value_added_dr10_catalog.ipynb in "
-          "bt_models/master, commit {0}. "
-           "The repo is stored on GitHub at "
-           "https://github.com/aphearin/galsize_models. Briefly, the umachine DR10 sample "
+    msg = ("This catalog was initially created by create_value_added_dr10_catalog.ipynb in "
+          "bt_models/master, \nwith further cross-matching against the Meert+15 morphology catalogs \n"
+          " done by the cross_match_umachine_sdss_meert15_with_meert15 function of the \n"
+          "https://github.com/aphearin/galsize_models repo, commit {0}.\n"
+          "The store_cross_matched_catalog_to_disk function in the galsize_models repo \n"
+          "created this hdf5 file on disk.\n"
+           "Briefly, the umachine DR10 sample "
           "has been cross-matched against my own query to DR7 to get DR7-objIDs; "
-          "these objIDs have been cross-matched against those in Mendel+13. "
-          "Cross-matching has also bee done against the Meert+15 morphology catalogs "
-          "using the cross_match_umachine_sdss_meert15_with_meert15 function.".format(commit_hash))
+          "these objIDs have been cross-matched against those in Mendel+13. ".format(commit_hash))
 
     f.attrs.create(key, msg)
     f.close()
