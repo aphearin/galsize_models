@@ -1,11 +1,14 @@
 """
 """
 import numpy as np
+from scipy.stats import norm
 from halotools.empirical_models import Moster13SmHm
 from halotools.sim_manager import CachedHaloCatalog
 from umachine_pyio.load_mock import load_mock_from_binaries, value_added_mock
 from halotools.empirical_models import halo_mass_to_halo_radius
 from astropy.cosmology import Planck15
+from astropy.utils.misc import NumpyRNGContext
+from astropy.table import Table
 
 from .new_haloprops import halo_radius_at_mpeak
 from .random_bt_assignment import value_add_random_bt
@@ -13,7 +16,7 @@ from .random_bt_assignment import value_add_random_bt
 from ..measurements import load_umachine_sdss_with_meert15
 
 
-__all__ = ('load_moster13_mock', 'load_umachine_mock')
+__all__ = ('moster13_based_mock', 'load_umachine_mock', 'load_baseline_halocat')
 
 default_umachine_galprops = list((
     'sm', 'sfr', 'obs_sm', 'obs_sfr', 'icl', 'halo_id', 'upid',
@@ -21,25 +24,53 @@ default_umachine_galprops = list((
     'a_first_infall', 'dvmax_zscore', 'vmax_at_mpeak'))
 
 
-def load_moster13_mock(logmstar_cut=9.75, simname='bolplanck', redshift=0.):
-    """
-    Examples
-    --------
-    >>> mock = load_moster13_mock(logmstar_cut=10)
-    """
+moster13_halocat_keys = ('halo_upid', 'halo_mpeak', 'halo_scale_factor_mpeak',
+        'halo_x', 'halo_y', 'halo_z', 'halo_zpeak',
+        'halo_vx', 'halo_vy', 'halo_vz',
+        'halo_mvir_host_halo', 'halo_spin', 'halo_uran')
 
+
+def load_baseline_halocat(simname='bolplanck', redshift=0, fixed_seed=411):
     halocat = CachedHaloCatalog(simname=simname, redshift=redshift)
-    mpeak = halocat.halo_table['halo_mpeak']
-    redshift = 1./halocat.halo_table['halo_scale_factor_mpeak'] - 1.
 
-    mstar_model = Moster13SmHm()
-    halocat.halo_table['mstar'] = mstar_model.mc_stellar_mass(
-            prim_haloprop=mpeak, redshift=redshift)
+    halocat.halo_table['halo_zpeak'] = 1./halocat.halo_table['halo_scale_factor_mpeak'] - 1.
 
-    mstar_mask = halocat.halo_table['mstar'] > 10**logmstar_cut
-    mock = halocat.halo_table[mstar_mask]
-    mock['comoving_radius_at_mpeak'] = halo_radius_at_mpeak(
-            mock['halo_mpeak'], mock['halo_scale_factor_mpeak'])
+    rvir_peak_comoving_unity_h = halo_mass_to_halo_radius(halocat.halo_table['halo_mpeak'],
+                                halocat.cosmology, halocat.halo_table['halo_zpeak'], 'vir')
+    A = halocat.halo_table['halo_scale_factor_mpeak']/halocat.cosmology.h
+    rvir_peak_physical = A*rvir_peak_comoving_unity_h
+    halocat.halo_table['halo_rvir_zpeak'] = rvir_peak_physical*1000.
+
+    nhalos = len(halocat.halo_table)
+    with NumpyRNGContext(fixed_seed):
+        halocat.halo_table['halo_uran'] = np.random.rand(nhalos)
+
+    return halocat
+
+
+def moster13_based_mock(halocat=None, keys_to_keep=moster13_halocat_keys, **moster13_params):
+    """
+    """
+    if halocat is None:
+        halocat = load_baseline_halocat()
+
+    model = Moster13SmHm()
+    model.param_dict.update(moster13_params)
+
+    mean_mstar_unity_h = model.mean_stellar_mass(
+            prim_haloprop=halocat.halo_table['halo_mpeak'],
+            redshift=halocat.halo_table['halo_zpeak'])
+
+    mean_mstar = mean_mstar_unity_h/halocat.cosmology.h/halocat.cosmology.h
+    mean_logmstar = np.log10(mean_mstar)
+    mc_mstar = 10**norm.isf(1-halocat.halo_table['halo_uran'], loc=mean_logmstar,
+            scale=model.param_dict[u'scatter_model_param1'])
+
+    mock = Table()
+    mstar_mask = mc_mstar > 10**9
+    for key in keys_to_keep:
+        mock[key[5:]] = halocat.halo_table[key][mstar_mask]
+
     return mock
 
 
@@ -56,6 +87,7 @@ def load_umachine_mock(galprops=default_umachine_galprops, Lbox=250):
     mock['logsm'] = np.log10(mock['obs_sm'])
 
     redshift = 1./mock['a_first_infall'] - 1.
+    raise ValueError("``rvir_halo_kpc`` is not computed correctly - fix this before using this mock")
     mock['rvir_halo_kpc'] = halo_mass_to_halo_radius(mock['mpeak']*Planck15.h,
             Planck15, redshift, 'vir')*1000./Planck15.h
 
