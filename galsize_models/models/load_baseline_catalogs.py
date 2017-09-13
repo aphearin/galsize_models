@@ -48,7 +48,8 @@ def load_baseline_halocat(simname='bolplanck', redshift=0, fixed_seed=411):
     return halocat
 
 
-def moster13_based_mock(halocat=None, keys_to_keep=moster13_halocat_keys, **moster13_params):
+def moster13_based_mock(halocat=None, keys_to_keep=moster13_halocat_keys,
+            scatter_ordinates=(0.35, 0.2, 0.45), **moster13_params):
     """
     """
     if halocat is None:
@@ -64,22 +65,24 @@ def moster13_based_mock(halocat=None, keys_to_keep=moster13_halocat_keys, **most
     mean_mstar = mean_mstar_unity_h/halocat.cosmology.h/halocat.cosmology.h
     mean_logmstar = np.log10(mean_mstar)
 
-    #  Apply M* correction to account for Meert+15 photometry differences
-    abscissa = 9, 10.5, 11.75
-    ordinates = 0.35, 0.2, 0.45
-    a0, a1, a2 = solve_for_polynomial_coefficients(abscissa, ordinates)
-    logmstar_correction = a0 + a1*mean_logmstar + a2*mean_logmstar**2
-    corrected_mean_logmstar = mean_logmstar + logmstar_correction
-
-    mc_mstar = 10**norm.isf(1-halocat.halo_table['halo_uran'], loc=corrected_mean_logmstar,
+    mc_logmstar = norm.isf(1-halocat.halo_table['halo_uran'], loc=mean_logmstar,
             scale=model.param_dict[u'scatter_model_param1'])
 
+    #  Apply M* correction to account for Meert+15 photometry differences
+    scatter_abscissa = 9.5, 10.5, 11.75
+    a0, a1, a2 = solve_for_polynomial_coefficients(scatter_abscissa, scatter_ordinates)
+    logmstar_correction = a0 + a1*mc_logmstar + a2*mc_logmstar**2
+    logmstar_correction = np.where(mc_logmstar < scatter_abscissa[0], scatter_ordinates[0], logmstar_correction)
+    logmstar_correction = np.where(mc_logmstar > scatter_abscissa[2], scatter_ordinates[2], logmstar_correction)
+    corrected_mc_logmstar = mc_logmstar + logmstar_correction
+
     mock = Table()
-    mstar_mask = mc_mstar > 10**9
+    mstar_mask = corrected_mc_logmstar > 9
     for key in keys_to_keep:
         mock[key[5:]] = halocat.halo_table[key][mstar_mask]
 
-    mock['mstar'] = mc_mstar[mstar_mask]
+    mock['mstar'] = 10**corrected_mc_logmstar[mstar_mask]
+    mock['mstar_moster13'] = 10**mc_logmstar[mstar_mask]
     return mock
 
 
