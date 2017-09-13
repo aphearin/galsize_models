@@ -9,8 +9,8 @@ from halotools.empirical_models import halo_mass_to_halo_radius
 from astropy.cosmology import Planck15
 from astropy.utils.misc import NumpyRNGContext
 from astropy.table import Table
+from halotools.empirical_models import solve_for_polynomial_coefficients
 
-from .new_haloprops import halo_radius_at_mpeak
 from .random_bt_assignment import value_add_random_bt
 
 from ..measurements import load_umachine_sdss_with_meert15
@@ -26,7 +26,7 @@ default_umachine_galprops = list((
 
 moster13_halocat_keys = ('halo_upid', 'halo_mpeak', 'halo_scale_factor_mpeak',
         'halo_x', 'halo_y', 'halo_z', 'halo_zpeak',
-        'halo_vx', 'halo_vy', 'halo_vz',
+        'halo_vx', 'halo_vy', 'halo_vz', 'halo_rvir_zpeak',
         'halo_mvir_host_halo', 'halo_spin', 'halo_uran')
 
 
@@ -63,7 +63,15 @@ def moster13_based_mock(halocat=None, keys_to_keep=moster13_halocat_keys, **most
 
     mean_mstar = mean_mstar_unity_h/halocat.cosmology.h/halocat.cosmology.h
     mean_logmstar = np.log10(mean_mstar)
-    mc_mstar = 10**norm.isf(1-halocat.halo_table['halo_uran'], loc=mean_logmstar,
+
+    #  Apply M* correction to account for Meert+15 photometry differences
+    abscissa = 9, 10.5, 11.75
+    ordinates = 0.35, 0.2, 0.45
+    a0, a1, a2 = solve_for_polynomial_coefficients(abscissa, ordinates)
+    logmstar_correction = a0 + a1*mean_logmstar + a2*mean_logmstar**2
+    corrected_mean_logmstar = mean_logmstar + logmstar_correction
+
+    mc_mstar = 10**norm.isf(1-halocat.halo_table['halo_uran'], loc=corrected_mean_logmstar,
             scale=model.param_dict[u'scatter_model_param1'])
 
     mock = Table()
@@ -71,6 +79,7 @@ def moster13_based_mock(halocat=None, keys_to_keep=moster13_halocat_keys, **most
     for key in keys_to_keep:
         mock[key[5:]] = halocat.halo_table[key][mstar_mask]
 
+    mock['mstar'] = mc_mstar[mstar_mask]
     return mock
 
 

@@ -2,6 +2,7 @@
 """
 import numpy as np
 from astropy.utils.misc import NumpyRNGContext
+from scipy.stats import norm
 
 from ..measurements.measure_one_points import mock_ssfr_sequence_one_points
 from ..measurements.sdss_covariance import assemble_data_vector
@@ -23,12 +24,18 @@ fiducial_norm_disk = fiducial_norm_bulge/fiducial_bulge_to_disk_size_ratio
 __all__ = ('component_size_vs_rhalo', 'galaxy_size_vs_rhalo')
 
 
-def component_size_vs_rhalo(rvir_halo_kpc, normalization, alpha, R0=1., scatter=0., seed=None):
+def component_size_vs_rhalo(rvir_halo_kpc, normalization, alpha,
+        R0=1., scatter=0., seed=None, uran=None):
     """
     """
     mean_size = normalization*(rvir_halo_kpc/R0)**alpha
-    with NumpyRNGContext(seed):
-        result = 10**np.random.normal(loc=np.log10(mean_size), scale=scatter)
+    log_mean_size = np.log10(mean_size)
+
+    if uran is None:
+        with NumpyRNGContext(seed):
+            uran = np.random.rand(len(mean_size))
+    result = 10**norm.isf(1 - uran, loc=log_mean_size, scale=scatter)
+
     return result
 
 
