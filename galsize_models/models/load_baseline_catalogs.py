@@ -49,7 +49,7 @@ def load_baseline_halocat(simname='bolplanck', redshift=0, fixed_seed=411):
 
 
 def moster13_based_mock(halocat=None, keys_to_keep=moster13_halocat_keys,
-            scatter_ordinates=(0.35, 0.2, 0.45), **moster13_params):
+            scatter_ordinates=(0.4, 0.3, 0.5), **moster13_params):
     """
     """
     if halocat is None:
