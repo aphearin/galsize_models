@@ -26,6 +26,7 @@ default_umachine_galprops = list((
 
 moster13_halocat_keys = ('halo_upid', 'halo_mpeak', 'halo_scale_factor_mpeak',
         'halo_x', 'halo_y', 'halo_z', 'halo_zpeak', 'halo_vmax_mpeak',
+        'halo_scale_factor_firstacc', 'halo_mvir_firstacc',
         'halo_vx', 'halo_vy', 'halo_vz', 'halo_rvir_zpeak', 'halo_vmax_at_mpeak_percentile',
         'halo_mvir_host_halo', 'halo_spin', 'halo_uran')
 
