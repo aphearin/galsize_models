@@ -25,8 +25,8 @@ default_umachine_galprops = list((
 
 
 moster13_halocat_keys = ('halo_upid', 'halo_mpeak', 'halo_scale_factor_mpeak',
-        'halo_x', 'halo_y', 'halo_z', 'halo_zpeak',
-        'halo_vx', 'halo_vy', 'halo_vz', 'halo_rvir_zpeak',
+        'halo_x', 'halo_y', 'halo_z', 'halo_zpeak', 'halo_vmax_mpeak',
+        'halo_vx', 'halo_vy', 'halo_vz', 'halo_rvir_zpeak', 'halo_vmax_at_mpeak_percentile',
         'halo_mvir_host_halo', 'halo_spin', 'halo_uran')
 
 
@@ -45,6 +45,11 @@ def load_baseline_halocat(simname='bolplanck', redshift=0, fixed_seed=411):
     with NumpyRNGContext(fixed_seed):
         halocat.halo_table['halo_uran'] = np.random.rand(nhalos)
 
+    mask = halocat.halo_table['halo_mvir_host_halo'] == 0
+    halocat.halo_table['halo_mvir_host_halo'][mask] = halocat.halo_table['halo_mpeak'][mask]
+
+    vmax_percentile_fname = '/Users/aphearin/work/UniverseMachine/temp_galsize_models/vmax_percentile.npy'
+    halocat.halo_table['halo_vmax_at_mpeak_percentile'] = np.load(vmax_percentile_fname)
     return halocat
 
 
