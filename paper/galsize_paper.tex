@@ -57,6 +57,9 @@
 %%%%%%%%  observations  %%%%%%%%
 \newcommand{\rproj}{r_{\rm p}}
 \newcommand{\wproj}{w_{\rm p}}
+\newcommand{\wplarge}{w_{\rm p}^{\rm large}}
+\newcommand{\wpsmall}{w_{\rm p}^{\rm small}}
+\newcommand{\wpall}{w_{\rm p}^{\rm all}}
 
 %%%%%%%%  units  %%%%%%%%
 \newcommand{\kpc}{{\rm kpc}}
@@ -129,7 +132,7 @@ Motivated by the simplicity of this scaling relation, we transform the \citet{kr
 
 %In \S\ref{subsec:tests1} we show comparisons between the galaxy size model described in \S\ref{sec:model} and our SDSS sample. We identify the key ingredients that determine the characteristic $\rhalf-$dependence of galaxy clustering in \S\ref{subsec:tests2}. In so doing, we demonstrate the sensitivity of galaxy clustering measurements to the underlying model assumptions, establishing the success of our model as non-trivial. 
 
-In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ with $\mstar.$ 
+In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ with $\mstar.$ Scattered gray points show the scaling relation for our SDSS galaxy sample, while the black curve shows the median relation $\langle\rhalf\vert\mstar\rangle$ implied by the model described in \S\ref{sec:model}.
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
@@ -137,32 +140,29 @@ In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ wit
 \includegraphics[width=8cm]{FIGS/single_component_model_vs_sdss_one_point.pdf}
 \caption{
 {\bf One-point data used to fit the fiducial model.}
-Scattered points show the $\rhalf-\mstar$ relation for SDSS galaxies as measured in \citet{meert_etal15}. The black curve in each panel shows the $\rhalf-\mstar$ relation implied by the model. This figure confirms the findings in \citet{kravtsov13} that a linear relationship between $\rvir$ and $\rhalf,$ convolved against the nonlinear relationships between $\rvir, \mhalo$ and $\mstar,$ correctly predicts the characteristic curvature in the relation $\langle\rhalf\vert\mstar\rangle$ over a wide range in stellar mass.
+Scattered points show the $\rhalf-\mstar$ relation for SDSS galaxies as measured in \citet{meert_etal15}. The black curve shows the median $\rhalf-\mstar$ relation implied by the model described in \S\ref{sec:model}, in which $\rhalf=0.0125\rvir.$ This figure confirms the findings in \citet{kravtsov13} that a linear relationship between $\rvir$ and $\rhalf,$ convolved against the nonlinear relationships between $\rvir, \mhalo$ and $\mstar,$ correctly predicts the characteristic curvature in the relation $\langle\rhalf\vert\mstar\rangle$ over a wide range in stellar mass.
 }
 \label{fig:scatter_plot}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
-In this section we present new measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj(\rproj).$ Galaxy clustering has complex, simultaneous dependence upon $\mstar,$ $\ssfr,$ $\rhalf,$ and $\bt.$ Since the purpose of this work is to test models of composite galaxy size $\rhalf,$ we design a measurement that is specifically tailored to isolate the influence of $\rhalf$ on the two-point function, while minimizing the dependence upon the other correlated variables.
+In Figure \ref{fig:clustering_ratio_upshot} we present new measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj(\rproj).$ Because galaxy clustering has well-known dependence upon $\mstar$ that is not the subject of this work, we wish to remove this influence and focus purely on the relationship between $\rhalf$ and $\wproj(\rproj).$ To do so, we determine the value $\langle\rhalf\vert\mstar\rangle$ by computing a sliding median of $\rhalf,$ calculated using a window of width $N_{\rm gal}=1000.$ Each galaxy is categorized as either ``large" or ``small" according to whether it is above or below the median value appropriate for its stellar mass. For any $\mstar-$threshold sample, the SMF of the ``large" and ``small" subsamples are identical, by construction. 
 
-To achieve this, we compute projected clustering separately for $\mstar-$complete samples of galaxies defined by simultaneous cuts on $\bt$ and $\rhalf,$ described as follows. First, we construct subsamples of disk-dominated and bulge-dominated galaxies using cuts of $\bt<0.25$ and $\bt>0.75,$ respectively, as in \S~\ref{subsubsec:scaling_relation} above. Separately for each $\bt-$selected subsample, we calculate $\langle\rhalf\vert\mstar;\bt\rangle,$ the median composite size of the sample as a function of total galaxy stellar mass. We split each $\bt-$selected sample in half according to whether the galaxy has a size $\rhalf$ that is above or below this median value. For any $\mstar-$complete threshold, this gives four subsamples of large and small, disk- and bulge-dominated galaxies. For each $\bt-$selected sample, we calculate the difference $\wproj^{\rm large}-\wproj^{\rm small},$ scaled by $\wproj^{\rm all},$ the clustering of the $\bt-$selected sample prior to splitting on $\rhalf,$ and refer to this quantity as {\em the $\rhalf$ clustering ratio}.
+We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds, $\mstar>10^{9.75}\msun,$ $\mstar>10^{10.25}\msun,$ $\mstar>10^{10.75}\msun,$ and $\mstar>10^{11.25}\msun.$ We make the same measurements for each volume-limited $\mstar-$threshold sample {\em without} splitting on size, giving us measurements $\wpall, \wplarge,$ and $\wpsmall$ for each threshold sample. This allow us to compute the ratio $(\wplarge-\wpsmall)/\wpall,$ which we refer to as {\em the $\rhalf$ clustering ratio}. These ratios are the measurements appearing on the y-axis in each panel of Figure \ref{fig:clustering_ratio_upshot}. Points with error bars show SDSS measurements, solid curves show the clustering ratios of model galaxies. Before unpacking the information contained in these clustering measurements, we stress that the good agreement shown between model and data in Figure~\ref{fig:clustering_ratio_upshot} is a genuine model prediction, since the model parameters were taken directly from \citet{kravtsov13}, which were fit to the one-point measurements in Fig.~\ref{fig:scatter_plot}, whereas the two-point measurements appearing in Figure \ref{fig:clustering_ratio_upshot} have heretofore never been measured. 
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
 \includegraphics[width=8cm]{FIGS/size_clustering_ratios_stripping_model_vs_sdss.pdf}
 \caption{
-{\bf Size-dependence of galaxy clustering.}
-Points with error bars show new SDSS measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj,$ compared to predictions by the model tuned to the measurements shown in Fig.~\ref{fig:scatter_plot}. We define a disk or bulge as ``large" or ``small" according to whether it is above or below the median size for its stellar mass. The y-axis shows clustering strength ratios, so that, for example, a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of comparable stellar mass. We show results separately for disk-dominated galaxies ({\em top} panels) and bulge-dominated galaxies ({\em bottom }panels), and different thresholds in total stellar mass in the {\em left} and {\em right} panels. The successful prediction shown here is remarkable because the model was not fit to these data, and because two-point clustering is highly sensitive to the physics that shapes satellite galaxy profiles (see Fig.~\ref{fig:satellites}).
+{\bf $\rhalf-$dependence of galaxy clustering.}
+Points with error bars show new SDSS measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj,$ compared to predictions by the model tuned to the measurements shown in Fig.~\ref{fig:scatter_plot}. We define a galaxy as ``large" or ``small" according to whether it is above or below the median size for its stellar mass, so that in each panel, the SMF of the ``large" and ``small" subsamples are identical, as described in the text. The y-axis shows {\em clustering strength ratios,} so that, for example, a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of comparable stellar mass. Each panel shows results separately for a different volume-limited $\mstar-$threshold samples. Fiducial model predictions appear as the solid curve in each panel.
 }
 \label{fig:clustering_ratio_upshot}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
-
-The y-axis of each panel in Figure \ref{fig:clustering_ratio_upshot} shows these $\rhalf$ clustering ratios, with left and right panels showing measurements for $\mstar>10^{10}M_{\odot}$ and $\mstar>10^{10.5}M_{\odot}$ thresholds in total stellar mass, and top and bottom panels showing results for disk- and bulge-dominated samples, respectively. Points with error bars show SDSS measurements, solid curves show the clustering ratios of model galaxies. Before unpacking the information contained in these clustering measurements, we stress that the good agreement shown between model and data in Figure~\ref{fig:clustering_ratio_upshot} is a genuine model prediction, since we only tuned parameters to fit the one-point measurements in Fig.~\ref{fig:scatter_plot}.
-
-The salient feature of the clustering ratio measurements is that they are negative: for either disk- or bulge-dominated samples, small galaxies cluster more strongly than large galaxies of the same stellar mass threshold, a new result. This feature also holds true for model galaxies, for which both $\rhalfbulge$ and $\rhalfdisk$ scale in power law proportion to $\rvir.$ Since halo mass $\mvir\propto\rvir^{3},$ and clustering is a strong function of $\mvir,$ the result may seem surprising.
+The salient feature of the clustering ratio measurements is that they are negative: small galaxies cluster more strongly than large galaxies of the same stellar mass, a new result. This feature also holds true for model galaxies. This result may be surprising, since $\rhalf\propto\rvir,$ halo mass $\rvir\propto\mhalo^{1/3},$ and clustering strength increases with $\mvir.$ Based on this simple argument, one would expect the opposite trend to the measurements shown here. 
 
 The resolution to this puzzle is illustrated in Figure~\ref{fig:bt_censat}, which shows the PDF of $\bt$ for halos of the same mass $\mhalo,$ defined as $\mpeak,$ the peak mass ever attained through the history of the (sub)halo, so that host halos and subhalos can be treated on equal footing. In the model, central galaxies are diskier than satellites, a feature that is inherited from the method we use to map $\bt$ to model galaxies.
 
@@ -182,7 +182,7 @@ Here we suppose that this assumption is violated, and that $\rhalf$ decreases af
 \centering
 \includegraphics[width=8cm]{FIGS/scrambled_size_clustering_ratios.pdf}
 \caption{
-{\bf Critical ingredients .}
+{\bf Origin of the $\rhalf-$dependence of clustering.}
 Here we compare our fiducial model, in which satellite galaxy size is set by $\rvir$ at the time of infall, to an alternative model analogous to \citet{watson_etal12} in which satellite sizes contract in proportion to $(\mvir/\macc)^{1/3}.$ The large differences between solid and dashed curves in the top panels show that the $\rhalf-$dependence of galaxy clustering ratios is highly sensitive to the post-infall evolution of satellite galaxy profiles. The successful prediction of our fiducial model, in which satellite galaxies neither contract nor puff up after infall, places tight constraints on satellite-specific physical processes, which must be either negligible or conspiratorially produce little-to-no size change after accretion.
 }
 \label{fig:satellites}
