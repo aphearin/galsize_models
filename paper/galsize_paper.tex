@@ -39,7 +39,6 @@
 \newcommand{\alphadisk}{\alpha_{\rm disk}}
 \newcommand{\alphabulge}{\alpha_{\rm bulge}}
 \newcommand{\sigmarhalf}{\sigma_{\rm R_{1/2}}}
-\newcommand{\rvir}{R_{\rm vir}}
 \newcommand{\bt}{{\rm B/T}}
 \newcommand{\mstar}{M_{\ast}}
 \newcommand{\ssfr}{{\rm sSFR}}
@@ -51,6 +50,8 @@
 \newcommand{\macc}{M_{\rm acc}}
 \newcommand{\mpeak}{M_{\rm peak}}
 \newcommand{\mhalo}{M_{\rm halo}}
+\newcommand{\rvir}{R_{\rm vir}}
+\newcommand{\rmpeak}{R_{\rm M_{peak}}}
 
 
 %%%%%%%%  observations  %%%%%%%%
@@ -115,22 +116,13 @@ We map $\mstar$ onto subhalos with the best-fit stellar-to-halo mass relation fr
 \end{equation*}
 For halo mass $\mhalo$ we use $\mpeak,$ the largest value of $\mvir$ ever attained along the main progenitor branch of the subhalo. The values of the best-fit parameters in \citet{moster_etal13} were fit to a stellar mass function (SMF) with values $\mstar^{\rm MPA-JHU}$ based on the MPA-JHU catalog \citep{kauffmann_etal03,brinchmann_etal04}, which differs from the SMF in our galaxy sample \citep[see, e.g.,][]{bernardi_etal14}. We account for this difference by manually tabulating the median value $\langle\mstar^{\rm Meert+15}\vert\mstar^{\rm MPA-JHU}\rangle$ in logarithmic bins spanning $9 < \log_{10}\mstar^{\rm MPA-JHU}/\msun < 12,$ and applying the median correction to the Monte Carlo realization of the mock galaxy sample. This results in a typical boost of $\sim0.25$ dex at $\mstar^{\rm MPA-JHU}\approx10^{9.75}\msun,$ and $\sim0.4$ dex at $\mstar^{\rm MPA-JHU}\approx10^{11.5}\msun.$ 
 
-Motivated by the \citet{kravtsov13} results, we model the half-mass radii of galaxies as separate power law functions of halo virial radius:
-
-\begin{eqnarray}
-\label{eq:fiducial_model}
-\rhalfbulge &=& \abulge\rvir^{\alphabulge} \\
-\rhalfdisk &=& \adisk\rvir^{\alphadisk}
-\end{eqnarray}
-
-For central galaxies residing in host halos, we use the present-day virial radius; for satellite galaxies we use the virial radius at the time of accretion, using physical units of $\kpc.$ We model the composite size of model galaxies as
+In \citet{kravtsov13}, it was found that if a stellar-to-halo mass relation is inverted to map halo mass estimates $\mhalo$ onto SDSS galaxies, and then the $\mhalo-\rvir$ relation is applied to map values of $\rvir$ onto the galaxies, then the resulting $\rhalf-\rvir$ relation of SDSS galaxies exhibits the following linear scaling across a wide range of stellar mass:
 \beq
-\rhalf = (\bt)\rhalfbulge + (1-\bt)\rhalfdisk.
+\label{eq:fiducial_model}
+\rhalf = 0.0125\rvir
 \eeq
 
-When generating Monte Carlo realizations of our model galaxy population, we add log-normal scatter $\sigmarhalf$ separately to each component. Our model for sizes thus has five free parameters: $\abulge, \adisk, \alphabulge, \alphadisk,$ and $\sigmarhalf.$
-
-We reiterate an important distinction drawn in the formulation of our forward modeling approach. In the model described above, $\rhalfbulge$ and $\rhalfdisk$ are forward modeling quantities that we aim to constrain through SDSS observations of {\em composite} galaxy size $\rhalf.$ In particular, both model and real galaxies will be categorized as ``small" or ``large`` according to whether $\rhalf$ is above or below the median size for a galaxy with total stellar mass $\mstar.$
+Motivated by the simplicity of this scaling relation, we transform the \citet{kravtsov13} into a forward model using {\tt Halotools}. For the virial radius of halos and subhalos, we use $\rmpeak,$ the value of $\rvir$ in physical units of $\kpc$ measured at the time of peak subhalo mass. When generating Monte Carlo realizations of our model galaxy sizes, we add log-normal scatter $\sigmarhalf=0.15$ dex.
 
 \section{Results}
 \label{sec:results}
