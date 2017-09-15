@@ -108,6 +108,13 @@ All numerical values of $\rhalf$ will be quoted in $\kpc,$ and all values of $\m
 \section{Galaxy-Halo Model}
 \label{sec:model}
 
+We map $\mstar$ onto subhalos with the best-fit stellar-to-halo mass relation from \citet{moster_etal13}:
+
+\begin{equation*}
+\mstar/\mhalo = 2N\left[(\mhalo/M_{1})^{-\beta} + (\mhalo/M_1)^{\gamma}\right]^{-1}.
+\end{equation*}
+For halo mass $\mhalo$ we use $\mpeak,$ the largest value of $\mvir$ ever attained along the main progenitor branch of the subhalo. The values of the best-fit parameters in \citet{moster_etal13} were fit to a stellar mass function (SMF) with values $\mstar^{\rm MPA-JHU}$ based on the MPA-JHU catalog \citep{kauffmann_etal03,brinchmann_etal04}, which differs from the SMF in our galaxy sample \citep[see, e.g.,][]{bernardi_etal14}. We account for this difference by manually tabulating the median value $\langle\mstar^{\rm Meert+15}\vert\mstar^{\rm MPA-JHU}\rangle$ in logarithmic bins spanning $9 < \log_{10}\mstar^{\rm MPA-JHU}/\msun < 12,$ and applying the median correction to the Monte Carlo realization of the mock galaxy sample. This results in a typical boost of $\sim0.25$ dex at $\mstar^{\rm MPA-JHU}\approx10^{9.75}\msun,$ and $\sim0.4$ dex at $\mstar^{\rm MPA-JHU}\approx10^{11.5}\msun.$ 
+
 Motivated by the \citet{kravtsov13} results, we model the half-mass radii of galaxies as separate power law functions of halo virial radius:
 
 \begin{eqnarray}
