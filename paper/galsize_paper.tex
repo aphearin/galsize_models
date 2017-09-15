@@ -32,7 +32,6 @@
 
 %%%%%%%%  galaxy properties  %%%%%%%%
 \newcommand{\rhalf}{R_{1/2}}
-\newcommand{\rhalftot}{R^{\rm tot}_{1/2}}
 \newcommand{\rhalfdisk}{R_{1/2}^{\rm disk}}
 \newcommand{\rhalfbulge}{R_{1/2}^{\rm bulge}}
 \newcommand{\adisk}{A_{\rm disk}}
@@ -43,7 +42,6 @@
 \newcommand{\rvir}{R_{\rm vir}}
 \newcommand{\bt}{{\rm B/T}}
 \newcommand{\mstar}{M_{\ast}}
-\newcommand{\mstartot}{M^{\rm tot}_{\ast}}
 \newcommand{\ssfr}{{\rm sSFR}}
 \newcommand{\sfr}{{\rm SFR}}
 
@@ -88,7 +86,7 @@ $^{4}$Universit{\"a}ts-Sternwarte, Ludwig-Maximilians-Universit{\"a}t M{\"u}nche
 \maketitle
 
 \begin{abstract}
-We derive empirical modeling constraints on the connection between dark matter halos and the half-light radius $\rhalf$ of galaxies. Using forward-modeling techniques based on {\tt Halotools}, we confirm previous results in Kravtsov (2013) that $\rhalf$ is well-described by a linear scaling relation with halo virial radius. Novel to this work, we use new SDSS measurements of the $\rhalf-$dependence of galaxy clustering to test this modeling assumption. With no changes to the parameters, the model accurately predicts the observed two-point clustering on small- and large-scales over a wide range of stellar mass. This quantitative success is remarkable since the Kravtsov (2013) parameters were fit to the observed $\langle\rhalf\vert\mstar\rangle,$ and the $\rhalf-$dependence of SDSS galaxy clustering has heretofore never been measured. Moreover, this success is non-trivial, as we demonstrate that galaxy clustering is highly sensitive to the assembly history-dependent physics that shapes the relative size of centrals and satellites. Our results can be treated as a boundary condition for more complex and fine-grained models of galaxy size, and provide a simple means for cosmological surveys to generate synthetic galaxy populations with realistic sizes across the cosmic web. 
+We derive empirical modeling constraints on the connection between dark matter halos and the half-light radius $\rhalf$ of galaxies. Using forward-modeling techniques based on {\tt Halotools}, we confirm previous results in Kravtsov (2013) that $\rhalf$ is well-described by a linear scaling relation with halo virial radius. Novel to this work, we use new SDSS measurements of the $\rhalf-$dependence of galaxy clustering to test this modeling assumption. With no changes to the parameters, the model accurately predicts the observed two-point clustering on small- and large-scales over a wide range of stellar mass. This quantitative success is remarkable since the Kravtsov (2013) parameters were fit to the observed $\langle\rhalf\vert\mstar\rangle,$ and the $\rhalf-$dependence of SDSS galaxy clustering has heretofore never been measured. Moreover, this success is non-trivial, as we demonstrate that galaxy clustering is highly sensitive to the assembly history-dependent physics that shapes the relative size of centrals and satellites. Our results can be treated as a boundary condition for more complex and fine-grained models of galaxy size, and provide a simple means for cosmological surveys to generate synthetic galaxy populations with realistic sizes across the cosmic web.
 \end{abstract}
 
 \section{Introduction}
@@ -102,13 +100,11 @@ Some introduction goes here.
 \label{subsec:galaxydata}
 
 
-Our galaxy sample comes from Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS][]{ahn_etal14}. We study the same $\mstar-$complete galaxy sample used in \citet{behroozi_etal15}, to which we refer the reader for details. Values for $\mstar$ and $\sfr$ are taken from the MPA-JHU value-added catalog \citep{kauffmann_etal03,brinchmann_etal04}.
+Our galaxy sample comes from the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. This catalog is based on Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS,][]{ahn_etal14}, with improvements to the photometry pipeline and light profile fitting methods \citep{vikram_etal10,bernardi_etal13,bernardi_etal14,meert_etal13}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile to determine the half-light radius $\rhalf.$ We apply the \citet{bell_etal03} mass-to-light ratio to the $r-$band flux and $g-r$ colors in this catalog to obtain an estimate for the total stellar mass $\mstar$ of every galaxy.
 
-We additionally use the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile. We cross-match our DR10 sample against the \citet{meert_etal15} catalog values of $\rhalftot,$ the half-light radius of the full (composite) profile, and $\bt,$ the $r-$band flux ratio of the de Vaucouleurs component to the total $r-$band flux. This cross-matching gives us a volume-limited galaxy sample with values of $\mstar,$ $\ssfr,$ $\rhalftot,$ and $\bt.$ Together with the present work, we make publicly available this cross-matched catalog, as well as code to generate the catalog from the original data files and load it into a python interpreter.
+We calculate two-point clustering $\wproj$ of our SDSS galaxy sample using line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. Our results in \S~\ref{sec:results} will give special focus on the dependence of $\wproj$ upon $\rhalf.$ We will quantify this dependence in terms of {\em clustering ratios} of ``large" vs. ``small" galaxies, defined according to whether composite galaxy size is above or below $\langle\rhalf\vert\mstar\rangle,$ computed as the median of a sliding stellar mass window with a width of $N_{\rm gal}=1000.$
 
-We calculate two-point clustering $\wproj$ of our SDSS galaxy sample using line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. Our results in \S~\ref{sec:results} will give special focus on the dependence of $\wproj$ upon $\rhalftot.$ We will quantify this dependence in terms of {\em clustering ratios} of ``large" vs. ``small" galaxies, defined according to whether composite galaxy size is above or below $\langle\rhalftot\vert\mstartot\rangle,$ computed as the median of a sliding stellar mass window with a width of $N_{\rm gal}=1000.$
-
-In all sections that follow, we will declutter our notation by referring to $\rhalftot$ as $\rhalf$ and $\mstartot$ as $\mstar.$ In all cases where we wish to refer to the half-light radius or stellar mass of a particular component, that component will explicitly appear in superscript. All numerical values of $\rhalf$ will be quoted in $\kpc,$ and all values of $\mstar$ and $\mhalo$ in $\msun,$ assuming $H_0=67.8~\kms\equiv100h~\kms,$ the best-fit value from \citet{planck15}. To scale stellar masses to ``$h=1$ units" \citep{croton13}, our numerically quoted values for $\mstar$ should be multiplied by a factor of $h^2,$ while our halo masses and distances should be multiplied by a factor of $h.$
+All numerical values of $\rhalf$ will be quoted in $\kpc,$ and all values of $\mstar$ and $\mhalo$ in $\msun,$ assuming $H_0=67.8~\kms\equiv100h~\kms,$ the best-fit value from \citet{planck15}. To scale stellar masses to ``$h=1$ units" \citep{croton13}, our numerically quoted values for $\mstar$ should be multiplied by a factor of $h^2,$ while our halo masses and distances should be multiplied by a factor of $h.$
 
 \subsection{Simulation and Halos}
 \label{subsec:sim}
@@ -131,7 +127,7 @@ Our model for galaxy size is further predicated upon the mapping between dark ma
 \subsection{Mock Measurements of Clustering and Lensing}
 \label{subsec:mock_measurements}
 
-For mock galaxies, to compute galaxy clustering we employ the distant observer approximation by treating the simulation $z-$axis as the line-of-sight. We compute $\wproj$ using the {\tt mock\_observables.wp} function in {\tt Halotools}, which is a python implementation of the algorithm in the {\tt Corrfunc} C library \citep{sinha_etal17}. We compute lensing $\Delta\Sigma$ using the {\tt mock\_observables.delta\_sigma} function in {\tt Halotools} to calculate the two-dimensional surface mass density of a random downsampling of $10^6$ dark matter particles in the snapshot. 
+For mock galaxies, to compute galaxy clustering we employ the distant observer approximation by treating the simulation $z-$axis as the line-of-sight. We compute $\wproj$ using the {\tt mock\_observables.wp} function in {\tt Halotools}, which is a python implementation of the algorithm in the {\tt Corrfunc} C library \citep{sinha_etal17}. We compute lensing $\Delta\Sigma$ using the {\tt mock\_observables.delta\_sigma} function in {\tt Halotools} to calculate the two-dimensional surface mass density of a random downsampling of $10^6$ dark matter particles in the snapshot.
 
 
 \section{Galaxy Profile Model}
@@ -147,12 +143,12 @@ Motivated by the \citet{kravtsov13} results, we model the half-mass radii of gal
 
 For central galaxies residing in host halos, we use the present-day virial radius; for satellite galaxies we use the virial radius at the time of accretion, using physical units of $\kpc.$ We model the composite size of model galaxies as
 \beq
-\rhalftot = (\bt)\rhalfbulge + (1-\bt)\rhalfdisk.
+\rhalf = (\bt)\rhalfbulge + (1-\bt)\rhalfdisk.
 \eeq
 
 When generating Monte Carlo realizations of our model galaxy population, we add log-normal scatter $\sigmarhalf$ separately to each component. Our model for sizes thus has five free parameters: $\abulge, \adisk, \alphabulge, \alphadisk,$ and $\sigmarhalf.$
 
-We reiterate an important distinction drawn in the formulation of our forward modeling approach. In the model described above, $\rhalfbulge$ and $\rhalfdisk$ are forward modeling quantities that we aim to constrain through SDSS observations of {\em composite} galaxy size $\rhalftot.$ In particular, both model and real galaxies will be categorized as ``small" or ``large`` according to whether $\rhalftot$ is above or below the median size for a galaxy with total stellar mass $\mstartot.$
+We reiterate an important distinction drawn in the formulation of our forward modeling approach. In the model described above, $\rhalfbulge$ and $\rhalfdisk$ are forward modeling quantities that we aim to constrain through SDSS observations of {\em composite} galaxy size $\rhalf.$ In particular, both model and real galaxies will be categorized as ``small" or ``large`` according to whether $\rhalf$ is above or below the median size for a galaxy with total stellar mass $\mstar.$
 
 \section{Results}
 \label{sec:results}
@@ -218,7 +214,7 @@ The resolution to this puzzle is illustrated in Figure~\ref{fig:bt_censat}, whic
 \centering
 \includegraphics[width=8cm]{FIGS/random_bt_centrals_vs_satellites.pdf}
 \caption{
-{\bf Morphologies of centrals and satellites of the same halo mass.} We show the PDF of the bulge-to-total stellar mass ratio $\bt$ of central and satellite galaxies of the same halo mass $\mhalo=\mpeak.$ In the model, the PDF of $\bt$ is determined by the stellar mass $\mstar$ and specific star-formation rate $\ssfr$ statistically determine, with no residual dependence on the cosmic web. Satellite galaxies in the model are ``bulgier" than centrals of the same halo mass because satellites are more quiescent than centrals of the same stellar mass. Thus our baseline model ansatz is that the morphology-density relation is purely derived from the color-density relation. Since composite size $\rhalf$ in the model is given by $\rhalf\equiv\rhalftot=(\bt)\rhalfbulge + (1-\bt)\rhalfdisk,$ this ansatz in turn implies that smaller galaxies cluster more strongly relative to larger galaxies of the same stellar mass, as seen in the measurements shown in Fig.~\ref{fig:clustering_ratio_upshot}.
+{\bf Morphologies of centrals and satellites of the same halo mass.} We show the PDF of the bulge-to-total stellar mass ratio $\bt$ of central and satellite galaxies of the same halo mass $\mhalo=\mpeak.$ In the model, the PDF of $\bt$ is determined by the stellar mass $\mstar$ and specific star-formation rate $\ssfr$ statistically determine, with no residual dependence on the cosmic web. Satellite galaxies in the model are ``bulgier" than centrals of the same halo mass because satellites are more quiescent than centrals of the same stellar mass. Thus our baseline model ansatz is that the morphology-density relation is purely derived from the color-density relation. Since composite size $\rhalf$ in the model is given by $\rhalf\equiv\rhalf=(\bt)\rhalfbulge + (1-\bt)\rhalfdisk,$ this ansatz in turn implies that smaller galaxies cluster more strongly relative to larger galaxies of the same stellar mass, as seen in the measurements shown in Fig.~\ref{fig:clustering_ratio_upshot}.
 }
 \label{fig:bt_censat}
 \end{figure}
