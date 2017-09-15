@@ -96,41 +96,16 @@ Some introduction goes here.
 \section{Data and Simulations}
 \label{sec:data}
 
-\subsection{Galaxy Sample and Measurements}
-\label{subsec:galaxydata}
-
-
 Our galaxy sample comes from the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. This catalog is based on Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS,][]{ahn_etal14}, with improvements to the photometry pipeline and light profile fitting methods \citep{vikram_etal10,bernardi_etal13,bernardi_etal14,meert_etal13}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile to determine the half-light radius $\rhalf.$ We apply the \citet{bell_etal03} mass-to-light ratio to the $r-$band flux and $g-r$ colors in this catalog to obtain an estimate for the total stellar mass $\mstar$ of every galaxy.
 
 We calculate two-point clustering $\wproj$ of our SDSS galaxy sample using line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. Our results in \S~\ref{sec:results} will give special focus on the dependence of $\wproj$ upon $\rhalf.$ We will quantify this dependence in terms of {\em clustering ratios} of ``large" vs. ``small" galaxies, defined according to whether composite galaxy size is above or below $\langle\rhalf\vert\mstar\rangle,$ computed as the median of a sliding stellar mass window with a width of $N_{\rm gal}=1000.$
 
+As the bedrock of our modeling, we use the catalog of {\tt Rockstar} subhalos identified at $z=0$ in the Bolshoi-Planck simulation \citep{klypin_etal11,behroozi12_rockstar,behroozi12_consistent_trees,riebe_etal13,rodriguez_puebla16_bolplanck}. the particular version of the catalog we use is made publicly available through {\tt Halotools} \citep{hearin_etal16}, with {\tt version\_name} = `halotools\_v0p4'. For mock galaxies, to compute galaxy clustering we employ the distant observer approximation by treating the simulation $z-$axis as the line-of-sight. We compute $\wproj$ using the {\tt mock\_observables.wp} function in {\tt Halotools}, which is a python implementation of the algorithm in the {\tt Corrfunc} C library \citep{sinha_etal17}. 
+
 All numerical values of $\rhalf$ will be quoted in $\kpc,$ and all values of $\mstar$ and $\mhalo$ in $\msun,$ assuming $H_0=67.8~\kms\equiv100h~\kms,$ the best-fit value from \citet{planck15}. To scale stellar masses to ``$h=1$ units" \citep{croton13}, our numerically quoted values for $\mstar$ should be multiplied by a factor of $h^2,$ while our halo masses and distances should be multiplied by a factor of $h.$
 
-\subsection{Simulation and Halos}
-\label{subsec:sim}
 
-{\tt Rockstar} subhalos identified at $z=0$ in the Bolshoi-Planck simulation are the basis of all our modeling.
-
-\subsection{Baseline Model and Mock Measurements}
-\label{subsec:baselinemock}
-
-\subsubsection{Mapping $\mstar$ \& $\sfr$ to halos}
-\label{subsubsec:umachine}
-
-The starting point of our model is the best-fit {\tt UniverseMachine} model \citep[][in prep]{behroozi_etal17}. This model maps stellar mass and star-formation rate to every halo and subhalo at each snapshot in the Bolshoi-Planck simulation. The stellar mass function, quenched fraction, SFR density, and SFR-dependent clustering are all accurately captured by this model from $z=0-10.$ The model we have developed in the present work does not depend in an essential way upon the {\tt UniverseMachine} model in particular; we only require some reasonably accurate starting point for the $\mstar$ and $\ssfr$ values mapped to simulated halos.
-
-\subsubsection{Mapping $\bt$ to halos}
-\label{subsubsec:random_bt_model}
-
-Our model for galaxy size is further predicated upon the mapping between dark matter halos and $\bt,$ the fraction of stellar mass in the bulge. In a companion paper to this work, we will present a separate empirical model for the $\bt-$halo connection. For our present purposes, we instead rely upon the simplest possible assumption for this connection that recovers the observed distribution $P(\bt\vert\mstar,\ssfr):$ we suppose that galaxy $\bt$ has no dependence whatsoever upon halo environment or assembly, beyond what is inherited by the mutual correlation between $\mstar, \ssfr$ and the cosmic web. That is, we map $\bt$ to dark matter halos by using the $\mstar$ and $\ssfr$ values from {\tt UniverseMachine} to randomly select the $\bt$ of a galaxy from our SDSS sample with a similar $\mstar$ and $\ssfr.$ The intuitive interpretation of this modeling choice is that we assume the morphology-density relation is entirely determined by the color-density relation.
-
-\subsection{Mock Measurements of Clustering and Lensing}
-\label{subsec:mock_measurements}
-
-For mock galaxies, to compute galaxy clustering we employ the distant observer approximation by treating the simulation $z-$axis as the line-of-sight. We compute $\wproj$ using the {\tt mock\_observables.wp} function in {\tt Halotools}, which is a python implementation of the algorithm in the {\tt Corrfunc} C library \citep{sinha_etal17}. We compute lensing $\Delta\Sigma$ using the {\tt mock\_observables.delta\_sigma} function in {\tt Halotools} to calculate the two-dimensional surface mass density of a random downsampling of $10^6$ dark matter particles in the snapshot.
-
-
-\section{Galaxy Profile Model}
+\section{Galaxy-Halo Model}
 \label{sec:model}
 
 Motivated by the \citet{kravtsov13} results, we model the half-mass radii of galaxies as separate power law functions of halo virial radius:
@@ -305,6 +280,8 @@ Motivated by these results, we show in the bottom panel of Fig.~\ref{fig:halospi
 \label{subsec:summary}
 
 \section*{Acknowledgments}
+
+APH thanks John Baker for the {\em Toejam \& Earl} soundtrack. 
 
 \bibliography{galsize_paper}
 
