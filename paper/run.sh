@@ -1,0 +1,11 @@
+pdflatex galsize_paper.tex
+rm galsize_paper.aux
+rm galsize_paper.log
+rm galsize_paper.bbl
+rm galsize_paper.blg
+pdflatex galsize_paper.tex
+bibtex galsize_paper.aux
+bibtex galsize_paper.aux
+pdflatex galsize_paper.tex
+pdflatex galsize_paper.tex
+open galsize_paper.pdf
