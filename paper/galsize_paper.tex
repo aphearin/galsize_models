@@ -170,7 +170,15 @@ The salient feature of the clustering ratio measurements is that they are negati
 \subsection{Origin of the size-dependence of galaxy clustering}
 \label{subsec:shuffle_tests}
 
-We can understand the origin of the shape of the clustering strength ratios shown in Figure~\ref{fig:clustering_ratio_upshot} through a series of straightforward ``shuffle tests". 
+We can understand the origin of the shape of the clustering strength ratios shown in Figure~\ref{fig:clustering_ratio_upshot} through a series of straightforward ``shuffle tests". The points with error bars and solid curves in each panel of Fig.\ref{fig:shuffle} are identical to those appearing in Fig.\ref{fig:clustering_ratio_upshot}, although the dynamic range of the y-axis has changed to accommodate the additional curves. 
+
+We generated each additional curve by variations on the following exercise. In logarithmic bins of $\mpeak$ with width of $0.1$dex, we randomly shuffle the modeled $\rhalf$ values of some particular subpopulation of model galaxies that reside in subhalos in the $\mpeak$ bin. After repeating this shuffle over the entire range of $\mpeak,$ we then re-divide model galaxies into ``large" and ``small" populations, and remeasure the clustering strength ratios. By shuffling sizes amongst different subpopulations, we can gain an understanding of the subhalo properties that contribute to the characteristic shape of the clustering ratios. 
+
+In the {\em brown, dotted} curves labeled ``all-gal scramble", we shuffle the sizes of {\em all} model galaxies in the $\mpeak$ bin, so that in the resulting mock, galaxy size has no correlation with any subhalo property beyond $\mpeak.$ In particular, the ``all-gal scramble" mock erases the possible influence of a correlation between galaxy size and the redshift at which the subhalo attains peak mass. The resulting clustering strength ratios become exactly as predicted by the naive expectation sketched at the conclusion of \S\ref{subsec:predictions}: $\rhalf\propto\rvir\propto\mhalo^{1/3},$ and so large galaxies clustering more strongly relative to small galaxies of comparable stellar mass. 
+
+Statistically, there are actually two distinct effects at work in the ``all-gal scramble".  Central and satellite galaxies of similar $\mpeak$ have their sizes shuffled amongst each other, and the potential influence of central galaxy assembly bias is also erased. We parse these separate effects by exploring three variations on the shuffle tests, described below. 
+
+For the {\em cyan dashed} curve labeled ``all-cen-scramble", we only shuffle sizes amongst present-day host halos, i.e., amongst subhalos for which Rockstar {\tt upid} equals -1. For the {\em black dashed} curve labeled ``true-cen-scramble", we only shuffle amongst host halos that have never passed within the virial radius of a larger halo throughout their entire assembly history, i.e., we only shuffle amongst non-backsplash host halos. Finally, the {\em purple dot-dashed} curve labeled ``sat-scramble", we only shuffle sizes amongst satellite galaxies, i.e., subhalos that are presently located inside the virial radius of a larger halo. 
 
 % shown in Figure \ref{fig:shuffle}. 
 
