@@ -36,10 +36,9 @@ def load_baseline_halocat(simname='bolplanck', redshift=0, fixed_seed=411):
 
     halocat.halo_table['halo_zpeak'] = 1./halocat.halo_table['halo_scale_factor_mpeak'] - 1.
 
-    rvir_peak_comoving_unity_h = halo_mass_to_halo_radius(halocat.halo_table['halo_mpeak'],
+    rvir_peak_physical_unity_h = halo_mass_to_halo_radius(halocat.halo_table['halo_mpeak'],
                                 halocat.cosmology, halocat.halo_table['halo_zpeak'], 'vir')
-    A = halocat.halo_table['halo_scale_factor_mpeak']/halocat.cosmology.h
-    rvir_peak_physical = A*rvir_peak_comoving_unity_h
+    rvir_peak_physical = rvir_peak_physical_unity_h/halocat.cosmology.h
     halocat.halo_table['halo_rvir_zpeak'] = rvir_peak_physical*1000.
 
     nhalos = len(halocat.halo_table)
