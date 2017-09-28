@@ -49,6 +49,7 @@
 \newcommand{\mvir}{M_{\rm vir}}
 \newcommand{\macc}{M_{\rm acc}}
 \newcommand{\mpeak}{M_{\rm peak}}
+\newcommand{\zpeak}{z_{\rm peak}}
 \newcommand{\mhalo}{M_{\rm halo}}
 \newcommand{\rvir}{R_{\rm vir}}
 \newcommand{\rmpeak}{R_{\rm M_{peak}}}
@@ -106,18 +107,29 @@ We calculate two-point clustering $\wproj$ of our SDSS galaxy sample using line-
 
 As the bedrock of our modeling, we use the catalog of {\tt Rockstar} subhalos identified at $z=0$ in the Bolshoi-Planck simulation \citep{klypin_etal11,behroozi12_rockstar,behroozi12_consistent_trees,riebe_etal13,rodriguez_puebla16_bolplanck}. the particular version of the catalog we use is made publicly available through {\tt Halotools} \citep{hearin_etal16}, with {\tt version\_name} = `halotools\_v0p4'. For mock galaxies, to compute galaxy clustering we employ the distant observer approximation by treating the simulation $z-$axis as the line-of-sight. We compute $\wproj$ using the {\tt mock\_observables.wp} function in {\tt Halotools}, which is a python implementation of the algorithm in the {\tt Corrfunc} C library \citep{sinha_etal17}. 
 
-All numerical values of $\rhalf$ will be quoted in $\kpc,$ and all values of $\mstar$ and $\mhalo$ in $\msun,$ assuming $H_0=67.8~\kms\equiv100h~\kms,$ the best-fit value from \citet{planck15}. To scale stellar masses to ``$h=1$ units" \citep{croton13}, our numerically quoted values for $\mstar$ should be multiplied by a factor of $h^2,$ while our halo masses and distances should be multiplied by a factor of $h.$
+All numerical values of $\rhalf$ will be quoted in physical $\kpc,$ and all values of $\mstar$ and $\mhalo$ in $\msun,$ assuming $H_0=67.8~\kms\equiv100h~\kms,$ the best-fit value from \citet{planck15}. To scale stellar masses to ``$h=1$ units" \citep{croton13}, our numerically quoted values for $\mstar$ should be multiplied by a factor of $h^2,$ while our halo masses and distances should be multiplied by a factor of $h.$
 
 
 \section{Galaxy-Halo Model}
 \label{sec:model}
 
+\subsection{Stellar mass model}
+\label{subsec:model}
+
 We map $\mstar$ onto subhalos with the best-fit stellar-to-halo mass relation from \citet{moster_etal13}:
 
-\begin{equation*}
+\begin{equation}
+\label{eq:smhm}
 \langle\mstar/\mhalo\rangle = 2N\left[(\mhalo/M_{1})^{-\beta} + (\mhalo/M_1)^{\gamma}\right]^{-1}.
-\end{equation*}
-For halo mass $\mhalo$ we use $\mpeak,$ the largest value of $\mvir$ ever attained along the main progenitor branch of the subhalo. The values of the best-fit parameters in \citet{moster_etal13} were fit to a stellar mass function (SMF) with values $\mstar^{\rm MPA-JHU}$ based on the MPA-JHU catalog \citep{kauffmann_etal03,brinchmann_etal04}, which differs from the SMF in our galaxy sample \citep[see, e.g.,][]{bernardi_etal14}. We account for this difference by manually tabulating the median value $\langle\mstar^{\rm Meert+15}\vert\mstar^{\rm MPA-JHU}\rangle$ in logarithmic bins spanning $9 < \log_{10}\mstar^{\rm MPA-JHU}/\msun < 12,$ and applying the median correction to the Monte Carlo realization of the mock galaxy sample. This results in a typical boost of $\sim0.25$ dex at $\mstar^{\rm MPA-JHU}\approx10^{9.75}\msun,$ and $\sim0.4$ dex at $\mstar^{\rm MPA-JHU}\approx10^{11.5}\msun.$ 
+\end{equation}
+For halo mass $\mhalo$ we use $\mpeak,$ the largest value of $\mvir$ ever attained along the main progenitor branch of the subhalo. 
+
+We additionally explore the potential existence of satellite galaxies that reside in subhalos that are not identified by halo-finder to the present day, so-called ``orphan galaxies" \citep[see, e.g.,][]{campbell_etal17}. We use an extension of {\tt Consistent Trees} that models the evolution of subhalos after disruption. The phase space evolution of orphans is approximated by following a point mass evolving in the host halo potential according to the orbital parameters of the subhalo at the time of disruption; the evolution of subhalo mass and circular velocity is approximated using the semi-analytic model presented in \citet{jiang_vdB14}.   
+
+The values of the best-fit parameters in \citet{moster_etal13} were fit to a stellar mass function (SMF) with values $\mstar^{\rm MPA-JHU}$ based on the MPA-JHU catalog \citep{kauffmann_etal03,brinchmann_etal04}, which differs from the SMF in our galaxy sample \citep[see, e.g.,][]{bernardi_etal14}. We account for this difference by manually tabulating the median value $\langle\mstar^{\rm Meert+15}\vert\mstar^{\rm MPA-JHU}\rangle$ in logarithmic bins spanning $9 < \log_{10}\mstar^{\rm MPA-JHU}/\msun < 12,$ and applying the median correction to the Monte Carlo realization of the mock galaxy sample. This results in a typical boost of $\sim0.25$ dex at $\mstar^{\rm MPA-JHU}\approx10^{9.75}\msun,$ and $\sim0.4$ dex at $\mstar^{\rm MPA-JHU}\approx10^{11.5}\msun.$ 
+
+\subsection{Galaxy size models}
+\label{subsec:model}
 
 In \citet{kravtsov13}, it was found that if a stellar-to-halo mass relation is inverted to map halo mass estimates $\mhalo$ onto SDSS galaxies, and then the $\mhalo-\rvir$ relation is applied to map values of $\rvir$ onto the galaxies, then the resulting $\rhalf-\rvir$ relation of SDSS galaxies exhibits the following linear scaling across a wide range of stellar mass:
 \beq
@@ -125,7 +137,20 @@ In \citet{kravtsov13}, it was found that if a stellar-to-halo mass relation is i
 \rhalf = 0.0125\rvir
 \eeq
 
-Motivated by the simplicity of this scaling relation, we transform the \citet{kravtsov13} into a forward model using {\tt Halotools}. For the virial radius of halos and subhalos, we use $\rmpeak,$ the value of $\rvir$ in physical units of $\kpc$ measured at the time of peak subhalo mass. When generating Monte Carlo realizations of our model galaxy sizes, we add log-normal scatter $\sigmarhalf=0.15$ dex.
+Motivated by the simplicity of this scaling relation, we transform the \citet{kravtsov13} into a forward model using {\tt Halotools}. For the virial radius of halos and subhalos, we use $\rmpeak,$ the value of $\rvir$ in physical units of $\kpc$ measured at the time of peak subhalo mass, defined by 
+
+\beq
+\mpeak\equiv\frac{4\pi}{3}\rmpeak^{3}\Delta_{\rm vir}(\zpeak)\rho_{\rm m}(\zpeak)
+\eeq
+
+When generating Monte Carlo realizations of our model galaxy sizes, we add log-normal scatter $\sigmarhalf=0.2$ dex. For some models explored in this work, this scatter will be purely stochastic, while other models will introduce a correlation between the scatter and an additional halo property. Models employing correlated scatter are implemented using the {\tt halotools.empirical\_models.conditional\_abunmatch} function, which generalizes the Conditional Abundance Matching technique described in \citet{hearin_etal13b}. 
+
+We will also consider models for galaxy size in which stellar mass is stripped from satellite galaxies after infall. The basis of this class of models is the fitting function presented in \citet{smith_etal16}, which was calibrated by studying stellar mass loss in a suite of high-resolution hydrodynamical simulations. In this model, $f_{\ast}$ quantifies the fraction of stellar mass lost as a function of $f_{\rm DM},$ the amount of dark matter that has been stripped since infall:
+
+\beq
+f_{\ast} = 1 - \exp(-14.2f_{\rm DM})
+\eeq
+For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the peak mass, $M_{\rm vir}/M_{\rm peak}.$ If we denote the post-stripping stellar mass as $M_{\ast}',$ then we have $M_{\ast}'\equiv f_{\ast}M_{\ast},$ where $M_{\ast}$ is given by Eq.~\ref{eq:smhm}. We then calculate the post-stripping radius by interpolating $\langle\rhalf'\vert\mstar'\rangle$ directly from SDSS data. 
 
 \section{Results}
 \label{sec:results}
