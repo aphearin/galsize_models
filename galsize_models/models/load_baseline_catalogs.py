@@ -54,23 +54,35 @@ def load_baseline_halocat(simname='bolplanck', redshift=0, fixed_seed=411):
 
 
 def moster13_based_mock(halocat=None, keys_to_keep=moster13_halocat_keys,
-            scatter_ordinates=(0.4, 0.3, 0.5), **moster13_params):
+            scatter_ordinates=(0.4, 0.3, 0.5), mpeak_key='halo_mpeak',
+            zpeak_key='halo_zpeak', **moster13_params):
     """
     """
     if halocat is None:
         halocat = load_baseline_halocat()
+    else:
+        rvir_peak_physical_unity_h = halo_mass_to_halo_radius(halocat.halo_table[mpeak_key],
+                                    halocat.cosmology, halocat.halo_table[zpeak_key], 'vir')
+        rvir_peak_physical = rvir_peak_physical_unity_h/halocat.cosmology.h
+        halocat.halo_table['halo_rvir_zpeak'] = rvir_peak_physical*1000.
+
 
     model = Moster13SmHm()
     model.param_dict.update(moster13_params)
 
     mean_mstar_unity_h = model.mean_stellar_mass(
-            prim_haloprop=halocat.halo_table['halo_mpeak'],
-            redshift=halocat.halo_table['halo_zpeak'])
+            prim_haloprop=halocat.halo_table[mpeak_key],
+            redshift=halocat.halo_table[zpeak_key])
 
     mean_mstar = mean_mstar_unity_h/halocat.cosmology.h/halocat.cosmology.h
     mean_logmstar = np.log10(mean_mstar)
 
-    mc_logmstar = norm.isf(1-halocat.halo_table['halo_uran'], loc=mean_logmstar,
+    try:
+        uran = halocat.halo_table['halo_uran']
+    except KeyError:
+        uran = np.random.rand(len(halocat.halo_table))
+
+    mc_logmstar = norm.isf(1-uran, loc=mean_logmstar,
             scale=model.param_dict[u'scatter_model_param1'])
 
     #  Apply M* correction to account for Meert+15 photometry differences
