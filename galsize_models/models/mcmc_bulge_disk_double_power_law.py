@@ -9,7 +9,10 @@ from ..measurements.sdss_covariance import sdss_measurements_and_cov, logsm_bins
 from ..models.load_baseline_catalogs import load_umachine_mock
 
 
-mock = load_umachine_mock()
+try:
+    mock = load_umachine_mock()
+except:
+    pass
 
 sdss_data_vector, sdss_cov = sdss_measurements_and_cov()
 sdss_invcov = np.linalg.inv(sdss_cov)
@@ -29,4 +32,7 @@ def lnprob(params, observations, icov, mock, logsm_bins):
         return lnlike(params, observations, icov, mock, logsm_bins) + prior
 
 
-lnprob_args = tuple((sdss_data_vector, sdss_invcov, mock, logsm_bins))
+try:
+    lnprob_args = tuple((sdss_data_vector, sdss_invcov, mock, logsm_bins))
+except:
+    pass
