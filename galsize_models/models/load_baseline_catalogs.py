@@ -1,5 +1,6 @@
 """
 """
+import os
 import numpy as np
 from scipy.stats import norm
 from halotools.empirical_models import Moster13SmHm
@@ -16,7 +17,8 @@ from .random_bt_assignment import value_add_random_bt
 from ..measurements import load_umachine_sdss_with_meert15
 
 
-__all__ = ('moster13_based_mock', 'load_umachine_mock', 'load_baseline_halocat')
+__all__ = ('moster13_based_mock', 'load_umachine_mock', 'load_baseline_halocat',
+        'load_orphan_mock')
 
 default_umachine_galprops = list((
     'sm', 'sfr', 'obs_sm', 'obs_sfr', 'icl', 'halo_id', 'upid',
@@ -136,3 +138,42 @@ def load_umachine_mock(galprops=default_umachine_galprops, Lbox=250):
     sdss = full_sdss[mask]
 
     return value_add_random_bt(mock, sdss)
+
+
+def load_orphan_mock():
+
+    dirname = "/Users/aphearin/work/sims/bolplanck/orphan_catalog_z0"
+    basename = "cross_matched_orphan_catalog.hdf5"
+
+    halo_table = Table.read(os.path.join(dirname, basename), path='data')
+
+    halo_table['vmax_at_mpeak_percentile'] = np.load(
+        os.path.join(dirname, 'vmax_percentile.npy'))
+
+    halo_table['zpeak'] = 1./halo_table['mpeak_scale']-1.
+
+    class HaloCatalog(object):
+        def __init__(self, halo_table):
+            self.halo_table = halo_table
+            self.cosmology = Planck15
+            for key in self.halo_table.keys():
+                if key[:5] != 'halo_':
+                    halo_table.rename_column(key, 'halo_'+key)
+
+    halocat = HaloCatalog(halo_table)
+
+    from galsize_models.models import moster13_based_mock
+
+    keys_to_keep=list(halocat.halo_table.keys())
+    keys_to_keep.append('halo_rvir_zpeak')
+
+    mock = moster13_based_mock(halocat=halocat, mpeak_key='halo_mpeak', zpeak_key='halo_zpeak',
+                              keys_to_keep=keys_to_keep)
+
+    from halotools.empirical_models import noisy_percentile
+
+    mock['noisy_vmax_at_mpeak_percentile'] = noisy_percentile(
+        mock['vmax_at_mpeak_percentile'], 0.5)
+
+    return mock
+
