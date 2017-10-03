@@ -49,11 +49,15 @@
 \newcommand{\mvir}{M_{\rm vir}}
 \newcommand{\macc}{M_{\rm acc}}
 \newcommand{\mpeak}{M_{\rm peak}}
-\newcommand{\zpeak}{z_{\rm peak}}
+\newcommand{\zpeak}{z_{M_{\rm peak}}}
 \newcommand{\mhalo}{M_{\rm halo}}
 \newcommand{\rvir}{R_{\rm vir}}
 \newcommand{\rmpeak}{R_{\rm M_{peak}}}
 \newcommand{\vmaxmpeak}{V_{\rm peak}}
+\newcommand{\vmax}{V_{\rm max}}
+\newcommand{\rspeak}{{R_{\rm s,}}_{\rm M_{peak}}}
+
+
 
 %%%%%%%%  observations  %%%%%%%%
 \newcommand{\rproj}{r_{\rm p}}
@@ -76,8 +80,8 @@
 
 \begin{document}
 
-\title[On the Galaxy Size-Halo Connection]
-{Empirical Modeling Constraints on the Galaxy Size-Halo Connection}
+\title[Forward Modeling Galaxy Size]
+{Forward Modeling Galaxy Size in a Cosmological Context}
 
 
 \author[Hearin, Behroozi, Kravtsov \& Moster]{
@@ -91,7 +95,7 @@ $^{4}$Universit{\"a}ts-Sternwarte, Ludwig-Maximilians-Universit{\"a}t M{\"u}nche
 \maketitle
 
 \begin{abstract}
-We derive empirical modeling constraints on the connection between dark matter halos and the half-light radius of galaxies, $\rhalf.$ Novel to this work, we study galaxy size using new SDSS measurements of the $\rhalf-$dependence of galaxy clustering. Smaller galaxies cluster stronger relative to larger galaxies of the same stellar mass, a new result. We use {\tt Halotools} to test a collection of forward models of galaxy size to identify the qualitative ingredients needed to reproduce the observed clustering. We show that the $\rhalf-$dependence of galaxy clustering is largely driven by centrals being larger than satellite galaxies of the same halo mass. Models in which $\rhalf$ is determined by stellar mass $\mstar$ exhibit qualitatively discrepant clustering properties from SDSS galaxies. Models where $\rhalf$ is linearly proportional to halo virial radius $\rvir$ at the time of peak halo mass are much more successful, provided that scatter in $\rhalf$ is strongly correlated with the halo scale radius $R_{\rm s}$ at that time. Together with the result that stellar mass stripping of satellites has only a mild impact on $\rhalf-$dependent clustering, this suggests that the relative size of centrals and satellites is already in place at the time of satellite infall, and supports the notion that $L_{\ast}$ galaxy and halo profiles co-evolve across many Gyr of cosmic time. 
+We derive empirical modeling constraints on the connection between dark matter halos and the half-light radius of galaxies, $\rhalf.$ Novel to this work, we study galaxy size using new SDSS measurements of the $\rhalf-$dependence of galaxy clustering. Smaller galaxies cluster stronger relative to larger galaxies of the same stellar mass, a new result. We use {\tt Halotools} to test a collection of forward models of galaxy size to identify the qualitative ingredients needed to reproduce the observed clustering. We show that the $\rhalf-$dependence of galaxy clustering is largely driven by centrals being larger than satellite galaxies of the same halo mass. Models in which $\rhalf$ is determined by stellar mass $\mstar$ exhibit qualitatively discrepant clustering properties from SDSS galaxies. Models where $\rhalf$ is linearly proportional to halo virial radius $\rvir$ at the time of peak halo mass are much more successful, provided that scatter in $\rhalf$ is significantly correlated with the halo scale radius $R_{\rm s}$ at that time. Together with the result that stellar mass stripping of satellites has only a mild impact on $\rhalf-$dependent clustering, this suggests that the relative size of centrals and satellites is already in place at the time of satellite infall, and supports the notion that $L_{\ast}$ galaxy and halo profiles co-evolve across many Gyr of cosmic time. 
 %Our results can be treated as a boundary condition for more complex and fine-grained models of galaxy size, and provide a simple means for cosmological surveys to generate synthetic galaxy populations with realistic sizes across the cosmic web.
 \end{abstract}
 
@@ -117,7 +121,7 @@ All numerical values of $\rhalf$ will be quoted in physical $\kpc,$ and all valu
 \label{sec:model}
 
 \subsection{Stellar mass model}
-\label{subsec:model}
+\label{subsec:smhm}
 
 We map $\mstar$ onto subhalos with the best-fit stellar-to-halo mass relation from \citet{moster_etal13}:
 
@@ -135,8 +139,13 @@ The values of the best-fit parameters in \citet{moster_etal13} were fit to a ste
 In \S\ref{sec:results}, we calculate predictions for the $\rhalf-$dependence of galaxy clustering for several different kinds of empirical models, described in turn below.
 
 
-\subsubsection{K13 model}
-\label{subsubsec:k13model}
+\subsubsection{$\mstar-$only model}
+\label{subsubsec:mstaronlymodel}
+
+In the first class of models we explore, we suppose that stellar mass $\mstar$ is the statistical regulator of $\rhalf,$ so that galaxy sizes are drawn from a log-normal distribution centered at $\langle\rhalf\vert\mstar\rangle,$ where $\mstar$ derives from the \citet{moster_etal13} relation described above in \S\ref{subsec:smhm}. To implement this model, for simplicity we directly tabulate $\langle\rhalf\vert\mstar\rangle$ from the data, rather than pursue a parametric form \citep[see, e.g.,][]{zhang_yang17}. 
+
+\subsubsection{$\rvir-$only model}
+\label{subsubsec:rvirmodel}
 
 In \citet{kravtsov13}, it was found that if a stellar-to-halo mass relation is inverted to map halo mass estimates $\mhalo$ onto SDSS galaxies, and then the $\mhalo-\rvir$ relation is applied to map values of $\rvir$ onto the galaxies, then the resulting $\rhalf-\rvir$ relation of SDSS galaxies exhibits the following linear scaling across a wide range of stellar mass:
 \beq
@@ -147,19 +156,32 @@ In \citet{kravtsov13}, it was found that if a stellar-to-halo mass relation is i
 Motivated by the simplicity of this scaling relation, we transform the \citet{kravtsov13} into a forward model using {\tt Halotools}. For the virial radius of halos and subhalos, we use $\rmpeak,$ the value of $\rvir$ in physical units of $\kpc$ measured at the time of peak subhalo mass, defined by 
 
 \beq
-\mpeak\equiv\frac{4\pi}{3}\rmpeak^{3}\Delta_{\rm vir}(\zpeak)\rho_{\rm m}(\zpeak)
+\mpeak\equiv\frac{4\pi}{3}\rmpeak^{3}\Delta_{\rm vir}(\zpeak)\rho_{\rm m}(\zpeak), 
 \eeq
-When generating predictions for the K13 model galaxy sizes, we add uncorrelated log-normal scatter of $\sigmarhalf=0.2$ dex to generate a Monto Carlo realization of the model population. 
+where for $\Delta_{\rm vir}(\zpeak)$ we use the fitting function to the ``virial" definition used in \citet{bryan_norman98}. For the model we refer to as the ``$\rvir-$only model", we add uncorrelated log-normal scatter of $\sigmarhalf=0.2$ dex to generate a Monto Carlo realization of the model population. 
 
-\subsubsection{K13 + co-evolution model}
+\subsubsection{Profile co-evolution model}
 \label{subsubsec:coevolutionmodel}
 
-The {\em K13 + co-evolution model} model is identical to K13, but the scatter in $\rhalf$ at fixed $\rmpeak$ is no longer purely stochastic, but is instead correlated with $\vmaxmpeak.$ We implement scatter correlations using the {\tt halotools.empirical\_models.conditional\_abunmatch} function, which generalizes the Conditional Abundance Matching technique described in \citet{hearin_etal13b}. 
+The ``profile co-evolution" model is identical to the $\rvir-$only model, but the scatter in $\rhalf$ at fixed $\rmpeak$ is no longer purely stochastic, and is instead correlated with $\vmaxmpeak,$ defined as the value of $\vmax$ at $\zpeak.$ In this way, $\rmpeak$ statistically determines the distribution of available sizes, but halos with extended dark matter profiles and large scale radii $R_{\rm s}$ host galaxies with above-average sizes, while halos with small $R_{\rm s}$ host smaller galaxies. See Figure \ref{fig:coevolutionmodel} for a visual illustration of this residual correlation. We implement scatter correlations using the {\tt halotools.empirical\_models.conditional\_abunmatch} function, which generalizes the Conditional Abundance Matching technique described in \citet{hearin_etal13b}. 
 
-\subsubsection{K13 + stripping model}
+%---------------------------------------------------------------------------------------------------
+\begin{figure}
+\centering
+\includegraphics[width=8cm]{FIGS/rs_correlation_visual.pdf}
+\caption{
+{\bf Profile co-evolution model.} In this model, the log-normal distribution of galaxy sizes is determined by $\rmpeak,$ the physical size of the halo virial radius at the time the halo reaches its peak mass. Thus log-normal the shape of this curve is determined by $\langle\rhalf\vert\rmpeak\rangle=0.0125\rmpeak$ with $0.2$ dex of scatter. The profile co-evolution model further supposes that galaxy and halo profiles co-evolve across cosmic time. Thus within this log-normal distribution, for two halos with the same $\rmpeak,$ halos with larger scale radius at $\zpeak$ will host galaxies with above-average $\rhalf,$ and conversely for halos with smaller values of $\rspeak.$ 
+}
+\label{fig:coevolutionmodel}
+\end{figure}
+%-----------------------------------------------------------------------------------------------------
+
+\subsubsection{$\mstar-$stripping model}
 \label{subsubsec:strippingmodel}
 
-We will also consider models for galaxy size in which stellar mass is stripped from satellite galaxies after infall. The basis of this class of models is the fitting function presented in \citet{smith_etal16}, which was calibrated by studying stellar mass loss in a suite of high-resolution hydrodynamical simulations. In this model, $f_{\ast}$ quantifies the fraction of stellar mass lost as a function of $f_{\rm DM},$ the amount of dark matter that has been stripped since infall:
+As we will show in \S\ref{sec:results}, the chief ingredient needed to recover the observed clustering properties of galaxies is that satellites need to be smaller than centrals of comparable halo mass. Thus it is natural to consider a class of models in which stellar mass is stripped from satellite galaxies after infall. 
+
+The basis of this class of models is the fitting function presented in \citet{smith_etal16}, which was calibrated by studying stellar mass loss in a suite of high-resolution hydrodynamical simulations. In this model, $f_{\ast}$ quantifies the fraction of stellar mass lost as a function of $f_{\rm DM},$ the amount of dark matter that has been stripped since infall:
 
 \beq
 f_{\ast} = 1 - \exp(-14.2f_{\rm DM})
@@ -174,15 +196,13 @@ In \S\ref{subsec:predictions} we show comparisons between the galaxy size models
 \subsection{Testing Model Predictions}
 \label{subsec:predictions}
 
-In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ with $\mstar.$ Scattered gray points show the scaling relation for our SDSS galaxy sample, while the black curve shows the median relation $\langle\rhalf\vert\mstar\rangle$ implied by the K13 model described in \S\ref{sec:model}.
+In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ with $\mstar.$ The black curve enveloped by the gray bands show the scaling relation for our SDSS galaxy sample, while the blue curve shows the median relation $\langle\rhalf\vert\mstar\rangle$ implied by the profile co-evolution model described in \S\ref{sec:model}. This figure shows that models in which $\rhalf\propto\rvir$ can naturally give rise to the characteristic curvature in the $\langle\rhalf\vert\mstar\rangle$ relation, confirming the results in \citet{kravtsov13} in a forward modeling context. 
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
 \includegraphics[width=8cm]{FIGS/rhalf_vs_mstar_fiducial_model.pdf}
-\caption{
-{\bf One-point data used to fit the fiducial model.}
-Scattered points show the $\rhalf-\mstar$ relation for SDSS galaxies as measured in \citet{meert_etal15}. The black curve shows the median $\rhalf-\mstar$ relation implied by the model described in \S\ref{sec:model}, in which $\rhalf=0.0125\rvir.$ This figure confirms the findings in \citet{kravtsov13} that a linear relationship between $\rvir$ and $\rhalf,$ convolved against the nonlinear relationships between $\rvir, \mhalo$ and $\mstar,$ correctly predicts the characteristic curvature in the relation $\langle\rhalf\vert\mstar\rangle$ over a wide range in stellar mass.
+\caption{The black curve shows the median $\rhalf-\mstar$ relation SDSS galaxies as measured in \citet{meert_etal15}. The two gray bands enveloping the black curve show the $50\%$ and $90\%$ percentile regions. The blue curve shows profile co-evolution model in which $\langle\rhalf\vert\rvir\rangle=0.0125\rvir,$ as in \citet{kravtsov13}. This figure confirms that a linear relationship between $\rvir$ and $\rhalf,$ convolved against the nonlinear relationships between $\rvir, \mhalo$ and $\mstar,$  predicts the characteristic curvature in the relation $\langle\rhalf\vert\mstar\rangle$ over a wide range in mass.
 }
 \label{fig:scatter_plot}
 \end{figure}
@@ -254,16 +274,6 @@ Here we compare our fiducial model, \dots
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
-%---------------------------------------------------------------------------------------------------
-\begin{figure}
-\centering
-\includegraphics[width=8cm]{FIGS/rs_correlation_visual.pdf}
-\caption{
-{\bf Illustration of galaxy \& halo profile co-evolution.}
-}
-\label{fig:coevolution}
-\end{figure}
-%-----------------------------------------------------------------------------------------------------
 
 %Figure~\ref{fig:satellites} compares the clustering ratios of our fiducial model (solid curves) to the clustering ratios of this alternative model (dashed curves). The difference between the small-scale clustering of the two models is stark: the assumption that $\rhalf$ decreases after infall leaves a strong imprint on the $\rhalf-$dependence of $\wproj(\rproj),$ such that small galaxies cluster {\em much} more strongly relative to large galaxies, particularly for disk-dominated systems with $\mstar\approx10^{10}\msun.$
 
