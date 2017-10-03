@@ -191,11 +191,6 @@ For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the pea
 \section{Results}
 \label{sec:results}
 
-In \S\ref{subsec:predictions} we show comparisons between the galaxy size models described in \S\ref{sec:model} and our SDSS sample. 
-
-\subsection{Testing Model Predictions}
-\label{subsec:predictions}
-
 In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ with $\mstar.$ The black curve enveloped by the gray bands show the scaling relation for our SDSS galaxy sample, while the blue curve shows the median relation $\langle\rhalf\vert\mstar\rangle$ implied by the profile co-evolution model described in \S\ref{sec:model}. This figure shows that models in which $\rhalf\propto\rvir$ can naturally give rise to the characteristic curvature in the $\langle\rhalf\vert\mstar\rangle$ relation, confirming the results in \citet{kravtsov13} in a forward modeling context. 
 
 %---------------------------------------------------------------------------------------------------
@@ -210,7 +205,7 @@ In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ wit
 
 In Figure \ref{fig:clustering_ratio_upshot} we present new measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj(\rproj).$ Because galaxy clustering has well-known dependence upon $\mstar$ that is not the subject of this work, we wish to remove this influence and focus purely on the relationship between $\rhalf$ and $\wproj(\rproj).$ To do so, we determine the value $\langle\rhalf\vert\mstar\rangle$ by computing a sliding median of $\rhalf,$ calculated using a window of width $N_{\rm gal}=1000.$ Each galaxy is categorized as either ``large" or ``small" according to whether it is above or below the median value appropriate for its stellar mass. For any $\mstar-$threshold sample, the SMF of the ``large" and ``small" subsamples are identical, by construction. 
 
-We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds, $\mstar>10^{9.75}\msun,$ $\mstar>10^{10.25}\msun,$ $\mstar>10^{10.75}\msun,$ and $\mstar>10^{11.25}\msun.$ We make the same measurements for each volume-limited $\mstar-$threshold sample {\em without} splitting on size, giving us measurements $\wpall, \wplarge,$ and $\wpsmall$ for each threshold sample. This allow us to compute the ratio $(\wplarge-\wpsmall)/\wpall,$ which we refer to as {\em the $\rhalf$ clustering ratio}. These ratios are the measurements appearing on the y-axis in each panel of Figure \ref{fig:clustering_ratio_upshot}. Points with error bars show SDSS measurements, solid curves show the clustering ratios of model galaxies as predicted by the models described in \S\ref{sec:model}. 
+We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds, $\mstar>10^{9.75}\msun,$ $\mstar>10^{10.25}\msun,$ $\mstar>10^{10.75}\msun,$ and $\mstar>10^{11.25}\msun.$ We make the same measurements for each volume-limited $\mstar-$threshold sample {\em without} splitting on size, giving us measurements $\wpall, \wplarge,$ and $\wpsmall$ for each threshold sample. This allow us to compute the ratio $(\wplarge-\wpsmall)/\wpall,$ which we refer to as {\em the $\rhalf$ clustering ratio}. These ratios are the measurements appearing on the y-axis in each panel of Figure \ref{fig:clustering_ratio_upshot}. Points with jackknife-estimated error bars show SDSS measurements, solid curves show the clustering ratios of model galaxies as predicted by the models described in \S\ref{sec:model}. 
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
@@ -227,15 +222,12 @@ The salient feature of the clustering ratio measurements is that they are negati
 
 A straightforward resolution to this puzzle is shown in Figure \ref{fig:censatsizehist}. 
 
-\subsection{Origin of the size-dependence of galaxy clustering}
-\label{subsec:shuffle_tests}
-
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
 \includegraphics[width=8cm]{FIGS/cen_sat_sizes.pdf}
 \caption{
-{\bf Relative sizes of centrals and satellites.} In a narrow bin of halo mass $\mhalo=\mpeak\approx10^{12}\msun,$ we show the distribution of model galaxy sizes for different subpopulations galaxies. The red histogram shows the sizes of satellites; the blue histogram shows host halos that have never passed inside the virial radius of a larger halo (``true centrals"); the green histogram host halos that were subhalos inside a larger at some point in their past history (``splashback halos"). In the fiducial model, galaxy size is set by the physical size of the virial radius at the time the (sub)halo attains its peak mass, naturally resulting in smaller sizes for satellites and backsplash centrals relative to true centrals of the same $\mpeak.$
+{\bf Relative sizes of centrals and satellites.} In a narrow bin of halo mass $\mhalo=\mpeak\approx10^{12}\msun,$ we show the distribution of model galaxy sizes for different subpopulations galaxies, as predicted by the $\rvir-$only model. The red histogram shows the sizes of satellites; the blue histogram shows host halos that have never passed inside the virial radius of a larger halo (``true centrals"); the green histogram host halos that were subhalos inside a larger at some point in their past history (``splashback halos"). In the $\rvir-$only model, galaxy size is set by the {\em physical} size of the virial radius at the time the halo attains its peak mass, naturally resulting in smaller sizes for satellites and backsplash centrals relative to true centrals of the same $\mpeak.$ The central/satellite size differences shown here are not enough to correctly predict the observed clustering ratios (see Figure \ref{fig:clustering_ratio_upshot}), motivating the $\mstar-$stripping and profile co-evolution models. 
 }
 \label{fig:censatsizehist}
 \end{figure}
