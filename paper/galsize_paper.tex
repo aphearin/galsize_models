@@ -96,7 +96,6 @@ $^{4}$Universit{\"a}ts-Sternwarte, Ludwig-Maximilians-Universit{\"a}t M{\"u}nche
 
 \begin{abstract}
 We derive empirical modeling constraints on the connection between dark matter halos and the half-light radius of galaxies, $\rhalf.$ Novel to this work, we study galaxy size using new SDSS measurements of the $\rhalf-$dependence of galaxy clustering. Smaller galaxies cluster stronger relative to larger galaxies of the same stellar mass, a new result. We use {\tt Halotools} to test a collection of forward models of galaxy size to identify the qualitative ingredients needed to reproduce the observed clustering. We show that the $\rhalf-$dependence of galaxy clustering is largely driven by centrals being larger than satellite galaxies of the same halo mass. Models in which $\rhalf$ is determined by stellar mass $\mstar$ exhibit qualitatively discrepant clustering properties from SDSS galaxies. Models where $\rhalf$ is linearly proportional to halo virial radius $\rvir$ at the time of peak halo mass are much more successful, provided that scatter in $\rhalf$ is significantly correlated with the halo scale radius $R_{\rm s}$ at that time. Together with the result that stellar mass stripping of satellites has only a mild impact on $\rhalf-$dependent clustering, this suggests that the relative size of centrals and satellites is already in place at the time of satellite infall, and supports the notion that $L_{\ast}$ galaxy and halo profiles co-evolve across many Gyr of cosmic time. 
-%Our results can be treated as a boundary condition for more complex and fine-grained models of galaxy size, and provide a simple means for cosmological surveys to generate synthetic galaxy populations with realistic sizes across the cosmic web.
 \end{abstract}
 
 \section{Introduction}
@@ -275,10 +274,6 @@ In forward modeling, the direction of inference is turned around: a mapping is i
 
 Backward modeling the galaxy-halo connection is useful for generating hypotheses and motivating functional forms. Forward modeling becomes necessary when the problem at hand becomes encumbered by multiple relevant variables, as is the case with galaxy size. Forward modeling also makes it possible to conduct rigorous Bayesian inference, which we consider to be the next natural step in the progression described here (see \S\ref{subsec:future} for further discussion).  
 
-\subsection{Empirical Modeling $\rhalf:$ advantages and limitations}
-\label{subsec:empirical_modeling}
-
-
 \subsection{Implications for Satellite Mass Loss}
 \label{subsec:satellite_discussion}
 
@@ -289,12 +284,22 @@ Backward modeling the galaxy-halo connection is useful for generating hypotheses
 \section{Conclusions}
 \label{sec:conclusion}
 
-\subsection{Summary}
-\label{subsec:summary}
+We have presented new measurements of the dependence of galaxy clustering upon galaxy size, and used {\tt Halotools} to identify the basic ingredients that influence the signal. We conclude with a brief summary of our primary findings:
+
+\ben
+\item Small galaxies clustering more strongly than large galaxies of the same stellar mass, a new result. Differences between the clustering of small and large galaxies increase on scales $R\lesssim1\mpc,$ and decrease with stellar mass. 
+\item The most important ingredient influencing this signal is the relative size of central and satellite galaxies. The magnitude, scale-dependence, and $\mstar-$dependence of $\rhalf-$dependent clustering provides strong evidence that satellite galaxies are smaller than central galaxies of the same halo mass. 
+\item Simple empirical models in which $\rhalf$ is regulated by $\mstar,$ rather than $\mhalo,$ are grossly discrepant with the observed clustering signal. 
+\item The ``co-evolution model" shown with solid curves in Figure \ref{fig:clustering_ratio_upshot} exhibits a clustering signal that is strikingly similar to that seen in SDSS. In this model, $\rhalf$ is statistically regulated by $\rmpeak,$ the halo virial radius $\rvir$ at the time of peak halo mass, with strong residual correlation with $\rspeak,$ the halo scale radius at that time. The success of this model supports the notion that galaxy and halo profiles co-evolve across many Gyr of cosmic time.
+\een
+
+Our results can be treated as a boundary condition for more complex and fine-grained models of galaxy size, such as semi-analytic models and hydrodynamical simulations. We view the present work as a pilot study that motivates a Bayesian inference program to tightly constrain the galaxy size-halo connection with forward modeling techniques, in direct analogy to the literature on the stellar-to-halo-mass relation. Our publicly available code provides a simple means for cosmological surveys to generate synthetic galaxy populations with realistic sizes across the cosmic web.
 
 \section*{Acknowledgments}
 
-APH thanks John Baker for the {\em Toejam \& Earl} soundtrack. 
+APH thanks John Baker for the {\em Toejam \& Earl} soundtrack. Thanks also to Frank van den Bosch, Doug Watson, and Risa Wechsler for thoughtful feedback at various stages of the development of this work. 
+
+This research was supported in part by the National Science Foundation under Grant No. NSF PHY11-25915. Work done at Argonne National Laboratory was supported under the DOE contract DE-AC02-06CH11357.
 
 \bibliography{galsize_paper}
 
