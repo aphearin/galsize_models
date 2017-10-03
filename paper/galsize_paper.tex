@@ -203,6 +203,9 @@ In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ wit
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
+\subsection{Size-Dependent Clustering}
+\label{subsec:clustering_results}
+
 In Figure \ref{fig:clustering_ratio_upshot} we present new measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj(\rproj).$ Because galaxy clustering has well-known dependence upon $\mstar$ that is not the subject of this work, we wish to remove this influence and focus purely on the relationship between $\rhalf$ and $\wproj(\rproj).$ To do so, we determine the value $\langle\rhalf\vert\mstar\rangle$ by computing a sliding median of $\rhalf,$ calculated using a window of width $N_{\rm gal}=1000.$ Each galaxy is categorized as either ``large" or ``small" according to whether it is above or below the median value appropriate for its stellar mass. Using this technique, we stress that for any $\mstar-$threshold sample, the SMF of the ``large" and ``small" subsamples are identical, by construction. 
 
 We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds, $\mstar>10^{9.75}\msun,$ $\mstar>10^{10.25}\msun,$ $\mstar>10^{10.75}\msun,$ and $\mstar>10^{11.25}\msun.$ We make the same measurements for each volume-limited $\mstar-$threshold sample {\em without} splitting on size, giving us measurements $\wpall, \wplarge,$ and $\wpsmall$ for each threshold sample. This allow us to compute the ratio $(\wplarge-\wpsmall)/\wpall,$ which we refer to as {\em the $\rhalf$ clustering ratio}. These ratios are the measurements appearing on the y-axis in each panel of Figure \ref{fig:clustering_ratio_upshot}. Points with jackknife-estimated error bars show SDSS measurements, solid curves show the clustering ratios of model galaxies as predicted by the models described in \S\ref{sec:model}. 
@@ -220,7 +223,10 @@ Points with error bars show new SDSS measurements of the $\rhalf-$dependence of 
 
 The salient feature of the clustering ratio measurements is that they are negative: small galaxies cluster more strongly than large galaxies of the same stellar mass, a new result. This feature also holds true for galaxies predicted by the $\rvir-$only model. This result may be surprising, since $\rhalf\propto\rvir,$ halo mass $\rvir\propto\mhalo^{1/3},$ and clustering strength increases with $\mvir.$ Based on this simple argument, one would expect the opposite trend to the measurements shown here. 
 
-A straightforward resolution to this puzzle is shown in Figure \ref{fig:censatsizehist}, which compares the $\rhalf$ distributions of central, satellite, and splashback galaxies with the same halo mass $\mpeak\approx10^{12}\msun.$ A ``splashback" galaxy is defined as a present-day central that used to be a satellite, i.e., its main progenitor halo passed inside the virial radius of a larger halo at some point in its past history. On the other hand, we define a ``true central" as a galaxy that has never been a satellite. 
+\subsection{Central vs. Satellite Sizes}
+\label{subsec:censat_sizes}
+
+A straightforward resolution to the above puzzle is shown in Figure \ref{fig:censatsizehist}, which compares the $\rhalf$ distributions of central, satellite, and splashback galaxies with the same halo mass $\mpeak\approx10^{12}\msun.$ A ``splashback" galaxy is defined as a present-day central that used to be a satellite, i.e., its main progenitor halo passed inside the virial radius of a larger halo at some point in its past history. On the other hand, we define a ``true central" as a galaxy that has never been a satellite. 
 
 In the $\rvir-$only model, satellite and splashback galaxies are smaller than centrals of the same halo mass due to the physical size of their halo being smaller at earlier times $\zpeak.$ There are two distinct reasons why this feature results in small galaxies being more strongly clustered relative to larger galaxies of the same mass. First, satellite galaxies statistically occupy higher mass host halos that are more strongly clustered. In models where satellites are smaller than centrals, for any given $\mstar-$threshold the ``small" subsample will naturally have a higher satellite fraction, resulting in a negative clustering ratio as seen in SDSS data. Second, at fixed mass, halos of $L_\ast$ galaxies that form earlier are more strongly clustered, a phenomenon commonly known as {\em halo assembly bias}. Since splashback halos are typically earlier forming than true centrals, then models where splashback halos host smaller-than-average galaxies will naturally predict negative clustering ratios. 
 
@@ -228,6 +234,14 @@ In the $\mstar-$only model, in which $\rhalf$ is statistically set by present-da
 
 Much more successful is the profile co-evolution model shown with the solid curves in Figure \ref{fig:clustering_ratio_upshot}. The strongly negative clustering ratios predicted by the assumption of profile co-evolution can be understood in terms of the same features discussed above. Figure \ref{fig:coevolutionmodel} shows that at fixed $\mpeak,$ larger galaxies will occupy halos with larger $\rspeak.$ Since halo concentration $c=\rvir/R_{\rm s},$ this implies that high-concentration galaxies will tend to host smaller galaxies. Both satellites and splashback centrals have higher concentration than true centrals, another manifestation of assembly bias, and so the assumption of profile co-evolution naturally results in an enhancement of the clustering ratios beyond the $\rvir-$only model. 
 
+\subsection{Tidal Stripping and Orphan Satellites}
+\label{subsec:orphan_stripping}
+
+We conclude this section with a discussion of Figure \ref{fig:strippingorphans}, which provides an estimate of how satellite mass stripping and orphan galaxies impact size-dependent clustering ratios. In the $\mstar-$stripping model described in \S\ref{subsubsec:strippingmodel}, satellites lose stellar mass in a way that mimics what is seen in high-resolution hydrodynamical simulations. This naturally results in an enhancement of size differences between satellites and centrals, and the dot-dashed curves in Figure \ref{fig:strippingorphans} show that produces the expected sign of the effect on the clustering ratios. The magnitude of the effect, however is not strong enough to remedy the discrepancy of the clustering predictions of the $\rvir-$only model. We discuss the physical implications of this result in \S\ref{subsec:satellite_discussion}. 
+
+The dotted curves in Figure \ref{fig:strippingorphans} show results of the $\rvir-$only model applied to a subhalo catalog that includes a orphan halos. As described in \S\ref{}, orphan halos are subhalos that are no longer resolved by {\tt Rockstar}, but whose evolution is tracked in a post-processing phase. We apply the same mass-stripping model described in \S\ref{subsubsec:strippingmodel} to this subhalo catalog that includes orphan halos, keep all model galaxies that retain more than half of their stellar mass, and show results for the $\rvir-$only model applied to the resulting catalog. 
+
+As the orphan catalog has a higher satellite fraction than the standard subhalo catalog, the negative boost shown the dotted curves in Figure \ref{fig:strippingorphans} is expected. Orphan halos also typically have earlier-than-average values of $\zpeak$ relative to ordinary subhalos, which also enhances differences between central and satellite sizes. See \S\ref{subsec:satellite_discussion} for further discussion. 
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
@@ -240,28 +254,16 @@ Much more successful is the profile co-evolution model shown with the solid curv
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
-%We conclude this section by estimating how satellite mass stripping manifests in $\wproj(\rproj).$ To do so, we construct an extension our fiducial model with a simple additional ingredient for post-infall evolution of satellites mass and size. 
-
-%In the fiducial model described in \S~\ref{sec:model}, recall that in the power law a scaling relations (Eq.~\ref{eq:fiducial_model}) the halo radius $\rvir$ used for satellite galaxies is taken to be the value at the time of infall. The simple interpretation of this assumption is that, in a statistical sense, the size of satellite galaxies is determined by its history as a central galaxy, and that post-infall physics leaves no distinct imprint on satellite $\rhalf.$
-
-%Here we suppose that this assumption is violated, and that $\rhalf$ decreases after infall according to $(\mvir/\macc)^{1/3}.$ That is, in this alternative formulation, rather than using $\rvir$ at the time of infall for satellites in the power law scaling relations, we instead use $\rvir(\mvir/\macc)^{1/3}.$ This simple toy model attempts supposes that the same physical processes leading to halo mass loss are also responsible for a post-infall decrease in satellite size.
-
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
 \includegraphics[width=8cm]{FIGS/penultimate_clustering_ratios_alternate_models.pdf}
 \caption{
-{\bf Impact of mass loss and orphan satellites.}
-Here we compare our fiducial model, \dots 
+{\bf Impact of tidal stripping and orphan satellites.} In all panels, the axes and points with error bars are the same as in Figure \ref{fig:clustering_ratio_upshot}. The dashed curves (``$\rvir-$only model") and solid curves (``profile co-evolution model") from  Figure \ref{fig:clustering_ratio_upshot} are also shown for convenience. The dot-dashed curves show results for a model in which satellites lose mass after infall in a manner similar to what is seen in high-resolution hydrodynamical simulations, as described in \S\ref{subsubsec:strippingmodel}. The dotted curve shows results for the same model, but including the effect of ``orphan" galaxies that live in subhalos no longer resolved by {\tt Rockstar}. 
 }
-\label{fig:shuffle}
+\label{fig:strippingorphans}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
-
-
-%Figure~\ref{fig:satellites} compares the clustering ratios of our fiducial model (solid curves) to the clustering ratios of this alternative model (dashed curves). The difference between the small-scale clustering of the two models is stark: the assumption that $\rhalf$ decreases after infall leaves a strong imprint on the $\rhalf-$dependence of $\wproj(\rproj),$ such that small galaxies cluster {\em much} more strongly relative to large galaxies, particularly for disk-dominated systems with $\mstar\approx10^{10}\msun.$
-
-%The large differences between the solid and dashed curves in Fig.~\ref{fig:satellites} establishes that the largely successful prediction for the clustering ratios fiducial model is a non-trivial: $\wproj(\rproj)$ is indeed providing good constraining power on the  assumptions underlying our profile modeling and not simply our morphology modeling, c.f., \S\ref{subsubsec:random_bt_model} and \S\ref{sec:model}. We refer the reader to \S\ref{subsec:satellite_discussion} for further discussion of the physical implications of this result.
 
 \section{Discussion}
 \label{sec:discussion}
