@@ -274,12 +274,46 @@ In forward modeling, the direction of inference is turned around: a mapping is i
 
 Backward modeling the galaxy-halo connection is useful for generating hypotheses and motivating functional forms. Forward modeling becomes necessary when the problem at hand becomes encumbered by multiple relevant variables, as is the case with galaxy size. Forward modeling also makes it possible to conduct rigorous Bayesian inference, which we consider to be the next natural step in the progression described here (see \S\ref{subsec:future} for further discussion).  
 
-\subsection{Implications for Satellite Mass Loss}
+
+
+\subsection{Relation to Previous Work}
+\label{subsec:previous_work}
+
+\ben
+\item \citet{shankar_etal14} - SAMs vs. SDSS. Use Yang to study median sizes of central galaxies as a function of environment, as defined by Yang-determined halo mass. The data do not show any difference in the structural properties of early-type galaxies with environment, at fixed stellar mass. All hierarchical models considered in this work instead tend to predict a moderate to strong environmental dependence. 
+\item \citet{huertas_company_etal13b} - No Evidence for a Dependence of the Mass-Size Relation of Early-type Galaxies on Environment in the Local Universe. The mass?size relation of ETGs in the local Universe does not significantly depend
+on environment. At fixed stellar mass (or fixed central stellar mass density), galaxies
+residing in clusters have similar sizes than the ones living in the field. satellites and central galaxies follow similar mass-size relations.
+\item \citet{spindler_wake17} - central vs. satellite sizes. 
+\bit
+\item They treat $\sigma_0$ like $\mpeak$
+\item Satellites are smaller than centrals of the same $\sigma_0$, but only for quiescent galaxies. 
+\item no dependence of central-satellite mass difference on $\sigma_0$
+\eit
+\item \citet{somerville_etal17} - spin as the origin of scatter
+\item \citet{cebrian_trujillo14} - NYU-VAGC find that field galaxies are slightly larger than high-density regions (defined by 2Mpc smoothing kernel)
+\item \citet{vanderwel_etal14,kawamata_etal15,shibuya_etal15,huertas_company_etal13a,huang_etal17} - high redshift studies of size evolution with HST
+\item \citet{shankar_etal17,yoon_kim17,huang_leauthaud_etal17} - high mass
+\item \citet{huang_etal13} - multiple component profiles
+\een
+
+\subsection{Implications for Satellite Evolution}
 \label{subsec:satellite_discussion}
+
+Points to address:
+\ben
+\item $\rhalf$ is set at $\zpeak.$ Stripping appears to be statistically unimportant. 
+\item The $\rhalf-\rspeak$ correlation implies a very long timeline for co-evolution, since $R_{\rm s}$ is largely frozen in at the time 
+\een
 
 \subsection{Future Directions for Empirical Modeling of Morphology}
 \label{subsec:future}
 
+\ben
+\item joint modeling with the SMHM to get a better handle on satellite fraction
+\item differential buildup like becker model
+\item joint modeling with bulge/disk decomposition
+\een
 
 \section{Conclusions}
 \label{sec:conclusion}
