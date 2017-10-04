@@ -297,14 +297,23 @@ Explanations for differences between the sizes of centrals and satellites fall i
 
 Both the $\rvir-$only model and the co-evolution model (see sections \S\ref{subsubsec:rvirmodel} and \S\ref{subsubsec:coevolutionmodel}, respectively) represent explanations falling into the second category, in which centrals and satellites of the same $\mhalo$ have different sizes due to their different evolutionary paths {\em prior} to satellite infall. For these models the story is very different: the influence of pre-infall co-evolution has a dramatic impact on $\rhalf-$clustering ratios, with a scale- and $\mstar-$dependence that closely resembles the SDSS signal. Quantitative constraints on the true level of this co-evolution effect will be a natural outcome of the program described in \S\ref{subsec:future}, but it is already clear that the long term co-evolution of galaxy and halo profiles should be considered a critical ingredient to models for the distribution of galaxy sizes across the cosmic web. 
 
-\subsection{Future Directions for Empirical Modeling of Morphology}
+\subsection{Future Directions for Empirical Modeling of Galaxy Size}
 \label{subsec:future}
 
-\ben
-\item joint modeling with the SMHM to get a better handle on satellite fraction
-\item differential buildup like becker model
-\item joint modeling with bulge/disk decomposition
-\een
+\subsubsection{Jointly modeling $\langle\mstar\vert\mhalo\rangle$}
+
+The scope of this work is to serve as a pilot study in which we identify the chief ingredients that can influence the $\rhalf-$dependence of galaxy clustering. While our results suggest that our profile co-evolution model is giving the correct qualitative picture, our implementation cannot be correct in quantitative detail: the clustering ratios of this model shown in Figure \ref{fig:clustering_ratio_upshot} are too strong relative to SDSS. This likely indicates that the central/satellite size differences depicted in Figure \ref{fig:} are too strong, and that the correlation strength in the real Universe is intermediate, rather than maximal. Our publicly available code that reproduces our results already contains the machinery to implement continuously variable levels of $\rhalf-\rspeak$ correlation strength, but for present purposes we have chosen to focus on exploring bracketing cases of qualitative ingredients, rather than fine-tuning the model. 
+
+In addition to varying the $\rhalf-\rspeak$ correlation strength, there are other factors that should be included in any proper likelihood analysis of galaxy size models. In particular, since the clustering signal is strongly influenced by differences between centrals and satellites, then the satellite fraction $F_{\rm sat}(\mstar)$ plays an important role in $\rhalf-$dependent clustering. For fixed scaling relations $\langle\rhalf^{\rm cens}\vert\mhalo\rangle$ and $\langle\rhalf^{\rm sats}\vert\mhalo\rangle,$ models with different satellite fractions will exhibit different $\rhalf-$clustering ratios because $F_{\rm sat}(\mstar)$ controls the relative weighting of the two populations. Our results based on the catalog that includes orphan subhalos (Figure \ref{fig:strippingorphans}, dotted curves) give an explicit demonstration of the impact of $F_{\rm sat}(\mstar)$ on the clustering signal. 
+
+On the one hand, this degeneracy with the satellite fraction is unfortunate, because it means galaxy sizes does not leave a pure and unique signature on $\rhalf-$clustering ratios. However, this can also be viewed as an opportunity to extract tighter constraints on $F_{\rm sat}(\mstar),$ which are sorely needed to discriminate between competing models. For this problem, the path forward is clear. Traditional galaxy clustering is already being used to validate and/or fit models of the stellar-to-halo-mass relation \citep[e.g.,][]{moster_etal13,behroozi13_smhm,lehmann_etal15}. Based on our results, we advocate that empirical models for $\langle\mstar\vert\mhalo\rangle$ be supplemented with additional model ingredients for $\langle\rhalf\vert\mstar\rangle,$ and that the parameters of composite model are jointly constrained by measurements of the stellar mass function, $\mstar-$dependent clustering, and $\rhalf-$dependent clustering. Careful attention will need to be paid to the orphan subhalo population, which is well-known to have a significant impact on small-scale clustering \citep{guo_white13,campbell_etal17}. 
+
+\subsubsection{Jointly modeling morphology}
+
+Previous studies of large-scale structure measured by SDSS indicate that morphological type has a significant influence on galaxy clustering \citep{skibba_etal08}. Because morphology is covariant with star-formation rate (SFR) and $\rhalf,$ accounting for this dependency will require simultaneously modeling each of these variables. 
+
+To date, such a task has been beyond the purview of empirical models. However, recent progress has substantially improved the richness of the predictions that galaxy-halo models are capable of \citep{becker15,cohn17,moster_etal17}. This new class of models has accomplished this by empirically modeling star-formation rate, and then integrating SFR along each halo's history to differentially build up stellar mass.\footnote{This approach towards predicting $\mstar$ is thus mathematically akin to traditional semi-analytic models, although \citet{becker15} have retained the empirical modeling prioritization of simplicity and computational efficiency.} We are currently extending this new class of models to differentially build up the disk and bulge across cosmic time. In addition to treating the multi-dimensional nature of the problem, this also allows us to use data at higher redshift in a self-consistent manner.  
+
 
 \section{Conclusions}
 \label{sec:conclusion}
