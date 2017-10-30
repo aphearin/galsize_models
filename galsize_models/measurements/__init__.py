@@ -5,3 +5,4 @@ from .load_cross_matched_umachine import *
 from .measure_one_points import *
 from .rhalf_rvir_power_law_fit import rvir_rhalf_power_law_fit
 from .wp_ratio_mock import *
+from .wp_absolute_mock import masked_wp
