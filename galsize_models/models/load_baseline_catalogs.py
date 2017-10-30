@@ -11,6 +11,8 @@ from astropy.cosmology import Planck15
 from astropy.utils.misc import NumpyRNGContext
 from astropy.table import Table
 from halotools.empirical_models import solve_for_polynomial_coefficients
+from AbundanceMatching import AbundanceFunction, calc_number_densities
+from halotools.empirical_models import enforce_periodicity_of_box
 
 from .random_bt_assignment import value_add_random_bt
 
@@ -18,7 +20,7 @@ from ..measurements import load_umachine_sdss_with_meert15
 
 
 __all__ = ('moster13_based_mock', 'load_umachine_mock', 'load_baseline_halocat',
-        'load_orphan_mock')
+        'load_orphan_mock', 'moustakas_sham_with_orphans', 'load_orphan_subhalos')
 
 default_umachine_galprops = list((
     'sm', 'sfr', 'obs_sm', 'obs_sfr', 'icl', 'halo_id', 'upid',
@@ -31,6 +33,14 @@ moster13_halocat_keys = ('halo_upid', 'halo_mpeak', 'halo_scale_factor_mpeak',
         'halo_scale_factor_firstacc', 'halo_mvir_firstacc', 'halo_halfmass_scale_factor',
         'halo_vx', 'halo_vy', 'halo_vz', 'halo_rvir_zpeak', 'halo_vmax_at_mpeak_percentile',
         'halo_mvir_host_halo', 'halo_spin', 'halo_uran')
+
+smf_dirname = "/Users/aphearin/work/UniverseMachine/code/UniverseMachine/obs"
+smf_basename = "moustakas_z0.01_z0.20.smf"
+smf_fname = os.path.join(smf_dirname, smf_basename)
+smf = np.loadtxt(smf_fname)
+log10_sm_table_h0p7 = 0.5*(smf[:, 0] + smf[:, 1])
+dn_dlog10_sm_h0p7 = smf[:, 2]
+sham_ext_range = (8, 12.75)
 
 
 def load_baseline_halocat(simname='bolplanck', redshift=0, fixed_seed=411):
@@ -141,6 +151,8 @@ def load_umachine_mock(galprops=default_umachine_galprops, Lbox=250):
 
 
 def load_orphan_mock():
+    """ Note that this function calls a Moster+13 model and applies a cut on stellar mass.
+    """
 
     dirname = "/Users/aphearin/work/sims/bolplanck/orphan_catalog_z0"
     basename = "cross_matched_orphan_catalog.hdf5"
@@ -177,3 +189,45 @@ def load_orphan_mock():
 
     return mock
 
+
+def load_orphan_subhalos():
+    """
+    """
+    dirname = "/Users/aphearin/work/sims/bolplanck/orphan_catalog_z0"
+    basename = "cross_matched_orphan_catalog.hdf5"
+
+    halo_table = Table.read(os.path.join(dirname, basename), path='data')
+
+    Lbox = 250.
+    halo_table['x'] = enforce_periodicity_of_box(halo_table['x'], Lbox)
+    halo_table['y'] = enforce_periodicity_of_box(halo_table['y'], Lbox)
+    halo_table['z'] = enforce_periodicity_of_box(halo_table['z'], Lbox)
+
+    halo_table['vmax_at_mpeak_percentile'] = np.load(
+        os.path.join(dirname, 'vmax_percentile.npy'))
+
+    halo_table['zpeak'] = 1./halo_table['mpeak_scale']-1.
+
+    rvir_peak_physical_unity_h = halo_mass_to_halo_radius(halo_table['mpeak'],
+                                Planck15, halo_table['zpeak'], 'vir')
+    rvir_peak_physical = rvir_peak_physical_unity_h/Planck15.h
+    halo_table['halo_rvir_zpeak'] = rvir_peak_physical*1000.
+    return halo_table
+
+
+def moustakas_sham_with_orphans(sham_subhalo_property, scatter, sample_mask, Lbox_h1p0):
+    """
+    """
+    log10_mstar_sham = np.zeros(len(sham_subhalo_property)) + np.nan
+    af = AbundanceFunction(log10_sm_table_h0p7, dn_dlog10_sm_h0p7,
+            sham_ext_range, faint_end_first=True)
+
+    x = sham_subhalo_property[sample_mask]
+    h = 0.7
+    Lbox_h0p7 = Lbox_h1p0/h
+    nd_subhalos = calc_number_densities(x, Lbox_h0p7)
+
+    _remainder = af.deconvolute(scatter, 20)
+    log10_mstar_sham[sample_mask] = af.match(nd_subhalos, scatter=scatter,
+            do_add_scatter=True, do_rematch=True)
+    return log10_mstar_sham
