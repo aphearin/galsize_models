@@ -227,10 +227,19 @@ def load_orphan_subhalos():
 
     halo_table['zpeak'] = 1./halo_table['mpeak_scale']-1.
 
+    halo_table['zpeak_no_splashback'] = 0.
+    satmask = halo_table['upid'] != -1
+    halo_table['zpeak_no_splashback'][satmask] = halo_table['zpeak'][satmask]
+
     rvir_peak_physical_unity_h = halo_mass_to_halo_radius(halo_table['mpeak'],
                                 Planck15, halo_table['zpeak'], 'vir')
     rvir_peak_physical = rvir_peak_physical_unity_h/Planck15.h
     halo_table['rvir_zpeak'] = rvir_peak_physical*1000.
+
+    rvir_peak_no_spl_physical_unity_h = halo_mass_to_halo_radius(halo_table['mpeak'],
+                                Planck15, halo_table['zpeak_no_splashback'], 'vir')
+    rvir_peak_no_spl_physical = rvir_peak_no_spl_physical_unity_h/Planck15.h
+    halo_table['rvir_zpeak_no_splashback'] = rvir_peak_no_spl_physical*1000.
 
     halo_table['hostid'] = np.nan
     hostmask = halo_table['upid'] == -1
