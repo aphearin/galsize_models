@@ -13,6 +13,8 @@ from astropy.table import Table
 from halotools.empirical_models import solve_for_polynomial_coefficients
 from AbundanceMatching import AbundanceFunction, calc_number_densities
 from halotools.empirical_models import enforce_periodicity_of_box
+from halotools.utils import crossmatch
+from halotools.empirical_models import noisy_percentile
 
 from .random_bt_assignment import value_add_random_bt
 
@@ -20,7 +22,7 @@ from ..measurements import load_umachine_sdss_with_meert15
 
 
 __all__ = ('moster13_based_mock', 'load_umachine_mock', 'load_baseline_halocat',
-        'load_orphan_mock', 'moustakas_sham_with_orphans', 'load_orphan_subhalos')
+        'load_orphan_mock', 'moustakas_sham', 'load_orphan_subhalos')
 
 default_umachine_galprops = list((
     'sm', 'sfr', 'obs_sm', 'obs_sfr', 'icl', 'halo_id', 'upid',
@@ -41,6 +43,8 @@ smf = np.loadtxt(smf_fname)
 log10_sm_table_h0p7 = 0.5*(smf[:, 0] + smf[:, 1])
 dn_dlog10_sm_h0p7 = smf[:, 2]
 sham_ext_range = (8, 12.75)
+moustakas_af = AbundanceFunction(log10_sm_table_h0p7, dn_dlog10_sm_h0p7,
+        sham_ext_range, faint_end_first=True)
 
 
 def load_baseline_halocat(simname='bolplanck', redshift=0, fixed_seed=411):
@@ -176,13 +180,12 @@ def load_orphan_mock():
 
     from galsize_models.models import moster13_based_mock
 
-    keys_to_keep=list(halocat.halo_table.keys())
+    keys_to_keep = list(halocat.halo_table.keys())
     keys_to_keep.append('halo_rvir_zpeak')
 
     mock = moster13_based_mock(halocat=halocat, mpeak_key='halo_mpeak', zpeak_key='halo_zpeak',
                               keys_to_keep=keys_to_keep)
 
-    from halotools.empirical_models import noisy_percentile
 
     mock['noisy_vmax_at_mpeak_percentile'] = noisy_percentile(
         mock['vmax_at_mpeak_percentile'], 0.5)
@@ -205,29 +208,38 @@ def load_orphan_subhalos():
 
     halo_table['vmax_at_mpeak_percentile'] = np.load(
         os.path.join(dirname, 'vmax_percentile.npy'))
+    halo_table['noisy_vmax_at_mpeak_percentile'] = noisy_percentile(
+        halo_table['vmax_at_mpeak_percentile'], 0.5)
 
     halo_table['zpeak'] = 1./halo_table['mpeak_scale']-1.
 
     rvir_peak_physical_unity_h = halo_mass_to_halo_radius(halo_table['mpeak'],
                                 Planck15, halo_table['zpeak'], 'vir')
     rvir_peak_physical = rvir_peak_physical_unity_h/Planck15.h
-    halo_table['halo_rvir_zpeak'] = rvir_peak_physical*1000.
+    halo_table['rvir_zpeak'] = rvir_peak_physical*1000.
+
+    halo_table['hostid'] = np.nan
+    hostmask = halo_table['upid'] == -1
+    halo_table['hostid'][hostmask] = halo_table['halo_id'][hostmask]
+    halo_table['hostid'][~hostmask] = halo_table['upid'][~hostmask]
+
+    idxA, idxB = crossmatch(halo_table['hostid'], halo_table['halo_id'])
+    halo_table['host_mvir'] = np.nan
+    halo_table['host_mvir'][idxA] = halo_table['mvir'][idxB]
+
+    halo_table = halo_table[~np.isnan(halo_table['host_mvir'])]
+
+    halo_table['frac_mpeak_remaining'] = halo_table['mvir']/halo_table['mpeak']
+    halo_table['frac_vpeak_remaining'] = halo_table['vmax']/halo_table['vmax_at_mpeak']
+
     return halo_table
 
 
-def moustakas_sham_with_orphans(sham_subhalo_property, scatter, sample_mask, Lbox_h1p0):
+def moustakas_sham(sham_subhalo_property, scatter):
     """
     """
-    log10_mstar_sham = np.zeros(len(sham_subhalo_property)) + np.nan
-    af = AbundanceFunction(log10_sm_table_h0p7, dn_dlog10_sm_h0p7,
-            sham_ext_range, faint_end_first=True)
+    Lbox_h0p7 = 250./0.7
+    _remainder = moustakas_af.deconvolute(scatter, 20)
+    return moustakas_af.match(calc_number_densities(sham_subhalo_property, Lbox_h0p7),
+                scatter=scatter, do_add_scatter=True, do_rematch=True)
 
-    x = sham_subhalo_property[sample_mask]
-    h = 0.7
-    Lbox_h0p7 = Lbox_h1p0/h
-    nd_subhalos = calc_number_densities(x, Lbox_h0p7)
-
-    _remainder = af.deconvolute(scatter, 20)
-    log10_mstar_sham[sample_mask] = af.match(nd_subhalos, scatter=scatter,
-            do_add_scatter=True, do_rematch=True)
-    return log10_mstar_sham
