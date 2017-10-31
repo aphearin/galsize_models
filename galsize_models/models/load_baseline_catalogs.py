@@ -22,7 +22,7 @@ from ..measurements import load_umachine_sdss_with_meert15
 
 
 __all__ = ('moster13_based_mock', 'load_umachine_mock', 'load_baseline_halocat',
-        'load_orphan_mock', 'moustakas_sham', 'load_orphan_subhalos')
+        'load_orphan_mock', 'moustakas_sham', 'load_orphan_subhalos', 'orphan_selection')
 
 default_umachine_galprops = list((
     'sm', 'sfr', 'obs_sm', 'obs_sfr', 'icl', 'halo_id', 'upid',
@@ -211,6 +211,20 @@ def load_orphan_subhalos():
     halo_table['noisy_vmax_at_mpeak_percentile'] = noisy_percentile(
         halo_table['vmax_at_mpeak_percentile'], 0.5)
 
+    halo_table['orphan_mass_loss_percentile'] = -1.
+    halo_table['orphan_mass_loss_percentile'][halo_table['orphan']] = np.load(
+            os.path.join(dirname, 'orphan_mass_loss_percentile.npy'))
+    halo_table['orphan_vmax_at_mpeak_percentile'] = -1.
+    halo_table['orphan_vmax_at_mpeak_percentile'][halo_table['orphan']] = np.load(
+            os.path.join(dirname, 'orphan_vmax_at_mpeak_percentile.npy'))
+    halo_table['orphan_vmax_loss_percentile'] = -1.
+    halo_table['orphan_vmax_loss_percentile'][halo_table['orphan']] = np.load(
+            os.path.join(dirname, 'orphan_vmax_loss_percentile.npy'))
+
+    halo_table['orphan_fixed_mpeak_mhost_percentile'] = -1.
+    halo_table['orphan_fixed_mpeak_mhost_percentile'][halo_table['orphan']] = np.load(
+            os.path.join(dirname, 'orphan_fixed_mpeak_mhost_percentile.npy'))
+
     halo_table['zpeak'] = 1./halo_table['mpeak_scale']-1.
 
     rvir_peak_physical_unity_h = halo_mass_to_halo_radius(halo_table['mpeak'],
@@ -243,3 +257,15 @@ def moustakas_sham(sham_subhalo_property, scatter):
     return moustakas_af.match(calc_number_densities(sham_subhalo_property, Lbox_h0p7),
                 scatter=scatter, do_add_scatter=True, do_rematch=True)
 
+
+def orphan_selection(catalog, mpeak_abscissa=(11, 13), prob_select_ordinates=(0.5, 0.),
+            selection_key='orphan_fixed_mpeak_mhost_percentile'):
+    num_subhalos = len(catalog)
+    selection_indices = np.ones(num_subhalos).astype(bool)
+
+    eligible_orphan_mask = catalog['orphan']
+    orphans = catalog[eligible_orphan_mask]
+    prob_select = np.interp(np.log10(orphans['mpeak']), mpeak_abscissa, prob_select_ordinates)
+    selected_orphan_mask = orphans[selection_key] > 1-prob_select
+    selection_indices[eligible_orphan_mask] = selected_orphan_mask
+    return selection_indices
