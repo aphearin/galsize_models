@@ -172,17 +172,6 @@ where for $\Delta_{\rm vir}(\zpeak)$ we use the fitting function to the ``virial
 
 The ``profile co-evolution" model is identical to the $\rvir-$only model, but the scatter in $\rhalf$ at fixed $\rmpeak$ is no longer purely stochastic, and is instead correlated with $\vmaxmpeak,$ defined as the value of $\vmax$ at $\zpeak.$ In this way, $\rmpeak$ statistically determines the distribution of available sizes, but halos with extended dark matter profiles and large scale radii $R_{\rm s}$ host galaxies with above-average sizes, while halos with small $R_{\rm s}$ host smaller galaxies. See Figure \ref{fig:coevolutionmodel} for a visual illustration of this residual correlation. We implement scatter correlations using the {\tt halotools.empirical\_models.conditional\_abunmatch} function, which generalizes the Conditional Abundance Matching technique described in \citet{hearin_etal13b}.
 
-%---------------------------------------------------------------------------------------------------
-\begin{figure}
-\centering
-\includegraphics[width=8cm]{FIGS/rs_correlation_visual.pdf}
-\caption{
-{\bf Profile co-evolution model.} In this model, the log-normal distribution of galaxy sizes is determined by $\rmpeak,$ the physical size of the halo virial radius at the time the halo reaches its peak mass. Thus log-normal the shape of this curve is determined by $\langle\rhalf\vert\rmpeak\rangle=0.0125\rmpeak$ with $0.2$ dex of scatter. The profile co-evolution model further supposes that galaxy and halo profiles co-evolve across cosmic time. Thus within this log-normal distribution, for two halos with the same $\rmpeak,$ halos with larger scale radius at $\zpeak$ will host galaxies with above-average $\rhalf,$ and conversely for halos with smaller values of $\rspeak.$
-}
-\label{fig:coevolutionmodel}
-\end{figure}
-%-----------------------------------------------------------------------------------------------------
-
 \subsubsection{$\mstar-$stripping model}
 \label{subsubsec:strippingmodel}
 
@@ -203,8 +192,9 @@ In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ wit
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
-\includegraphics[width=8cm]{FIGS/rhalf_vs_mstar_fiducial_model.pdf}
-\caption{The black curve shows the median $\rhalf-\mstar$ relation SDSS galaxies as measured in \citet{meert_etal15}. The two gray bands enveloping the black curve show the $50\%$ and $90\%$ percentile regions. The blue curve shows profile co-evolution model in which $\langle\rhalf\vert\rvir\rangle=0.0125\rvir,$ as in \citet{kravtsov13}. This figure confirms that a linear relationship between $\rvir$ and $\rhalf,$ convolved against the nonlinear relationships between $\rvir, \mhalo$ and $\mstar,$  predicts the characteristic curvature in the relation $\langle\rhalf\vert\mstar\rangle$ over a wide range in mass.
+\includegraphics[width=8cm]{FIGS/rvir_only_rhalf_vs_mstar_sham_model.pdf}
+\caption{
+The black curve shows the median $\rhalf-\mstar$ relation SDSS galaxies as measured in \citet{meert_etal15}. The two gray bands enveloping the black curve show the $50\%$ and $90\%$ percentile regions. The blue curve shows profile co-evolution model in which $\langle\rhalf\vert\rvir\rangle=0.0125\rvir,$ as in \citet{kravtsov13}. This figure confirms that a linear relationship between $\rvir$ and $\rhalf,$ convolved against the nonlinear relationships between $\rvir, \mhalo$ and $\mstar,$  predicts the characteristic curvature in the relation $\langle\rhalf\vert\mstar\rangle$ over a wide range in mass.
 }
 \label{fig:scatter_plot}
 \end{figure}
@@ -218,12 +208,31 @@ In Figure \ref{fig:clustering_ratio_upshot} we present new measurements of the $
 We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds, $\mstar>10^{9.75}\msun,$ $\mstar>10^{10.25}\msun,$ $\mstar>10^{10.75}\msun,$ and $\mstar>10^{11.25}\msun.$ We make the same measurements for each volume-limited $\mstar-$threshold sample {\em without} splitting on size, giving us measurements $\wpall, \wplarge,$ and $\wpsmall$ for each threshold sample. This allow us to compute the ratio $(\wplarge-\wpsmall)/\wpall,$ which we refer to as {\em the $\rhalf$ clustering ratio}. These ratios are the measurements appearing on the y-axis in each panel of Figure \ref{fig:clustering_ratio_upshot}. Points with jackknife-estimated error bars show SDSS measurements, solid curves show the clustering ratios of model galaxies as predicted by the models described in \S\ref{sec:model}.
 
 %---------------------------------------------------------------------------------------------------
+\begin{figure}
+\centering
+\includegraphics[width=8cm]{FIGS/baseline_sham_orphans.pdf}
+\caption{some caption}
+\label{fig:baseline_sham_clustering}
+\end{figure}
+%-----------------------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------------------
 \begin{figure*}
 \centering
-\includegraphics[width=12cm]{FIGS/penultimate_clustering_ratios_no_orphans.pdf}
+\includegraphics[width=12cm]{FIGS/rvir_only_wp_large_small_absolute.pdf}
+\caption{some caption}
+\label{fig:rvir_only_clustering_absolute}
+\end{figure*}
+%-----------------------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------------------
+\begin{figure*}
+\centering
+\includegraphics[width=12cm]{FIGS/rvir_only_wp_ratios.pdf}
 \caption{
 {\bf $\rhalf-$dependence of galaxy clustering.}
-Points with error bars show new SDSS measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj.$ We define a galaxy as ``large" or ``small" according to whether it is above or below the median size for its stellar mass, so that in each panel, the stellar mass functions of the ``large" and ``small" subsamples are identical, as described in the text. The y-axis shows {\em clustering strength ratios,} so that, for example, a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of comparable stellar mass. Each panel shows results separately for different volume-limited $\mstar-$threshold samples; predictions of three different models are shown in each panel. See \S\ref{subsec:model} for a description of each model.}
+%Points with error bars show new SDSS measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj.$ We define a galaxy as ``large" or ``small" according to whether it is above or below the median size for its stellar mass, so that in each panel, the stellar mass functions of the ``large" and ``small" subsamples are identical, as described in the text. The y-axis shows {\em clustering strength ratios,} so that, for example, a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of comparable stellar mass. Each panel shows results separately for different volume-limited $\mstar-$threshold samples; predictions of three different models are shown in each panel. See \S\ref{subsec:model} for a description of each model.
+}
 \label{fig:clustering_ratio_upshot}
 \end{figure*}
 %-----------------------------------------------------------------------------------------------------
@@ -253,9 +262,10 @@ As the orphan catalog has a higher satellite fraction than the standard subhalo 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
-\includegraphics[width=8cm]{FIGS/cen_sat_sizes.pdf}
+\includegraphics[width=8cm]{FIGS/rvir_only_cen_sat_sizes.pdf}
 \caption{
-{\bf Relative sizes of centrals and satellites.} In a narrow bin of halo mass $\mhalo=\mpeak\approx10^{12}\msun,$ we show the distribution of model galaxy sizes for different subpopulations galaxies, as predicted by the $\rvir-$only model. The red histogram shows the sizes of satellites; the blue histogram shows host halos that have never passed inside the virial radius of a larger halo (``true centrals"); the green histogram host halos that were subhalos inside a larger at some point in their past history (``splashback halos"). In the $\rvir-$only model, galaxy size is set by the {\em physical} size of the virial radius at the time the halo attains its peak mass, naturally resulting in smaller sizes for satellites and backsplash centrals relative to true centrals of the same $\mpeak.$ The central/satellite size differences shown here are not enough to correctly predict the observed clustering ratios (see Figure \ref{fig:clustering_ratio_upshot}), motivating the $\mstar-$stripping and profile co-evolution models.
+{\bf Relative sizes of centrals and satellites.} 
+In a narrow bin of halo mass $\mhalo=\mpeak\approx10^{12}\msun,$ we show the distribution of model galaxy sizes for different subpopulations galaxies, as predicted by the $\rvir-$only model. The red histogram shows the sizes of satellites; the blue histogram shows host halos that have never passed inside the virial radius of a larger halo (``true centrals"); the green histogram host halos that were subhalos inside a larger at some point in their past history (``splashback halos"). In the $\rvir-$only model, galaxy size is set by the {\em physical} size of the virial radius at the time the halo attains its peak mass, naturally resulting in smaller sizes for satellites and backsplash centrals relative to true centrals of the same $\mpeak.$ The central/satellite size differences shown here are not enough to correctly predict the observed clustering ratios (see Figure \ref{fig:clustering_ratio_upshot}), motivating the $\mstar-$stripping and profile co-evolution models.
 }
 \label{fig:censatsizehist}
 \end{figure}
@@ -264,12 +274,38 @@ As the orphan catalog has a higher satellite fraction than the standard subhalo 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
-\includegraphics[width=8cm]{FIGS/penultimate_clustering_ratios_alternate_models.pdf}
+\includegraphics[width=8cm]{FIGS/alt_model_wp_ratios.pdf}
 \caption{
-{\bf Impact of tidal stripping and orphan satellites.} In all panels, the axes and points with error bars are the same as in Figure \ref{fig:clustering_ratio_upshot}. The dashed curves (``$\rvir-$only model") and solid curves (``profile co-evolution model") from  Figure \ref{fig:clustering_ratio_upshot} are also shown for convenience. The dot-dashed curves show results for a model in which satellites lose mass after infall in a manner similar to what is seen in high-resolution hydrodynamical simulations, as described in \S\ref{subsubsec:strippingmodel}. The dotted curve shows results for the same model, but including the effect of ``orphan" galaxies that live in subhalos no longer resolved by {\tt Rockstar}.
+{\bf Impact of tidal stripping.} 
+In all panels, the axes and points with error bars are the same as in Figure \ref{fig:clustering_ratio_upshot}. The dashed curves (``$\rvir-$only model") and solid curves (``profile co-evolution model") from  Figure \ref{fig:clustering_ratio_upshot} are also shown for convenience. The dot-dashed curves show results for a model in which satellites lose mass after infall in a manner similar to what is seen in high-resolution hydrodynamical simulations, as described in \S\ref{subsubsec:strippingmodel}. The dotted curve shows results for the same model, but including the effect of ``orphan" galaxies that live in subhalos no longer resolved by {\tt Rockstar}.
 }
 \label{fig:strippingorphans}
 \end{figure}
+%-----------------------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------------------
+%\begin{figure}
+%\centering
+%\includegraphics[width=8cm]{FIGS/sdss_size_dependent_clustering_9p75_to_10p25.pdf}
+%\caption{
+%{\bf Some caption.} 
+%}
+%\label{fig:strippingorphans}
+%\end{figure}
+%-----------------------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------------------
+\begin{figure*}
+\centering
+\includegraphics[width=8cm]{FIGS/blue_sdss_size_dependent_clustering_9p75_to_10p25.pdf}
+\includegraphics[width=8cm]{FIGS/red_sdss_size_dependent_clustering_9p75_to_10p25.pdf}
+\includegraphics[width=8cm]{FIGS/disk_sdss_size_dependent_clustering_9p75_to_10p25.pdf}
+\includegraphics[width=8cm]{FIGS/bulge_sdss_size_dependent_clustering_9p75_to_10p25.pdf}
+\caption{
+{\bf Some caption.} 
+}
+\label{fig:strippingorphans}
+\end{figure*}
 %-----------------------------------------------------------------------------------------------------
 
 \section{Discussion}
