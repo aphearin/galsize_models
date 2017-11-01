@@ -109,7 +109,6 @@ $^{4}$Universit{\"a}ts-Sternwarte, Ludwig-Maximilians-Universit{\"a}t M{\"u}nche
 
 \begin{abstract}
 We place empirical constraints on the connection between dark matter halos and galaxy half-light radii, $\rhalf.$ Low-redshift SDSS measurements show that smaller galaxies cluster much more strongly than larger galaxies at fixed stellar mass. Using {\tt Halotools} to forward model the observations, we find that the clustering signal generically requires satellite galaxies to be smaller than central galaxies of the same halo mass. We present a simple empirical model consistent with the clustering results, in which galaxy size is proportional to halo virial radius at the time of peak halo mass. We use this model to predict how galaxy lensing, $\Delta\Sigma,$ should depend on $\rhalf$ for $\mstar-$complete samples. Other simple empirical models fail the clustering test, such as models in which galaxy size is related to stellar mass alone; these failures persist even when accounting for possible effects from satellite stripping and orphan galaxies. Our results suggest that the relative size of centrals and satellites is predetermined at the time of satellite infall, and that a remarkably simple galaxy--halo scaling relation emerges from the complex physics regulating galaxy size. 
-%We make our python code publicly available to support ongoing efforts to generate realistic synthetic galaxy catalogs for large cosmological surveys.  
 \end{abstract}
 
 \section{Introduction}
@@ -387,13 +386,14 @@ Our approach is closely aligned with the methods used in \citet{somerville_etal1
 We have presented new measurements of the dependence of galaxy clustering upon galaxy size, and used {\tt Halotools} to identify the basic ingredients that influence the signal. We conclude with a brief summary of our primary findings:
 
 \ben
-\item Small galaxies cluster more strongly than large galaxies of the same stellar mass, a new result. Differences between the clustering of small and large galaxies increase on small scales $R\lesssim1\mpc,$ and decrease with stellar mass.
+\item Small galaxies cluster more strongly than large galaxies of the same stellar mass. Differences between the clustering of small and large galaxies increase on small scales $R\lesssim1\mpc,$ and decrease with stellar mass.
 \item The most important ingredient influencing this signal is the relative size of central and satellite galaxies. The magnitude, scale-dependence, and $\mstar-$dependence of $\rhalf-$dependent clustering provides strong evidence that satellite galaxies are smaller than central galaxies of the same halo mass.
-\item Simple empirical models in which $\rhalf$ is regulated by $\mstar,$ rather than $\mhalo,$ are grossly discrepant with the observed clustering signal.
-%\item The ``co-evolution model" shown with solid curves in Figure \ref{fig:clustering_ratio_upshot} exhibits a clustering signal that is strikingly similar to that seen in SDSS. In this model, $\rhalf$ is statistically regulated by $\rmpeak,$ the halo virial radius $\rvir$ at the time of peak halo mass, with strong residual correlation with $\rspeak,$ the halo scale radius at that time. The success of this model supports the notion that galaxy and halo profiles co-evolve across many Gyr of cosmic time.
+\item A simple empirical model in which $\rhalf$ is set by halo $\rvir$ at the time of peak halo mass exhibits a clustering signal that is strikingly similar to that seen in SDSS. 
+\item Models in which $\rhalf$ is regulated by $\mstar,$ rather than $\mhalo,$ are grossly discrepant with the observed clustering signal, even when accounting for satellite mass stripping. 
+\item Taken together, our findings indicate that satellite-specific processes play a sub-dominant role in setting the relative size of centrals and satellites, which instead appears to be largely predetermined at the time of satellite infall.  
 \een
 
-Our results can be treated as a boundary condition for more complex and fine-grained models of galaxy size, such as semi-analytic models and hydrodynamical simulations. We view the present work as a pilot study that motivates a Bayesian inference program to tightly constrain the galaxy size-halo connection with forward modeling techniques, in direct analogy to the literature on the stellar-to-halo-mass relation. Our publicly available code provides a simple means for cosmological surveys to generate synthetic galaxy populations with realistic sizes across the cosmic web.
+Our results can be treated as a boundary condition for more complex and fine-grained models of galaxy size, such as semi-analytic models and hydrodynamical simulations. We view the present work as a pilot study that motivates a Bayesian inference program to tightly constrain the galaxy size-halo connection with forward modeling techniques, in direct analogy to the literature on the stellar-to-halo-mass relation. Our publicly available python code provides a simple means for cosmological surveys to generate synthetic galaxy populations with realistic sizes across the cosmic web.
 
 \section*{Acknowledgments}
 
