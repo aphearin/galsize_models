@@ -230,7 +230,7 @@ We measure $\wproj(\rproj)$ separately for large and small subsamples for four d
 \includegraphics[width=8cm]{FIGS/baseline_sham_orphans.pdf}
 \caption{
 {\bf SHAM + orphan clustering predictions.}
-Using the abundance matching methods described in \S\ref{subsec:smhm}, we compare the projected clustering of mock vs. SDSS galaxies. Each panel shows the comparison for a volume-limited sample defined by a different $\mstar-$threshold. Black points with jackknife-estimated error bars show SDSS measurements; solid red (black) curves show the abundance matching prediction including (excluding) the effect of orphan subhalos (see Appendix A). Including orphans mitigates the discrepancy in the clustering predicted by traditional, $\mpeak-$based SHAM based, though mild tension remains for $\mstar\gtrsim10^{10.75}\msun.$
+Using the abundance matching methods described in \S\ref{subsec:smhm}, we compare the projected clustering of mock vs. SDSS galaxies. Each panel shows the comparison for a volume-limited sample defined by a different $\mstar-$threshold. Black points with error bars show SDSS measurements; solid red (black) curves show the abundance matching prediction including (excluding) the effect of orphan subhalos (see Appendix A). Including orphans mitigates the discrepancy in the clustering predicted by traditional, $\mpeak-$based SHAM based, though mild tension remains for $\mstar\gtrsim10^{10.75}\msun.$
 }
 \label{fig:baseline_sham_clustering}
 \end{figure}
@@ -240,7 +240,10 @@ Using the abundance matching methods described in \S\ref{subsec:smhm}, we compar
 \begin{figure*}
 \centering
 \includegraphics[width=12cm]{FIGS/rvir_only_wp_large_small_absolute.pdf}
-\caption{some caption}
+\caption{
+{\bf $\rhalf-$dependence of galaxy clustering.}
+Red and blue points with error bars show our SDSS measurements of the clustering of small and large galaxies, respectively. For each volume-limited sample of $\mstar-$complete galaxies, the small and large subsamples have identical stellar mass functions, as shown in Figure \ref{fig:sizedefinition}. Solid curves show the clustering predictions of the $\rvir-$only model described in \S\ref{subsubsec:rvirmodel}. The $\rvir-$only model inherits the shortcoming of ordinary abundance matching at $\mstar\gtrsim10^{10.75}\msun,$ although the model faithfully captures the {\em relative} clustering of small vs. large galaxies, as shown in Figure \ref{fig:clustering_ratio_upshot}. 
+}
 \label{fig:rvir_only_clustering_absolute}
 \end{figure*}
 %-----------------------------------------------------------------------------------------------------
@@ -250,8 +253,8 @@ Using the abundance matching methods described in \S\ref{subsec:smhm}, we compar
 \centering
 \includegraphics[width=12cm]{FIGS/rvir_only_wp_ratios.pdf}
 \caption{
-{\bf $\rhalf-$dependence of galaxy clustering.}
-%Points with error bars show new SDSS measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj.$ We define a galaxy as ``large" or ``small" according to whether it is above or below the median size for its stellar mass, so that in each panel, the stellar mass functions of the ``large" and ``small" subsamples are identical, as described in the text. The y-axis shows {\em clustering strength ratios,} so that, for example, a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of comparable stellar mass. Each panel shows results separately for different volume-limited $\mstar-$threshold samples; predictions of three different models are shown in each panel. See \S\ref{subsec:model} for a description of each model.
+{\bf $\rhalf-$dependence of galaxy clustering: clustering ratios.}
+Closely related to Figure \ref{fig:rvir_only_clustering_absolute}, the y-axes show {\em clustering strength ratios,} defined as $(w_{\rm p}^{\rm large} - w_{\rm p}^{\rm small})/w_{\rm p}^{\rm all}.$ Thus a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of the same stellar mass. Solid curves show the clustering ratio predictions of the $\rvir-$only model described in \S\ref{subsubsec:rvirmodel}. Normalizing the measurements and predictions by $w_{\rm p}^{\rm all}$ scales away the shortcoming of ordinary abundance matching at high stellar mass (see Figure \ref{fig:baseline_sham_clustering}), highlighting the successful prediction of the $\rvir-$only model for the $\rhalf-$dependence of galaxy clustering. 
 }
 \label{fig:clustering_ratio_upshot}
 \end{figure*}
@@ -285,7 +288,7 @@ As the orphan catalog has a higher satellite fraction than the standard subhalo 
 \includegraphics[width=8cm]{FIGS/rvir_only_cen_sat_sizes.pdf}
 \caption{
 {\bf Relative sizes of centrals and satellites.} 
-In a narrow bin of halo mass $\mhalo=\mpeak\approx10^{12}\msun,$ we show the distribution of model galaxy sizes for different subpopulations galaxies, as predicted by the $\rvir-$only model. The red histogram shows the sizes of satellites; the blue histogram shows host halos that have never passed inside the virial radius of a larger halo (``true centrals"); the green histogram host halos that were subhalos inside a larger at some point in their past history (``splashback halos"). In the $\rvir-$only model, galaxy size is set by the {\em physical} size of the virial radius at the time the halo attains its peak mass, naturally resulting in smaller sizes for satellites and backsplash centrals relative to true centrals of the same $\mpeak.$ The central/satellite size differences shown here are not enough to correctly predict the observed clustering ratios (see Figure \ref{fig:clustering_ratio_upshot}), motivating the $\mstar-$stripping and profile co-evolution models.
+In a narrow bin of halo mass $\mhalo\equiv\mpeak\approx10^{12}\msun,$ we show the distribution of model galaxy sizes for different subpopulations galaxies, as predicted by the $\rvir-$only model. The red histogram shows the sizes of satellites; the blue histogram shows host halos that have never passed inside the virial radius of a larger halo (``true centrals"); the green histogram host halos that were subhalos inside a larger at some point in their past history (``splashback centrals"). In the $\rvir-$only model, galaxy size is set by the {\em physical} size of the virial radius at the time the halo attains its peak mass, naturally resulting in smaller sizes for satellites and splashback centrals relative to true centrals of the same $\mhalo.$ 
 }
 \label{fig:censatsizehist}
 \end{figure}
@@ -297,7 +300,7 @@ In a narrow bin of halo mass $\mhalo=\mpeak\approx10^{12}\msun,$ we show the dis
 \includegraphics[width=8cm]{FIGS/alt_model_wp_ratios.pdf}
 \caption{
 {\bf Impact of tidal stripping.} 
-In all panels, the axes and points with error bars are the same as in Figure \ref{fig:clustering_ratio_upshot}. The dashed curves (``$\rvir-$only model") and solid curves (``profile co-evolution model") from  Figure \ref{fig:clustering_ratio_upshot} are also shown for convenience. The dot-dashed curves show results for a model in which satellites lose mass after infall in a manner similar to what is seen in high-resolution hydrodynamical simulations, as described in \S\ref{subsubsec:strippingmodel}. The dotted curve shows results for the same model, but including the effect of ``orphan" galaxies that live in subhalos no longer resolved by {\tt Rockstar}.
+In all panels, the axes and points with error bars are the same as in Figure \ref{fig:clustering_ratio_upshot}. The solid green curves shows the prediction of the $\mstar-$only model, which is in gross tension with the data due to satellites having the same size as centrals of the same mass. The solid purple curves show results for a model in which satellites lose mass after infall in a manner similar to what is seen in high-resolution hydrodynamical simulations, as described in \S\ref{subsubsec:strippingmodel}. This produces satellites that are smaller than centrals, but the effect is too mild to correctly capture the observed clustering. Evidently, satellite-specific mass stripping plays a sub-dominant role in setting the relative size of centrals and satellites. 
 }
 \label{fig:strippingorphans}
 \end{figure}
