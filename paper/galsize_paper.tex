@@ -60,6 +60,7 @@
 \newcommand{\mpeak}{M_{\rm peak}}
 \newcommand{\zpeak}{z_{M_{\rm peak}}}
 \newcommand{\mhalo}{M_{\rm halo}}
+\newcommand{\mhost}{M_{\rm host}}
 \newcommand{\rvir}{R_{\rm vir}}
 \newcommand{\rmpeak}{R_{\rm M_{peak}}}
 \newcommand{\vmaxmpeak}{V_{\rm peak}}
@@ -129,9 +130,7 @@ Our galaxy sample comes from the catalog of SDSS galaxy profile decompositions p
 
 We calculate two-point clustering $\wproj$ of our SDSS galaxy sample using line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. {\color{red} PSB: Please fill in details about {\tt correl} here}. 
 
-As the bedrock of our modeling, we use the publicly available\footnote{\url{http://www.slac.stanford.edu/~behroozi/BPlanck\_Hlists}} catalog of {\tt Rockstar} subhalos identified at $z=0$ in the Bolshoi-Planck simulation \citep{klypin_etal11,behroozi12_rockstar,behroozi12_consistent_trees,riebe_etal13,rodriguez_puebla16_bolplanck}. 
-
-We additionally explore the potential existence of satellite galaxies that reside in subhalos that are not identified by halo-finder to the present day, so-called ``orphan galaxies" \citep[see, e.g.,][]{campbell_etal17}. We use an extension of {\tt Consistent Trees} that models the evolution of subhalos after disruption. The phase space evolution of orphans is approximated by following a point mass evolving in the host halo potential according to the orbital parameters of the subhalo at the time of disruption; the evolution of subhalo mass and circular velocity is approximated using the semi-analytic model presented in \citet{jiang_vdB14}. {\color{red} PSB: Make sure you agree with my description of your orphan treatment.} 
+As the bedrock of our modeling, we use the publicly available\footnote{\url{http://www.slac.stanford.edu/~behroozi/BPlanck\_Hlists}} catalog of {\tt Rockstar} subhalos identified at $z=0$ in the Bolshoi-Planck simulation \citep{klypin_etal11,behroozi12_rockstar,behroozi12_consistent_trees,riebe_etal13,rodriguez_puebla16_bolplanck}. As described in \S\ref{subsec:sham}, we will use traditional abundance matching to connect stellar mass $\mstar$ with subhalo peak mass $\mpeak.$ To address issues related to subhalo incompleteness \citep{guo_white13}, we supplement the Bolshoi-Planck subhalo catalog with {\em all} subhalos that were ever identified by {\tt Rockstar}, including those that no longer appear in the standard catalog as subhalos that survive to $z=0.$ We describe our treatment of these ``orphan" subhalos in the Appendix. 
 
 For mock galaxies, to compute galaxy clustering we employ the distant observer approximation by treating the simulation $z-$axis as the line-of-sight. We compute $\wproj$ using the {\tt mock\_observables.wp} function in {\tt Halotools}, which is a python implementation of the algorithm in the {\tt Corrfunc} C library \citep{sinha_etal17}.
 
@@ -156,12 +155,10 @@ Because galaxy clustering has well-known dependence upon $\mstar$ that is not th
 \section{Galaxy-Halo Model}
 \label{sec:model}
 
-\subsection{Stellar mass model}
-\label{subsec:smhm}
+\subsection{Abundance Matching}
+\label{subsec:sham}
 
-We map $\mstar$ onto subhalos using deconvolution abundance matching on the orphan-supplemented Bolshoi-Planck subhalo catalog, as described in detail in the Appendix. 
-
-%For halo mass $\mhalo$ we use $\mpeak,$ the largest value of $\mvir$ ever attained along the main progenitor branch of the subhalo.
+We map $\mstar$ onto subhalos using deconvolution abundance matching on the orphan-supplemented Bolshoi-Planck subhalo catalog, as described in detail in the Appendix. Briefly, our abundance matching prescription is based $\mpeak,$ the largest value of $\mvir$ ever attained along the main progenitor branch of the subhalo.
 
 \subsection{Galaxy size models}
 \label{subsec:model}
@@ -405,9 +402,14 @@ This research was supported in part by the National Science Foundation under Gra
 
 \bibliography{galsize_paper}
 
-\section*{Appendix: Treatment of Orphan Subhalos}
+\section*{Appendix: Treatment of Disrupted Subhalos}
 
+We use an extension of {\tt Consistent Trees} that models the evolution of subhalos after disruption. The phase space evolution of disrupted subhalos is approximated by following a point mass evolving in the host halo potential according to the orbital parameters of the subhalo at the time of disruption; the evolution of subhalo mass and circular velocity is approximated using the semi-analytic model presented in \citet{jiang_vdB14}. We then use the {\tt orphans} program in {\tt UniverseMachine} to walk through all the Bolshoi-Planck {\tt hlist} files, yielding the main progenitor information of every subhalo that was ever identified by {\tt Consistent Trees}. 
 
+Since it is likely that some portion of these disrupted subhalos should be populated with model galaxies \citep{guo_white13, campbell_etal17}, in our initial application of deconvolution abundance matching we derive the $\mstar--\mpeak$ relation using {\em all} subhalos, including those that may be disrupted. We then apply a selection function to the disrupted subhalos, so that a fraction of these objects will host galaxies in our mock universe. We refer to this as the {\em orphan selection function}, $\mathcal{F}_{\rm orphan},$ which we consider to be an integral component of our application of abundance matching. 
+
+Since a rigorous calibration of $\mathcal{F}_{\rm orphan}$ is beyond the scope of the present work, we instead opt for a simple parameterization that yields reasonably accurate recovery of the galaxy clustering signal observed in SDSS. We model $\mathcal{F}_{\rm orphan}=\mathcal{F}_{\rm orphan}(M_{\rm peak},M_{\rm host}),$ where $\mpeak$ is the peak mass of the disrupted subhalo, and $\mhost$ is the present-day virial mass of its $z=0$ host halo. For the $\mpeak-$dependence, we select $50\%$ of disrupted subhalos with $\mpeak=10^{11}\msun,$ $0\%$ of subhalos with $\mpeak=10^{13}\msun,$ linearly interpolating in $\log\mpeak$ for intermediate values of $\mpeak.$ At each $\mpeak,$ the selection of disrupted halos is not random; instead, we preferentially select the subhalos with larger $\mhost,$ which we intend to offset the increased difficulty of subhalo-finding algorithms to identify subhalos with especially small values of  $\mu\equiv\mpeak/\mhost.$
+ 
 \end{document}
 
 
