@@ -77,6 +77,8 @@
 \newcommand{\wpsmall}{w_{\rm p}^{\rm small}}
 \newcommand{\wpall}{w_{\rm p}^{\rm all}}
 
+\newcommand{\median}[2]{\langle{#1}\vert{#2}\rangle_{\rm median}}
+
 %%%%%%%%  units  %%%%%%%%
 \newcommand{\kpc}{{\rm kpc}}
 \newcommand{\mpc}{{\rm Mpc}}
@@ -146,7 +148,7 @@ Because galaxy clustering has well-known dependence upon $\mstar$ that is not th
 \centering
 \includegraphics[width=8cm]{FIGS/sdss_small_large_sample_definitions.pdf}
 \caption{
-{\bf Definition of small and large galaxy samples.} 
+{\bf Definition of ``small" and ``large" galaxies.} For a volume-limited SDSS galaxy sample defined by $M_{\ast}>10^{10.25}M_{\odot},$ we visually demonstrate how we classify galaxies into ``small" and ``large" subsamples. As described in detail in \S\ref{subsec:sizedef}, we compute the median value $\median{\rhalf}{\mstar}$ using a sliding window with a width of $1000$ galaxies at each value of $\mstar.$ The {\em left panel} shows a histogram of the stellar masses, confirming that our method yields identical stellar mass functions for the two subsamples. The {\em right panel} shows histograms of $\rhalf$ for the two subsamples, which partially overlap due to the finite range of $\mstar$ in the volume-limited sample. 
 }
 \label{fig:sizedefinition}
 \end{figure}
@@ -171,7 +173,7 @@ In \S\ref{sec:results}, we calculate predictions for the $\rhalf-$dependence of 
 \subsubsection{$\mstar-$only model}
 \label{subsubsec:mstaronlymodel}
 
-In the first class of models we explore, we suppose that stellar mass $\mstar$ is the statistical regulator of $\rhalf,$ so that galaxy sizes are drawn from a log-normal distribution centered at $\langle\rhalf\vert\mstar\rangle,$ where $\mstar$ derives from the \citet{moster_etal13} relation described above in \S\ref{subsec:smhm}. To implement this model, for simplicity we directly tabulate $\langle\rhalf\vert\mstar\rangle$ from the data, rather than pursue a parametric form \citep[see, e.g.,][]{zhang_yang17}.
+In the first class of models we explore, we suppose that stellar mass $\mstar$ is the statistical regulator of $\rhalf,$ so that galaxy sizes are drawn from a log-normal distribution centered at $\median{\rhalf}{\mstar}.$ To implement this model, for simplicity we directly tabulate $\median{\rhalf}{\mstar}$ directly from the data, rather than pursue a parametric form \citep[see, e.g.,][]{zhang_yang17}.
 
 \subsubsection{$\rvir-$only model}
 \label{subsubsec:rvirmodel}
@@ -209,7 +211,7 @@ In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ wit
 \centering
 \includegraphics[width=8cm]{FIGS/rvir_only_rhalf_vs_mstar_sham_model.pdf}
 \caption{
-The black curve shows the median $\rhalf-\mstar$ relation SDSS galaxies as measured in \citet{meert_etal15}. The two gray bands enveloping the black curve show the $50\%$ and $90\%$ percentile regions. The blue curve shows $\rvir-$only model in which $\langle\rhalf\vert\rvir\rangle=0.0125\rvir,$ as in \citet{kravtsov13}. This figure confirms that a linear relationship between $\rvir$ and $\rhalf,$ convolved against the nonlinear relationships between $\rvir, \mhalo$ and $\mstar,$  predicts the characteristic curvature in the relation $\langle\rhalf\vert\mstar\rangle$ over a wide range in mass.
+The black curve shows the median size-mass relation of SDSS galaxies as measured in \citet{meert_etal15}. The two gray bands enveloping the black curve show the $50\%$ and $90\%$ percentile regions. The blue curve shows $\rvir-$only model in which $\median{\rhalf}{\rvir}=0.01\rvir.$ This figure confirms that a linear relationship between $\rvir$ and $\rhalf,$ convolved against the nonlinear relationships between $\rvir, \mhalo$ and $\mstar,$  predicts the characteristic curvature in the relation $\median{\rhalf}{\mstar}$ over a wide range in mass.
 }
 \label{fig:scatter_plot}
 \end{figure}
@@ -226,7 +228,10 @@ We measure $\wproj(\rproj)$ separately for large and small subsamples for four d
 \begin{figure}
 \centering
 \includegraphics[width=8cm]{FIGS/baseline_sham_orphans.pdf}
-\caption{some caption}
+\caption{
+{\bf SHAM + orphan clustering predictions.}
+Using the abundance matching methods described in \S\ref{subsec:smhm}, we compare the projected clustering of mock vs. SDSS galaxies. Each panel shows the comparison for a volume-limited sample defined by a different $\mstar-$threshold. Black points with jackknife-estimated error bars show SDSS measurements; solid red (black) curves show the abundance matching prediction including (excluding) the effect of orphan subhalos (see Appendix A). Including orphans mitigates the discrepancy in the clustering predicted by traditional, $\mpeak-$based SHAM based, though mild tension remains for $\mstar\gtrsim10^{10.75}\msun.$
+}
 \label{fig:baseline_sham_clustering}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
@@ -395,6 +400,9 @@ We thank the {\tt Astropy} developers for the package-template \citep{astropy}, 
 This research was supported in part by the National Science Foundation under Grant No. NSF PHY11-25915. Work done at Argonne National Laboratory was supported under the DOE contract DE-AC02-06CH11357.
 
 \bibliography{galsize_paper}
+
+\section*{Appendix: Treatment of Orphan Subhalos}
+
 
 \end{document}
 
