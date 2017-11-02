@@ -160,6 +160,18 @@ Because galaxy clustering has well-known dependence upon $\mstar$ that is not th
 
 We map $\mstar$ onto subhalos using deconvolution abundance matching on the orphan-supplemented Bolshoi-Planck subhalo catalog, as described in detail in the Appendix. Briefly, our abundance matching prescription is based $\mpeak,$ the largest value of $\mvir$ ever attained along the main progenitor branch of the subhalo.
 
+%---------------------------------------------------------------------------------------------------
+\begin{figure}
+\centering
+\includegraphics[width=8cm]{FIGS/baseline_sham_orphans.pdf}
+\caption{
+{\bf SHAM + orphan clustering predictions.}
+Using the abundance matching methods described in \S\ref{subsec:smhm}, we compare the projected clustering of mock vs. SDSS galaxies. Each panel shows the comparison for a volume-limited sample defined by a different $\mstar-$threshold. Black points with error bars show SDSS measurements; solid red (black) curves show the abundance matching prediction including (excluding) the effect of orphan subhalos (see Appendix A). Including orphans mitigates the discrepancy in the clustering predicted by traditional, $\mpeak-$based SHAM based, though mild tension remains for $\mstar\gtrsim10^{10.75}\msun.$
+}
+\label{fig:baseline_sham_clustering}
+\end{figure}
+%-----------------------------------------------------------------------------------------------------
+
 \subsection{Galaxy size models}
 \label{subsec:model}
 
@@ -200,6 +212,9 @@ For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the pea
 \section{Results}
 \label{sec:results}
 
+\subsection{Size-Mass Scaling Relation}
+\label{subsec:one_point_function}
+
 In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ with $\mstar.$ The black curve enveloped by the gray bands show the scaling relation for our SDSS galaxy sample, while the blue curve shows the median relation $\langle\rhalf\vert\mstar\rangle$ implied by the $\rvir-$only model described in \S\ref{sec:model}. This figure shows that models in which $\rhalf\propto\rvir$ can naturally give rise to the characteristic curvature in the $\langle\rhalf\vert\mstar\rangle$ relation, confirming the results in \citet{kravtsov13} in a forward modeling context.
 
 %---------------------------------------------------------------------------------------------------
@@ -220,17 +235,6 @@ In Figure \ref{fig:clustering_ratio_upshot} we present new measurements of the $
 
 We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds, $\mstar>10^{9.75}\msun,$ $\mstar>10^{10.25}\msun,$ $\mstar>10^{10.75}\msun,$ and $\mstar>10^{11.25}\msun.$ We make the same measurements for each volume-limited $\mstar-$threshold sample {\em without} splitting on size, giving us measurements $\wpall, \wplarge,$ and $\wpsmall$ for each threshold sample. This allow us to compute the ratio $(\wplarge-\wpsmall)/\wpall,$ which we refer to as {\em the $\rhalf$ clustering ratio}. These ratios are the measurements appearing on the y-axis in each panel of Figure \ref{fig:clustering_ratio_upshot}. Points with jackknife-estimated error bars show SDSS measurements, solid curves show the clustering ratios of model galaxies as predicted by the models described in \S\ref{sec:model}.
 
-%---------------------------------------------------------------------------------------------------
-\begin{figure}
-\centering
-\includegraphics[width=8cm]{FIGS/baseline_sham_orphans.pdf}
-\caption{
-{\bf SHAM + orphan clustering predictions.}
-Using the abundance matching methods described in \S\ref{subsec:smhm}, we compare the projected clustering of mock vs. SDSS galaxies. Each panel shows the comparison for a volume-limited sample defined by a different $\mstar-$threshold. Black points with error bars show SDSS measurements; solid red (black) curves show the abundance matching prediction including (excluding) the effect of orphan subhalos (see Appendix A). Including orphans mitigates the discrepancy in the clustering predicted by traditional, $\mpeak-$based SHAM based, though mild tension remains for $\mstar\gtrsim10^{10.75}\msun.$
-}
-\label{fig:baseline_sham_clustering}
-\end{figure}
-%-----------------------------------------------------------------------------------------------------
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure*}
@@ -263,21 +267,6 @@ The salient feature of the clustering ratio measurements is that they are negati
 
 A straightforward resolution to the above puzzle is shown in Figure \ref{fig:censatsizehist}, which compares the $\rhalf$ distributions of central, satellite, and splashback galaxies with the same halo mass $\mpeak\approx10^{12}\msun.$ A ``splashback" galaxy is defined as a present-day central that used to be a satellite, i.e., its main progenitor halo passed inside the virial radius of a larger halo at some point in its past history. On the other hand, we define a ``true central" as a galaxy that has never been a satellite.
 
-In the $\rvir-$only model, satellite and splashback galaxies are smaller than centrals of the same halo mass due to the physical size of their halo being smaller at earlier times $\zpeak.$ There are two distinct reasons why this feature results in small galaxies being more strongly clustered relative to larger galaxies of the same mass. First, satellite galaxies statistically occupy higher mass host halos that are more strongly clustered. In models where satellites are smaller than centrals, for any given $\mstar-$threshold the ``small" subsample will naturally have a higher satellite fraction, resulting in a negative clustering ratio as seen in SDSS data. Second, at fixed mass, halos of $L_\ast$ galaxies that form earlier are more strongly clustered, a phenomenon commonly known as {\em halo assembly bias}. Since splashback halos are typically earlier forming than true centrals, then models where splashback halos host smaller-than-average galaxies will naturally predict negative clustering ratios.
-
-In the $\mstar-$only model, in which $\rhalf$ is statistically set by present-day stellar mass with no other dependencies. Thus neither of the above features are present: satellites and centrals of the same mass have no differences in size, and there is essentially no $\rhalf-$dependence to galaxy clustering, in gross disagreement with our SDSS observations.
-
-Much more successful is the profile co-evolution model shown with the solid curves in Figure \ref{fig:clustering_ratio_upshot}. The strongly negative clustering ratios predicted by the assumption of profile co-evolution can be understood in terms of the same features discussed above. Figure \ref{fig:coevolutionmodel} shows that at fixed $\mpeak,$ larger galaxies will occupy halos with larger $\rspeak.$ Since halo concentration $c=\rvir/R_{\rm s},$ this implies that high-concentration galaxies will tend to host smaller galaxies. Both satellites and splashback centrals have higher concentration than true centrals, another manifestation of assembly bias, and so the assumption of profile co-evolution naturally results in an enhancement of the clustering ratios beyond the $\rvir-$only model.
-
-\subsection{Satellite Mass Loss}
-\label{subsec:orphan_stripping}
-
-We conclude this section with a discussion of Figure \ref{fig:strippingorphans}, which provides an estimate of how satellite mass stripping and orphan galaxies impact size-dependent clustering ratios. In the $\mstar-$stripping model described in \S\ref{subsubsec:strippingmodel}, satellites lose stellar mass in a way that mimics what is seen in high-resolution hydrodynamical simulations. This naturally results in an enhancement of size differences between satellites and centrals, and the dot-dashed curves in Figure \ref{fig:strippingorphans} show that produces the expected sign of the effect on the clustering ratios. The magnitude of the effect, however is not strong enough to remedy the discrepancy of the clustering predictions of the $\rvir-$only model. We discuss the physical implications of this result in \S\ref{subsec:satellite_discussion}.
-
-The dotted curves in Figure \ref{fig:strippingorphans} show results of the $\rvir-$only model applied to a subhalo catalog that includes a orphan halos. As described in \S\ref{}, orphan halos are subhalos that are no longer resolved by {\tt Rockstar}, but whose evolution is tracked in a post-processing phase. We apply the same mass-stripping model described in \S\ref{subsubsec:strippingmodel} to this subhalo catalog that includes orphan halos, keep all model galaxies that retain more than half of their stellar mass, and show results for the $\rvir-$only model applied to the resulting catalog.
-
-As the orphan catalog has a higher satellite fraction than the standard subhalo catalog, the negative boost shown the dotted curves in Figure \ref{fig:strippingorphans} is expected. Orphan halos also typically have earlier-than-average values of $\zpeak$ relative to ordinary subhalos, which also enhances differences between central and satellite sizes. See \S\ref{subsec:satellite_discussion} for further discussion.
-
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
@@ -290,6 +279,16 @@ In a narrow bin of halo mass $\mhalo\equiv\mpeak\approx10^{12}\msun,$ we show th
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
+In the $\rvir-$only model, satellite and splashback galaxies are smaller than centrals of the same halo mass due to the physical size of their halo being smaller at earlier times $\zpeak.$ There are two distinct reasons why this feature results in small galaxies being more strongly clustered relative to larger galaxies of the same mass. First, satellite galaxies statistically occupy higher mass host halos that are more strongly clustered. In models where satellites are smaller than centrals, for any given $\mstar-$threshold the ``small" subsample will naturally have a higher satellite fraction, resulting in a negative clustering ratio as seen in SDSS data. Second, at fixed mass, halos of $L_\ast$ galaxies that form earlier are more strongly clustered, a phenomenon commonly known as {\em halo assembly bias}. Since splashback halos are typically earlier forming than true centrals, then models where splashback halos host smaller-than-average galaxies will naturally predict negative clustering ratios.
+
+In the $\mstar-$only model, in which $\rhalf$ is statistically set by present-day stellar mass with no other dependencies. Thus neither of the above features are present: satellites and centrals of the same mass have no differences in size, and there is essentially no $\rhalf-$dependence to galaxy clustering, in gross disagreement with our SDSS observations.
+
+
+\subsection{Failure of $\mstar-$based Models}
+\label{subsec:orphan_stripping}
+
+We conclude this section with a discussion of Figure \ref{fig:strippingorphans}, which provides an estimate of how satellite mass stripping and orphan galaxies impact size-dependent clustering ratios. In the $\mstar+$stripping model described in \S\ref{subsubsec:strippingmodel}, satellites lose stellar mass in a way that mimics what is seen in high-resolution hydrodynamical simulations. This naturally results in an enhancement of size differences between satellites and centrals, and the dot-dashed curves in Figure \ref{fig:strippingorphans} show that produces the expected sign of the effect on the clustering ratios. The magnitude of the effect, however is not strong enough to remedy the discrepancy of the clustering predictions of the $\mstar-$only model. We discuss the physical implications of this result in \S\ref{subsec:satellite_discussion}.
+
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
@@ -301,6 +300,13 @@ In all panels, the axes and points with error bars are the same as in Figure \re
 \label{fig:strippingorphans}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
+
+The dotted curves in Figure \ref{fig:strippingorphans} show results of the $\rvir-$only model applied to a subhalo catalog that includes a orphan halos. As described in \S\ref{}, orphan halos are subhalos that are no longer resolved by {\tt Rockstar}, but whose evolution is tracked in a post-processing phase. We apply the same mass-stripping model described in \S\ref{subsubsec:strippingmodel} to this subhalo catalog that includes orphan halos, keep all model galaxies that retain more than half of their stellar mass, and show results for the $\rvir-$only model applied to the resulting catalog.
+
+As the orphan catalog has a higher satellite fraction than the standard subhalo catalog, the negative boost shown the dotted curves in Figure \ref{fig:strippingorphans} is expected. Orphan halos also typically have earlier-than-average values of $\zpeak$ relative to ordinary subhalos, which also enhances differences between central and satellite sizes. See \S\ref{subsec:satellite_discussion} for further discussion.
+
+\subsection{The Role of Morphology and Color}
+\label{subsec:colormorph}
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure*}
