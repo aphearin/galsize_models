@@ -138,7 +138,11 @@ All numerical values of $\rhalf$ will be quoted in physical $\kpc,$ and all valu
 
 \subsection{Classifying large vs. small galaxies}
 \label{subsec:sizedef}
-Because galaxy clustering has well-known dependence upon $\mstar$ that is not the subject of this work, we wish to remove this influence and focus purely on the relationship between $\rhalf$ and $\wproj(\rproj).$ To do so, we determine the value $\langle\rhalf\vert\mstar\rangle$ by computing a sliding median of $\rhalf,$ calculated using a window of width $N_{\rm gal}=1000.$ Each galaxy is categorized as either ``large" or ``small" according to whether it is above or below the median value appropriate for its stellar mass. Using this technique, we stress that for any $\mstar-$threshold sample, the SMF of the ``large" and ``small" subsamples are identical, by construction. See Figure~\ref{fig:sizedefinition}.
+
+Because galaxy clustering has well-known dependence upon $\mstar$ that is not the subject of this work, we wish to remove this influence and focus purely on the relationship between $\rhalf$ and $\wproj(\rproj).$ To do so, we determine the value $\median{\rhalf}{\mstar}$ by computing a sliding median of $\rhalf,$ calculated using a window of width $N_{\rm gal}=1000.$ Each galaxy is categorized as either ``large" or ``small" according to whether it is above or below the median value appropriate for its stellar mass. We note that this is directly analogous to the common convention for studying the properties of ``red" vs. ``blue" galaxies, in which the two subsamples are divided by a $\mstar-$ or luminosity-dependent green valley cut \citep[e.g.,][]{vdB_etal08,zehavi_etal11}. 
+
+Using this technique, for any $\mstar-$threshold sample, the stellar mass function of the ``large" and ``small" subsamples are identical. We illustrate this for the particular case of $\mstar>10^{10.25}\msun$ in left panel of Figure~\ref{fig:sizedefinition}, which shows histograms of stellar mass for the two subsamples. The right panel of Figure~\ref{fig:sizedefinition} compares histograms of their size distributions, which partially overlap due to the variation in $\median{\rhalf}{\mstar}$ across the $\mstar-$ range of the threshold sample. 
+
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
