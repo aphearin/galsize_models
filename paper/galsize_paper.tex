@@ -138,7 +138,6 @@ All numerical values of $\rhalf$ will be quoted in physical $\kpc,$ and all valu
 
 \subsection{Classifying large vs. small galaxies}
 \label{subsec:sizedef}
-
 Because galaxy clustering has well-known dependence upon $\mstar$ that is not the subject of this work, we wish to remove this influence and focus purely on the relationship between $\rhalf$ and $\wproj(\rproj).$ To do so, we determine the value $\langle\rhalf\vert\mstar\rangle$ by computing a sliding median of $\rhalf,$ calculated using a window of width $N_{\rm gal}=1000.$ Each galaxy is categorized as either ``large" or ``small" according to whether it is above or below the median value appropriate for its stellar mass. Using this technique, we stress that for any $\mstar-$threshold sample, the SMF of the ``large" and ``small" subsamples are identical, by construction. See Figure~\ref{fig:sizedefinition}.
 
 %---------------------------------------------------------------------------------------------------
@@ -215,7 +214,7 @@ For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the pea
 \subsection{Size-Mass Scaling Relation}
 \label{subsec:one_point_function}
 
-In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ with $\mstar.$ The black curve enveloped by the gray bands show the scaling relation for SDSS galaxies, while the blue curve shows the median relation  $\median{\rhalf}{\mstar}$ implied by the $\rvir-$based model described in \S\ref{sec:model}. This figure shows that models in which $\rhalf\propto\rvir$ can naturally give rise to the characteristic curvature in the $\langle\rhalf\vert\mstar\rangle$ relation, confirming the results in \citet{kravtsov13} in a forward modeling context.
+In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ with $\mstar.$ The black curve enveloped by the gray bands shows the scaling relation for SDSS galaxies, while the blue curve shows the median relation  $\median{\rhalf}{\mstar}$ implied by the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}. This figure shows that models in which $\rhalf\propto\rvir$ can naturally give rise to the characteristic curvature in the $\rhalf-\mstar$ relation, confirming the results in \citet{kravtsov13} in a forward modeling context.
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
@@ -231,10 +230,15 @@ The black curve shows the median size-mass relation of SDSS galaxies as measured
 \subsection{Size-Dependent Clustering}
 \label{subsec:clustering_results}
 
-In Figure \ref{fig:clustering_ratio_upshot} we present new measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj(\rproj).$
+In Figure~\ref{fig:rvir_only_clustering_absolute}, we present new measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj(\rproj).$ We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds, $\mstar>10^{9.75}\msun,$ $\mstar>10^{10.25}\msun,$ $\mstar>10^{10.75}\msun,$ and $\mstar>10^{11}\msun.$ For each threshold, we split the galaxies into ``large" and ``small" subsamples; as described in \S\ref{subsec:sizedef} and illustrated in Figure \ref{fig:sizedefinition}, our size-based selection is defined so that the subsamples have identical stellar mass functions. Red points with jackknife-estimated error bars show SDSS measurements of $\wproj(\rproj)$ for small galaxy samples, blue points show the same for large galaxies. Solid curves show $\wproj$ as predicted by the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}. 
 
-We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds, $\mstar>10^{9.75}\msun,$ $\mstar>10^{10.25}\msun,$ $\mstar>10^{10.75}\msun,$ and $\mstar>10^{11}\msun.$ We make the same measurements for each volume-limited $\mstar-$threshold sample {\em without} splitting on size, giving us measurements $\wpall, \wplarge,$ and $\wpsmall$ for each threshold sample. This allow us to compute the ratio $(\wplarge-\wpsmall)/\wpall,$ which we refer to as {\em the $\rhalf$ clustering ratio}. These ratios are the measurements appearing on the y-axis in each panel of Figure \ref{fig:clustering_ratio_upshot}. Points with jackknife-estimated error bars show SDSS measurements, solid curves show the clustering ratios of model galaxies as predicted by the models described in \S\ref{sec:model}.
+The salient feature of these clustering measurements is that small galaxies cluster more strongly than large galaxies of the same stellar mass. This feature also holds true for galaxies predicted by the $\rvir-$based model. This result may be surprising, since $\rhalf\propto\rvir,$ halo mass $\rvir\propto\mhalo^{1/3},$ and clustering strength increases with $\mvir.$ Based on this simple argument, one would expect that large galaxies would be the more strongly clustered. We provide a resolution to this conundrum in \S\ref{subsec:censat_sizes}; before doing so, we first examine the clustering test of the $\rvir-$based model in more detail.
 
+As shown in Figure \ref{fig:baseline_sham_clustering}, the abundance matching prediction for $\wproj(\rproj)$ exhibits tension with SDSS observations at the $10-20\%$ level, particularly for $\mstar\gtrsim10^{10.75}\msun.$ This tension is inherited by our $\rvir-$based model for size, which is the subject of this work, and so we wish to compare our size models to data in such a way that minimizes the role played by the underlying stellar-to-halo-mass relation. We accomplish this using {\em the $\rhalf$ clustering ratios,} described below. 
+
+For each volume-limited $\mstar-$threshold sample, we additionally measure $\wproj(\rproj)$ {\em without} splitting on size, giving us measurements $\wpall, \wplarge,$ and $\wpsmall$ for each threshold sample. This allows us to compute the ratio $(\wplarge-\wpsmall)/\wpall,$ which we refer to as {\em the $\rhalf$ clustering ratio}, denoted as $\delta_{\rhalf}(\wproj).$ For example, a clustering ratio of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of the same stellar mass. These ratios are the measurements appearing on the y-axis in each panel of Figure \ref{fig:clustering_ratio_upshot}. 
+
+The points and curves in Figure \ref{fig:clustering_ratio_upshot} are all negative: small galaxies cluster more strongly relative to large. This presentation of the measurement makes plain that the underlying signal of $\rhalf-$dependent clustering is strongest for samples with smaller stellar mass; as $\mstar$ increases, the signal weakens and nearly vanishes for $\mstar\gtrsim10^{11}\msun.$ Strikingly, the $\rvir-$based model exhibits this $\mstar-$dependent behavior, as well as the scale-dependence of the observed clustering signal at each $\mstar.$ As described in \S\ref{subsec:censat_sizes} below, we attribute the success of this prediction to the relative sizes of central vs. satellite galaxies. 
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure*}
@@ -259,8 +263,6 @@ Closely related to Figure \ref{fig:rvir_only_clustering_absolute}, the y-axes sh
 \label{fig:clustering_ratio_upshot}
 \end{figure*}
 %-----------------------------------------------------------------------------------------------------
-
-The salient feature of the clustering ratio measurements is that they are negative: small galaxies cluster more strongly than large galaxies of the same stellar mass. This feature also holds true for galaxies predicted by the $\rvir-$based model. This result may be surprising, since $\rhalf\propto\rvir,$ halo mass $\rvir\propto\mhalo^{1/3},$ and clustering strength increases with $\mvir.$ Based on this simple argument, one would expect the opposite trend to the measurements shown here.
 
 \subsection{Central vs. Satellite Sizes}
 \label{subsec:censat_sizes}
