@@ -131,9 +131,9 @@ Our galaxy sample comes from the catalog of SDSS galaxy profile decompositions p
 
 We calculate two-point clustering $\wproj$ of our SDSS galaxy sample using line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. {\color{red} PSB: Please fill in details about {\tt correl} here}.
 
-As the bedrock of our modeling, we use the publicly available\footnote{\url{http://www.slac.stanford.edu/~behroozi/BPlanck\_Hlists}} catalog of {\tt Rockstar} subhalos identified at $z=0$ in the Bolshoi-Planck simulation \citep{klypin_etal11,behroozi12_rockstar,behroozi12_consistent_trees,riebe_etal13,rodriguez_puebla16_bolplanck}. As described in \S\ref{subsec:sham}, we will use traditional abundance matching to connect stellar mass $\mstar$ with subhalo peak mass $\mpeak.$ To address issues related to subhalo incompleteness \citep{guo_white13}, we supplement the Bolshoi-Planck subhalo catalog with {\em all} subhalos that were ever identified by {\tt Rockstar}, including those that no longer appear in the standard catalog as subhalos that survive to $z=0.$ We describe our treatment of these ``orphan" subhalos in the Appendix.
+As the bedrock of our modeling, we use the publicly available\footnote{\url{http://www.slac.stanford.edu/~behroozi/BPlanck\_Hlists}} catalog of {\tt Rockstar} subhalos identified at $z=0$ in the Bolshoi-Planck simulation \citep{klypin_etal11,behroozi12_rockstar,behroozi12_consistent_trees,riebe_etal13,rodriguez_puebla16_bolplanck}. As described in \S\ref{subsec:sham}, we will use traditional abundance matching to connect stellar mass $\mstar$ with subhalo peak mass $\mpeak.$ To address issues related to subhalo incompleteness \citep{guo_white13,campbell_etal17}, we supplement the Bolshoi-Planck subhalo catalog with {\em all} subhalos that were ever identified by {\tt Rockstar}, including those that no longer appear in the standard catalog as subhalos that survive to $z=0.$ We describe our treatment of these ``orphan" subhalos in the Appendix.
 
-For mock galaxies, to compute galaxy clustering we employ the distant observer approximation by treating the simulation $z-$axis as the line-of-sight. We compute $\wproj$ using the {\tt mock\_observables.wp} function in {\tt Halotools}, which is a python implementation of the algorithm in the {\tt Corrfunc} C library \citep{sinha_etal17}.
+For mock galaxies, to compute galaxy clustering we employ the distant observer approximation by treating the simulation $z-$axis as the line-of-sight. We compute $\wproj$ using the {\tt mock\_observables.wp} function in {\tt Halotools}, which is a python implementation of the algorithm in the {\tt Corrfunc} C library \citep{sinha_etal17}. We compute $\Delta\Sigma$ using the {\tt mock\_observables.delta\_sigma} function. 
 
 All numerical values of $\rhalf$ will be quoted in physical $\kpc,$ and all values of $\mstar$ and $\mhalo$ in $\msun,$ assuming $H_0=67.8~\kms\equiv100h~\kms,$ the best-fit value from \citet{planck15}. To scale stellar masses to ``$h=1$ units" \citep{croton13}, our numerically quoted values for $\mstar$ should be multiplied by a factor of $h^2,$ while our halo masses and distances should be multiplied by a factor of $h.$
 
@@ -162,7 +162,7 @@ Using this technique, for any $\mstar-$threshold sample, the stellar mass functi
 \subsection{Abundance Matching}
 \label{subsec:sham}
 
-We map $\mstar$ onto subhalos using deconvolution abundance matching on the orphan-supplemented Bolshoi-Planck subhalo catalog, as described in detail in the Appendix. Briefly, our abundance matching prescription is based $\mpeak,$ the largest value of $\mvir$ ever attained along the main progenitor branch of the subhalo.
+We map $\mstar$ onto subhalos using deconvolution abundance matching (SHAM). See section 3.3 of \citet{behroozi_etal10} or the appendix of \citet{kravtsov_etal14} for an account of the mathematics underlying this technique. To perform the abundance matching, we use the publicly available code\footnote{\url{https://bitbucket.org/yymao/abundancematching/overview}} developed by Yao-Yuan Mao \citep{lehmann_etal15} that provides a python wrapper around the C kernel developed by Peter Behroozi \citep{behroozi_etal10}. For the subhalo property used in SHAM, we use $\mpeak,$ the largest value of $\mvir$ ever attained by the subhalo throughout the entire history of the main progenitor halo.  Using the stellar mass function provided in \citet{moustakas_etal13}, we model $\mstar$ as a log-normal distribution with $0.2$dex of scatter about the median relation $\median{\mstar}{\mpeak}$ determined by deconvolution abundance matching. As described in the appendix, we include a prescription for supplementing the ordinary {\tt Rockstar} subhalo catalog with disrupted subhalos, so that some of our model galaxies inhabit subhalos that are no longer resolved and do not appear in the standard publicly available catalog. 
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
@@ -180,7 +180,6 @@ Using the abundance matching methods described in \S\ref{subsec:smhm}, we compar
 \label{subsec:model}
 
 In \S\ref{sec:results}, we calculate predictions for the $\rhalf-$dependence of galaxy clustering for several different kinds of empirical models, described in turn below.
-
 
 \subsubsection{$\mstar-$based model}
 \label{subsubsec:mstaronlymodel}
@@ -408,7 +407,7 @@ Our results can be treated as a boundary condition for more complex and fine-gra
 
 \section*{Acknowledgments}
 
-APH thanks John Baker for the {\em Toejam \& Earl} soundtrack. Thanks also to Frank van den Bosch, Doug Watson, and Risa Wechsler for thoughtful feedback at various stages of the development of this work, and to Faustin Carter and Sebastian Bocquet for sharing their python expertise.
+APH thanks John Baker for the {\em Toejam \& Earl} soundtrack. Thanks also to Frank van den Bosch, Andrew Zentner, Doug Watson, and Risa Wechsler for thoughtful feedback at various stages of the development of this work, and to Faustin Carter and Sebastian Bocquet for sharing their matplotlib expertise.
 
 We thank the {\tt Astropy} developers for the package-template \citep{astropy}, and {\tt NumPy} \citep{numpy_ndarray}, {\tt SciPy} \citep{scipy}, IPython, Matplotlib, and GitHub for their extremely useful free software.
 
