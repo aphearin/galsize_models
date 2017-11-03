@@ -184,7 +184,7 @@ In \S\ref{sec:results}, we calculate predictions for the $\rhalf-$dependence of 
 \subsubsection{$\mstar-$based model}
 \label{subsubsec:mstaronlymodel}
 
-In the first class of models we explore, we suppose that stellar mass $\mstar$ is the statistical regulator of $\rhalf,$ so that galaxy sizes are drawn from a log-normal distribution centered at $\median{\rhalf}{\mstar}.$ To implement this model, for simplicity we directly tabulate $\median{\rhalf}{\mstar}$ directly from the data, rather than pursue a parametric form \citep[see, e.g.,][]{zhang_yang17}.
+In the first class of models we explore, we suppose that stellar mass $\mstar$ is the statistical regulator of $\rhalf,$ so that galaxy sizes are drawn from a log-normal distribution with $0.2$ dex of scatter centered at $\median{\rhalf}{\mstar}.$ To implement this model, for simplicity we directly tabulate $\median{\rhalf}{\mstar}$ directly from the data, rather than pursue a parametric form \citep[see, e.g.,][]{zhang_yang17}.
 
 \subsubsection{$\rvir-$based model}
 \label{subsubsec:rvirmodel}
@@ -204,14 +204,13 @@ where for $\Delta_{\rm vir}(\zpeak)$ we use the fitting function to the ``virial
 \label{subsubsec:strippingmodel}
 
 As we will show in \S\ref{sec:results}, the chief ingredient needed to recover the observed clustering properties of galaxies is that satellites need to be smaller than centrals of comparable halo mass. Thus it is natural to consider a class of models in which stellar mass is stripped from satellite galaxies after infall.
- %satellites lose stellar mass in a way that mimics what is seen in high-resolution hydrodynamical simulations. 
 
 The basis of this class of models is the fitting function presented in \citet{smith_etal16}, which was calibrated by studying stellar mass loss in a suite of high-resolution hydrodynamical simulations. In this model, $f_{\ast}$ quantifies the fraction of stellar mass lost as a function of $f_{\rm DM},$ the amount of dark matter that has been stripped since infall:
 
 \beq
 f_{\ast} = 1 - \exp(-14.2f_{\rm DM})
 \eeq
-For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the peak mass, $M_{\rm vir}/M_{\rm peak}.$ If we denote the post-stripping stellar mass as $M_{\ast}',$ then we have $M_{\ast}'\equiv f_{\ast}M_{\ast},$ where $M_{\ast}$ is given by Eq.~\ref{eq:smhm}. We then calculate the post-stripping radius by interpolating $\langle\rhalf'\vert\mstar'\rangle$ directly from SDSS data.
+For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the peak mass, $M_{\rm vir}/M_{\rm peak}.$ If we denote the post-stripping stellar mass as $M_{\ast}',$ then we have $M_{\ast}'\equiv f_{\ast}M_{\ast},$ where $M_{\ast}$ is given by Eq.~\ref{eq:smhm}. We then calculate the post-stripping radius by interpolating $\langle\rhalf'\vert\mstar'\rangle$ directly from SDSS data. 
 
 \section{Results}
 \label{sec:results}
