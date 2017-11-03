@@ -353,15 +353,6 @@ Using the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}, we make 
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{Progression from Backwards to Forward Modeling}
-\label{subsec:forwardsmodeling}
-
-Our results give an archetypal demonstration of the natural scientific progression from backwards to forward modeling. In backwards modeling, some mapping is applied to observed galaxies to estimate the values of model quantities such as halo mass. In \citet{kravtsov13}, the model quantities mapped onto galaxies are $\mhalo$ and $\rvir;$ another classic example of backwards modeling uses a group- or cluster-finding algorithm to assign $\mhalo$ to observed galaxies \citep[e.g.,][]{berlind_etal06,yang_etal05a,rykoff_etal14}. Once the observed galaxies have been supplemented with model variables, then the relations of the galaxy-halo connection can be inferred, for example, by calculating quantities such as the mean stellar mass or quiescent fraction as a function of halo mass \citep[e.g.,][]{yang_etal05b,weinmann_etal06}.
-
-In forward modeling, the direction of inference is turned around: a mapping is instead applied to the model quantities such as $\mhalo.$ In the case of {\tt Halotools}, this transforms a cosmological simulation into a synthetic galaxy catalog that can be directly compared with observations. This enables a richer quantitative study of modeling hypotheses relative to backwards modeling. For example, Figure \ref{fig:clustering_ratio_upshot} shows how forward modeling allows us to exploit galaxy clustering measurements to quantitatively test whether $\mhalo$ or $\mstar$ is the statistical regulator of galaxy size. The ability disentangle coupled variables such as $\mstar$ and $\mhalo$ is just one example of this advantage of forward modeling. Another example is illustrated in Figure \ref{fig:censatsizehist}, in which we explore the role of splashback halos in setting galaxy size. In our forward modeling approach, this is entirely straightforward; in backwards modeling, such an investigation would not even be possible without introducing additional modeling ingredients.
-
-Backwards modeling the galaxy-halo connection is useful for generating hypotheses and motivating functional forms. Forward modeling becomes necessary when the problem at hand becomes encumbered by multiple relevant variables, as is the case with galaxy size. Forward modeling also makes it possible to conduct rigorous Bayesian inference, which we consider to be the next natural step in the progression described here (see \S\ref{subsec:future} for further discussion).
-
 \subsection{Relation to Previous Work}
 \label{subsec:previous_work}
 
