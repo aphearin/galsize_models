@@ -127,6 +127,8 @@ These well-measured scaling relations are challenging to faithfully recover usin
 \section{Data and Simulations}
 \label{sec:data}
 
+{\color{blue} AVK comment: Need to be much clearer and more explicit about which galaxy properties come from which dataset, and probably to reiterate this when discussing the Figure \ref{fig:scatter_plot} plot of the size-mass relation.}
+
 Our galaxy sample comes from the catalog of SDSS galaxy profile decompositions provided by \citet{meert_etal15}. This catalog is based on Data Release 10 of the Sloan Digital Sky Survey \citep[SDSS,][]{ahn_etal14}, with improvements to the photometry pipeline and light profile fitting methods \citep{vikram_etal10,bernardi_etal13,bernardi_etal14,meert_etal13}. In the version of this catalog that we use, two-dimensional $r-$band profiles were fit with a two-component de Vaucouleurs + exponential profile to determine the half-light radius $\rhalf.$ We use stellar mass measurements made available through the MPA-JHU catalog \citep{kauffmann_etal03,brinchmann_etal04}, allowing us to define volume-limited samples of galaxies according to the same completeness cuts used in \citet{behroozi_etal15} (see Figure 2).
 
 We calculate two-point clustering $\wproj$ of our SDSS galaxy sample using line-of-sight projection of $\pi_{\rm max}=20\mpc$ using the {\tt correl} program in {\tt UniverseMachine}. {\color{red} PSB: Please fill in details about {\tt correl} here}.
@@ -142,7 +144,7 @@ All numerical values of $\rhalf$ will be quoted in physical $\kpc,$ and all valu
 
 Because galaxy clustering has well-known dependence upon $\mstar$ that is not the subject of this work, we wish to remove this influence and focus purely on the relationship between $\rhalf$ and $\wproj(\rproj).$ To do so, we determine the value $\median{\rhalf}{\mstar}$ by computing a sliding median of $\rhalf,$ calculated using a window of width $N_{\rm gal}=1000.$ Each galaxy is categorized as either ``large" or ``small" according to whether it is above or below the median value appropriate for its stellar mass. We note that this is directly analogous to the common convention for studying the properties of ``red" vs. ``blue" galaxies, in which the two subsamples are divided by a $\mstar-$ or luminosity-dependent green valley cut \citep[e.g.,][]{vdB_etal08,zehavi_etal11}. 
 
-Using this technique, for any $\mstar-$threshold sample, the stellar mass function of the ``large" and ``small" subsamples are identical. We illustrate this for the particular case of $\mstar>10^{10.25}\msun$ in left panel of Figure~\ref{fig:sizedefinition}, which shows histograms of stellar mass for the two subsamples. The right panel of Figure~\ref{fig:sizedefinition} compares histograms of their size distributions, which partially overlap due to the variation in $\median{\rhalf}{\mstar}$ across the $\mstar-$ range of the threshold sample. 
+Using this technique, for any $\mstar-$threshold sample, the stellar mass function of the ``large" and ``small" subsamples are identical. We illustrate this for the particular case of $\mstar>10^{10.25}\msun$ in left panel of Figure~\ref{fig:sizedefinition}, which shows histograms of stellar mass for the two subsamples. The right panel of Figure~\ref{fig:sizedefinition} compares histograms of their size distributions, which partially overlap due to the variation in $\median{\rhalf}{\mstar}$ across the $\mstar-$ range of the threshold sample. {\color{blue} AVK comment: left panel should be actual stellar mass function, not just a histogram}
 
 
 %---------------------------------------------------------------------------------------------------
@@ -150,7 +152,7 @@ Using this technique, for any $\mstar-$threshold sample, the stellar mass functi
 \centering
 \includegraphics[width=8cm]{FIGS/sdss_small_large_sample_definitions.pdf}
 \caption{
-{\bf Definition of ``small" and ``large" galaxies.} For a volume-limited SDSS galaxy sample defined by $M_{\ast}>10^{10.25}M_{\odot},$ we visually demonstrate how we classify galaxies into ``small" and ``large" subsamples. As described in detail in \S\ref{subsec:sizedef}, we compute the median value $\median{\rhalf}{\mstar}$ using a sliding window with a width of $1000$ galaxies at each value of $\mstar.$ The {\em left panel} shows a histogram of the stellar masses, confirming that our method yields identical stellar mass functions for the two subsamples. The {\em right panel} shows histograms of $\rhalf$ for the two subsamples, which partially overlap due to the finite range of $\mstar$ in the volume-limited sample.
+{\bf Definition of ``small" and ``large" galaxies.} For a volume-limited SDSS galaxy sample defined by $M_{\ast}>10^{10.25}M_{\odot},$ we visually demonstrate how we classify galaxies into ``small" and ``large" subsamples. As described in detail in \S\ref{subsec:sizedef}, we compute the median value $\median{\rhalf}{\mstar}$ using a sliding window with a width of $1000$ galaxies at each value of $\mstar.$ The {\em left panel} shows a histogram of the stellar masses, confirming that our method yields identical stellar mass functions for the two subsamples. The {\em right panel} shows histograms of $\rhalf$ for the two subsamples, which partially overlap due to the finite range of $\mstar$ in the volume-limited sample. {\color{blue} AVK comment: left panel should be actual stellar mass function, not just a histogram}
 }
 \label{fig:sizedefinition}
 \end{figure}
@@ -188,6 +190,8 @@ In the first class of models we explore, we suppose that stellar mass $\mstar$ i
 
 \subsubsection{$\rvir-$based model}
 \label{subsubsec:rvirmodel}
+
+{\color{blue} AVK comment: The choice of nomenclature of $\rvir-$based model and $\mstar-$based model is not clear at all. APH: The big picture being compared/tested here are ``pre-infall" vs. ``post-infall" processes, respectively. Those don't seem like great names either though.}
 
 Motivated by \citet{kravtsov13}, we explore a model in which $\rhalf$ is linearly proportional to halo virial radius:
 \beq
