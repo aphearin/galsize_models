@@ -181,18 +181,24 @@ Using the abundance matching methods described in \S\ref{subsec:sham}, we compar
 \subsection{Galaxy size models}
 \label{subsec:model}
 
-In \S\ref{sec:results}, we calculate predictions for the $\rhalf-$dependence of galaxy clustering for several different kinds of empirical models, described in turn below.
-{\color{blue} AVK comment: The choice of nomenclature of $\rvir-$based model and $\mstar-$based model is not clear at all. APH: The big picture being compared/tested here are ``pre-infall" vs. ``post-infall" processes, respectively. Those don't seem like great names either though.}
+In \S\ref{sec:results}, we calculate predictions for the $\rhalf-$dependence of galaxy clustering for two classes of empirical models, described in turn below.
 
-\subsubsection{$\mstar-$based model}
-\label{subsubsec:mstaronlymodel}
+\subsubsection{Satellite mass loss model}
+\label{subsubsec:strippingmodel}
 
 In the first class of models we explore, we suppose that stellar mass $\mstar$ is the statistical regulator of $\rhalf,$ so that galaxy sizes are drawn from a log-normal distribution with $0.2$ dex of scatter centered at $\median{\rhalf}{\mstar}.$ To implement this model, for simplicity we directly tabulate $\median{\rhalf}{\mstar}$ directly from the data, rather than pursue a parametric form \citep[see, e.g.,][]{zhang_yang17}.
+
+It is natural to consider the possibility that stellar mass is stripped from satellite galaxies after infall. The basis for our implementation of this phenomenon is the fitting function presented in \citet{smith_etal16}, which was calibrated by studying stellar mass loss in a suite of high-resolution hydrodynamical simulations. In this model, $f_{\ast}$ quantifies the fraction of stellar mass lost as a function of $f_{\rm DM},$ the amount of dark matter that has been stripped since infall:
+
+\beq
+f_{\ast} = 1 - \exp(-14.2f_{\rm DM})
+\eeq
+For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the peak mass, $M_{\rm vir}/M_{\rm peak}.$ If we denote the post-stripping stellar mass as $M_{\ast}',$ then we have $M_{\ast}'\equiv f_{\ast}M_{\ast},$ where $M_{\ast}$ is given by the initial application of abundance matching. We then calculate the post-stripping radius by interpolating $\langle\rhalf'\vert\mstar'\rangle$ directly from SDSS data. In this way, we model satellite mass loss and subsequent size truncation in a manner that mimics what is seen in hydrodynamical simulations.
 
 \subsubsection{$\rvir-$based model}
 \label{subsubsec:rvirmodel}
 
-Motivated by \citet{kravtsov13}, we explore a model in which $\rhalf$ is linearly proportional to halo virial radius:
+Motivated by \citet{kravtsov13}, we additionall explore a model in which $\rhalf$ is linearly proportional to halo virial radius:
 \beq
 \label{eq:fiducial_model}
 \rhalf = 0.01\rvir
@@ -202,18 +208,6 @@ For the virial radius of halos and subhalos, we use $\rmpeak,$ the value of $\rv
 \mpeak\equiv\frac{4\pi}{3}\rmpeak^{3}\Delta_{\rm vir}(\zpeak)\rho_{\rm m}(\zpeak),
 \eeq
 where for $\Delta_{\rm vir}(\zpeak)$ we use the fitting function to the ``virial" definition used in \citet{bryan_norman98}. For the model we refer to as the ``$\rvir-$based model", we add uncorrelated log-normal scatter of $\sigmarhalf=0.2$ dex to generate a Monto Carlo realization of the model population.
-
-\subsubsection{$\mstar$+stripping model}
-\label{subsubsec:strippingmodel}
-
-As we will show in \S\ref{sec:results}, the chief ingredient needed to recover the observed clustering properties of galaxies is that satellites need to be smaller than centrals of comparable halo mass. Thus it is natural to consider a class of models in which stellar mass is stripped from satellite galaxies after infall.
-
-The basis of this class of models is the fitting function presented in \citet{smith_etal16}, which was calibrated by studying stellar mass loss in a suite of high-resolution hydrodynamical simulations. In this model, $f_{\ast}$ quantifies the fraction of stellar mass lost as a function of $f_{\rm DM},$ the amount of dark matter that has been stripped since infall:
-
-\beq
-f_{\ast} = 1 - \exp(-14.2f_{\rm DM})
-\eeq
-For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the peak mass, $M_{\rm vir}/M_{\rm peak}.$ If we denote the post-stripping stellar mass as $M_{\ast}',$ then we have $M_{\ast}'\equiv f_{\ast}M_{\ast},$ where $M_{\ast}$ is given by the initial application of abundance matching. We then calculate the post-stripping radius by interpolating $\langle\rhalf'\vert\mstar'\rangle$ directly from SDSS data.
 
 \section{Results}
 \label{sec:results}
@@ -274,9 +268,9 @@ Closely related to Figure \ref{fig:rvir_only_clustering_absolute}, the y-axes sh
 \subsection{Testing the Impact of Satellite Mass Loss}
 \label{subsec:mstar_stripping}
 
-The green curves in Figure~\ref{fig:mstarmodelclustering} test the clustering predictions of the $\mstar-$based model described in \S\ref{subsubsec:mstaronlymodel}. In this model, $\rhalf$ is a log-normal distribution centered at $\median{\rhalf}{\mstar}.$ By construction, this model predicts no dependence at all of galaxy clustering upon $\rhalf$ at fixed $\mstar,$ simply because the scatter of $\rhalf$ about $\median{\rhalf}{\mstar}$ is uncorrelated with any other property. This is in contrast to the $\rvir-$based model, which correlates the scatter with host halo mass and as well as halo assembly. Likewise, the $\mstar+$stripping model described in \S\ref{subsubsec:strippingmodel} also exhibits correlations between scatter in $\rhalf$ and halo properties: in this alternative model, satellites have smaller sizes than centrals of the same $\mstar$ due to post-infall stripping.
+The green curves in Figure~\ref{fig:mstarmodelclustering} test the clustering predictions of the model described in \S\ref{subsubsec:strippingmodel} {\em before} applying the satellite mass loss prescription. Thus the green curves pertain to a model where $\rhalf$ is a purely random log-normal distribution centered at $\median{\rhalf}{\mstar}.$ By construction, this model predicts no dependence at all of galaxy clustering upon $\rhalf$ at fixed $\mstar,$ simply because the scatter of $\rhalf$ about $\median{\rhalf}{\mstar}$ is uncorrelated with any other property. The application of satellite mass loss introduces correlations in the scatter: after mass loss, satellites have smaller sizes than centrals of the same $\mstar$ due to post-infall stripping.
 
-The treatment of stellar mass loss in this model naturally results in an enhancement of size differences between satellites and centrals. As shown by the purple curves in Figure \ref{fig:mstarmodelclustering}, this impacts $\rhalf-$dependent clustering in the expected manner. The ``small" galaxy population has a higher satellite fraction, and so in this model small galaxies cluster more strongly relative to large galaxies of the same stellar mass. However, the magnitude of the effect is evidently is not strong enough to produce clustering predictions that are consistent with SDSS. Evidently it is difficult to strip enough mass from satellites so that the $\rhalf-$dependent clustering is in agreement with observations. As we argue in \S\ref{sec:interpretation}, this supports the conclusion that the relative difference between central and satellite size is at least partially in place at the time of satellite infall. 
+As shown by the purple curves in Figure \ref{fig:mstarmodelclustering}, satellite mass loss impacts $\rhalf-$dependent clustering in the expected manner. The ``small" galaxy population has a higher satellite fraction due to satellites being smaller than centrals of the same $\mstar,$ and so in this model small galaxies cluster more strongly relative to large. However, the magnitude of the effect is evidently is not strong enough to produce clustering predictions that are consistent with SDSS. Evidently it is difficult to strip enough mass from satellites so that the $\rhalf-$dependent clustering is in agreement with observations. As we argue in \S\ref{sec:interpretation}, this supports the conclusion that the relative difference between central and satellite size is at least partially in place at the time of satellite infall.
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
@@ -284,7 +278,7 @@ The treatment of stellar mass loss in this model naturally results in an enhance
 \includegraphics[width=8cm]{FIGS/alt_model_wp_ratios.pdf}
 \caption{
 {\bf Impact of tidal stripping.}
-In all panels, the axes and points with error bars are the same as in Figure \ref{fig:clustering_ratio_upshot}. The solid green curves shows the prediction of the $\mstar-$based model, which is in gross tension with the data due to satellites having the same size as centrals of the same mass. The solid purple curves show results for a model in which satellites lose mass after infall in a manner similar to what is seen in high-resolution hydrodynamical simulations, as described in \S\ref{subsubsec:strippingmodel}. This produces satellites that are smaller than centrals, but the effect is too mild to correctly capture the observed clustering. Evidently, satellite-specific mass stripping plays a sub-dominant role in setting the relative size of centrals and satellites.
+In all panels, the axes and points with error bars are the same as in Figure \ref{fig:clustering_ratio_upshot}. The solid green curves shows the prediction of the satellite mass loss model, which is in gross tension with the data due to satellites having the same size as centrals of the same mass. The solid purple curves show results for a model in which satellites lose mass after infall in a manner similar to what is seen in high-resolution hydrodynamical simulations, as described in \S\ref{subsubsec:strippingmodel}. This produces satellites that are smaller than centrals, but the effect is too mild to correctly capture the observed clustering. Evidently, satellite-specific mass stripping plays a sub-dominant role in setting the relative size of centrals and satellites.
 }
 \label{fig:mstarmodelclustering}
 \end{figure}
@@ -351,9 +345,9 @@ In a narrow bin of halo mass $\mhalo\equiv\mpeak\approx10^{12}\msun,$ we show th
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
-In the $\rvir-$based model, satellite and splashback galaxies are smaller than centrals of the same halo mass due to the physical size of their halo being smaller at earlier times $\zpeak.$ There are two distinct reasons why this feature results in small galaxies being more strongly clustered relative to larger galaxies of the same mass. First and foremost, satellite galaxies statistically occupy higher mass host halos that are more strongly clustered. So in models where satellites are smaller than centrals, at fixed $\mstar$ the ``small" subsample will naturally have a higher satellite fraction, boosting the clustering of small galaxies relative to large of the same stellar mass. Second, at fixed mass, halos of $L_\ast$ galaxies that form earlier are more strongly clustered, a phenomenon commonly known as {\em halo assembly bias}. Splashback halos are typically earlier-forming than true centrals, and so models where splashback halos host smaller-than-average galaxies will naturally predict smaller galaxies being the more strongly clustered. We highlight this point in section \ref{subsec:mstar_stripping} below by testing predictions for $\mstar-$based models that do not possess central vs. satellite size differences.
+In the $\rvir-$based model, satellite and splashback galaxies are smaller than centrals of the same halo mass due to the physical size of their halo being smaller at earlier times $\zpeak.$ There are two distinct reasons why this feature results in small galaxies being more strongly clustered relative to larger galaxies of the same mass. First and foremost, satellite galaxies statistically occupy higher mass host halos that are more strongly clustered. So in models where satellites are smaller than centrals, at fixed $\mstar$ the ``small" subsample will naturally have a higher satellite fraction, boosting the clustering of small galaxies relative to large of the same stellar mass. Second, at fixed mass, halos of $L_\ast$ galaxies that form earlier are more strongly clustered, a phenomenon commonly known as {\em halo assembly bias}. Splashback halos are typically earlier-forming than true centrals, and so models where splashback halos host smaller-than-average galaxies will naturally predict smaller galaxies being the more strongly clustered. We highlight this point in section \ref{subsec:mstar_stripping} below by testing predictions for satellite mass loss models that do not possess central vs. satellite size differences.
 
-{\color{blue} Important point/sentence to reincorporate here, after deleting from above:} Since the satellite fraction increases with decreasing stellar mass, the clustering ratios are more negative for samples with smaller $\mstar$ thresholds. {\color{blue} The analogous point should be made when discussing the role of color/morphology selection}. 
+{\color{blue} Important point/sentence to reincorporate here, after deleting from above:} Since the satellite fraction increases with decreasing stellar mass, the clustering ratios are more negative for samples with smaller $\mstar$ thresholds. {\color{blue} The analogous point should be made when discussing the role of color/morphology selection}.
 
 \subsection{Broader Implications}
 \label{subsec:broader_implications}
