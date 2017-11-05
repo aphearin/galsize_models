@@ -187,25 +187,6 @@ For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the pea
 \subsubsection{$\rvir-$based model}
 \label{subsubsec:rvirmodel}
 
-Motivated by \citet{kravtsov13}, we additionally explore a model in which $\rhalf$ is linearly proportional to halo virial radius:\footnote{We note that the normalization factor in \citet{kravtsov13} is 0.0125, where as our normalization is 0.01. The difference derives from the choice of halo radius definition: \citet{bryan_norman98} in the present work, compared to the $200c$ definition used in \citet{kravtsov13}.} 
-\beq
-\label{eq:fiducial_model}
-\rhalf = 0.01\rvir.
-\eeq
-For the virial radius of halos and subhalos, we use $\rmpeak:$ the value of $\rvir$ in physical units of $\kpc$ measured at the time of peak subhalo mass. The relationship between $\rmpeak$ and $\mpeak$ is given by 
-\beq
-\mpeak\equiv\frac{4\pi}{3}\rmpeak^{3}\Delta_{\rm vir}(\zpeak)\rho_{\rm m}(\zpeak),
-\eeq
-where for $\Delta_{\rm vir}(\zpeak)$ we use the fitting function to the ``virial" definition used in \citet{bryan_norman98}. For the model we refer to as the ``$\rvir-$based model", we add uncorrelated log-normal scatter of $\sigmarhalf=0.2$ dex to generate a Monto Carlo realization of the model population.
-
-\section{Results}
-\label{sec:results}
-
-\subsection{Size-Mass Scaling Relation}
-\label{subsec:one_point_function}
-
-In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ with $\mstar.$ The black curve enveloped by the gray bands shows the scaling relation for SDSS galaxies, while the blue curve shows the median relation  $\median{\rhalf}{\mstar}$ implied by the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}. This figure shows that models in which $\rhalf\propto\rvir$ can naturally give rise to the characteristic curvature in the $\rhalf-\mstar$ relation, confirming the results in \citet{kravtsov13} in a forward modeling context.
-
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
@@ -216,19 +197,6 @@ The black curve shows the median size-mass relation of SDSS galaxies as measured
 \label{fig:scatter_plot}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
-
-\subsection{Size-Dependent Clustering Measurements}
-\label{subsec:clustering_results}
-
-In Figure~\ref{fig:rvir_only_clustering_absolute}, we present new measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj(\rproj).$ We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds, $\mstar>10^{9.75}\msun,$ $\mstar>10^{10.25}\msun,$ $\mstar>10^{10.75}\msun,$ and $\mstar>10^{11}\msun.$ For each threshold, we split the galaxies into ``large" and ``small" subsamples; as described in \S\ref{subsec:sizedef} and illustrated in Figure \ref{fig:sizedefinition}, our size-based selection is defined so that the subsamples have identical stellar mass functions. Red points with jackknife-estimated error bars show SDSS measurements of $\wproj(\rproj)$ for small galaxy samples, blue points show the same for large galaxies. Solid curves show $\wproj$ as predicted by the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}.
-
-The salient feature of these clustering measurements is that small galaxies cluster more strongly than large galaxies of the same stellar mass. This feature also holds true for galaxies predicted by the $\rvir-$based model. This result may be surprising, since $\rhalf\propto\rvir,$ halo mass $\rvir\propto\mhalo^{1/3},$ and clustering strength increases with $\mvir.$ Based on this simple argument, one would expect that large galaxies would be the more strongly clustered. We provide a resolution to this conundrum in \S\ref{subsec:censat_sizes}; before doing so, we first examine the clustering test of the $\rvir-$based model in more detail.
-
-As shown in Figure \ref{fig:baseline_sham_clustering}, the abundance matching prediction for $\wproj(\rproj)$ exhibits tension with SDSS observations at the $10-20\%$ level, particularly for $\mstar\gtrsim10^{10.75}\msun.$ This tension is inherited by our $\rvir-$based model for size, which is the subject of this work, and so we wish to compare our size models to data in such a way that minimizes the role played by the underlying stellar-to-halo-mass relation. We accomplish this using {\em the $\rhalf$ clustering ratios,} described below.
-
-For each volume-limited $\mstar-$threshold sample, we additionally measure $\wproj(\rproj)$ {\em without} splitting on size, giving us measurements $\wpall, \wplarge,$ and $\wpsmall$ for each threshold sample. This allows us to compute the ratio $(\wplarge-\wpsmall)/\wpall,$ which we refer to as {\em the $\rhalf$ clustering ratio}, denoted as $\delta_{\rhalf}(\wproj).$ For example, a clustering ratio of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of the same stellar mass. These ratios are the measurements appearing on the y-axis in each panel of Figure \ref{fig:clustering_ratio_upshot}.
-
-The points and curves in Figure \ref{fig:clustering_ratio_upshot} are all negative: small galaxies cluster more strongly relative to large. This presentation of the measurement makes plain that the underlying signal of $\rhalf-$dependent clustering is strongest for samples with smaller stellar mass; as $\mstar$ increases, the signal weakens and nearly vanishes for $\mstar\gtrsim10^{11}\msun.$ Strikingly, the $\rvir-$based model exhibits this $\mstar-$dependent behavior, as well as the scale-dependence of the observed clustering signal at each $\mstar.$ As described in \S\ref{subsec:censat_sizes} below, we attribute the success of this prediction to the relative sizes of central vs. satellite galaxies.
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure*}
@@ -254,24 +222,58 @@ Closely related to Figure \ref{fig:rvir_only_clustering_absolute}, the y-axes sh
 \end{figure*}
 %-----------------------------------------------------------------------------------------------------
 
+
+Motivated by \citet{kravtsov13}, we additionally explore a model in which $\rhalf$ is linearly proportional to halo virial radius:\footnote{We note that the normalization factor in \citet{kravtsov13} is 0.0125, where as our normalization is 0.01. The difference derives from the choice of halo radius definition: \citet{bryan_norman98} in the present work, compared to the $200c$ definition used in \citet{kravtsov13}.} 
+\beq
+\label{eq:fiducial_model}
+\rhalf = 0.01\rvir.
+\eeq
+For the virial radius of halos and subhalos, we use $\rmpeak:$ the value of $\rvir$ in physical units of $\kpc$ measured at the time of peak subhalo mass. The relationship between $\rmpeak$ and $\mpeak$ is given by 
+\beq
+\mpeak\equiv\frac{4\pi}{3}\rmpeak^{3}\Delta_{\rm vir}(\zpeak)\rho_{\rm m}(\zpeak),
+\eeq
+where for $\Delta_{\rm vir}(\zpeak)$ we use the fitting function to the ``virial" definition used in \citet{bryan_norman98}. For the model we refer to as the ``$\rvir-$based model", we add uncorrelated log-normal scatter of $\sigmarhalf=0.2$ dex to generate a Monto Carlo realization of the model population.
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Size-Mass Scaling Relation}
+\label{subsec:one_point_function}
+
+In Figure \ref{fig:scatter_plot} we show the scaling of galaxy size $\rhalf$ with $\mstar.$ The black curve enveloped by the gray bands shows the scaling relation for SDSS galaxies, while the blue curve shows the median relation  $\median{\rhalf}{\mstar}$ implied by the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}. This figure shows that models in which $\rhalf\propto\rvir$ can naturally give rise to the characteristic curvature in the $\rhalf-\mstar$ relation, confirming the results in \citet{kravtsov13} in a forward modeling context.
+
+
+\subsection{Size-Dependent Clustering Measurements}
+\label{subsec:clustering_results}
+
+In Figure~\ref{fig:rvir_only_clustering_absolute}, we present new measurements of the $\rhalf-$dependence of projected galaxy clustering, $\wproj(\rproj).$ We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds, $\mstar>10^{9.75}\msun,$ $\mstar>10^{10.25}\msun,$ $\mstar>10^{10.75}\msun,$ and $\mstar>10^{11}\msun.$ For each threshold, we split the galaxies into ``large" and ``small" subsamples; as described in \S\ref{subsec:sizedef} and illustrated in Figure \ref{fig:sizedefinition}, our size-based selection is defined so that the subsamples have identical stellar mass functions. Red points with jackknife-estimated error bars show SDSS measurements of $\wproj(\rproj)$ for small galaxy samples, blue points show the same for large galaxies. Solid curves show $\wproj$ as predicted by the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}.
+
+The salient feature of these clustering measurements is that small galaxies cluster more strongly than large galaxies of the same stellar mass. This feature also holds true for galaxies predicted by the $\rvir-$based model. This result may be surprising, since $\rhalf\propto\rvir,$ halo mass $\rvir\propto\mhalo^{1/3},$ and clustering strength increases with $\mvir.$ Based on this simple argument, one would expect that large galaxies would be the more strongly clustered. We provide a resolution to this conundrum in \S\ref{subsec:censat_sizes}; before doing so, we first examine the clustering test of the $\rvir-$based model in more detail.
+
+As shown in Figure \ref{fig:baseline_sham_clustering}, the abundance matching prediction for $\wproj(\rproj)$ exhibits tension with SDSS observations at the $10-20\%$ level, particularly for $\mstar\gtrsim10^{10.75}\msun.$ This tension is inherited by our $\rvir-$based model for size, which is the subject of this work, and so we wish to compare our size models to data in such a way that minimizes the role played by the underlying stellar-to-halo-mass relation. We accomplish this using {\em the $\rhalf$ clustering ratios,} described below.
+
+For each volume-limited $\mstar-$threshold sample, we additionally measure $\wproj(\rproj)$ {\em without} splitting on size, giving us measurements $\wpall, \wplarge,$ and $\wpsmall$ for each threshold sample. This allows us to compute the ratio $(\wplarge-\wpsmall)/\wpall,$ which we refer to as {\em the $\rhalf$ clustering ratio}, denoted as $\delta_{\rhalf}(\wproj).$ For example, a clustering ratio of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of the same stellar mass. These ratios are the measurements appearing on the y-axis in each panel of Figure \ref{fig:clustering_ratio_upshot}.
+
+The points and curves in Figure \ref{fig:clustering_ratio_upshot} are all negative: small galaxies cluster more strongly relative to large. This presentation of the measurement makes plain that the underlying signal of $\rhalf-$dependent clustering is strongest for samples with smaller stellar mass; as $\mstar$ increases, the signal weakens and nearly vanishes for $\mstar\gtrsim10^{11}\msun.$ Strikingly, the $\rvir-$based model exhibits this $\mstar-$dependent behavior, as well as the scale-dependence of the observed clustering signal at each $\mstar.$ As described in \S\ref{subsec:censat_sizes} below, we attribute the success of this prediction to the relative sizes of central vs. satellite galaxies.
+
 \subsection{Testing the Impact of Satellite Mass Loss}
 \label{subsec:mstar_stripping}
-
-The green curves in Figure~\ref{fig:mstarmodelclustering} test the clustering predictions of the model described in \S\ref{subsubsec:strippingmodel} {\em before} applying the satellite mass loss prescription. Thus the green curves pertain to a model where $\rhalf$ is a purely random log-normal distribution centered at $\median{\rhalf}{\mstar}.$ By construction, this model predicts no dependence at all of galaxy clustering upon $\rhalf$ at fixed $\mstar,$ simply because the scatter of $\rhalf$ about $\median{\rhalf}{\mstar}$ is uncorrelated with any other property. The application of satellite mass loss introduces correlations in the scatter: after mass loss, satellites have smaller sizes than centrals of the same $\mstar$ due to post-infall stripping.
-
-As shown by the purple curves in Figure \ref{fig:mstarmodelclustering}, satellite mass loss impacts $\rhalf-$dependent clustering in the expected manner. The ``small" galaxy population has a higher satellite fraction due to satellites being smaller than centrals of the same $\mstar,$ and so in this model small galaxies cluster more strongly relative to large. However, the magnitude of the effect is evidently is not strong enough to produce clustering predictions that are consistent with SDSS. Evidently it is difficult to strip enough mass from satellites so that the $\rhalf-$dependent clustering is in agreement with observations. As we argue in \S\ref{sec:interpretation}, this supports the conclusion that the relative difference between central and satellite size is at least partially in place at the time of satellite infall.
-
 %---------------------------------------------------------------------------------------------------
-\begin{figure}
+\begin{figure*}
 \centering
-\includegraphics[width=8cm]{FIGS/alt_model_wp_ratios.pdf}
+\includegraphics[width=12cm]{FIGS/alt_model_wp_ratios.pdf}
 \caption{
 {\bf Impact of tidal stripping.}
 In all panels, the axes and points with error bars are the same as in Figure \ref{fig:clustering_ratio_upshot}. The solid green curves shows the prediction of the satellite mass loss model, which is in gross tension with the data due to satellites having the same size as centrals of the same mass. The solid purple curves show results for a model in which satellites lose mass after infall in a manner similar to what is seen in high-resolution hydrodynamical simulations, as described in \S\ref{subsubsec:strippingmodel}. This produces satellites that are smaller than centrals, but the effect is too mild to correctly capture the observed clustering. Evidently, satellite-specific mass stripping plays a sub-dominant role in setting the relative size of centrals and satellites.
 }
 \label{fig:mstarmodelclustering}
-\end{figure}
+\end{figure*}
 %-----------------------------------------------------------------------------------------------------
+
+The green curves in Figure~\ref{fig:mstarmodelclustering} test the clustering predictions of the model described in \S\ref{subsubsec:strippingmodel} {\em before} applying the satellite mass loss prescription. Thus the green curves pertain to a model where $\rhalf$ is a purely random log-normal distribution centered at $\median{\rhalf}{\mstar}.$ By construction, this model predicts no dependence at all of galaxy clustering upon $\rhalf$ at fixed $\mstar,$ simply because the scatter of $\rhalf$ about $\median{\rhalf}{\mstar}$ is uncorrelated with any other property. The application of satellite mass loss introduces correlations in the scatter: after mass loss, satellites have smaller sizes than centrals of the same $\mstar$ due to post-infall stripping.
+
+As shown by the purple curves in Figure \ref{fig:mstarmodelclustering}, satellite mass loss impacts $\rhalf-$dependent clustering in the expected manner. The ``small" galaxy population has a higher satellite fraction due to satellites being smaller than centrals of the same $\mstar,$ and so in this model small galaxies cluster more strongly relative to large. However, the magnitude of the effect is evidently is not strong enough to produce clustering predictions that are consistent with SDSS. Evidently it is difficult to strip enough mass from satellites so that the $\rhalf-$dependent clustering is in agreement with observations. As we argue in \S\ref{sec:interpretation}, this supports the conclusion that the relative difference between central and satellite size is at least partially in place at the time of satellite infall.
+
 
 \subsection{The Role of Morphology and Color}
 \label{subsec:colormorph}
@@ -310,6 +312,17 @@ Using the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}, we make 
 \label{fig:lensingprediction}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
+%---------------------------------------------------------------------------------------------------
+\begin{figure}
+\centering
+\includegraphics[width=8cm]{FIGS/rvir_only_cen_sat_sizes.pdf}
+\caption{
+{\bf Relative sizes of centrals and satellites.}
+In a narrow bin of halo mass $\mhalo\equiv\mpeak\approx10^{12}\msun,$ we show the distribution of model galaxy sizes for different subpopulations galaxies, as predicted by the $\rvir-$based model. The red histogram shows the sizes of satellites; the blue histogram shows host halos that have never passed inside the virial radius of a larger halo (``true centrals"); the green histogram host halos that were subhalos inside a larger at some point in their past history (``splashback centrals"). In the $\rvir-$based model, galaxy size is set by the {\em physical} size of the virial radius at the time the halo attains its peak mass, naturally resulting in smaller sizes for satellites and splashback centrals relative to true centrals of the same $\mhalo.$
+}
+\label{fig:censatsizehist}
+\end{figure}
+%-----------------------------------------------------------------------------------------------------
 
 \section{A Unified Interpretation of $\rhalf-$Dependent Clustering}
 \label{sec:interpretation}
@@ -322,17 +335,6 @@ The clustering measurements shown in the previous section present (at least) two
 
 A straightforward resolution to this puzzle is shown in Figure \ref{fig:censatsizehist}, which compares the $\rhalf$ distributions of central, satellite, and splashback galaxies with the same halo mass $\mhalo\equiv\mpeak\approx10^{12}\msun.$ A ``splashback central"  is defined as a present-day central that used to be a satellite, i.e., its main progenitor halo passed inside the virial radius of a larger halo at some point in its past history. On the other hand, we define a ``true central" as a galaxy that has never been a satellite.
 
-%---------------------------------------------------------------------------------------------------
-\begin{figure}
-\centering
-\includegraphics[width=8cm]{FIGS/rvir_only_cen_sat_sizes.pdf}
-\caption{
-{\bf Relative sizes of centrals and satellites.}
-In a narrow bin of halo mass $\mhalo\equiv\mpeak\approx10^{12}\msun,$ we show the distribution of model galaxy sizes for different subpopulations galaxies, as predicted by the $\rvir-$based model. The red histogram shows the sizes of satellites; the blue histogram shows host halos that have never passed inside the virial radius of a larger halo (``true centrals"); the green histogram host halos that were subhalos inside a larger at some point in their past history (``splashback centrals"). In the $\rvir-$based model, galaxy size is set by the {\em physical} size of the virial radius at the time the halo attains its peak mass, naturally resulting in smaller sizes for satellites and splashback centrals relative to true centrals of the same $\mhalo.$
-}
-\label{fig:censatsizehist}
-\end{figure}
-%-----------------------------------------------------------------------------------------------------
 
 In the $\rvir-$based model, satellite and splashback galaxies are smaller than centrals of the same halo mass due to the physical size of their halo being smaller at earlier times $\zpeak.$ There are two distinct reasons why this feature results in small galaxies being more strongly clustered relative to larger galaxies of the same mass. First and foremost, satellite galaxies statistically occupy higher mass host halos that are more strongly clustered. So in models where satellites are smaller than centrals, at fixed $\mstar$ the ``small" subsample will naturally have a higher satellite fraction, boosting the clustering of small galaxies relative to large of the same stellar mass. Second, at fixed mass, halos of $L_\ast$ galaxies that form earlier are more strongly clustered, a phenomenon commonly known as {\em halo assembly bias}. Splashback halos are typically earlier-forming than true centrals, and so models where splashback halos host smaller-than-average galaxies will naturally predict smaller galaxies being the more strongly clustered. 
 
