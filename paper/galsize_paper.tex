@@ -176,24 +176,23 @@ In \S\ref{sec:results}, we calculate predictions for the $\rhalf-$dependence of 
 \subsubsection{Satellite mass loss model}
 \label{subsubsec:strippingmodel}
 
-In the first class of models we explore, we suppose that stellar mass $\mstar$ is the statistical regulator of $\rhalf,$ so that galaxy sizes are drawn from a log-normal distribution with $0.2$ dex of scatter centered at $\median{\rhalf}{\mstar}.$ To implement this model, for simplicity we directly tabulate $\median{\rhalf}{\mstar}$ directly from the data, rather than pursue a parametric form \citep[see, e.g.,][]{zhang_yang17}.
+In the first class of models we explore, we suppose that stellar mass $\mstar$ is the statistical regulator of $\rhalf,$ so that galaxy sizes are drawn from a log-normal distribution with $0.2$ dex of scatter centered at $\median{\rhalf}{\mstar}.$ To implement this model, for simplicity we tabulate $\median{\rhalf}{\mstar}$ directly from the data, rather than pursue a parametric form \citep[see, e.g.,][]{zhang_yang17}.
 
-It is natural to consider the possibility that stellar mass is stripped from satellite galaxies after infall. The basis for our implementation of this phenomenon is the fitting function presented in \citet{smith_etal16}, which was calibrated by studying stellar mass loss in a suite of high-resolution hydrodynamical simulations. In this model, $f_{\ast}$ quantifies the fraction of stellar mass lost as a function of $f_{\rm DM},$ the amount of dark matter that has been stripped since infall:
-
+It is natural to consider the possibility that stellar mass is stripped from satellite galaxies after infall. The basis for our implementation of this phenomenon is the fitting function presented in \citet{smith_etal16}, which was calibrated by studying stellar mass loss in a suite of high-resolution hydrodynamical simulations. In this model, $f_{\ast}$ quantifies the remaining fraction of stellar mass as a function of $f_{\rm DM},$ the fraction of dark matter mass that remains after subhalo infall:
 \beq
-f_{\ast} = 1 - \exp(-14.2f_{\rm DM})
+f_{\ast} = 1 - \exp(-14.2f_{\rm DM}).
 \eeq
-For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the peak mass, $M_{\rm vir}/M_{\rm peak}.$ If we denote the post-stripping stellar mass as $M_{\ast}',$ then we have $M_{\ast}'\equiv f_{\ast}M_{\ast},$ where $M_{\ast}$ is given by the initial application of abundance matching. We then calculate the post-stripping radius by interpolating $\langle\rhalf'\vert\mstar'\rangle$ directly from SDSS data. In this way, we model satellite mass loss and subsequent size truncation in a manner that mimics what is seen in hydrodynamical simulations.
+For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the peak mass, $M_{\rm vir}/M_{\rm peak}.$ If we denote the post-stripping stellar mass as $M_{\ast}',$ then we have $M_{\ast}'\equiv f_{\ast}M_{\ast},$ where $M_{\ast}$ is given by the initial application of abundance matching. We then calculate the post-stripping radius by interpolating $\langle\rhalf'\vert\mstar'\rangle$ directly from SDSS data. In this way, we model satellite mass loss and  size truncation in a manner that mimics what is seen in hydrodynamical simulations.
 
 \subsubsection{$\rvir-$based model}
 \label{subsubsec:rvirmodel}
 
-Motivated by \citet{kravtsov13}, we additionall explore a model in which $\rhalf$ is linearly proportional to halo virial radius:
+Motivated by \citet{kravtsov13}, we additionally explore a model in which $\rhalf$ is linearly proportional to halo virial radius:\footnote{We note that the normalization factor in \citet{kravtsov13} is 0.0125, where as our normalization is 0.01. The difference derives from the choice of halo radius definition: \citet{bryan_norman98} in the present work, compared to the $200c$ definition used in \citet{kravtsov13}.} 
 \beq
 \label{eq:fiducial_model}
-\rhalf = 0.01\rvir
+\rhalf = 0.01\rvir.
 \eeq
-For the virial radius of halos and subhalos, we use $\rmpeak,$ the value of $\rvir$ in physical units of $\kpc$ measured at the time of peak subhalo mass, defined by
+For the virial radius of halos and subhalos, we use $\rmpeak:$ the value of $\rvir$ in physical units of $\kpc$ measured at the time of peak subhalo mass. The relationship between $\rmpeak$ and $\mpeak$ is given by 
 \beq
 \mpeak\equiv\frac{4\pi}{3}\rmpeak^{3}\Delta_{\rm vir}(\zpeak)\rho_{\rm m}(\zpeak),
 \eeq
