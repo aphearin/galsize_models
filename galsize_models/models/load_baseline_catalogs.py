@@ -22,7 +22,8 @@ from ..measurements import load_umachine_sdss_with_meert15
 
 
 __all__ = ('moster13_based_mock', 'load_umachine_mock', 'load_baseline_halocat',
-        'load_orphan_mock', 'moustakas_sham', 'load_orphan_subhalos', 'orphan_selection')
+        'load_orphan_mock', 'moustakas_sham', 'load_orphan_subhalos', 'orphan_selection',
+        'random_orphan_selection')
 
 default_umachine_galprops = list((
     'sm', 'sfr', 'obs_sm', 'obs_sfr', 'icl', 'halo_id', 'upid',
@@ -278,3 +279,16 @@ def orphan_selection(catalog, mpeak_abscissa=(11, 13), prob_select_ordinates=(0.
     selected_orphan_mask = orphans[selection_key] > 1-prob_select
     selection_indices[eligible_orphan_mask] = selected_orphan_mask
     return selection_indices
+
+
+def random_orphan_selection(catalog, num_to_select):
+    """
+    """
+    num_subhalos = len(catalog)
+    selection_indices = np.arange(num_subhalos).astype(int)
+    surviving_subhalo_indices = selection_indices[~catalog['orphan']]
+    disrupted_subhalo_indices = selection_indices[catalog['orphan']]
+    selected_orphan_indices = np.random.choice(disrupted_subhalo_indices,
+            num_to_select, replace=False)
+    return np.concatenate((surviving_subhalo_indices, selected_orphan_indices))
+

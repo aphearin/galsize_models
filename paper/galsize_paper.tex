@@ -159,10 +159,10 @@ We map $\mstar$ onto subhalos using deconvolution abundance matching (SHAM). See
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
-\includegraphics[width=8cm]{FIGS/baseline_sham_orphans.pdf}
+\includegraphics[width=8cm]{FIGS/baseline_sham.pdf}
 \caption{
-{\bf SHAM + orphan clustering predictions.}
-Using the abundance matching methods described in \S\ref{subsec:sham}, we compare the projected clustering of mock vs. SDSS galaxies. Each panel shows the comparison for a volume-limited sample defined by a different $\mstar-$threshold. Black points with error bars show SDSS measurements; solid red (black) curves show the abundance matching prediction including (excluding) the effect of orphan subhalos (see Appendix A). Including orphans mitigates the discrepancy in the clustering predicted by traditional, $\mpeak-$based SHAM based, though mild tension remains for $\mstar\gtrsim10^{10.75}\msun.$
+{\bf Abundance matching clustering predictions.}
+Using the abundance matching methods described in \S\ref{subsec:sham}, we compare the projected clustering of mock vs. SDSS galaxies. Each panel shows the comparison for a volume-limited sample defined by a different $\mstar-$threshold. Black points with error bars show SDSS measurements; solid black curves show the abundance matching prediction of our fiducial model, which includes the effect of orphan subhalos (see Appendix A). Including orphans mitigates the discrepancy in the clustering predicted by traditional, $\mpeak-$based SHAM based, though mild tension remains for $\mstar\gtrsim10^{10.75}\msun.$
 }
 \label{fig:baseline_sham_clustering}
 \end{figure}
@@ -407,7 +407,7 @@ We have presented new measurements of the dependence of galaxy clustering upon g
 \item Taken together, our findings indicate that satellite-specific processes play a sub-dominant role in setting the relative size of centrals and satellites, which instead appears to be largely predetermined at the time of satellite infall.
 \een
 
-Our results can be treated as a boundary condition for more complex and fine-grained models of galaxy size, such as semi-analytic models and hydrodynamical simulations. We view the present work as a pilot study that motivates a Bayesian inference program to tightly constrain the galaxy size-halo connection with forward modeling techniques, in direct analogy to the literature on the stellar-to-halo-mass relation. Our publicly available python code provides a simple means for cosmological surveys to generate synthetic galaxy populations with realistic sizes across the cosmic web.
+Our results can be treated as a boundary condition for more complex and fine-grained models of galaxy size, such as semi-analytic models and hydrodynamical simulations. For convenience, Figure \ref{fig:censatsizeratios} provides a simple summary statistic that can be used as a diagnostic for calibrating alternative modeling efforts. We view the present work as a pilot study that motivates a Bayesian inference program to tightly constrain the galaxy size-halo connection with forward modeling techniques, in direct analogy to the literature on the stellar-to-halo-mass relation. Our publicly available python code provides a simple means for cosmological surveys to generate synthetic galaxy populations with realistic sizes across the cosmic web.
 
 \section*{Acknowledgments}
 
@@ -425,20 +425,19 @@ We use an extension of {\tt Consistent Trees} that models the evolution of subha
 
 Since it is likely that some portion of these disrupted subhalos should be populated with model galaxies \citep{guo_white13, campbell_etal17}, in our initial application of deconvolution abundance matching we derive the $\mstar-\mpeak$ relation using {\em all} subhalos, including those that may be disrupted. We then apply a selection function to the disrupted subhalos, so that a fraction of these objects will host galaxies in our mock universe. We refer to this as the {\em orphan selection function}, $\mathcal{F}_{\rm orphan},$ which we consider to be an integral component of our application of abundance matching.
 
-Since a rigorous calibration of $\mathcal{F}_{\rm orphan}$ is beyond the scope of the present work, we instead opt for a simple parameterization that yields reasonably accurate recovery of the galaxy clustering signal observed in SDSS. We model $\mathcal{F}_{\rm orphan}=\mathcal{F}_{\rm orphan}(M_{\rm peak},M_{\rm host}),$ where $\mpeak$ is the peak mass of the disrupted subhalo, and $\mhost$ is the present-day virial mass of its $z=0$ host halo. For the $\mpeak-$dependence, we select $50\%$ of disrupted subhalos with $\mpeak=10^{11}\msun,$ $0\%$ of subhalos with $\mpeak=10^{13}\msun,$ linearly interpolating in $\log\mpeak$ for intermediate values of $\mpeak.$ At each $\mpeak,$ the selection of disrupted halos is not random; instead, we preferentially select the subhalos with larger $\mhost,$ which we intend to offset the increased difficulty of subhalo-finding algorithms to identify subhalos with especially small values of  $\mu\equiv\mpeak/\mhost.$
+Since a rigorous calibration of $\mathcal{F}_{\rm orphan}$ is beyond the scope of the present work, we instead opt for a simple parameterization that yields reasonably accurate recovery of the galaxy clustering signal observed in SDSS. We model $\mathcal{F}_{\rm orphan}=\mathcal{F}_{\rm orphan}(M_{\rm peak},M_{\rm host}),$ where $\mpeak$ is the peak mass of the disrupted subhalo, and $\mhost$ is the present-day virial mass of its $z=0$ host halo. For the $\mpeak-$dependence, we select $50\%$ of disrupted subhalos with $\mpeak=10^{11}\msun,$ $0\%$ of subhalos with $\mpeak=10^{13}\msun,$ linearly interpolating in $\log\mpeak$ for intermediate values of $\mpeak.$ At each $\mpeak,$ the selection of disrupted halos is not random; instead, we preferentially select the subhalos with larger $\mhost,$ which we intend to offset the increased difficulty of subhalo-finding algorithms to identify subhalos with especially small values of  $\mu\equiv\mpeak/\mhost.$ We refer to this model as our ``fiducial orphan model". We assess the role of the nontrivial features in $\mathcal{F}_{\rm orphan}$ by randomly selecting the same number of orphan subhalos, referring to this alternate model as the ``random orphan model". 
 
-The impact of our orphan treatment on $\mstar-$threshold clustering is shown in Figure \ref{fig:baseline_sham_clustering} in the main body of the text. We show the impact on $\rhalf-$dependent clustering in Figure \ref{fig:orphan_clustering_ratios}. The character of the effect of orphan subhalos in Figure \ref{fig:orphan_clustering_ratios} is as expected. The orphan catalog has a higher satellite fraction than the standard subhalo catalog; since satellites have preferentially smaller sizes and stronger clustering, the black curves are more negative relative to the red. Orphan halos also typically have earlier-than-average values of $\zpeak$ relative to ordinary subhalos, which also enhances differences between central and satellite sizes.
-
-Encouragingly, when tuning $\mathcal{F}_{\rm orphan}$ so that the overall $\mstar-$threshold clustering is roughly correct (as in Figure \ref{fig:baseline_sham_clustering}), the same level of tuning is required for a successful prediction of $\rhalf-$dependent clustering. This figure gives quantitative motivation for the program described in \S\ref{sec:future} to jointly constrain the satellite fraction $F_{\rm sat}(\mstar)$ together with models for galaxy size.
+Figure \ref{fig:orphan_effects} illustrates the impact of the orphan selection function on $\mstar-$threshold clustering (top panel) and the satellite fraction (bottom panel). Comparing the black to the red curves shows that including orphans substantially boosts small-scale clustering due to the increased satellite fraction. Comparing the orange to the black curves, we see that randomly selecting orphans results in excessive small-scale clustering for the higher-mass threshold samples due to the inclusion of too many disrupted subhalos with large values of $\mpeak.$ 
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
-\includegraphics[width=8cm]{FIGS/clustering_ratios_orphan_impact.pdf}
+\includegraphics[width=8cm]{FIGS/baseline_sham_orphans.pdf}
+\includegraphics[width=8cm]{FIGS/orphan_satellite_fraction.pdf}
 \caption{
-Points with error bars as well as the black curves are the same as in Figure \ref{fig:clustering_ratio_upshot}. Red curves show predictions for the $\rhalf-$clustering ratios of the $\rvir-$based model, but excluding orphan subhalos.
+{\bf Impact of the orphan selection function.} The {\em top panel} is identical to Figure \ref{fig:baseline_sham_clustering}, but includes additional curves for the case of randomly selected orphan halos (orange curves), and no orphans at all (red curves). As a function of stellar mass, the {\em bottom panel} shows the satellite fraction, i.e., the fraction of objects that are not central galaxies.
 }
-\label{fig:orphan_clustering_ratios}
+\label{fig:orphan_effects}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
