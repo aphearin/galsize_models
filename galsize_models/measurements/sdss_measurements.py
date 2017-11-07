@@ -88,7 +88,15 @@ wp_sdss_mpajhu_sm11p25_large = np.load(os.path.join(output_dirname, 'sdss_mpajhu
 fracdiff_sm11p25_mpajhu = (wp_sdss_mpajhu_sm11p25_large-wp_sdss_mpajhu_sm11p25_small)/wp_sdss_mpajhu_sm11p25
 fracdiff_sm11p25_mpajhu_err = np.maximum(np.sqrt(wperr_sdss_mpajhu_sm11p25)/wp_sdss_mpajhu_sm11p25, cutoff_err)
 
+wp_sdss_mpajhu_blue_sm9p75_sm10p25_large = np.load(os.path.join(output_dirname, 'sdss_mpajhu_blue_sm9p75_sm10p25_large_wp.npy'))
+wp_sdss_mpajhu_blue_sm9p75_sm10p25_small = np.load(os.path.join(output_dirname, 'sdss_mpajhu_blue_sm9p75_sm10p25_small_wp.npy'))
+wp_sdss_mpajhu_blue_sm9p75_sm10p25 = np.load(os.path.join(output_dirname, 'sdss_mpajhu_blue_sm9p75_sm10p25_wp.npy'))
+wperr_sdss_mpajhu_blue_sm9p75_sm10p25 = np.load(os.path.join(output_dirname, 'sdss_mpajhu_blue_sm9p75_sm10p25_wperr.npy'))
 
+wp_sdss_mpajhu_red_sm9p75_sm10p25_large = np.load(os.path.join(output_dirname, 'sdss_mpajhu_red_sm9p75_sm10p25_large_wp.npy'))
+wp_sdss_mpajhu_red_sm9p75_sm10p25_small = np.load(os.path.join(output_dirname, 'sdss_mpajhu_red_sm9p75_sm10p25_small_wp.npy'))
+wp_sdss_mpajhu_red_sm9p75_sm10p25 = np.load(os.path.join(output_dirname, 'sdss_mpajhu_red_sm9p75_sm10p25_wp.npy'))
+wperr_sdss_mpajhu_red_sm9p75_sm10p25 = np.load(os.path.join(output_dirname, 'sdss_mpajhu_red_sm9p75_sm10p25_wperr.npy'))
 
 
 
