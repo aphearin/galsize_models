@@ -118,21 +118,21 @@ We place empirical constraints on the connection between dark matter halos and g
 \label{sec:intro}
 %----------------------------
 
-Many properties of observed galaxies exhibit remarkably tight scaling relations. Galaxy size, typically quantified by a half-mass or half-light radius, $\rhalf,$ has well-measured scaling with galaxy mass $\mstar$ in the local Universe \citep{shen_etal03,guo_etal09,huang_etal13,lange_etal15,zhang_yang17}, and at higher redshift \citep{trujillo_etal04,vanderwel_etal14,kawamata_etal15,shibuya_etal15,huertas_company_etal13a,huang_etal17}.
+Many properties of observed galaxies exhibit remarkably tight scaling relations. Galaxy size, typically quantified by a half-mass or half-light radius, $\rhalf,$ has well-measured scaling with galaxy mass $\mstar$ in the local Universe \citep{shen_etal03,huang_etal13,lange_etal15,zhang_yang17}, and at higher redshift \citep{trujillo_etal04,vanderwel_etal14,kawamata_etal15,shibuya_etal15,huertas_company_etal13a,huang_etal17}.
 
-Observational constraints on models for galaxy $\rhalf$ typically come from one-point function measurements such as $\median{\rhalf}{\mstar}$ and $\sigma(\rhalf\vert\mstar),$ e.g.,  \citet{khochfar_silk06,desmond_etal17,bottrell_etal17b,hou_etal17,somerville_etal17}, or otherwise from catalogs of galaxy groups \citep{weinmann_etal08,huertas_company_etal13b,spindler_wake17}. More recently, the connection between a galaxy's size and the virial radius of its parent halo has been
+Observational constraints on models for galaxy $\rhalf$ typically come from one-point function measurements such as $\median{\rhalf}{\mstar}$ and $\sigma(\rhalf\vert\mstar),$ e.g.,  \citet{khochfar_silk06,desmond_etal17,bottrell_etal17b,hou_etal17,somerville_etal17}, or otherwise from catalogs of galaxy groups \citep{weinmann_etal08,guo_etal09,huertas_company_etal13b,spindler_wake17}. More recently, the connection between a galaxy's size and the virial radius of its parent halo has been
 explored by converting stellar mass to halo mass and virial radius, using abundance matching \citep{kravtsov_etal04,tasitsiomi_etal04,vale_ostriker04,vale_ostriker06,conroy_etal06}.  Such analyses have indicated that galaxy size is, on average, proportional to host halo virial radius, both at $z=0$ \citep{kravtsov13}, and higher redshifts \citep{huang_etal17,somerville_etal17}.
 
 Observations of two-point galaxy clustering, $\wproj(\rproj),$ have historically been used to place tight constraints on many features of the galaxy--halo connection, such as its $\mstar-$dependence \citep{moster_etal10,leauthaud_etal11,reddick_etal13,skibba_etal15}, dependence on luminosity \citep{kravtsov_etal04, tasitsiomi_etal04,vale_ostriker04,vale_ostriker06,tinker_etal05,cacciato_etal13}, broadband color \citep{coil_etal08,zehavi_etal11,guo_etal11,hearin_watson13}, and star-formation rate \citep{wang_etal07,tinker_etal13,watson_etal14}. In the present work, we exploit the constraining power of $\wproj(\rproj)$ to test empirical models connecting galaxy stellar mass and size to the properties of the galaxy's parent dark matter halo.
 
-The approach we take is to forward model the $\rhalf-$halo connection: we generate a Monte Carlo realizations of the model, and then make synthetic measurements in a manner that closely mimics the measurements we make on our observed galaxy samples. We describe the dataset and simulations we use in \S\ref{sec:data}, and our forward-modeling methods in \S\ref{sec:model}. All of our primary results appear in \S\ref{sec:results}, and their theoretical interpretation in \S\ref{sec:interpretation}. We contextualize our findings in terms of previous work in \S\ref{sec:previous_work}, and discuss future directions in \S\ref{sec:future}. We conclude the paper with a summary of our principal results in \S\ref{sec:conclusion}.
+The approach we take is to forward model the $\rhalf-$halo connection: we generate Monte Carlo realizations of models using a high-resolution cosmological N-body simulation, and then make synthetic measurements in a manner that closely mimics the measurements we make on our observed galaxy samples. We describe the dataset and simulations we use in \S\ref{sec:data}, and our forward-modeling methods in \S\ref{sec:model}. All of our primary results appear in \S\ref{sec:results}, and their theoretical interpretation in \S\ref{sec:interpretation}. We contextualize our findings in terms of previous work in \S\ref{sec:previous_work}, and discuss future directions in \S\ref{sec:future}. We conclude the paper with a summary of our principal results in \S\ref{sec:conclusion}.
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure*}
 \centering
 \includegraphics[width=\textwidth]{FIGS/sdss_small_large_sample_definitions.pdf}
 \caption{
-{\bf Definition of ``small" and ``large" galaxies.} For a volume-limited SDSS galaxy sample defined by $M_{\ast}>10^{10.25}M_{\odot},$ we visually demonstrate how we classify galaxies into ``small" and ``large" subsamples. As described in detail in \S\ref{subsec:sizedef}, we compute the median value $\median{\rhalf}{\mstar}$ at the stellar mass of each galaxy in the sample, and divide the sample into two based on this $\mstar-$dependent cut. The {\em left panel} compares the stellar mass functions $\phi(\mstar)$ of the two samples, confirming that our method for separating ``small" from ``large" galaxies yields subsamples with statistically indistinguishable $\phi(\mstar)$. The {\em right panel} shows histograms of $\rhalf$ for the two subsamples, which partially overlap due to the finite range of $\mstar$ in the volume-limited sample.
+{\bf Definition of ``small" and ``large" galaxies.} For a volume-limited SDSS galaxy sample defined by $M_{\ast}>10^{10.25}M_{\odot},$ we visually demonstrate how we classify galaxies into ``small" and ``large" subsamples. As described in detail in \S\ref{subsec:sizedef}, we compute the median value $\median{\rhalf}{\mstar}$ at the stellar mass of each galaxy in the sample, and divide the sample into two based on this $\mstar-$dependent cut. The {\em left panel} compares the stellar mass functions $\phi(\mstar)$ of the two samples, confirming that our method for separating ``small" from ``large" galaxies yields subsamples with statistically indistinguishable $\phi(\mstar)$. The {\em right panel} shows histograms of $\rhalf$ for the two subsamples, which partially overlap due to the stellar mass range spanned by the volume-limited, $\mstar$-threshold sample.
 }
 \label{fig:sizedefinition}
 \end{figure*}
@@ -177,7 +177,7 @@ Figure \ref{fig:baseline_sham_clustering} shows that our implementation of SHAM 
 \includegraphics[width=8cm]{FIGS/baseline_sham.pdf}
 \caption{
 {\bf Abundance matching clustering predictions.}
-Using the abundance matching methods described in \S\ref{subsec:sham}, we compare the projected clustering of mock vs. SDSS galaxies. Each panel shows the comparison for a volume-limited sample defined by a different $\mstar-$threshold. Black points with error bars show SDSS measurements; solid black curves show the abundance matching prediction of our fiducial model, which includes the effect of orphan subhalos (see Appendix A). Including orphans mitigates the discrepancy in the clustering predicted by traditional, $\mpeak-$based SHAM, though mild tension remains on small scales for $\mstar\gtrsim10^{10.75}\msun,$ and on all scales for $\mstar\gtrsim10^{9.75}\msun.$
+We show the $\mstar-$dependence of projected galaxy clustering, $\wproj(\rproj),$ comparing standard abundance matching to SDSS galaxies (see \S\ref{subsec:sham} for details). Each panel shows the comparison for a volume-limited sample defined by a different $\mstar-$threshold. Black points with error bars show SDSS measurements; solid black curves show the abundance matching prediction of our fiducial model, which includes the effect of orphan subhalos (see Appendix A). Including orphans mitigates the discrepancy in the clustering predicted by traditional, $\mpeak-$based SHAM, though mild tension remains on small scales for $\mstar\gtrsim10^{10.75}\msun,$ and on all scales for $\mstar\gtrsim10^{9.75}\msun.$
 }
 \label{fig:baseline_sham_clustering}
 \end{figure}
@@ -188,11 +188,10 @@ Using the abundance matching methods described in \S\ref{subsec:sham}, we compar
 
 In \S\ref{sec:results}, we calculate predictions for the $\rhalf-$dependence of galaxy clustering for two classes of empirical models, described in turn below.
 
-\subsubsection{Satellite mass loss model}
+\subsubsection{$\mstar$ tidal-stripping model}
 \label{subsubsec:strippingmodel}
 
-\textcolor{red}{AK: I don't think the name of the model is descriptive here, but I could not yet come up with a better one.}
-In the first model we explore, we assume that stellar mass $\mstar$ controls $\rhalf,$ so that galaxy sizes are drawn from a log-normal distribution with $0.2$ dex of scatter centered at $\median{\rhalf}{\mstar}.$ To implement this model, for simplicity we tabulate $\median{\rhalf}{\mstar}$ directly from the data, rather than pursue a parametric form \citep[see, e.g.,][]{zhang_yang17}. Thus this model reproduces the observed $\rhalf-\mstar$ relation by construction.
+In the first model we explore, we assume that stellar mass $\mstar$ controls $\rhalf,$ so that galaxy sizes are drawn from a log-normal distribution with $0.2$ dex of scatter centered at $\median{\rhalf}{\mstar}.$ To implement this model, for simplicity we tabulate $\median{\rhalf}{\mstar}$ directly from the data, rather than pursue a parametric form. Thus this model reproduces the observed $\rhalf-\mstar$ relation by construction.
 
 
 It is natural to consider the possibility that stellar mass is stripped from satellite galaxies after infall. The basis for our implementation of this phenomenon is the fitting function presented in \citet{smith_etal16}, which was calibrated by studying stellar mass loss in a suite of high-resolution hydrodynamical simulations. In this model, $f_{\ast}$ quantifies the remaining fraction of stellar mass as a function of $f_{\rm DM},$ the fraction of dark matter mass that remains after subhalo infall:
@@ -210,7 +209,7 @@ For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the pea
 \centering
 \includegraphics[width=8cm]{FIGS/rvir_only_rhalf_vs_mstar_sham_model.pdf}
 \caption{
-The black curve shows the median size-mass relation of SDSS galaxies as measured in \citet{meert_etal15}. The two gray bands enveloping the black curve show the $50\%$ and $90\%$ percentile regions. The blue curve shows $\rvir-$based model in which $\median{\rhalf}{\rvir}=0.01\rvir.$ This figure confirms that a linear relationship between $\rvir$ and $\rhalf$ predicts the characteristic curvature in the relation $\median{\rhalf}{\mstar}$ over a wide range in mass.
+The black curve shows the median size-mass relation of SDSS galaxies as measured in \citet{meert_etal15}. The two gray bands enveloping the black curve show the $50\%$ and $90\%$ percentile regions. The blue curve shows the $\rvir-$based model in which $\median{\rhalf}{\rvir}=0.01\rvir$ (see Section \ref{subsubsec:rvirmodel} for details).  
 }
 \label{fig:scatter_plot}
 \end{figure}
@@ -233,8 +232,8 @@ Red and blue points with error bars show our SDSS measurements of the clustering
 \centering
 \includegraphics[width=12cm]{FIGS/rvir_only_wp_ratios.pdf}
 \caption{
-{\bf $\rhalf-$dependence of galaxy clustering: clustering ratios.}
-Closely related to Figure \ref{fig:rvir_only_clustering_absolute}, the y-axes show {\em clustering strength ratios,} defined as $(w_{\rm p}^{\rm large} - w_{\rm p}^{\rm small})/w_{\rm p}^{\rm all}.$ Thus a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of the same stellar mass. Solid curves show the clustering ratio predictions of the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}. Normalizing the measurements and predictions by $w_{\rm p}^{\rm all}$ scales away the shortcoming of ordinary abundance matching (see Figure \ref{fig:baseline_sham_clustering}), highlighting the successful prediction of the $\rvir-$based model for the $\rhalf-$dependence of galaxy clustering.
+{\bf $\rhalf-$dependence of galaxy clustering.}
+Closely related to Figure \ref{fig:rvir_only_clustering_absolute}, the y-axes show {\em clustering strength ratios,} defined as $\delta\wproj/\wproj\equiv(w_{\rm p}^{\rm large} - w_{\rm p}^{\rm small})/w_{\rm p}^{\rm all}.$ Thus a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of the same stellar mass. Solid curves show the clustering ratio predictions of the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}. Normalizing the measurements and predictions by $w_{\rm p}^{\rm all}$ scales away the shortcoming of ordinary abundance matching (see Figure \ref{fig:baseline_sham_clustering}), highlighting the successful prediction of the $\rvir-$based model for the $\rhalf-$dependence of galaxy clustering.
 }
 \label{fig:clustering_ratio_upshot}
 \end{figure*}
