@@ -219,29 +219,6 @@ The black curve shows the median size-mass relation of SDSS galaxies as measured
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
 
-%---------------------------------------------------------------------------------------------------
-\begin{figure*}
-\centering
-\includegraphics[width=12cm]{FIGS/rvir_only_wp_large_small_absolute.pdf}
-\caption{
-{\bf $\rhalf-$dependence of galaxy clustering.}
-Red and blue points with error bars show our SDSS measurements of the clustering of small and large galaxies, respectively. For each volume-limited sample of $\mstar-$complete galaxies, the small and large subsamples have identical stellar mass functions, as shown in Figure \ref{fig:sizedefinition}. Small galaxies cluster much more strongly relative to large galaxies of the same stellar mass. Solid curves show the clustering predictions of the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}. The $\rvir-$based model inherits the shortcoming of ordinary abundance matching shown in Figure \ref{fig:baseline_sham_clustering}, although the model faithfully captures the {\em relative} clustering of small vs. large galaxies, as shown in Figure \ref{fig:clustering_ratio_upshot}.
-}
-\label{fig:rvir_only_clustering_absolute}
-\end{figure*}
-%-----------------------------------------------------------------------------------------------------
-
-%---------------------------------------------------------------------------------------------------
-\begin{figure*}
-\centering
-\includegraphics[width=12cm]{FIGS/rvir_only_wp_ratios.pdf}
-\caption{
-{\bf $\rhalf-$dependence of galaxy clustering.}
-Closely related to Figure \ref{fig:rvir_only_clustering_absolute}, the y-axes show {\em clustering strength ratios,} defined as $\delta\wproj/\wproj\equiv(w_{\rm p}^{\rm large} - w_{\rm p}^{\rm small})/w_{\rm p}^{\rm all}.$ Thus a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of the same stellar mass. Solid curves show the clustering ratio predictions of the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}. Normalizing the measurements and predictions by $w_{\rm p}^{\rm all}$ scales away the shortcoming of ordinary abundance matching (see Figure \ref{fig:baseline_sham_clustering}), highlighting the successful prediction of the $\rvir-$based model for the $\rhalf-$dependence of galaxy clustering.
-}
-\label{fig:clustering_ratio_upshot}
-\end{figure*}
-%-----------------------------------------------------------------------------------------------------
 
 
 As noted in \S\ref{sec:intro}, \citet{kravtsov13} showed that galaxy sizes are on average proportional to the virial radius of their host halo. Motivated by these results, we  explore a model in which $\rhalf$ scales linearly with halo virial radius:\footnote{We note that the normalization factor in \citet{kravtsov13} is 0.015, where as our normalization is 0.01. The difference derives from two factors: {\em i.} the choice of halo radius definition: \citet{bryan_norman98} in the present work, compared to the $200c$ definition used in \citet{kravtsov13}; {\em ii.} the latter study used deprojected (larger) sizes for spheroidal galaxies, whereas we make no such correction here.}
@@ -254,6 +231,30 @@ For the virial radius of halos and subhalos, we use $\rmpeak:$ the value of $\rv
 \mpeak\equiv\frac{4\pi}{3}\rmpeak^{3}\Delta_{\rm vir}(\zpeak)\rho_{\rm m}(\zpeak),
 \eeq
 where for $\Delta_{\rm vir}(\zpeak)$ we use the fitting function to the ``virial" definition used in \citet{bryan_norman98}. This modeling assumption effectively defines $\median{\rhalf}{\mhalo};$ this relation defines the center of the log-normal distribution with $0.2$ dex of scatter that we use to generate a Monto Carlo realization of the model population.
+
+%---------------------------------------------------------------------------------------------------
+\begin{figure*}
+\centering
+\includegraphics[width=11cm]{FIGS/rvir_only_wp_large_small_absolute.pdf}
+\caption{
+{\bf $\rhalf-$dependence of galaxy clustering.}
+Red and blue points with error bars show our SDSS measurements of the clustering of small and large galaxies, respectively. For each volume-limited sample of $\mstar-$complete galaxies, the small and large subsamples have identical stellar mass functions, as shown in Figure \ref{fig:sizedefinition}. Small galaxies cluster much more strongly relative to large galaxies of the same stellar mass. Solid curves show the clustering predictions of the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}. The $\rvir-$based model inherits the shortcoming of ordinary abundance matching shown in Figure \ref{fig:baseline_sham_clustering}, although the model faithfully captures the {\em relative} clustering of small vs. large galaxies, as shown in Figure \ref{fig:clustering_ratio_upshot}.
+}
+\label{fig:rvir_only_clustering_absolute}
+\end{figure*}
+%-----------------------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------------------
+\begin{figure*}
+\centering
+\includegraphics[width=11cm]{FIGS/rvir_only_wp_ratios.pdf}
+\caption{
+{\bf $\rhalf-$dependence of galaxy clustering.}
+Closely related to Figure \ref{fig:rvir_only_clustering_absolute}, the y-axes show {\em clustering strength ratios,} defined as $\delta\wproj/\wproj\equiv(w_{\rm p}^{\rm large} - w_{\rm p}^{\rm small})/w_{\rm p}^{\rm all}.$ Thus a y-axis value of $-0.5$ corresponds to small galaxies being $50\%$ more strongly clustered than large galaxies of the same stellar mass. Solid curves show the clustering ratio predictions of the $\rvir-$based model described in \S\ref{subsubsec:rvirmodel}. Normalizing the measurements and predictions by $w_{\rm p}^{\rm all}$ scales away the shortcoming of ordinary abundance matching (see Figure \ref{fig:baseline_sham_clustering}), highlighting the successful prediction of the $\rvir-$based model for the $\rhalf-$dependence of galaxy clustering.
+}
+\label{fig:clustering_ratio_upshot}
+\end{figure*}
+%-----------------------------------------------------------------------------------------------------
 
 %-----------------------
 \section{Results}
@@ -288,7 +289,7 @@ The points and curves in Figure \ref{fig:clustering_ratio_upshot} are all negati
 %--------------------------------------------------------------------------------------
 \begin{figure*}
 \centering
-\includegraphics[width=12cm]{FIGS/alt_model_wp_ratios.pdf}
+\includegraphics[width=11cm]{FIGS/alt_model_wp_ratios.pdf}
 \caption{
 {\bf The subdominant role of tidal stripping.}
 In all panels, the axes and points with error bars are the same as in Figure \ref{fig:clustering_ratio_upshot}. The solid green curves shows the prediction of a model where $\rhalf$ is statistically set by $\mstar,$ in the complete absence of satellite mass loss. Such a model predicts zero $\rhalf-$dependence to galaxy clustering, in gross tension with observations. The solid purple curves show results for a model in which satellites lose mass after infall in a manner similar to what is seen in high-resolution hydrodynamical simulations, as described in \S\ref{subsubsec:strippingmodel}. This produces satellites that are smaller than centrals, but the effect is too mild to correctly capture the observed clustering. Evidently, satellite-specific mass stripping plays a sub-dominant role in setting the relative size of centrals and satellites.
