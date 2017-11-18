@@ -118,14 +118,14 @@ We place empirical constraints on the connection between dark matter halos and g
 \label{sec:intro}
 %----------------------------
 
-Many properties of observed galaxies exhibit remarkably tight scaling relations. Galaxy size, typically quantified by a half-mass or half-light radius, $\rhalf,$ has well-measured scaling with galaxy mass $\mstar$ in the local Universe \citep{shen_etal03,huang_etal13,lange_etal15,zhang_yang17}, and at higher redshift \citep{trujillo_etal04,vanderwel_etal14,kawamata_etal15,shibuya_etal15,huertas_company_etal13a,huang_etal17}.
+Many properties of observed galaxies exhibit remarkably tight scaling relations. Galaxy size, typically quantified by a half-mass or half-light radius, $\rhalf,$ has well-measured scaling with galaxy mass $\mstar$ in the local Universe \citep{shen_etal03,huang_etal13,lange_etal15,zhang_yang17}, and at higher redshift \citep{trujillo_etal04,huertas_company_etal13a,vanderwel_etal14,kawamata_etal15,shibuya_etal15,huang_etal17}.
 
-Observational constraints on models for galaxy $\rhalf$ typically come from one-point function measurements such as $\median{\rhalf}{\mstar}$ and $\sigma(\rhalf\vert\mstar),$ e.g.,  \citet{khochfar_silk06,lang_etal14,desmond_etal17,bottrell_etal17b,hou_etal17,somerville_etal17}, or otherwise from catalogs of galaxy groups \citep{weinmann_etal08,guo_etal09,huertas_company_etal13b,spindler_wake17}. More recently, the connection between a galaxy's size and the virial radius of its parent halo has been
+Observational constraints on models for galaxy $\rhalf$ typically come from one-point function measurements such as $\mean{\rhalf}{\mstar}$ and $\sigma(\rhalf\vert\mstar),$ e.g.,  \citet{khochfar_silk06,lang_etal14,desmond_etal17,bottrell_etal17b,hou_etal17,somerville_etal17}, or otherwise from catalogs of galaxy groups \citep{weinmann_etal08,guo_etal09,huertas_company_etal13b,spindler_wake17}. More recently, the connection between a galaxy's size and the virial radius of its parent halo has been
 explored by converting stellar mass to halo mass and virial radius, using abundance matching \citep{kravtsov_etal04,tasitsiomi_etal04,vale_ostriker04,vale_ostriker06,conroy_etal06}.  Such analyses have indicated that galaxy size is, on average, proportional to host halo virial radius, both at $z=0$ \citep{kravtsov13}, and higher redshifts \citep{huang_etal17,somerville_etal17}.
 
 Observations of two-point galaxy clustering, $\wproj(\rproj),$ have historically been used to place tight constraints on many features of the galaxy--halo connection, such as its $\mstar-$dependence \citep{moster_etal10,leauthaud_etal11,reddick_etal13,skibba_etal15}, dependence on luminosity \citep{kravtsov_etal04, tasitsiomi_etal04,vale_ostriker04,vale_ostriker06,tinker_etal05,cacciato_etal13}, broadband color \citep{coil_etal08,zehavi_etal11,guo_etal11,hearin_watson13}, and star-formation rate \citep{wang_etal07,tinker_etal13,watson_etal14}. In the present work, we exploit the constraining power of $\wproj(\rproj)$ to test empirical models connecting galaxy stellar mass and size to the properties of the galaxy's parent dark matter halo.
 
-The approach we take is to forward model the $\rhalf-$halo connection: we generate Monte Carlo realizations of models using a high-resolution cosmological N-body simulation, and then make synthetic measurements in a manner that closely mimics the measurements we make on our observed galaxy samples. We describe the dataset and simulations we use in \S\ref{sec:data}, and our forward-modeling methods in \S\ref{sec:model}. All of our primary results appear in \S\ref{sec:results}, and their theoretical interpretation in \S\ref{sec:interpretation}. We contextualize our findings in terms of previous work in \S\ref{sec:previous_work}, and discuss future directions in \S\ref{sec:future}. We conclude the paper with a summary of our principal results in \S\ref{sec:conclusion}.
+The approach we take is to forward model the $\rhalf-$halo connection: we generate Monte Carlo realizations of models using a high-resolution cosmological N-body simulation, and then make synthetic measurements in a manner that closely mimics the measurements we make on our observed galaxy samples. We describe the dataset and simulations we use in \S\ref{sec:data}. Our forward-modeling methods are described in \S\ref{sec:model}, with supplementary material in the Appendix. All of our primary results appear in \S\ref{sec:results}, and their theoretical interpretation in \S\ref{sec:interpretation}. We contextualize our findings in terms of previous work in \S\ref{sec:previous_work}, and discuss future directions in \S\ref{sec:future}. We conclude the paper with a summary of our principal results in \S\ref{sec:conclusion}.
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure*}
@@ -163,7 +163,7 @@ Because galaxy clustering has well-known dependence upon $\mstar$ that is not th
 
 Using this technique, for any $\mstar-$threshold sample, the stellar mass function of the ``large" and ``small" subsamples are identical. We illustrate this for the particular case of $\mstar>10^{10.25}\msun$ in bottom left panel of Figure~\ref{fig:sizedefinition}, which shows stellar mass functions for the two subsamples. The bottom right panel of Figure~\ref{fig:sizedefinition} compares histograms of the two size distributions of these subsamples, which partially overlap due to the variation in $\median{\rhalf}{\mstar}$ across the $\mstar-$ range of the threshold sample.
 
-In addition to stellar mass, $\wproj(\rproj)$ depends on galaxy color \citep[e.g.,][]{zehavi_etal11}. Thus, we will also consider
+In addition to stellar mass, $\wproj(\rproj)$ depends on galaxy color \citep[e.g.,][]{zehavi_etal11}. Thus, we will also consider the 
 dependence of clustering on galaxy size while controlling for color. Observations of clustering exhibited by subsamples split in stellar mass and color are presented in \S\ref{subsec:colormorph}.
 
 \section{Galaxy-Halo Model}
@@ -191,7 +191,7 @@ We show the $\mstar-$dependence of projected galaxy clustering, $\wproj(\rproj),
 \subsection{Galaxy size models}
 \label{subsec:model}
 
-In \S\ref{sec:results}, we calculate predictions for the $\rhalf-$dependence of galaxy clustering for two classes of empirical models, described in turn below.
+Our primary results in \S\ref{sec:results} show predictions for the $\rhalf-$dependence of galaxy clustering for two classes of empirical models, described in turn in the two subsections below.
 
 \subsubsection{Tidal stripping model}
 \label{subsubsec:strippingmodel}
@@ -202,8 +202,7 @@ It is natural to consider the possibility that stellar mass is stripped from sat
 \beq
 f_{\ast} = 1 - \exp(-14.2f_{\rm DM}).
 \eeq
-For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the peak mass, $M_{\rm vir}/M_{\rm peak}.$ If we denote the post-stripping stellar mass as $M_{\ast}',$ then we have $M_{\ast}'\equiv f_{\ast}M_{\ast},$ where $M_{\ast}$ is given by the initial application of abundance matching. We then calculate the post-stripping radius by interpolating $\langle\rhalf'\vert\mstar'\rangle$ directly from SDSS data. In this way, we model satellite mass loss and  size truncation in a manner that mimics what is seen in hydrodynamical simulations. As shown in \citet{smith_etal16}, stellar stripping in this model does not begin until $f_{\rm DM}\lesssim0.2,$ and the DM halo needs to be stripped to $\sim5\%$ of its initial mass for $\sim50\%$ of stars to be stripped.
-
+For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the peak mass, $M_{\rm vir}/M_{\rm peak}.$ If we denote the post-stripping stellar mass as $M_{\ast}',$ then we have $M_{\ast}'\equiv f_{\ast}M_{\ast},$ where $M_{\ast}$ is given by the initial application of abundance matching. We then calculate the post-stripping radius by interpolating $\langle\rhalf'\vert\mstar'\rangle$ directly from SDSS data. In this way, we model satellite mass loss and  size truncation in a manner that mimics what is seen in hydrodynamical simulations. As shown in \citet{smith_etal16}, stellar stripping in this model does not begin until $f_{\rm DM}\lesssim0.2,$ and in order for $\sim50\%$ of stars to be stripped, the DM halo needs to be stripped to $\sim5\%$ of its initial mass. 
 
 \subsubsection{$\rvir-$based model}
 \label{subsubsec:rvirmodel}
@@ -221,7 +220,7 @@ The black curve shows the median size-mass relation of SDSS galaxies as measured
 
 
 
-As noted in \S\ref{sec:intro}, \citet{kravtsov13} showed that galaxy sizes are on average proportional to the virial radius of their host halo. Motivated by these results, we  explore a model in which $\rhalf$ scales linearly with halo virial radius:\footnote{We note that the normalization factor in \citet{kravtsov13} is 0.015, where as our normalization is 0.01. The difference derives from two factors: {\em i.} the choice of halo radius definition: \citet{bryan_norman98} in the present work, compared to the $200c$ definition used in \citet{kravtsov13}; {\em ii.} the latter study used deprojected (larger) sizes for spheroidal galaxies, whereas we make no such correction here.}
+As noted in \S\ref{sec:intro}, \citet{kravtsov13} showed that galaxy sizes are on average proportional to the virial radius of their host halo. Motivated by these results, we  explore a model in which $\rhalf$ scales linearly with halo virial radius:\footnote{We note that the normalization factor in \citet{kravtsov13} is 0.015, where as our normalization is 0.01. The difference derives from two factors: {\em i.} the choice of halo radius definition: \citet{bryan_norman98} in the present work, compared to the $200c$ definition used in \citet{kravtsov13}; {\em ii.} the latter study used deprojected (larger) sizes for spheroidal galaxies, whereas we make no such correction here. See \S\ref{sec:future} for further discussion.}
 \beq
 \label{eq:fiducial_model}
 \rhalf = 0.01\rvir
@@ -463,10 +462,10 @@ Figure \ref{fig:censatsizeratios} shows that satellites in $\mhalo\approx10^{12}
 We have presented new measurements of the dependence of galaxy clustering upon galaxy size, and used forward-modeling methods based on {\tt Halotools} to identify the basic ingredients that influence the signal. We conclude with a brief summary of our primary findings:
 
 \ben
-\item Small galaxies cluster more strongly than large galaxies of the same stellar mass. Differences between the clustering of small and large galaxies increase on small scales $R\lesssim1\mpc,$ and decrease with stellar mass.
+\item Small galaxies cluster more strongly than large galaxies of the same stellar mass. Differences between the clustering of small and large galaxies increase on small scales $R\lesssim1\mpc,$ and decrease with stellar mass (see Figure \ref{fig:rvir_only_clustering_absolute}). 
 \item The most important ingredient influencing this signal is the relative size of central and satellite galaxies. The magnitude, scale-dependence, and $\mstar-$dependence of $\rhalf-$dependent clustering provides strong evidence that satellite galaxies are smaller than central galaxies of the same halo mass.
-\item A simple empirical model in which $\rhalf$ is set by halo $\rvir$ at the time of peak halo mass exhibits a clustering signal that is strikingly similar to that seen in SDSS.
-\item Models in which $\rhalf$ is regulated by $\mstar,$ rather than $\mhalo,$ are grossly discrepant with the observed clustering signal, even when accounting for satellite mass stripping.
+\item A simple empirical model in which $\rhalf$ is set by halo $\rvir$ at the time of peak halo mass exhibits a clustering signal that is strikingly similar to that seen in SDSS (see Figure \ref{fig:clustering_ratio_upshot}). 
+\item Models in which $\rhalf$ is regulated by $\mstar,$ rather than $\mhalo,$ are grossly discrepant with the observed clustering signal, even when accounting for satellite mass stripping (see Figure \ref{fig:mstarmodelclustering}).
 \item Taken together, our findings indicate that satellite-specific processes play a sub-dominant role in setting the different sizes of centrals and satellites; these size differences instead appear to be largely predetermined at the time of satellite infall.
 \een
 
