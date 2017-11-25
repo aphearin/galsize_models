@@ -52,6 +52,7 @@
 \newcommand{\mstar}{M_{\ast}}
 \newcommand{\ssfr}{{\rm sSFR}}
 \newcommand{\sfr}{{\rm SFR}}
+\newcommand{\fsat}{F_{\rm sat}}
 
 %%%%%%%%  halo properties  %%%%%%%%
 \newcommand{\halospin}{\lambda_{\rm halo}}
@@ -77,7 +78,6 @@
 \newcommand{\wplarge}{w_{\rm p}^{\rm large}}
 \newcommand{\wpsmall}{w_{\rm p}^{\rm small}}
 \newcommand{\wpall}{w_{\rm p}^{\rm all}}
-
 \newcommand{\mean}[2]{\langle{#1}\vert{#2}\rangle}
 \newcommand{\median}[2]{\langle{#1}\vert{#2}\rangle_{\rm median}}
 
@@ -111,19 +111,13 @@ $^5$Max-Planck Institut f\"ur Astrophysik, Karl-Schwarzschild Stra\ss e 1, 85748
 \maketitle
 
 \begin{abstract}
-We explore size dependence of galaxy clustering and the implied connection between galaxy half-light radii, $\rhalf$, and their halo virial radii. 
-We show that in the volume-limited SDSS galaxy samples smaller galaxies cluster much more strongly than larger galaxies at fixed stellar mass. 
-The size dependence increases with decreasing scale and decreases with stellar mass of the sample. Using {\tt Halotools} to forward model the observations, 
-we show that a simple empirical model, in which $\rhalf$ is proptortional to the halo $\rvir$ at the time when halo mass reached its maximum,
-reproduces observed size-dependence of galaxy clustering in striking detail.
-The success of the model implies that the size-dependence of galaxy clustering is mainly due to the fact that satellite galaxies have smaller sizes compared 
-to central galaxies of the same stellar mass. Taken together, our findings indicate that  sizes of satellite galaxies are set  prior to satellite infall and that a 
-remarkably simple linear size--virial radius relation emerges from the complex physics regulating galaxy size. The $\rvir$-based size model that reproduces
- the observed size dependence of clustering makes a prediction that future observations of size dependence of galaxy-galaxy lensing for stellar mass 
- selected galaxy samples will see stronger signal for smaller galaxies. 
- %Left over this sentence. Not sure we need to talk about this model in the abstract: 
- % At the same time, model in which size is based on stellar mass does not reproduce the clustering trend, even after taking into account stellar mass loss by satellites. 
-
+Using new SDSS measurements of projected galaxy clustering, $\wproj(\rproj),$ we place empirical constraints on the connection between galaxy size, $\rhalf,$ and halo virial radius, $\rvir.$  
+We find that small galaxies cluster much more strongly than large galaxies of the same stellar mass. 
+The size-dependence of $\wproj(\rproj)$ increases on smaller scales, and decreases at larger stellar mass. Using {\tt Halotools} to forward model the observations, we show that a simple empirical model, in which galaxy $\rhalf$ is proportional to halo $\rvir$ at the time when halo mass reached its maximum,
+reproduces the observed size-dependence of $\wproj(\rproj)$ in striking detail. 
+We show that the success of this model provides strong support for the conclusion that satellite galaxies have smaller sizes relative to central galaxies of the same halo mass. 
+Our findings indicate that the sizes of satellites are set prior to the time of satellite infall, and that a remarkably simple, linear size--virial radius relation emerges from the complex physics regulating galaxy size. 
+%We conclude with a prediction that future measurements of galaxy-galaxy lensing will show that small galaxies exhibit a significantly stronger lensing signal relative to large galaxies.of the same stellar mass. 
 \end{abstract}
 
 %----------------------------
@@ -173,7 +167,7 @@ All numerical values of $\rhalf$ will be quoted in physical $\kpc,$ and all valu
 \label{subsec:sizedef}
 
 Galaxy clustering has well-known dependence upon $\mstar$, which is not the focus of this work.  We thus wish to remove this dependence to focus solely on the  $\wproj(\rproj)$ dependence
-on $\rhalf.$ To do so, we determine the value $\median{\rhalf}{\mstar}$ by computing a sliding median of $\rhalf$ for galaxies sorted by $\mstar,$ calculated using a window of width $N_{\rm gal}=1000.$ \textcolor{magenta}{AK: is window symmetric? What is done for the most massive and least massive galaxies? } Each galaxy is categorized as either ``large" or ``small" according to whether it is above or below the median value appropriate for its stellar mass. We note that this is analogous to the common convention for studying the properties of ``red" vs. ``blue" galaxies, in which the two subsamples are divided by a $\mstar-$ or luminosity-dependent green valley cut \citep[e.g.,][]{vdB_etal08,zehavi_etal11}, only here the $\rhalf$ distribution is uni-modal, not bi-modal.
+on $\rhalf.$ To do so, we determine the value $\median{\rhalf}{\mstar}$ by computing a sliding median of $\rhalf$ for galaxies sorted by $\mstar,$ calculated using a symmetric window of width $N_{\rm gal}=1000,$ keeping this window fixed for the first and last $500$ galaxies. Each galaxy is categorized as either ``large" or ``small" according to whether it is above or below the median value appropriate for its stellar mass. We note that this is analogous to the common convention for studying the properties of ``red" vs. ``blue" galaxies, in which the two subsamples are divided by a $\mstar-$ or luminosity-dependent green valley cut \citep[e.g.,][]{vdB_etal08,zehavi_etal11}, only here the $\rhalf$ distribution is uni-modal, not bi-modal.
 
 Using this technique, for any $\mstar-$threshold sample, the stellar mass function of the ``large" and ``small" subsamples are identical. We illustrate this for the particular case of $\mstar>10^{10.25}\msun$ in bottom left panel of Figure~\ref{fig:sizedefinition}, which shows stellar mass functions for the two subsamples. The bottom right panel of Figure~\ref{fig:sizedefinition} compares histograms of the two size distributions of these subsamples, which partially overlap due to the variation in $\median{\rhalf}{\mstar}$ across the $\mstar-$ range of the threshold sample.
 
@@ -186,7 +180,7 @@ dependence of clustering on galaxy size while controlling for color. Observation
 \subsection{Abundance Matching}
 \label{subsec:sham}
 
-We map $\mstar$ onto subhalos using deconvolution abundance matching (SHAM). See Section 3.3 of \citet{behroozi_etal10}, or the appendix of \citet{kravtsov_etal14}, for an account of the mathematics underlying this technique in the presence of scatter. To perform the abundance matching, we use the publicly available code\footnote{\url{https://bitbucket.org/yymao/abundancematching/overview}} developed by Yao-Yuan Mao \citep{lehmann_etal15} that provides a python wrapper around the C kernel developed in \citet{behroozi_etal10}. For the subhalo property used in SHAM, we use $\mpeak,$ the largest value of $\mvir$ ever attained by the subhalo throughout the entire history of the main progenitor halo.  Using the stellar mass function provided in \citet{moustakas_etal13}, we model $\mstar$ as a log-normal distribution with $0.2$ dex of scatter about the median relation $\median{\mstar}{\mpeak}$ determined by SHAM \citep{reddick_etal13}. As described in the appendix, we include a prescription for supplementing the ordinary {\tt Rockstar} subhalo catalog with disrupted subhalos, so that some of our model galaxies inhabit subhalos that are no longer resolved and do not appear in the standard publicly available catalog (``orphan galaxies").
+We map $\mstar$ onto subhalos using deconvolution abundance matching (SHAM). See Section 3.3 of \citet{behroozi_etal10}, or the appendix of \citet{kravtsov_etal14}, for an account of the mathematics underlying this technique in the presence of scatter. To perform the abundance matching, we use the publicly available code\footnote{\url{https://bitbucket.org/yymao/abundancematching}} developed by Yao-Yuan Mao \citep{lehmann_etal15} that provides a python wrapper around the C kernel developed in \citet{behroozi_etal10}. For the subhalo property used in SHAM, we use $\mpeak,$ the largest value of $\mvir$ ever attained by the subhalo throughout the entire history of the main progenitor halo.  Using the stellar mass function provided in \citet{moustakas_etal13}, we model $\mstar$ as a log-normal distribution with $0.2$ dex of scatter about the median relation $\median{\mstar}{\mpeak}$ determined by SHAM \citep{reddick_etal13}. As described in the appendix, we include a prescription for supplementing the ordinary {\tt Rockstar} subhalo catalog with disrupted subhalos, so that some of our model galaxies inhabit subhalos that are no longer resolved and do not appear in the standard publicly available catalog (``orphan galaxies").
 
 Figure \ref{fig:baseline_sham_clustering} shows that our implementation of SHAM produces model galaxies whose projected clustering is in reasonably good agreement with SDSS galaxies. We note, however, that small-scale clustering shows mild $\sim10-20\%$ tension at stellar mass $\mstar\gtrsim10^{10.75}\msun,$ and similarly on all scales for the $\mstar\gtrsim10^{9.75}\msun$ sample, although the statistical significance of this discrepancy is likely rather mild due to the sample variance of SDSS galaxies with $z\lesssim0.05.$
 
@@ -217,7 +211,6 @@ It is natural to consider the possibility that stellar mass is stripped from sat
 f_{\ast} = 1 - \exp(-14.2f_{\rm DM}).
 \eeq
 For $f_{\rm DM}$ we use the ratio of present-day subhalo mass divided by the peak mass, $M_{\rm vir}/M_{\rm peak}.$ If we denote the post-stripping stellar mass as $M_{\ast}',$ then we have $M_{\ast}'\equiv f_{\ast}M_{\ast},$ where $M_{\ast}$ is given by the initial application of abundance matching. We then calculate the post-stripping radius by interpolating $\langle\rhalf'\vert\mstar'\rangle$ directly from SDSS data. In this way, we model satellite mass loss and  size truncation in a manner that mimics what is seen in hydrodynamical simulations. As shown in \citet{smith_etal16}, stellar stripping in this model does not begin until $f_{\rm DM}\lesssim0.2,$ and in order for $\sim50\%$ of stars to be stripped, the DM halo needs to be stripped to $\sim5\%$ of its initial mass. 
-\textcolor{magenta}{How is mass loss is handled and how stellar mass assigned for orphans? This is not described in the appendix or here.}.
 
 \subsubsection{$\rvir-$based model}
 \label{subsubsec:rvirmodel}
@@ -338,8 +331,8 @@ Figure \ref{fig:colorclustering} shows the clustering of large vs. small galaxie
 \centering
 \includegraphics[width=8cm]{FIGS/color_selected_size_dependent_clustering.pdf}
 \caption{
-{\bf \textcolor{magenta}{AK: it may be difficult for people (especially color-blind) to tell the difference between color of points of small and large galaxies.} Distinct $\rhalf-$dependence of clustering for color-selected galaxy samples.}
-Projected clustering of SDSS galaxies in the bin of stellar mass: $10^{9.75}<\mstar/\msun<10^{10.25}.$ For both ``blue" and ``red" samples, we first divide SDSS galaxies falling in the $\mstar$ bin based on a color cut at $g-r=0.65.$ We then subsequently compute $\median{\rhalf}{\mstar; {\rm red}}$ and $\median{\rhalf}{\mstar; {\rm blue}}$. In analogy to the bottom left panel of Figure \ref{fig:sizedefinition}, for each of the red and blue samples, the small and large subsamples have statistically indistinguishable stellar mass functions. We then measure $\wproj$ for each of the four subsamples, plotting the results with color-coding as specified in the legend. At this stellar mass, pre-selecting galaxy samples by color results in a dramatic weakening of the $\rhalf-$dependence of $\wproj$ relative to $\mstar-$complete samples, as well as a sign-reversal of the signal. In \S\ref{sec:interpretation} we give a simple halo model picture unifying the trends shown here with those illustrated in Figure \ref{fig:clustering_ratio_upshot}.
+{\bf Distinct $\rhalf-$dependence of clustering for color-selected galaxy samples.}
+Projected clustering of SDSS galaxies in the bin of stellar mass: $10^{9.75}<\mstar/\msun<10^{10.25}.$ For both ``blue" and ``red" samples, we first divide SDSS galaxies falling in the $\mstar$ bin based on a color cut at $g-r=0.65.$ We then subsequently compute $\median{\rhalf}{\mstar; {\rm red}}$ and $\median{\rhalf}{\mstar; {\rm blue}}$. In analogy to the bottom left panel of Figure \ref{fig:sizedefinition}, for each of the red and blue samples, the small and large subsamples have statistically indistinguishable stellar mass functions. We then measure $\wproj$ for each of the four subsamples; jackknife-estimated errors are shown alternately using error bars and shaded bands, as specified in the legend. At this stellar mass, pre-selecting galaxy samples by color results in a dramatic weakening of the $\rhalf-$dependence of $\wproj$ relative to $\mstar-$complete samples, as well as a sign-reversal of the signal. In \S\ref{sec:interpretation} we give a simple halo model picture unifying the trends shown here with those illustrated in Figure \ref{fig:clustering_ratio_upshot}.
 }
 \label{fig:colorclustering}
 \end{figure}
@@ -378,11 +371,9 @@ In the $\rvir-$based model, satellites and splashback galaxies are smaller than 
 
 We can also understand how the observed $\rhalf-$dependent clustering scales with $\mstar$ (shown by comparing different panels in Figure \ref{fig:clustering_ratio_upshot}) in terms of the different of size of centrals and satellites. The satellite fraction $F_{\rm sat}(\mstar)$ decreases as $\mstar$ increases \citep[e.g.,][]{guo_etal11,reddick_etal13}. As $F_{\rm sat}$ decreases, there are fewer satellites available to preferentially weight the subsample of smaller galaxies. Thus,  high-$\mstar$ samples consist mostly of central galaxies, and the split by size no longer corresponds to the split into satellite- and central-dominated samples. The size dependence of clustering correspondingly weakens and nearly disappears for samples with large $\mstar$.
 
-Likewise, the significantly weaker dependence of clustering on size for color-selected samples (Figure \ref{fig:colorclustering}), and its reversed sign, can be naturally explained by the same principles.  It is well known that satellites are redder than centrals of the same stellar mass \citep[e.g.,][]{vdB_etal08}, and so blue galaxies have a small satellite fraction, while red galaxies have a large fraction of satellites that occupy high-mass halos; accordingly, red galaxies cluster much more strongly than blue galaxies \citep[e.g.,][]{zehavi_etal11}. 
+Likewise, the significantly weaker dependence of clustering on size for color-selected samples (Figure \ref{fig:colorclustering}), and its reversed sign, may be explained by the same principles.  It is well known that satellites are redder than centrals of the same stellar mass \citep[e.g.,][]{vdB_etal08}, and that the clustering differences between red and blue galaxies can be understood in terms of red satellites preferentially occupying high-mass halos \citep[e.g.,][]{zehavi_etal11}. Pre-selecting galaxies by color then absorbs much of the potential effect that can be reaped by central vs. satellite differences, and so the relative clustering of centrals becomes more important. In the limit that size-dependent clustering is dominated by centrals, the $\rvir$-based size model predicts that large galaxy samples should be (weakly) more clustered than small ones, because $\rhalf\propto\rvir\propto\mhalo^{1/3}.$ This is the trend seen in the clustering measurements shown in Figure \ref{fig:colorclustering}. 
 
-Pre-selecting galaxy samples by color then naturally restricts the impact of satellites on size-dependent clustering. For blue galaxies, the reason traces to the small value of $F_{\rm sat};$ for red galaxies, the reason traces to the limited dynamic range of host halo masses occupied by the satellites. \textcolor{magenta}{AK: I did not quite understand the explanation for red galaxies in the last sentence. It'd be good to unpack it. }. With the impact of satellites reduced, the relative clustering of centrals becomes more important. In the limit that size-dependent clustering is dominated by centrals, the $\rvir$-based size model predicts that large galaxy samples should be (weakly) more clustered than small ones, because $\rhalf\propto\rvir\propto\mhalo^{1/3}.$ This is the trend seen in the clustering measurements shown in Figure \ref{fig:colorclustering}.
-
-While we consider such a hypothesis plausible, and even likely, a conclusive confirmation requires proper forward modeling of size and color jointly. Such an effort is well motivated by our results, but is beyond the scope of the present work.
+While we consider such a conjecture plausible, a conclusive confirmation requires proper forward modeling of size and color jointly. Such an effort is well motivated by our results, but is beyond the scope of the present work.
 
 %-------------------------------------------------
 \subsection{Broader Implications}
@@ -476,16 +467,15 @@ Figure \ref{fig:censatsizeratios} shows that satellites in $\mhalo\approx10^{12}
 \section{Conclusions}
 \label{sec:conclusion}
 
-We have presented new measurements of the dependence of galaxy clustering upon galaxy size, and used forward-modeling methods based on {\tt Halotools} to identify the basic ingredients that influence the signal. We conclude with a brief summary of our primary findings:
+We have presented new measurements of the dependence of projected galaxy clustering, $\wproj(\rproj),$ upon galaxy size and stellar mass, and used forward-modeling methods based on {\tt Halotools} to identify the basic ingredients that influence the signal. We conclude with a brief summary of our primary findings:
 
 \ben
-\item Small galaxies cluster more strongly than large galaxies of the same stellar mass. Differences between the clustering of small and large galaxies increase on small scales $R\lesssim1\mpc,$ and decrease with stellar mass (see Figure \ref{fig:rvir_only_clustering_absolute}). 
-\item The most important factor influencing this signal is the relative size of central and satellite galaxies. The magnitude, scale-dependence, and $\mstar-$dependence of $\rhalf-$dependent clustering provides strong evidence that satellite galaxies are smaller than central galaxies of the same halo mass.
-\item A simple empirical model in which $\rhalf$ is proptortional to the halo $\rvir$ at the time when halo mass reached its maximum peak halo mass reproduces size-dependence of galaxy clustering of the SDSS galaxies in striking detail (see Figure \ref{fig:clustering_ratio_upshot}). 
-\item Models in which $\rhalf$ is regulated by $\mstar,$ rather than $\mhalo,$ are grossly discrepant with the observed clustering signal, even when accounting for satellite mass stripping (see Figure \ref{fig:mstarmodelclustering}).
+\item Small galaxies cluster more strongly than large galaxies of the same stellar mass. Differences between the clustering of small and large galaxies increase on small scales $\rproj\lesssim1\mpc,$ and decrease with stellar mass (see Figure \ref{fig:rvir_only_clustering_absolute}). 
+\item The most important factor influencing the clustering signal is the relative size of central and satellite galaxies. The magnitude, scale-dependence, and $\mstar-$dependence of $\rhalf-$dependent clustering provides strong evidence that satellite galaxies are smaller than central galaxies of the same halo mass.
+\item A simple empirical model in which $\rhalf$ is proportional to halo $\rvir$ at the time when halo mass reached its maximum reproduces the size-dependence of SDSS galaxy clustering in striking detail (see Figure \ref{fig:clustering_ratio_upshot}). 
+\item Models in which $\rhalf$ is regulated by $\mstar,$ rather than $\mhalo,$ are grossly discrepant with the observed $\wproj(\rproj),$ even when accounting for satellite mass stripping (see Figure \ref{fig:mstarmodelclustering}).
 \item Taken together, our findings indicate that satellite-specific processes play a sub-dominant role in setting the different sizes of centrals and satellites; these size differences instead appear to be largely predetermined at the time of satellite infall.
-\item The $\rvir$-based size model that reproduces the observed size dependence of clustering makes a prediction that future observations of size dependence of galaxy-galaxy
-lensing for stellar mass selected galaxy samples will see stronger signal for smaller galaxies. 
+\item The $\rvir$-based size model that reproduces the observed $\wproj(\rproj)$ makes an unambiguous  prediction for future observations of galaxy-galaxy lensing: for $\mstar-$selected samples, $\Delta\Sigma$ should be much stronger for small galaxies relative to large (see Figure \ref{fig:lensingprediction}). The strength of the predicted difference in $\Delta\Sigma$ makes this test well within reach of numerous present-day imaging surveys. 
 \een
 
 Our results provide an integral constraint for more complex and fine-grained models of galaxy size, such as semi-analytic models and hydrodynamical simulations. For convenience, Figure \ref{fig:censatsizeratios} provides a simple summary statistic that can be used as a diagnostic for calibrating alternative modeling efforts. We view the present work as a pilot study that motivates a Bayesian inference program to tightly constrain the galaxy size-halo connection with forward modeling techniques, in direct analogy to the literature on the stellar-to-halo-mass relation.
@@ -504,27 +494,53 @@ Work done at Argonne National Laboratory was supported under the DOE contract DE
 
 \section*{Appendix: Treatment of Disrupted Subhalos}
 
-We use an extension of {\tt Consistent Trees} that models the evolution of subhalos after disruption. The phase space evolution of disrupted subhalos is approximated by following a point mass evolving in the host halo potential according to the orbital parameters of the subhalo at the time of disruption; the evolution of subhalo mass and circular velocity is approximated using the semi-analytic model presented in \citet{jiang_vdB14}. We then use the {\tt extract\_orphans} program in {\tt UniverseMachine} to walk through all the Bolshoi-Planck {\tt hlist} files, yielding the main progenitor information of every subhalo that was ever identified by {\tt Consistent Trees}.
+Recent results indicate that some portion of subhalos may be artificially disrupted \citep{guo_white13, campbell_etal17}. To address this possibility in our modeling, we use an extension of {\tt Consistent Trees} that models the evolution of subhalos after disruption. The phase space evolution of disrupted subhalos is approximated by following a point mass evolving in the host halo potential according to the orbital parameters of the subhalo at the time of disruption; the evolution of subhalo mass and circular velocity is approximated using the semi-analytic model presented in \citet{jiang_vdB14}. We then use the {\tt extract\_orphans} program in {\tt UniverseMachine} to walk through all the Bolshoi-Planck {\tt hlist} files, yielding the main progenitor information of every subhalo that was ever identified by {\tt Consistent Trees}. 
 
-Since it is likely that some portion of these disrupted subhalos should be populated with model galaxies \citep{guo_white13, campbell_etal17}, in our initial application of deconvolution abundance matching we derive the $\mstar-\mpeak$ relation using {\em all} subhalos, including those that may be disrupted. We then apply a selection function to the disrupted subhalos, so that a fraction of these objects will host model galaxies. We refer to this as the {\em orphan selection function}, $\mathcal{F}_{\rm orphan},$ which we consider to be an integral component of our application of abundance matching.
+In our initial application of deconvolution abundance matching we derive the $\mstar-\mpeak$ relation using {\em all} subhalos, including those that were initially considered disrupted. We then apply a selection function to the disrupted subhalos, so that a fraction of these objects will host model galaxies. We refer to this as the {\em orphan selection function}, $\mathcal{F}_{\rm orphan},$ which we consider to be an integral component of our application of abundance matching. Once $\mathcal{F}_{\rm orphan}$ has been applied, the assemblage of calculations described above provides values of $\mpeak,$ $\zpeak,$ and $\mvir$ for disrupted subhalos, which are the only properties needed to apply either the $\rvir-$based or $\mstar-$based size model.
 
-In this appendix, we present two different, a priori reasonable choices for the orphan selection function. Since a rigorous calibration of $\mathcal{F}_{\rm orphan}$ is beyond the scope of the present work, we instead opt for a simple parameterization that yields reasonably accurate recovery of the galaxy clustering signal observed in SDSS.
+In this appendix, we present two distinct choices for the orphan selection function, described in detail below. For the results in the main body of the text, we have opted for the simplest parameterization we could find that yields reasonably accurate recovery of the galaxy clustering signal observed in SDSS. While a rigorous calibration of $\mathcal{F}_{\rm orphan}$ is beyond the scope of the present work, we point out that a systematic study of subhalo disruption is needed to conduct the program discussed in \S\ref{sec:future}.
 
 In both treatments studied here, we first discard orphan subhalos with $V_{\rm max}/V_{\rm peak}<0.1,$ so that the most drastically disrupted subhalos remain unpopulated with galaxies. For our fiducial model used throughout the main body of the text, $\mathcal{F}_{\rm orphan}$ is defined by randomly selecting half of the orphan subhalos. For the alternative orphan selection function labeled as ``$M_{\rm host}-$dependent orphans" in this appendix, we proceed as follows. We model $\mathcal{F}_{\rm orphan}=\mathcal{F}_{\rm orphan}(M_{\rm peak},M_{\rm host}),$ where $\mpeak$ is the peak mass of the disrupted subhalo, and $\mhost$ is the present-day virial mass of its $z=0$ host halo. For the $\mpeak-$dependence, we select $50\%$ of disrupted subhalos with $\mpeak=10^{11}\msun,$ $0\%$ of subhalos with $\mpeak=10^{13}\msun,$ linearly interpolating in $\log\mpeak$ for intermediate values of $\mpeak.$ At each $\mpeak,$ the selection of disrupted halos is not random; instead, we preferentially select the subhalos with larger $\mhost,$ which we intend to offset the increased difficulty of subhalo-finding algorithms to identify subhalos with especially small values of  $\mu\equiv\mpeak/\mhost.$
 
-Figure \ref{fig:orphan_effects} illustrates the impact of the orphan selection function on $\mstar-$threshold clustering (top panel) and the satellite fraction (bottom panel). \textcolor{magenta}{AK: given that the focus of the paper is on the size dependence of clustering, some readers could want to see a version of Fig 5 for different orphan models instead of stellar mass dependence of clustering.} Comparing the black to the red curves shows that including orphans substantially boosts small-scale clustering due to the increased satellite fraction. Comparing the orange to the black curves, we see that random orphan selection, vs. the $M_{\rm host}-$dependent selection, results in similar clustering, with slight differences on the smallest scales at the highest masses. Because we have not been systematic in the calibration of $\mathcal{F}_{\rm orphan},$ we adopt the simpler, random orphan selection as the fiducial model shown in the main body of the text.
+Figure \ref{fig:orphan_satellite_fractions} illustrates the impact of the orphan selection function on the $\mstar-$dependence of the satellite fraction, $\fsat,$ defined as the fraction of galaxies that are not centrals. Both models that include disrupted subhalos receive a significant boost to $\fsat$ due to orphan galaxies. The $\mhost-$dependent model suppresses the selection of disrupted subhalos with larger values of $\mpeak,$ resulting in a milder boost to $\fsat$ at large $\mstar.$ 
+
+Figure \ref{fig:orphan_baseline_clustering} shows how the treatment of orphans impacts $\mstar-$dependent clustering. Comparing either the black or orange curves to the red curves shows that including orphans substantially boosts small-scale clustering due to the increased satellite fraction. We show the impact of orphans on $\rhalf-$dependent clustering in Figure \ref{fig:orphan_size_clustering}. As discussed in \S\ref{subsec:censat_sizes}, the value of $\fsat$ modulates the magnitude of the influence of central/satellite size differences on $\wproj;$ including orphans thus boosts the clustering ratios $\delta\wproj/\wproj.$ Because we have not been systematic in the calibration of $\mathcal{F}_{\rm orphan},$ we adopt the simpler, random orphan selection as the fiducial model shown in the main body of the text.
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
-\includegraphics[width=8cm]{FIGS/baseline_sham_orphans.pdf}
 \includegraphics[width=8cm]{FIGS/orphan_satellite_fraction.pdf}
 \caption{
-{\bf Impact of the orphan selection function.} \textcolor{magenta}{AK: I think the 4-panel plot should be a separate figure. Otherwise it's too small.}. The {\em top panel} is identical to Figure \ref{fig:baseline_sham_clustering}, but includes additional curves for the case of $M_{\rm host}-$dependent orphan selection (orange curves), and no orphans at all (red curves). As a function of stellar mass, the {\em bottom panel} shows the satellite fraction, i.e., the fraction of objects that are not central galaxies.
+{\bf Impact of orphans on $\fsat.$} The y-axis shows the fraction of galaxies that are not centrals, plotted as a function of stellar mass $\mstar.$ Different curves show results for three different choices for the treatment of disrupted subhalos, as indicated in the legend and described in the text of the appendix. 
 }
-\label{fig:orphan_effects}
+\label{fig:orphan_satellite_fractions}
 \end{figure}
 %-----------------------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------------------
+\begin{figure*}
+\centering
+\includegraphics[width=12cm]{FIGS/baseline_sham_orphans.pdf}
+\caption{
+{\bf Impact of orphans on $\mstar-$dependent clustering.}  
+Identical to Figure \ref{fig:baseline_sham_clustering}, but including additional curves for the case of $M_{\rm host}-$dependent orphan selection (orange curves), and no orphans at all (red curves). 
+}
+\label{fig:orphan_baseline_clustering}
+\end{figure*}
+%-----------------------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------------------
+\begin{figure*}
+\centering
+\includegraphics[width=12cm]{FIGS/clustering_ratios_orphan_impact.pdf}
+\caption{
+{\bf Impact of orphans on $\rhalf-$dependent clustering.}  
+Identical to Figure \ref{fig:clustering_ratio_upshot}, but including additional curves for the case of $M_{\rm host}-$dependent orphan selection (orange curves), and no orphans at all (red curves). 
+}
+\label{fig:orphan_size_clustering}
+\end{figure*}
+%-----------------------------------------------------------------------------------------------------
+
 
 \end{document}
 
