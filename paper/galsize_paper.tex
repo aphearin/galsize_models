@@ -111,12 +111,20 @@ $^5$Max-Planck Institut f\"ur Astrophysik, Karl-Schwarzschild Stra\ss e 1, 85748
 \maketitle
 
 \begin{abstract}
-Using new SDSS measurements of projected galaxy clustering, $\wproj(\rproj),$ we place empirical constraints on the connection between galaxy size and halo virial radius.  
+Using new measurements of projected two-point correlation function, $\wproj(\rproj)$, of  the Sloan Digital Sky Survey galaxies of different sizes and stellar masses,
+ we place empirical constraints on the connection between galaxy size and halo virial radius.  
 We find that small galaxies cluster much more strongly than large galaxies of the same stellar mass. 
-The magnitude of this clustering difference increases on small scales, and decreases with stellar mass. Using {\tt Halotools} to forward model the observations, we test a simple empirical model in which present-day galaxy size is proportional to the size of the virial radius at the time the halo reached its maximum mass. This simple model reproduces the observed size-dependence of $\wproj(\rproj)$ in striking detail. 
-The success of this model provides strong support for the conclusion that satellite galaxies have smaller sizes relative to central galaxies of the same halo mass. 
-Our findings indicate that satellite size is set prior to the time of infall, and that a remarkably simple, linear size--virial radius relation emerges from the complex physics regulating galaxy size. 
-We make quantitative predictions for future measurements of galaxy-galaxy lensing, including dependence upon size, scale, and stellar mass, and provide a simple scaling relation that can be used to calibrate hydrodynamical simulations and semi-analytic models. 
+The magnitude of this clustering difference increases on small scales, and decreases with increasing stellar mass. 
+Using {\tt Halotools} to forward model the observations, we test a simple empirical model in which present-day galaxy size is 
+proportional to the size of the virial radius at the time the halo reached its maximum mass. This simple model reproduces the 
+observed size-dependence of $\wproj(\rproj)$ in striking detail. 
+The success of this model provides strong support for the conclusion that satellite galaxies have smaller sizes relative to central 
+galaxies of the same halo mass. 
+Our findings indicate that satellite size is set prior to the time of infall, and that a remarkably simple, linear size--virial radius relation 
+emerges from the complex physics regulating galaxy size. 
+We make quantitative predictions for future measurements of galaxy-galaxy lensing, including dependence upon size, scale, 
+and stellar mass, and provide a simple scaling relation of the ratio of mean sizes of satellites and central galaxies as a function of their halo mass 
+that can be used to calibrate hydrodynamical simulations and semi-analytic models. 
 \end{abstract}
 
 %----------------------------
@@ -466,11 +474,11 @@ Figure \ref{fig:censatsizeratios} shows that satellites in $\mhalo\approx10^{12}
 We have presented new measurements of the dependence of projected galaxy clustering, $\wproj(\rproj),$ upon galaxy size and stellar mass, and used forward-modeling methods based on {\tt Halotools} to identify the basic ingredients that influence the signal. We conclude with a brief summary of our primary findings:
 
 \ben
-\item Small galaxies cluster more strongly than large galaxies of the same stellar mass. Differences between the clustering of small and large galaxies increase on small scales $\rproj\lesssim1\mpc,$ and decrease with stellar mass (see Figure \ref{fig:rvir_only_clustering_absolute}). 
+\item Small galaxies cluster more strongly than large galaxies of the same stellar mass. Differences between the clustering of small and large galaxies increase on small scales $\rproj\lesssim1\mpc,$ and decrease with increasing stellar mass (see Figure \ref{fig:rvir_only_clustering_absolute}). 
 \item The most important factor influencing the clustering signal is the relative size of central and satellite galaxies. The magnitude, scale-dependence, and $\mstar-$dependence of $\rhalf-$dependent clustering provides strong evidence that satellite galaxies are smaller than central galaxies of the same halo mass.
 \item A simple empirical model in which $\rhalf$ is proportional to halo $\rvir$ at the time when halo mass reached its maximum reproduces the size-dependence of SDSS galaxy clustering in striking detail (see Figure \ref{fig:clustering_ratio_upshot}). 
 \item Models in which $\rhalf$ is regulated by $\mstar,$ rather than $\mhalo,$ are grossly discrepant with the observed $\wproj(\rproj),$ even when accounting for satellite mass stripping (see Figure \ref{fig:mstarmodelclustering}).
-\item Taken together, our findings indicate that satellite-specific processes play a sub-dominant role in setting the different sizes of centrals and satellites; these size differences instead appear to be largely predetermined at the time of satellite infall.
+\item Taken together, our findings indicate that satellite-specific processes play a sub-dominant role in setting the different sizes of centrals and satellites; the sizes of satelitte galaxies instead appear to be largely predetermined at the time of their infall.
 \item The $\rvir$-based size model that reproduces the observed $\wproj(\rproj)$ makes an unambiguous  prediction for future observations of galaxy-galaxy lensing: for $\mstar-$selected samples, $\Delta\Sigma$ should be much stronger for small galaxies relative to large (see Figure \ref{fig:lensingprediction}). The strength of the predicted difference in $\Delta\Sigma$ makes this test well within reach of numerous present-day imaging surveys. 
 \een
 
@@ -489,7 +497,11 @@ Work done at Argonne National Laboratory was supported under the DOE contract DE
 
 \bibliography{galsize_paper}
 
+\newpage
 \section*{Appendix: Treatment of Disrupted Subhalos}
+
+%---------------------------------------------------------------------------------------------------
+
 
 Recent results indicate that some portion of subhalos may be artificially disrupted \citep{guo_white13, campbell_etal17}. To address this possibility in our modeling, we use an extension of {\tt Consistent Trees} that models the evolution of subhalos after disruption. The phase space evolution of disrupted subhalos is approximated by following a point mass evolving in the host halo potential according to the orbital parameters of the subhalo at the time of disruption; the evolution of subhalo mass and circular velocity is approximated using the semi-analytic model presented in \citet{jiang_vdB14}. We then use the {\tt extract\_orphans} program in {\tt UniverseMachine} to walk through all the Bolshoi-Planck {\tt hlist} files, yielding the main progenitor information of every subhalo that was ever identified by {\tt Consistent Trees}. 
 
@@ -501,9 +513,6 @@ In both treatments studied here, we first discard orphan subhalos with $V_{\rm m
 
 Figure \ref{fig:orphan_satellite_fractions} illustrates the impact of the orphan selection function on the $\mstar-$dependence of the satellite fraction, $\fsat,$ defined as the fraction of galaxies that are not centrals. Both models that include disrupted subhalos receive a significant boost to $\fsat$ due to orphan galaxies. The $\mhost-$dependent model suppresses the selection of disrupted subhalos with larger values of $\mpeak,$ resulting in a milder boost to $\fsat$ at large $\mstar.$ 
 
-Figure \ref{fig:orphan_baseline_clustering} shows how the treatment of orphans impacts $\mstar-$dependent clustering. Comparing either the black or orange curves to the red curves shows that including orphans substantially boosts small-scale clustering due to the increased satellite fraction. We show the impact of orphans on $\rhalf-$dependent clustering in Figure \ref{fig:orphan_size_clustering}. As discussed in \S\ref{subsec:censat_sizes}, the value of $\fsat$ modulates the magnitude of the influence of central/satellite size differences on $\wproj;$ including orphans thus boosts the clustering ratios $\delta\wproj/\wproj.$ Because we have not been systematic in the calibration of $\mathcal{F}_{\rm orphan},$ we adopt the simpler, random orphan selection as the fiducial model shown in the main body of the text.
-
-%---------------------------------------------------------------------------------------------------
 \begin{figure}
 \centering
 \includegraphics[width=8cm]{FIGS/orphan_satellite_fraction.pdf}
@@ -512,6 +521,10 @@ Figure \ref{fig:orphan_baseline_clustering} shows how the treatment of orphans i
 }
 \label{fig:orphan_satellite_fractions}
 \end{figure}
+
+Figure \ref{fig:orphan_baseline_clustering} shows how the treatment of orphans impacts $\mstar-$dependent clustering. Comparing either the black or orange curves to the red curves shows that including orphans substantially boosts small-scale clustering due to the increased satellite fraction. We show the impact of orphans on $\rhalf-$dependent clustering in Figure \ref{fig:orphan_size_clustering}. As discussed in \S\ref{subsec:censat_sizes}, the value of $\fsat$ modulates the magnitude of the influence of central/satellite size differences on $\wproj;$ including orphans thus boosts the clustering ratios $\delta\wproj/\wproj.$ Because we have not been systematic in the calibration of $\mathcal{F}_{\rm orphan},$ we adopt the simpler, random orphan selection as the fiducial model shown in the main body of the text.
+
+
 %-----------------------------------------------------------------------------------------------------
 
 %---------------------------------------------------------------------------------------------------
