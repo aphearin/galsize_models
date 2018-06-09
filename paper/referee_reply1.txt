@@ -50,6 +50,8 @@ MINOR:
 
 2) I recommend replacing M_{halo} everywhere by the specific definition of halo mass which is being referred to, typically M_{peak}. The reader may naturally interpret M_{halo} to mean something else, for example present-day M_{vir}.
 
+Reply) We have changed the text discussing Figure 10 at the end of Section 7. We replaced "M_{halo}" with "M_{peak}", which we agree improves the clarity of the discussion. We are happy to make other analogous changes if there are specific places where the referee finds ambiguity resulting from the use of the term "M_{halo}".
+
 3) DD, DR and RR need to be defined in the calculation of w_p.
 
 4) It may be helpful to normalise the pdfs in Figs 8-9 so that the total area under each curve is 1 (this may already be the case for Fig 8). It is unclear at the moment what scales are used on the y-axes.
