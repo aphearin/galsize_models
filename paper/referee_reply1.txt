@@ -35,6 +35,15 @@ Reply) The implementation of the stellar mass stripping model is indeed crude an
 7) Final paragraph of Section 6: It has been known for almost 20 years that the scatter in halo spin at fixed mass is larger than the scatter in galaxy size (de Jong & Lacey 2000, Gnedin et al 2007). The forward modelling implications of Reff^{disk} \propto \lambda have already been explored by Desmond & Wechsler 2015, who find it to be problematic for the Tully-Fisher relation as well as the scatter in size. Further, most modern hydrodynamical simulations (including Illustris [Rodriguez-Gomez et al 2017], EAGLE [Sales et al 2009, Desmond et al 2017] and Magneticum [Teklu et al 2015]) correlate Reff little if at all with halo spin. (It would be useful in general to provide a qualitative comparison with hydro sims, which have the potential to test models for the size-halo connection from first principles, and are beginning to do so.) Again it is unclear to me why Somerville et al 2017 should be of any particular importance for the scatter: The scatter in Reff at fixed M* comes straight from the data, and the scatter in lambda at fixed Mhalo (only relevant for angular momentum-based size models, which are barely mentioned here) comes straight from the N-body sim.
 
 
+Reply) We have added a new sentence to this paragraph (copied below for convenience) that clarifies the purpose of the final paragraph of Section 6, which is to call attention to the methodological similarity of our model to that in Somerville+17. We are interested in applying our forward-modeling techniques to see what insight can be learned about the R_1/2^{disk} \propto \lambda from galaxy clustering, which would be complementary to the knowledge gained by the Desmond & Wechsler 2015 study.
+
+---
+Their conclusions are consistent with previous findings \citep[e.g.,][]{dejong_lacey00, gnedin_etal07}, but employ modern forward-modeling methods that enable using two-point clustering as constraining data as we have  here.
+---
+
+Studying hydro sims with two-point statistics is the subject of ongoing work. We are including, for the referee's interest, a plot showing the results of a recent calculation of the clustering ratios exhibited by Illustris galaxies. We consider these and related results more appropriate for a separate follow-up paper.
+
+
 MINOR:
 
 1) Please provide more details in the main body of the text on the method used to treat orphan subhalos, and in particular that 50% of these are populated with galaxies in the fiducial model. As shown in the Appendix, this has significant impact on the clustering results, so it is important to be up front about the assumptions required. It should also be mentioned in the main text that the AM was done using all subhalos rather than only the ones that survived, as this may lead to substantial differences with alternative AM models that do not model orphans.
