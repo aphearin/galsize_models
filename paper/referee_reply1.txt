@@ -1,0 +1,41 @@
+Reviewer's Comments:
+Reviewer: 1
+
+Comments to the Author
+This paper presents size-dependent clustering of SDSS galaxies, and interprets it using a simple model for the dependence of effective radius on halo radius. It is well presented and the results are interesting and useful. I have however a few suggestions/questions that may help to further improve the clarity and strengthen the analysis.
+
+
+MAJOR:
+
+1) The size-halo connection that the authors advocate, presented in Section 3.2.2, sets each galaxy to be 1% of the size of its halo at the time of Mpeak. The authors state below Eq 3 that this defines a _median_ relation between Reff and Mhalo, around which they assume a log-normal scatter of 0.2 dex. However, it seems that a more direct application of Eq 2 would be to apply it on a halo-by-halo basis, since Rpeak is known for every object in the catalogue. This would specify the full Reff distribution, with scatter deriving from the scatter in Rpeak. Why is this not done? No justification is given for using a log-normal scatter of 0.2 dex.
+
+Reply) The concluding sentence to Section 3.2.2 was indeed confusing; it turns out it was also misleading: in fact, in our analysis we assigned R_1/2 in exactly the fashion the referee described, about each halo's own R_Mpeak. We have changed the language to more accurately reflect the implementation of the model, and thank the referee for pointing out this confusing language.
+
+2) This model is compared to one in which Reff does not correlate with any halo property at fixed stellar mass, but simply depends on M* in a manner that reproduces the M*-Reff relation by construction. Again the authors take 0.2 dex scatter around the median relation, but if one really wanted to reproduce the M*-Reff relation -- including its scatter -- one would take this scatter in bins of M* from the data. Even better would be to drop the assumption of Gaussian scatter altogether and simply assign a size randomly to each model galaxy by sampling the observed Reff distribution at given M*. It appears the authors' choice is motivated by a desire for compatibility with Somerville et al 2017, but it is unclear why this is especially relevant or important here.
+
+3) Why use Rvir at Mpeak and not at any other time (say z=0)? I assume this is simply because Mpeak gives the best match to the observations, but this is not explained and hence comes across as somewhat arbitrary. If the result is sensitive to this (as suggested in the final paragraph of Section 5.2), then clustering provides a means to distinguish different choices for halo size in terms of how well they predict Reff. Do the authors know which choices would or would not work? It would be helpful to compare the clustering predicted by one or more alternatives.
+
+4) There should be an uncertainty on w_p in the mock data, i.e. on the lines in Figs. 4-6. Since the model is probabilistic (both the abundance matching step and size assignment have random scatters), different Monte Carlo realisations of the model should give different results. Further, for a given realisation jackknife resampling would give an uncertainty estimate in a similar manner to the SDSS data. I would like to see these uncertainties as bands on the plots, or at least a general estimate of their magnitude. Looking at the bottom-right panel of Fig. 6, for the green line to be consistent with 0 the uncertainty on it must be fairly large, at least at low r; without this uncertainty it is hard to gauge the significance of the difference between the purple line and the data.
+
+5) When some of the stellar mass is removed due to stripping, does this not cause the final SMF that's actually used in the model to disagree with the observed input SMF? In the discussion just below Eq 1, it seems that the distribution of M* is the one that matches the observations, not M'*. Or is the SMF that's input to AM modified somehow so that only after this stripping does it match Moustakas et al 2013?
+
+6) A complementary method for studying the size-halo connection is to constrain correlations of galaxy size with halo properties *at fixed stellar mass*, which has been done using both weak lensing (e.g. Sonnenfeld et al 2015, Sonnenfeld & Leauthaud 2017) and galaxy dynamics (e.g. Desmond 2016, 2017). These are means of testing disk models such as Dutton et al 2007 & 2011 which the authors mention. It would be helpful to provide more information on how the Rvir-based model presented here relates to this alternative method. For example, since on average M* is positively correlated with Rpeak by AM, and empirically Reff is positively correlated with M*, then the model in which Reff depends only on M* (Sec 3.2.1) will also positively correlate Reff with Rpeak. It is not clear how this correlation differs from Reff=0.01*Rpeak, or in other words how the latter assumption correlates Reff with halo properties at fixed M*. It would be interesting to see 1) The Reff-Rpeak relation implied by the model in Sec 3.2.1, and/or 2) The correlation of Reff with halo mass or concentration at fixed M* implied by Reff=0.01*Rpeak. Understanding these different approaches will be of great help in devising a unified model for the size-halo connection.
+
+7) Final paragraph of Section 6: It has been known for almost 20 years that the scatter in halo spin at fixed mass is larger than the scatter in galaxy size (de Jong & Lacey 2000, Gnedin et al 2007). The forward modelling implications of Reff^{disk} \propto \lambda have already been explored by Desmond & Wechsler 2015, who find it to be problematic for the Tully-Fisher relation as well as the scatter in size. Further, most modern hydrodynamical simulations (including Illustris [Rodriguez-Gomez et al 2017], EAGLE [Sales et al 2009, Desmond et al 2017] and Magneticum [Teklu et al 2015]) correlate Reff little if at all with halo spin. (It would be useful in general to provide a qualitative comparison with hydro sims, which have the potential to test models for the size-halo connection from first principles, and are beginning to do so.) Again it is unclear to me why Somerville et al 2017 should be of any particular importance for the scatter: The scatter in Reff at fixed M* comes straight from the data, and the scatter in lambda at fixed Mhalo (only relevant for angular momentum-based size models, which are barely mentioned here) comes straight from the N-body sim.
+
+
+MINOR:
+
+1) Please provide more details in the main body of the text on the method used to treat orphan subhalos, and in particular that 50% of these are populated with galaxies in the fiducial model. As shown in the Appendix, this has significant impact on the clustering results, so it is important to be up front about the assumptions required. It should also be mentioned in the main text that the AM was done using all subhalos rather than only the ones that survived, as this may lead to substantial differences with alternative AM models that do not model orphans.
+
+2) I recommend replacing M_{halo} everywhere by the specific definition of halo mass which is being referred to, typically M_{peak}. The reader may naturally interpret M_{halo} to mean something else, for example present-day M_{vir}.
+
+3) DD, DR and RR need to be defined in the calculation of w_p.
+
+4) It may be helpful to normalise the pdfs in Figs 8-9 so that the total area under each curve is 1 (this may already be the case for Fig 8). It is unclear at the moment what scales are used on the y-axes.
+
+5) I suggest that the number of galaxies and stellar mass and redshift range of the datasets used be mentioned in the first paragraph of Section 2, rather than (or in addition to) in Section 4.2. Please justify the z<0.02 cut. Is this done in the simulation as well so that the mock data has the same number of galaxies and redshift distribution as the real data? Also, why does the 10^{11} thresholded sample have the same zmax as the 10^{10.75} sample?
+
+6) Abstract: surely one doesn't "forward model the observations"; this suggests that the observations are an input to the model, which they are precisely not in forward modelling. Perhaps one forward models *to* the observations?
+
+7) I'll let the Scottish grammar pass, but be any misunderstanding on yer ain heids.

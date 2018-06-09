@@ -240,7 +240,7 @@ For the virial radius of halos and subhalos, we use $\rmpeak:$ the value of $\rv
 \beq
 \mpeak\equiv\frac{4\pi}{3}\rmpeak^{3}\Delta_{\rm vir}(\zpeak)\rho_{\rm m}(\zpeak),
 \eeq
-where for $\Delta_{\rm vir}(\zpeak)$ we use the fitting function to the ``virial" definition used in \citet{bryan_norman98}. This modeling assumption effectively defines $\median{\rhalf}{\mhalo};$ this relation defines the center of the log-normal distribution with $0.2$ dex of scatter that we use to generate a Monto Carlo realization of the model population.
+where for $\Delta_{\rm vir}(\zpeak)$ we use the fitting function to the ``virial" definition used in \citet{bryan_norman98}. We implement a forward modeled Monte Carlo realization of this model by drawing $\rhalf$ from a log-normal distribution centered on $0.01\rmpeak$ for every mock galaxy, using $0.2$ dex of scatter for consistency with the constraints obtained in \citet{somerville_etal17} (see \S\ref{sec:previous_work} for further discussion).
 
 %---------------------------------------------------------------------------------------------------
 \begin{figure*}
