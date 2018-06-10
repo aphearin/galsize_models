@@ -1,5 +1,5 @@
-Reviewer's Comments:
-Reviewer: 1
+We thank the referee for a thoughtful, expert critique of our paper. We respond to each major and minor comment below, omitting a direct reply when the changes were straightforward to implement. 
+
 
 Comments to the Author
 This paper presents size-dependent clustering of SDSS galaxies, and interprets it using a simple model for the dependence of effective radius on halo radius. It is well presented and the results are interesting and useful. I have however a few suggestions/questions that may help to further improve the clarity and strengthen the analysis.
