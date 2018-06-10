@@ -1,4 +1,4 @@
-We thank the referee for a thoughtful, expert critique of our paper. We respond to each major and minor comment below, omitting a direct reply when the changes were straightforward to implement. 
+We thank the referee for a thoughtful, expert critique of our paper. We respond to each major and minor comment below, omitting a direct reply when the changes were straightforward to implement.
 
 
 Comments to the Author
@@ -9,7 +9,7 @@ MAJOR:
 
 1) The size-halo connection that the authors advocate, presented in Section 3.2.2, sets each galaxy to be 1% of the size of its halo at the time of Mpeak. The authors state below Eq 3 that this defines a _median_ relation between Reff and Mhalo, around which they assume a log-normal scatter of 0.2 dex. However, it seems that a more direct application of Eq 2 would be to apply it on a halo-by-halo basis, since Rpeak is known for every object in the catalogue. This would specify the full Reff distribution, with scatter deriving from the scatter in Rpeak. Why is this not done? No justification is given for using a log-normal scatter of 0.2 dex.
 
-Reply) The concluding sentence to Section 3.2.2 was indeed confusing; it turns out it was also misleading: in fact, in our analysis we assigned R_1/2 in exactly the fashion the referee described, about each halo's own R_Mpeak. We have changed the language to more accurately reflect the implementation of the model, and thank the referee for pointing out this confusing language.
+Reply) The concluding sentence to Section 3.2.2 was indeed confusing; it turns out it was also misleading: in fact, in our analysis we assigned R_1/2 in exactly the fashion the referee described, about each halo's own R_Mpeak. We have changed the language to more accurately reflect the implementation of the model, and thank the referee for pointing out this confusing language. We have also expanded the discussion for our choice of the fiducial level of scatter, as described further in our reply to the next comment.
 
 2) This model is compared to one in which Reff does not correlate with any halo property at fixed stellar mass, but simply depends on M* in a manner that reproduces the M*-Reff relation by construction. Again the authors take 0.2 dex scatter around the median relation, but if one really wanted to reproduce the M*-Reff relation -- including its scatter -- one would take this scatter in bins of M* from the data. Even better would be to drop the assumption of Gaussian scatter altogether and simply assign a size randomly to each model galaxy by sampling the observed Reff distribution at given M*. It appears the authors' choice is motivated by a desire for compatibility with Somerville et al 2017, but it is unclear why this is especially relevant or important here.
 
