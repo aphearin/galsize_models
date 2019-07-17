@@ -5,22 +5,29 @@ We thank the referee...
 
 Referee: "So to be clear, you have two sources of scatter in R_1/2 at fixed M* that sum in quadrature: 1) The scatter between M* and R_Mpeak, and 2) An additional 0.2 scatter that you impose by hand. Does this not increase the scatter in the M*-Reff relation to more than the level of Somerville et al 2017? I'm not sure what the scatter in R_Mpeak is at fixed M*, but the M*-Reff relation does not have more than 0.2 dex scatter."
 
-Reply:
-
-We have added a clarifying sentence to Section 6 to address this potential source of confusion.
+Reply: We have added a clarifying sentence to Section 6 to address this potential source of confusion.
 
 
 2. Section 4.3
 
-"If you have found models for the galaxy-halo connection other than the tidal stripping model which provide a poor fit to the observations, please mention them in the paper. Otherwise other people will waste their time investigating them."
+Referee: "If you have found models for the galaxy-halo connection other than the tidal stripping model which provide a poor fit to the observations, please mention them in the paper. Otherwise other people will waste their time investigating them."
+
+Reply: We have included discussion of all additional models we developed for purposes of the present paper.
+
 
 3. Jackknife error bars
 
-"Jackknife was one of the error estimation methods that I mentioned, but what about the scatter between different Monte Carlo realisations of the model. Presumably each realisation, with different M* and R_1/2 values for each subhalo, gives a single line on Figs 4-6, so that the entire model effectively produces a band even before jackknifing. How big is this scatter relative to that between different subregions for the same realisation? Or am I missing something and the line can only be calculated over many realisations? I don't think the role of the Monte Carlo realisations is explained completely clearly. Also, why not add the band to the green lines in Fig 6? It would be good to see explicitly that these are consistent with 0."
+Referee: "Jackknife was one of the error estimation methods that I mentioned, but what about the scatter between different Monte Carlo realisations of the model. Presumably each realisation, with different M* and R_1/2 values for each subhalo, gives a single line on Figs 4-6, so that the entire model effectively produces a band even before jackknifing. How big is this scatter relative to that between different subregions for the same realisation? Or am I missing something and the line can only be calculated over many realisations? I don't think the role of the Monte Carlo realisations is explained completely clearly. Also, why not add the band to the green lines in Fig 6? It would be good to see explicitly that these are consistent with 0."
+
+Reply:
+
 
 4. Section 6
 
-"The Desmond 2016, 2017 papers I was referring to were MNRAS 464 (4) 4160 and MNRAS 472 (1) L35. These papers use galaxies' M-R-V scalings to constrain the R_1/2--Mvir,c relation at fixed M*, after applying AM. They find that at fixed M*, R_1/2 is weakly anticorrelated with Mvir or c. Thus I would suggest that the positive R_1/2--Mvir correlation at fixed M* implied by your model is in conflict with galaxies' internal dynamics, for example by leading to a positive correlation between the residuals of the Tully-Fisher and mass-size relations, which is not observed. Perhaps you could add this caveat."
+Referee: "The Desmond 2016, 2017 papers I was referring to were MNRAS 464 (4) 4160 and MNRAS 472 (1) L35. These papers use galaxies' M-R-V scalings to constrain the R_1/2--Mvir,c relation at fixed M*, after applying AM. They find that at fixed M*, R_1/2 is weakly anticorrelated with Mvir or c. Thus I would suggest that the positive R_1/2--Mvir correlation at fixed M* implied by your model is in conflict with galaxies' internal dynamics, for example by leading to a positive correlation between the residuals of the Tully-Fisher and mass-size relations, which is not observed. Perhaps you could add this caveat."
+
+Reply: We have added two additional citations, Desmond (2016) and Desmond (2017), and called attention to possible tension between our findings and those deriving from internal dynamics.
+
 
 5. The final comment in the referee's second review partains to a qualitative comment we made in our response to the initial report. This issue is germane to ongoing follow-up work on the relation between galaxy size and halo spin, but is mostly tangential to the scope of the present work.
 
