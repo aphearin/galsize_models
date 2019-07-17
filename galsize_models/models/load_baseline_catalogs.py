@@ -37,7 +37,7 @@ moster13_halocat_keys = ('halo_upid', 'halo_mpeak', 'halo_scale_factor_mpeak',
         'halo_vx', 'halo_vy', 'halo_vz', 'halo_rvir_zpeak', 'halo_vmax_at_mpeak_percentile',
         'halo_mvir_host_halo', 'halo_spin', 'halo_uran')
 
-smf_dirname = "/Users/aphearin/work/UniverseMachine/code/UniverseMachine/obs"
+smf_dirname = "/Users/aphearin/work/repositories/c/universemachine/obs"
 smf_basename = "moustakas_z0.01_z0.20.smf"
 smf_fname = os.path.join(smf_dirname, smf_basename)
 smf = np.loadtxt(smf_fname)
