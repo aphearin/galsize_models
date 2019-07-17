@@ -1,0 +1,38 @@
+Scientific Editor: Prof Joop Schaye
+
+Assistant Editor's Comments:
+The abstract must be followed by between one and six keywords from the MNRAS keywords list – this list is common to MNRAS, ApJ and A&A, and only keywords that appear on the list are allowed. Please include up to six keywords on your manuscript from the following list - https://academic.oup.com/DocumentLibrary/mnras/keywords.pdf
+
+
+Reviewer's Comments:
+Reviewer: 1
+
+Comments to the Author
+Most of my comments have been addressed, but I have a few final suggestions/questions before the paper can be published. Please mark changes to the paper in red or bold.
+
+
+>> The concluding sentence to Section 3.2.2 was indeed confusing; it turns out it was also misleading: in fact, in our analysis we assigned R_1/2 in exactly the fashion the referee described, about each halo's own R_Mpeak. We have changed the language to more accurately reflect the implementation of the model, and thank the referee for pointing out this confusing language. We have also expanded the discussion for our choice of the fiducial level of scatter, as described further in our reply to the next comment.
+
+So to be clear, you have two sources of scatter in R_1/2 at fixed M* that sum in quadrature: 1) The scatter between M* and R_Mpeak, and 2) An additional 0.2 scatter that you impose by hand. Does this not increase the scatter in the M*-Reff relation to more than the level of Somerville et al 2017? I'm not sure what the scatter in R_Mpeak is at fixed M*, but the M*-Reff relation does not have more than 0.2 dex scatter.
+
+
+>> Our ``tidal stripping" model is an attempt to explore the consequences of using Mvir(z=0) to model galaxy size. There are certainly many other possible choices one can make for the halo property used to connect to size, such as the mass at the time of first infall, at the time of last infall, etc. We agree with the referee that a more comprehensive study of the hyper-parameter space is warranted by our results. In particular, we have found one good-fitting model based on R_Mpeak, and several other poor-fitting models based on alternative choices for the galaxy-halo connection. This directly implies that observations of galaxy clustering can indeed discriminate between such choices. Thus we consider a comprehensive study (analogous to the Reddick+13 SHAM study) well-motivated by our work, but beyond the present scope.
+
+If you have found models for the galaxy-halo connection other than the tidal stripping model which provide a poor fit to the observations, please mention them in the paper. Otherwise other people will waste their time investigating them.
+
+
+>> We have added jackknife error bars in the form of shaded bands surrounding wp in the figures comparing models to data.
+
+Jackknife was one of the error estimation methods that I mentioned, but what about the scatter between different Monte Carlo realisations of the model. Presumably each realisation, with different M* and R_1/2 values for each subhalo, gives a single line on Figs 4-6, so that the entire model effectively produces a band even before jackknifing. How big is this scatter relative to that between different subregions for the same realisation? Or am I missing something and the line can only be calculated over many realisations? I don't think the role of the Monte Carlo realisations is explained completely clearly. Also, why not add the band to the green lines in Fig 6? It would be good to see explicitly that these are consistent with 0.
+
+
+>> We have verified the correlation between R_1/2 and Mvir at fixed M* in present day centrals, and added a paragraph to Section 6 with the suggested references.
+
+The Desmond 2016, 2017 papers I was referring to were MNRAS 464 (4) 4160 and MNRAS 472 (1) L35. These papers use galaxies' M-R-V scalings to constrain the R_1/2--Mvir,c relation at fixed M*, after applying AM. They find that at fixed M*, R_1/2 is weakly anticorrelated with Mvir or c. Thus I would suggest that the positive R_1/2--Mvir correlation at fixed M* implied by your model is in conflict with galaxies' internal dynamics, for example by leading to a positive correlation between the residuals of the Tully-Fisher and mass-size relations, which is not observed. Perhaps you could add this caveat.
+
+
+>> We note that although the correlation of size or baryon specific angular momentum with current specific halo angular momentum is found to be weak in current simulations, some simulations show a nearly linear size-virial radius correlation consistent with observations (J. Schaye, private comm.). Also, the observed distribution of galaxy sizes is comparable to that expected in simple spin-based models from the halo spin distribution, when galaxies of *all* types are considered. Thus, the smaller scatter of sizes exhibited by disk galaxies may indicate either that sizes are affected by other factors and not only by spin, or, alternatively, that disk galaxies do not sample the entire spin distribution of halos. Both possibilities are very interesting and motivate future studies, which we believe are outside the scope of this paper.
+
+I disagree that the distribution of galaxy sizes is comparable to that expected in simple spin-based models from the halo spin distribution when all types of galaxies are considered. Look at Kravtsov 2013 fig 1. The observational scatter in the relation is quoted as 0.2 dex. Subtracting observational uncertainty would give an intrinsic scatter of ~0.17 dex, which is essentially the same as what you get using a late-type sample (Kravtsov even makes the point that early and late types obey essentially the same relation). That's already clearly less than the 0.25 dex from the scatter in spin from N-body sims, but a full spin-based model for galaxy size along the lines of Mo, Mao, White 1998 has even more scatter: for example it also has a contribution from the scatter in halo concentration which affects a galaxy's size at fixed M* and halo spin. When you forward-model all of these effects self-consistently you get a predicted intrinsic scatter for M*-R_1/2 of 0.31+/-0.2 dex (Desmond & Wechsler 2015, fig 5c). I really can't see this being consistent with the observed relation no matter what galaxies are included, and since the Kravtsov sample does not cut on type I don't think morphology selection effects can be critical in any case. And given that hydro sims do not corroborate the angular momentum partition model anyway, I don't think it deserves further consideration.
+
+None of this invalidates the present analysis -- it's perfectly possible to have a linear size-virial radius relation without galaxy and halo specific angular momenta being proportional. I just find it frustrating that the spin model continues to be touted as accurate despite these basic contradictions.
