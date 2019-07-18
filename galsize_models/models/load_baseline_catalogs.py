@@ -159,7 +159,7 @@ def load_orphan_mock():
     """ Note that this function calls a Moster+13 model and applies a cut on stellar mass.
     """
 
-    dirname = "/Users/aphearin/work/sims/bolplanck/orphan_catalog_z0"
+    dirname = "/Users/aphearin/work/DATA/SIMS/BPl/orphan_catalog_z0"
     basename = "cross_matched_orphan_catalog.hdf5"
 
     halo_table = Table.read(os.path.join(dirname, basename), path='data')
@@ -197,7 +197,7 @@ def load_orphan_mock():
 def load_orphan_subhalos():
     """
     """
-    dirname = "/Users/aphearin/work/sims/bolplanck/orphan_catalog_z0"
+    dirname = "/Users/aphearin/work/DATA/SIMS/BPl/orphan_catalog_z0"
     basename = "cross_matched_orphan_catalog.hdf5"
 
     halo_table = Table.read(os.path.join(dirname, basename), path='data')
