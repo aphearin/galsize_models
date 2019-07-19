@@ -19,10 +19,11 @@ Reply: We have included discussion of all additional models we developed for pur
 
 Referee: "Jackknife was one of the error estimation methods that I mentioned, but what about the scatter between different Monte Carlo realisations of the model. Presumably each realisation, with different M* and R_1/2 values for each subhalo, gives a single line on Figs 4-6, so that the entire model effectively produces a band even before jackknifing. How big is this scatter relative to that between different subregions for the same realisation? Or am I missing something and the line can only be calculated over many realisations? I don't think the role of the Monte Carlo realisations is explained completely clearly. Also, why not add the band to the green lines in Fig 6? It would be good to see explicitly that these are consistent with 0."
 
-Reply:
+Reply: We have included jackknife error estimation the errors on the green curve in Figure 6. We have furthermore verified that for these clustering ratios, statistical errors associated with Monte Carlo realizations are approximately captured by the jackknife: when we repeat the error estimation by repopulating each of the 125 jackknife subsamples with a new realization, the error bars on the ratio plots are comparable to the more standard treatment in which mock population is done once. We consider this sufficient for the purpose of these error estimations, which is merely to guide the reader's eye, rather than to compute chi^2 in an MCMC analysis.
 
 
-4. Section 6
+
+4. Section 6 discussion
 
 Referee: "The Desmond 2016, 2017 papers I was referring to were MNRAS 464 (4) 4160 and MNRAS 472 (1) L35. These papers use galaxies' M-R-V scalings to constrain the R_1/2--Mvir,c relation at fixed M*, after applying AM. They find that at fixed M*, R_1/2 is weakly anticorrelated with Mvir or c. Thus I would suggest that the positive R_1/2--Mvir correlation at fixed M* implied by your model is in conflict with galaxies' internal dynamics, for example by leading to a positive correlation between the residuals of the Tully-Fisher and mass-size relations, which is not observed. Perhaps you could add this caveat."
 
