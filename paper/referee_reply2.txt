@@ -1,4 +1,8 @@
-We thank the referee...
+We thank the referee for careful consideration of our revised manuscript. The second round of requested changes were rather minor, and so we apologize for our protracted reply.
+
+In the intervening time we have pursued two closely related directions of research that we had originally thought might be included in our revisions: 1. Studying the IllustrisTNG predictions for size-dependent lensing, and 2. new SDSS measurements of size-dependentlensing. In the end, both extensions turned out to be more involved than we anticipated, and so we have decided to pursue these directions in separate papers.
+
+We respond to each of the referee's second round of comments in the text below.
 
 
 1. Re: Discussion in Section 3.2.2
@@ -20,7 +24,6 @@ Reply: We have included discussion of all additional models we developed for pur
 Referee: "Jackknife was one of the error estimation methods that I mentioned, but what about the scatter between different Monte Carlo realisations of the model. Presumably each realisation, with different M* and R_1/2 values for each subhalo, gives a single line on Figs 4-6, so that the entire model effectively produces a band even before jackknifing. How big is this scatter relative to that between different subregions for the same realisation? Or am I missing something and the line can only be calculated over many realisations? I don't think the role of the Monte Carlo realisations is explained completely clearly. Also, why not add the band to the green lines in Fig 6? It would be good to see explicitly that these are consistent with 0."
 
 Reply: We have included jackknife error estimation the errors on the green curve in Figure 6. We have furthermore verified that for these clustering ratios, statistical errors associated with Monte Carlo realizations are approximately captured by the jackknife: when we repeat the error estimation by repopulating each of the 125 jackknife subsamples with a new realization, the error bars on the ratio plots are comparable to the more standard treatment in which mock population is done once. We consider this sufficient for the purpose of these error estimations, which is merely to guide the reader's eye, rather than to compute chi^2 in an MCMC analysis.
-
 
 
 4. Section 6 discussion
