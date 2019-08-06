@@ -164,9 +164,25 @@ As the bedrock of our modeling, we use the publicly available\footnote{\url{http
 
 For our SDSS galaxy samples, we calculate two-point clustering $\wproj$ using line-of-sight projection of $\pi_{\rm max}=20~\mpc$ using the {\tt correl} program in {\tt UniverseMachine} (Behroozi et al. 2017, in prep). For two samples of points distributed in redshift space, $\vec{x}_1$ and $\vec{x}_2,$ with $\vec{s}\equiv\vec{x}_2-\vec{x}_1$ and $\vec{l}\equiv0.5(\vec{x}_2+\vec{x}_1),$ the {\tt correl} code program counts the number of pairs of points within a line-of-sight distance $\pi\equiv(\vec{s}\cdot\vec{l})/\vert\vec{l}\vert$ and transverse separation $r_{\rm p}\equiv\sqrt{s^{2} - \pi^{2}}.$ When both sets of points are galaxy data, the resulting pair-counts are denoted by DD; when both sets are random points, RR; cross-counts between data and randoms are denoted by DR. Using the \citet{landy_szalay93} estimator ($DD - 2DR + RR$), we compute the redshift-space correlation function $\xi(\rproj, \pi)$. The function is then integrated over $\vert\pi\vert < 20$ Mpc to compute the projected correlation function $\wproj(\rproj)$.  The code uses $10^6$ randoms drawn from the same mask region with uniform volume distribution to compute $DR$, and $RR$ is computed via Monte Carlo integration. Errors are estimated by jackknife resampling, giving us an estimate for the lower bound of samples with volumes $V_{\rm eff}\lesssim 0.3\,{\rm Gpc}^3.$
 
-We measure $\wproj(\rproj)$ separately for large and small subsamples for four different $\mstar$ thresholds: an  $\mstar>10^{9.75}\msun$ sample with $z_{\rm max}=0.0435$ and $N_{\rm gal}=27658;$ an  $\mstar>10^{10.25}\msun$ sample with $z_{\rm max}=0.0663$ and $N_{\rm gal}=48571;$
-an  $\mstar>10^{10.75}\msun$ sample with $z_{\rm max}=0.1$ and $N_{\rm gal}=52350;$
-and an  $\mstar>10^{11}\msun$ sample with $z_{\rm max}=0.1$ and $N_{\rm gal}=33578.$ We follow standard practice \citep[e.g.,][]{zehavi_etal11} and throw out all galaxies with $z<z_{\rm min}=0.02$ to minimize lightcone effects; to minimize the effect of redshift evolution we also throw out galaxies with redshift $z \geq z_{\rm max}=0.1,$ including cases where a volume-limited sample would be attainable out to higher redshift.
+We measure $\wproj(\rproj)$ separately for large and small subsamples for four different thresholds in $\log_{10}\mstar/\msun:$ 9.75, 10.25, 10.75, and 11. We follow standard practice \citep[e.g.,][]{zehavi_etal11} and throw out all galaxies with $z<z_{\rm min}=0.02$ to minimize lightcone effects; to minimize the effect of redshift evolution we also throw out galaxies with redshift $z \geq z_{\rm max}=0.1,$ including cases where a volume-limited sample would be attainable out to higher redshift. We refer to Table \ref{table:data} for a summary of our volume-limited galaxy samples. 
+
+\begin{table}
+\caption{Summary of SDSS galaxy samples used as constraining data. The stellar mass threshold defining the mass-limited sample appears in the leftmost column. The remaining columns show the redshift range and the total number of galaxies in each sample. } % title of Table
+\centering % used for centering table
+\begin{tabular}{c c c c} % centered columns (4 columns)
+\hline\hline %inserts double horizontal lines
+$\log_{10}\mstar^{\rm min}/M_{\odot}$ & $z_{\rm min}$ & $z_{\rm max}$ & $N_{\rm gal}$ \\ [0.5ex] % inserts table
+%heading
+\hline % inserts single horizontal line
+9.75 & 0.02 & 0.0435 & 27658 \\ % inserting body of the table
+10.25 & 0.02 & 0.0663 & 48571\\
+10.75 & 0.02 & 0.1 & 52350 \\
+11 & 0.02 & 0.1 & 33578 \\ [1ex] % [1ex] adds vertical space
+\hline %inserts single line
+\end{tabular}
+\label{table:data} % is used to refer this table in the text
+\end{table}
+
 
 For mock galaxies, we compute $\wproj$ using the {\tt mock\_observables.wp} function in {\tt Halotools} \citep{hearin_etal16}, which is a python implementation of the algorithm in the {\tt Corrfunc} C library \citep{sinha_etal17}. We also use {\tt Halotools} to compute the galaxy-galaxy lensing signal, $\Delta\Sigma,$ using the {\tt mock\_observables.delta\_sigma} function.
 
