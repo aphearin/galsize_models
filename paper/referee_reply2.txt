@@ -1,6 +1,13 @@
+The submitted draft is a very minor revision from a previously submitted manuscript that had reached the "minor revisions" stage of the MNRAS referee process. However, we missed the deadline for resubmitting the second revision, and in accord with an email exchange with Joop Schaye, we are submitting this paper as a new manuscript.
+
+In the intervening time since the last round of minor revisions, we have pursued two closely related directions of research that we had originally thought might be included in our revisions: 1. Studying the IllustrisTNG predictions for size-dependent lensing, and 2. new SDSS measurements of size-dependent lensing. In the end, both extensions turned out to be more involved than we anticipated, and so we have decided to pursue these directions in separate papers. We apologize for the inconvenient timing and hope that our tardiness will not adversely influence the review of our manuscript.
+
+As the original referee was clearly an expert in the relevant domain who has already provided a thorough review of the paper, we request that the same referee review the current manuscript, if possible. To facilitate review of our resubmission, we have included below our response to the second referee report, and as supplementary material we have uploaded a redline PDF showing the changes made in the second round of revisions.
+
+-----
+
 We thank the referee for careful consideration of our revised manuscript. The second round of requested changes were rather minor, and so we apologize for our protracted reply.
 
-In the intervening time we have pursued two closely related directions of research that we had originally thought might be included in our revisions: 1. Studying the IllustrisTNG predictions for size-dependent lensing, and 2. new SDSS measurements of size-dependentlensing. In the end, both extensions turned out to be more involved than we anticipated, and so we have decided to pursue these directions in separate papers.
 
 We respond to each of the referee's second round of comments in the text below.
 
