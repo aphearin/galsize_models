@@ -69,14 +69,12 @@ def kravtsov_read_meert_catalog(datadir=default_datadir, phot_type=4):
         return (flag & (1 << bit)) != 0
 
     # use minimal quality cuts and flags recommended by Alan Meert
-    igood = [
-        (phot_r["petroMag"] > 0.0)
-        & (phot_r["petroMag"] < 100.0)
-        & (mnpdata["kcorr"] > 0)
-        & (mdata["m_tot"] > 0)
-        & (mdata["m_tot"] < 100)
-        & (isset(fflag, 1) | isset(fflag, 4) | isset(fflag, 10) | isset(fflag, 14))
-    ]
+    igood = phot_r["petroMag"] > 0.0
+    igood &= phot_r["petroMag"] < 100.0
+    igood &= mnpdata["kcorr"] > 0
+    igood &= mdata["m_tot"] > 0
+    igood &= mdata["m_tot"] < 100
+    igood &= isset(fflag, 1) | isset(fflag, 4) | isset(fflag, 10) | isset(fflag, 14)
 
     sdata = sdata[igood]
     phot_r = phot_r[igood]
