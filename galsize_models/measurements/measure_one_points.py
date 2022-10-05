@@ -14,7 +14,7 @@ __all__ = (
 )
 
 
-default_datadir = "/Users/aphearin/work/sdss/cross_matched_catalogs/meert15"
+default_datadir = "/Users/aphearin/work/DATA/SDSS/cross_matched_catalogs/meert15"
 
 
 def sdss_size_vs_stellar_mass(

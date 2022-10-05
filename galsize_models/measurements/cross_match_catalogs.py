@@ -21,7 +21,7 @@ def cross_match_umachine_sdss_meert15_with_meert15(
     >>> result = cross_match_umachine_sdss_meert15_with_meert15()
     """
     if umachine_sdss_fname is None:
-        umachine_sdss_dirname = "/Users/aphearin/work/sdss/cross_matched_catalogs"
+        umachine_sdss_dirname = "/Users/aphearin/work/DATA/SDSS/cross_matched_catalogs"
         umachine_sdss_basename = "umachine_sdss_dr10_value_added_bt.hdf5"
         umachine_sdss_fname = os.path.join(
             umachine_sdss_dirname, umachine_sdss_basename

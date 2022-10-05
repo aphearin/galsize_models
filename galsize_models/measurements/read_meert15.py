@@ -8,7 +8,7 @@ from colossus.cosmology import cosmology
 
 
 cosmo = cosmology.setCosmology("planck15")
-default_datadir = r"/Users/aphearin/work/sdss/meert15"
+default_datadir = r"/Users/aphearin/work/DATA/SDSS/meert15"
 
 __all__ = ("load_meert15",)
 

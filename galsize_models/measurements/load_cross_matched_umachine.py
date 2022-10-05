@@ -7,7 +7,7 @@ from astropy.table import Table
 
 __all__ = ("load_umachine_sdss_with_meert15", "mendel13_bulge_to_total")
 
-default_datadir = "/Users/aphearin/work/sdss/cross_matched_catalogs/meert15"
+default_datadir = "/Users/aphearin/work/DATA/SDSS/cross_matched_catalogs/meert15"
 
 
 def load_umachine_sdss_with_meert15(datadir=default_datadir):
