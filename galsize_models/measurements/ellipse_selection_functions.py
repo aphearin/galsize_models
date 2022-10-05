@@ -4,15 +4,14 @@ import numpy as np
 
 
 def counter_clockwise_2d_rotation_matrix(rot_angle_in_degrees):
-    """
-    """
-    rot_angle_in_radians = rot_angle_in_degrees*np.pi/180.
+    """ """
+    rot_angle_in_radians = rot_angle_in_degrees * np.pi / 180.0
     c, s = np.cos(rot_angle_in_radians), np.sin(rot_angle_in_radians)
     return np.array(((c, s), (-s, c))).T
 
 
 def rotate_2d(v, rot_angle_in_degrees):
-    """ Rotate a 2-d vector ``v`` in the counter-clockwise direction by some angle
+    """Rotate a 2-d vector ``v`` in the counter-clockwise direction by some angle
 
     Parameters
     ----------
@@ -31,20 +30,20 @@ def rotate_2d(v, rot_angle_in_degrees):
 
 
 def ellipse_distance(xpts, ypts, xc, yc, major_axis_angle, b_by_a):
-    """ Calculate the distance between (xc, yc) and each point in (xpts, ypts)
+    """Calculate the distance between (xc, yc) and each point in (xpts, ypts)
     using an elliptical distance metric, with the ellipse defined by the
     axis ``major_axis_angle`` (in degrees) and ``b_by_a`` major-to-minor axis length
     """
     major_axis = rotate_2d((1, 0), major_axis_angle)
     minor_axis = rotate_2d(major_axis, 90)
-    pts = np.vstack((xpts-xc, ypts-yc)).T
+    pts = np.vstack((xpts - xc, ypts - yc)).T
     a = np.dot(pts, major_axis)
     b = np.dot(pts, minor_axis)
-    return np.sqrt(a**2 + b_by_a*b**2)
+    return np.sqrt(a**2 + b_by_a * b**2)
 
 
 def ellipse_selector(xpts, ypts, xc, yc, major_axis_angle, b_by_a, nkeep):
-    """ From an input set of points in the xy plane, select a sample of ``nkeep`` points
+    """From an input set of points in the xy plane, select a sample of ``nkeep`` points
     defined by the ellipse defined by the input ``major_axis_angle`` and ``b_by_a``.
 
     Parameters
@@ -82,7 +81,7 @@ def ellipse_selector(xpts, ypts, xc, yc, major_axis_angle, b_by_a, nkeep):
 
 
 def split_sample_along_axis_angle(xpts, ypts, xc, yc, axis_angle):
-    """ From an input set of points in the xy plane, split the sample into
+    """From an input set of points in the xy plane, split the sample into
     points on one side or the other of the line passing through (xc, yc) with
     angle ``axis_angle``.
 
@@ -114,9 +113,9 @@ def split_sample_along_axis_angle(xpts, ypts, xc, yc, axis_angle):
     """
     splitting_axis = rotate_2d((1, 0), axis_angle)
     if splitting_axis[0] != 0:
-        slope = splitting_axis[1]/splitting_axis[0]
-        b = yc - slope*xc
-        ycut = slope*xpts + b
+        slope = splitting_axis[1] / splitting_axis[0]
+        b = yc - slope * xc
+        ycut = slope * xpts + b
         return ypts > ycut
     else:
         return xpts > xc
